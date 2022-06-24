@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3matchupstorageb0c9ab6f",
+  "bucketName": "matchup-storage-b0c9ab6f",
+  "policyUUID": "8cc46fe1",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

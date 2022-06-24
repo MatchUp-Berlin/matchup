@@ -1,0 +1,36 @@
+type MatchUpUser @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  MatchUpUsers: User @hasOne
+  UserMatchUps: MatchUp @hasOne
+  attended: Boolean
+}
+
+type MatchUp @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  users: [User] @manyToMany(relationName: "UserMatchUp")
+  location: String!
+  organizer: String!
+  sportCategory: String!
+  skillLevel: String
+  totalCost: Int
+  reservedCourt: Boolean
+  attendanceMin: Int
+  attendanceMax: Int
+  cancelled: Boolean
+  description: String
+  image: String
+  date: AWSDateTime
+  currency: String
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  givenName: String!
+  familyName: String!
+  email: String!
+  MatchUps: [MatchUp] @manyToMany(relationName: "UserMatchUp")
+  profileImage: String
+  about: String
+}
+ 
