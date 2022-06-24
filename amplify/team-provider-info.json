@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "matchup": {}
+      },
+      "function": {
+        "matchupa8ac8198": {
+          "deploymentBucketName": "amplify-matchup-staging-155447-deployment",
+          "s3Key": "amplify-builds/matchupa8ac8198-4d394c4a743456414370-build.zip"
+        }
       }
     }
   }
