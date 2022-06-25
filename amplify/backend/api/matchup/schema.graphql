@@ -1,11 +1,11 @@
-type MatchUpUser @model @auth(rules: [{allow: public}]) {
+type MatchUpUser @model @auth(rules: [{ allow: public }]) {
   id: ID!
   MatchUpUsers: User @hasOne
   UserMatchUps: MatchUp @hasOne
   attended: Boolean
 }
 
-type MatchUp @model @auth(rules: [{allow: public}]) {
+type MatchUp @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   users: [User] @manyToMany(relationName: "UserMatchUp")
@@ -24,7 +24,7 @@ type MatchUp @model @auth(rules: [{allow: public}]) {
   currency: String
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{ allow: public }]) {
   id: ID!
   givenName: String!
   familyName: String!
@@ -33,4 +33,3 @@ type User @model @auth(rules: [{allow: public}]) {
   profileImage: String
   about: String
 }
- 

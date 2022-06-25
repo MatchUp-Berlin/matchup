@@ -12,6 +12,7 @@
     }
   ],
   "secretNames": [
-    "secret"
+    "secret",
+    "GRAPHQL_API_KEY"
   ]
 }

@@ -1,3 +1,17 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["secret","GRAPHQL_API_KEY"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 import { default as fetch, Request } from 'node-fetch';
 
 const GRAPHQL_ENDPOINT = process.env.API_matchup_GRAPHQLAPIENDPOINTOUTPUT;
@@ -17,7 +31,7 @@ const query = /* GraphQL */ `
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-export const handler = async (event) => {
+export const handler = async (event, context) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
 
   const variables = {
@@ -39,7 +53,6 @@ export const handler = async (event) => {
   };
 
   const request = new Request(GRAPHQL_ENDPOINT, options);
-  console.log('REQUEST', request);
 
   let statusCode = 200;
   let body;
@@ -47,9 +60,9 @@ export const handler = async (event) => {
 
   try {
     response = await fetch(request);
-    console.log('RESPONSE', response);
     body = await response.json();
     if (body.errors) statusCode = 400;
+    context.done(null, event);
   } catch (error) {
     statusCode = 400;
     body = {

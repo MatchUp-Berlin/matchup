@@ -16,13 +16,13 @@
     "s3Key": {
       "Type": "String"
     },
+    "secretsPathAmplifyAppId": {
+      "Type": "String"
+    },
     "apiMatchupGraphqlapiendpointoutput": {
       "Type": "String"
     },
     "apiMatchupGraphqlapikeyoutput": {
-      "Type": "String"
-    },
-    "secretsPathAmplifyAppId": {
       "Type": "String"
     }
   },
@@ -79,12 +79,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_matchup_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apiMatchupGraphqlapiendpointoutput"
-            },
-            "API_matchup_GRAPHQLAPIKEYOUTPUT": {
-              "Ref": "apiMatchupGraphqlapikeyoutput"
-            },
             "secret": {
               "Fn::Join": [
                 "",
@@ -106,6 +100,34 @@
                   "secret"
                 ]
               ]
+            },
+            "GRAPHQL_API_KEY": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "matchupe757c159"
+                      }
+                    ]
+                  },
+                  "GRAPHQL_API_KEY"
+                ]
+              ]
+            },
+            "API_matchup_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apiMatchupGraphqlapiendpointoutput"
+            },
+            "API_matchup_GRAPHQLAPIKEYOUTPUT": {
+              "Ref": "apiMatchupGraphqlapikeyoutput"
             }
           }
         },
