@@ -1,17 +1,20 @@
 import { useState, useEffect, FC } from 'react'
-
-import { Amplify } from 'aws-amplify';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-function Profile<FC>({user, signOut}) {
-
+function SignIn<FC>() {
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
   return (
-    <div>
-      { user && <h1>Welcome, {user.username}</h1> }
-      <button onClick={signOut}>Sign out</button>
-    </div>
-  )
+    <Authenticator>
+      {({ signOut, user }) => (
+        <main>
+          <h1>Hello {user.username}</h1>
+          <button onClick={signOut}>Sign out</button>
+        </main>
+      )}
+    </Authenticator>
+  );
 }
 
-export default withAuthenticator(Profile)
+export default SignIn;
