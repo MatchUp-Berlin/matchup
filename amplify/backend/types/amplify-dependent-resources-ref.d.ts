@@ -24,7 +24,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "function": {
-        "matchupa8ac8198": {
+        "matchupe757c159": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

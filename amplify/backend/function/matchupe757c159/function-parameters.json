@@ -1,0 +1,18 @@
+{
+  "permissions": {},
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "apiMatchupGraphqlapiendpointoutput",
+      "environmentVariableName": "API_matchup_GRAPHQLAPIENDPOINTOUTPUT"
+    },
+    {
+      "cloudFormationParameterName": "apiMatchupGraphqlapikeyoutput",
+      "environmentVariableName": "API_matchup_GRAPHQLAPIKEYOUTPUT"
+    }
+  ],
+  "secretNames": [
+    "secret",
+    "GRAPHQL_API_KEY"
+  ]
+}
