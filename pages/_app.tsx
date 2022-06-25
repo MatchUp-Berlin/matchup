@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Link href="/">
           <span>Home</span>
         </Link>
-        <Link href="/SignInPage">
+        <Link href="/SignIn">
           <span>Profile</span>
         </Link>
       </nav>
