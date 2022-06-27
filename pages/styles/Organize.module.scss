@@ -7,3 +7,32 @@
   margin-bottom: 6em;
   flex-wrap: wrap;
 }
+
+.generalInfoForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1em;
+
+  .inputGroup {
+    width: 100%;
+    .label {
+      margin-left: 1em;
+    }
+
+    .input {
+      height: 50px;
+      border-radius: 25px;
+      width: 100%;
+      border-style: solid;
+      border-width: 1px;
+      padding: 0 1em;
+
+      &::placeholder {
+        opacity: 0.5;
+      }
+    }
+  }
+}

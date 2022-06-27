@@ -53,8 +53,8 @@ const OrganizePage: NextPage = () => {
   /* Keeping track of all of the answers */
   const [sportCategory, setSportCategory] = useState<string>();
   const [title, setTitle] = useState<string>();
-  const [date, setDate] = useState<Date>();
-  const [location, setLocaion] = useState<any>();
+  const [date, setDate] = useState<string>();
+  const [location, setLocation] = useState<any>();
   const [indoors, setIndoors] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
@@ -147,7 +147,7 @@ const OrganizePage: NextPage = () => {
           leftButton={
             <HeaderButton
               viewBox="0 0 10 10"
-              callback={() => {}}
+              callback={() => Router.back()}
               icon={
                 <path
                   xmlns="http://www.w3.org/2000/svg"
@@ -157,6 +157,45 @@ const OrganizePage: NextPage = () => {
             />
           }
         ></Header>
+
+        <form className={styles.generalInfoForm}>
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>Title</label>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Give your MatchUp a cool name"
+              className={styles.input}
+              style={{ borderColor: '#DDDDDD' }}
+            ></input>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>Time</label>
+            <input
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              placeholder="Choose a day and time to MatchUp"
+              className={styles.input}
+              type="datetime-local"
+              style={{ borderColor: '#DDDDDD' }}
+            ></input>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>Location</label>
+            <input
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Where do you want to meet?"
+              className={styles.input}
+              style={{ borderColor: '#DDDDDD' }}
+            ></input>
+          </div>
+        </form>
+
+        {/* <div>Map going here</div>
+        <div>Switch going here</div> */}
 
         <Footer
           progress={50}
