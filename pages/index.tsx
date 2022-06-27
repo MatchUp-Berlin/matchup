@@ -5,7 +5,7 @@ import SlotsCard from '../components/cards/Slots.Card';
 const Home: NextPage = () => {
   return (
     <>
-      <SkillsCard></SkillsCard>
+      <SkillsCard skillLevel="advanced"></SkillsCard>
       <SlotsCard attending={2} slots={10}></SlotsCard>
     </>
   );
