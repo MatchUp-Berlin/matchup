@@ -1,0 +1,14 @@
+.btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  border-radius: 100%;
+
+  .icon {
+    width: 13px;
+    height: 13px;
+  }
+}
