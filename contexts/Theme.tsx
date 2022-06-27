@@ -13,13 +13,13 @@ interface IColors {
   };
   text: {
     '100': string;
-    '60': string;
     '80': string;
+    '60': string;
   };
   background: {
     '100': string;
-    '60': string;
     '80': string;
+    '60': string;
   };
 }
 

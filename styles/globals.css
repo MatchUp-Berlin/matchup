@@ -32,26 +32,31 @@ h3 {
 p {
   font-size: 15px;
   font-weight: 400;
+  margin: 0;
 }
 
 p.fat {
   font-size: 15px;
   font-weight: 700;
+  margin: 0;
 }
 
 p.small {
   font-size: 13px;
   font-weight: 300;
+  margin: 0;
 }
 
 p.highlight-1 {
   font-size: 20px;
   font-weight: 700;
+  margin: 0;
 }
 
 p.highlight-2 {
   font-size: 20px;
   font-weight: 500;
+  margin: 0;
 }
 
 a {
