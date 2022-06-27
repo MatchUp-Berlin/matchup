@@ -21,7 +21,7 @@ const Footer: React.FunctionComponent<IFooterProps> = ({ leftSide, rightButton, 
           className={styles.progressBar}
           style={{
             width: `${progress}%`,
-            backgroundColor: colors.primary['100'],
+            backgroundImage: colors.gradient.secondary,
           }}
         ></div>
       )}
