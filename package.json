@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.0.2",
+    "@types/googlemaps": "^3.43.3",
     "@types/react-query": "^1.2.9",
     "aws-amplify": "^4.3.26",
     "aws-sdk": "^2.1162.0",
+    "dotenv": "^16.0.1",
     "next": "12.1.6",
     "node-fetch": "^3.2.6",
     "react": "18.2.0",
