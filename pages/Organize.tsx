@@ -64,13 +64,6 @@ const OrganizePage: NextPage = () => {
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<File>();
 
-  // if (route !== 'authenticated') {
-  //   Router.push('/Profile/SignIn');
-  //   return <></>;
-  // } else {
-  {
-    /* CHOOSING SPORT CATEGORY */
-  }
   if (step == 0)
     return (
       <>
@@ -204,6 +197,5 @@ const OrganizePage: NextPage = () => {
         ></Footer>
       </>
     );
-  // }
 };
 export default OrganizePage;
