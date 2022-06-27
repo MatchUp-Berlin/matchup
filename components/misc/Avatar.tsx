@@ -36,6 +36,7 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({ size, image }) => {
         layout='responsive'
         width={avatarSize}
         height={avatarSize}
+        alt='personally I would have replaced missing images with some Max-s mothers picture, but you now...pc people and stuff'
       />
     </div>
   );
