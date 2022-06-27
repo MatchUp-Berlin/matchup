@@ -4,6 +4,11 @@ import { useTheme } from '../../contexts/Theme';
 import styles from './styles/MatchUp.Card.module.scss';
 
 import basketball from '../../public/basketball-icon.png';
+import football from '../../public/football-icon.png';
+import volleyball from '../../public/volleyball-icon.png';
+import frisbee from '../../public/frisbee-icon.png';
+import beachvolleyball from '../../public/beachvolleyball-icon.png';
+import tennis from '../../public/tennis-icon.png';
 import clock from '../../public/clock.svg';
 import pin from '../../public/pin.svg';
 import euro from '../../public/euro.svg';
@@ -14,7 +19,7 @@ export interface IMatchUpCardProps {
   slots: number;
   participating: number;
   location: string;
-  sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee';
+  sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball';
   skill: 'beginner' | 'intermediate' | 'advanced';
   imageUrl: any;
   paid: boolean;
@@ -25,19 +30,27 @@ export interface IMatchUpCardProps {
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
 
-  function getSportIcon(sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee') {
+  function getSportIcon(
+    sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball'
+  ) {
     switch (sport) {
+      case 'football': {
+        return football;
+      }
       case 'basketball': {
         return basketball;
       }
-      case 'football': {
-        return basketball;
+      case 'beach-volleyball': {
+        return beachvolleyball;
       }
       case 'tennis': {
-        return basketball;
+        return tennis;
+      }
+      case 'volleyball': {
+        return volleyball;
       }
       case 'ultimate-frisbee': {
-        return basketball;
+        return frisbee;
       }
     }
   }
