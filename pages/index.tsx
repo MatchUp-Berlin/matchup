@@ -1,11 +1,13 @@
 import type { NextPage } from 'next';
-import { Footer, Button } from '../components/misc';
+import SkillsCard from '../components/cards/Skills.Card';
+import SlotsCard from '../components/cards/Slots.Card';
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <h1>🐋 blanalala 🐋</h1>
-    </div>
+    <>
+      <SkillsCard></SkillsCard>
+      <SlotsCard attending={2} slots={10}></SlotsCard>
+    </>
   );
 };
 
