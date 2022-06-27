@@ -14,6 +14,7 @@ const SportCard: React.FunctionComponent<ISportCardProps> = (props) => {
   const { colors, shadows } = useTheme();
   return (
     <div
+      onClick={props.callback}
       className={styles.wrapper}
       style={{ boxShadow: shadows.small, backgroundColor: colors.background[80] }}
     >
