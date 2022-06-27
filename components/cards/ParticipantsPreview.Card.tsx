@@ -13,7 +13,7 @@ const ParticipantsPreviewCard: React.FunctionComponent<
   return (
     <div className={styles.avatarPreview}>
       {users.map((user) => (
-        <Avatar size={'small'} image={user.profileImage} />
+        <Avatar key={user.id} size={'small'} image={user.profileImage} />
       ))}
     </div>
   );
