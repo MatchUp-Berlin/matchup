@@ -1,7 +1,7 @@
 import { User } from './User.Type'
 
 export interface MatchUp {
-    id: string;
+    id?: string;
     title: string;
     users: User[];
     location: string;

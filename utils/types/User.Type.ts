@@ -1,11 +1,11 @@
 import { MatchUp } from './MatchUp.Type'
 
 export interface User {
-    id: string;
+    id?: string;
     givenName: string;
     familyName: string;
     email: string;
-    MatchUps: MatchUp[];
+    matchUps: MatchUp[];
     profileImage: string;
     about: string;
   }

@@ -1,14 +1,16 @@
 type MatchUpUser @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  MatchUpUsers: User @hasOne
-  UserMatchUps: MatchUp @hasOne
+  userId: ID @index(name: "byUser", queryField: "byUser")
+  matchUpId: ID @index(name: "byMatchUp", queryField: "byMatchUp")
+  user: User @belongsTo(fields: ["userId"])
+  matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
   attended: Boolean
 }
 
 type MatchUp @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
-  users: [User] @manyToMany(relationName: "UserMatchUp")
+  users: [MatchUpUser] @hasMany(indexName: "byUser", fields: ["id"])
   location: String!
   organizer: String!
   sportCategory: String!
@@ -29,7 +31,7 @@ type User @model @auth(rules: [{ allow: public }]) {
   givenName: String!
   familyName: String!
   email: String!
-  MatchUps: [MatchUp] @manyToMany(relationName: "UserMatchUp")
+  matchUps: [MatchUpUser] @hasMany(indexName: "byMatchUp", fields: ["id"])
   profileImage: String
   about: String
 }

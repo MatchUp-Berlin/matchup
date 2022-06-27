@@ -8,12 +8,14 @@ export const createMatchUpUser = /* GraphQL */ `
   ) {
     createMatchUpUser(input: $input, condition: $condition) {
       id
-      MatchUpUsers {
+      userId
+      matchUpId
+      user {
         id
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -25,7 +27,7 @@ export const createMatchUpUser = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      UserMatchUps {
+      matchUp {
         id
         title
         users {
@@ -57,8 +59,6 @@ export const createMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      matchUpUserMatchUpUsersId
-      matchUpUserUserMatchUpsId
     }
   }
 `;
@@ -69,12 +69,14 @@ export const updateMatchUpUser = /* GraphQL */ `
   ) {
     updateMatchUpUser(input: $input, condition: $condition) {
       id
-      MatchUpUsers {
+      userId
+      matchUpId
+      user {
         id
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -86,7 +88,7 @@ export const updateMatchUpUser = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      UserMatchUps {
+      matchUp {
         id
         title
         users {
@@ -118,8 +120,6 @@ export const updateMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      matchUpUserMatchUpUsersId
-      matchUpUserUserMatchUpsId
     }
   }
 `;
@@ -130,12 +130,14 @@ export const deleteMatchUpUser = /* GraphQL */ `
   ) {
     deleteMatchUpUser(input: $input, condition: $condition) {
       id
-      MatchUpUsers {
+      userId
+      matchUpId
+      user {
         id
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -147,7 +149,7 @@ export const deleteMatchUpUser = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      UserMatchUps {
+      matchUp {
         id
         title
         users {
@@ -179,8 +181,6 @@ export const deleteMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      matchUpUserMatchUpUsersId
-      matchUpUserUserMatchUpsId
     }
   }
 `;
@@ -195,8 +195,9 @@ export const createMatchUp = /* GraphQL */ `
       users {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -238,8 +239,9 @@ export const updateMatchUp = /* GraphQL */ `
       users {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -281,8 +283,9 @@ export const deleteMatchUp = /* GraphQL */ `
       users {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -323,11 +326,12 @@ export const createUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      matchUps {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -357,11 +361,12 @@ export const updateUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      matchUps {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -391,11 +396,12 @@ export const deleteUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      matchUps {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -407,186 +413,6 @@ export const deleteUser = /* GraphQL */ `
       }
       profileImage
       about
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createUserMatchUp = /* GraphQL */ `
-  mutation CreateUserMatchUp(
-    $input: CreateUserMatchUpInput!
-    $condition: ModelUserMatchUpConditionInput
-  ) {
-    createUserMatchUp(input: $input, condition: $condition) {
-      id
-      matchUpID
-      userID
-      matchUp {
-        id
-        title
-        users {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        description
-        image
-        date
-        currency
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        givenName
-        familyName
-        email
-        MatchUps {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateUserMatchUp = /* GraphQL */ `
-  mutation UpdateUserMatchUp(
-    $input: UpdateUserMatchUpInput!
-    $condition: ModelUserMatchUpConditionInput
-  ) {
-    updateUserMatchUp(input: $input, condition: $condition) {
-      id
-      matchUpID
-      userID
-      matchUp {
-        id
-        title
-        users {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        description
-        image
-        date
-        currency
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        givenName
-        familyName
-        email
-        MatchUps {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteUserMatchUp = /* GraphQL */ `
-  mutation DeleteUserMatchUp(
-    $input: DeleteUserMatchUpInput!
-    $condition: ModelUserMatchUpConditionInput
-  ) {
-    deleteUserMatchUp(input: $input, condition: $condition) {
-      id
-      matchUpID
-      userID
-      matchUp {
-        id
-        title
-        users {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        description
-        image
-        date
-        currency
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        givenName
-        familyName
-        email
-        MatchUps {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version
