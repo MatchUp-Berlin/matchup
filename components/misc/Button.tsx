@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../../contexts/Theme';
+import styles from './styles/Button.module.scss';
 
 export interface IButtonProps {
   variant: 'primary' | 'secondary';
