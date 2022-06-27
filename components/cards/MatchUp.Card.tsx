@@ -13,6 +13,8 @@ import clock from '../../public/clock.svg';
 import pin from '../../public/pin.svg';
 import euro from '../../public/euro.svg';
 
+//TODO: Adjust to actual types!!
+
 export interface IMatchUpCardProps {
   timestamp: string;
   title: string;
@@ -26,6 +28,7 @@ export interface IMatchUpCardProps {
   price?: number;
   rented?: boolean;
 }
+
 
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
