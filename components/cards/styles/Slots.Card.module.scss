@@ -15,7 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1em 2em;
+    padding: 1em 1.5em;
     min-width: 150px;
     max-width: 150px;
     color: transparent;
@@ -23,5 +23,9 @@
     outline-width: 4px;
     outline-style: solid;
     outline-offset: -4px;
+
+    p {
+      font-size: 1.1em;
+    }
   }
 }
