@@ -4,7 +4,13 @@ import { Footer, Button } from '../components/misc';
 const Home: NextPage = () => {
   return (
     <div>
-      <h1>🐋 blanalala 🐋</h1>;
+      <h1>🐋 blanalala 🐋</h1>
+      <div style={{ height: '30vh' }}>arrarrarra</div>
+      <div style={{ height: '30vh' }}>arrarrarra</div>
+      <div style={{ height: '30vh' }}>arrarrarra</div>
+      <div style={{ height: '30vh' }}>arrarrarra</div>
+      <div style={{ height: '30vh' }}>arrarrarra</div>
+      <div style={{ height: '30vh' }}>arrarrarra</div>
       <Footer
         leftSide={'suuuuuuuca'}
         progress={25}

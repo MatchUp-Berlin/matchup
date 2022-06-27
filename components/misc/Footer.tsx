@@ -1,10 +1,10 @@
 import React from 'react';
-import Button, { IButtonProps } from './Button';
 import { useTheme } from '../../contexts/Theme';
+import styles from './styles/Footer.module.scss';
 
 export interface IFooterProps {
   leftSide: React.ReactNode;
-  rightButton: IButtonProps;
+  rightButton: React.ReactNode;
   progress: number | null;
 }
 
@@ -13,28 +13,31 @@ const Footer: React.FunctionComponent<IFooterProps> = ({
   rightButton,
   progress,
 }) => {
-  const { colors } = useTheme();
+  const { colors, darkMode } = useTheme();
 
   return (
-    <>
+    <footer
+      className={styles.footer}
+      style={
+        darkMode
+          ? { borderTop: `solid 1px #32333D` }
+          : { borderTop: 'solid 1px #DDDDDD' }
+      }
+    >
       <div
-        className='progress-bar'
+        className={styles.progressBar}
         style={{
           width: `${progress}%`,
           backgroundColor: colors.primary['100'],
         }}
-      >
-        progress
+      ></div>
+      <div className={styles.mainWrapper}>
+        <div className={styles.leftSide} style={{ color: colors.text[100] }}>
+          {leftSide}
+        </div>
+        <div className={styles.rightSide}>{rightButton}</div>
       </div>
-      <div className='left-side'>left part</div>
-      <div className='right-side'>
-        <Button
-          variant={rightButton.variant}
-          callback={rightButton.callback}
-          text={rightButton.text}
-        />
-      </div>
-    </>
+    </footer>
   );
 };
 
