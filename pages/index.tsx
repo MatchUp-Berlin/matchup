@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Footer, Button } from '../components/misc';
+import { Footer, Button, Avatar } from '../components/misc';
 
 const Home: NextPage = () => {
   return (
