@@ -10,7 +10,9 @@ const SkillsCard: React.FunctionComponent<ISkillsCardProps> = (props) => {
   const { colors } = useTheme();
   return (
     <div className={styles.wrapper}>
-      <p>SKILL LEVEL</p>
+      <p className={styles.title} style={{ color: colors.text[60] }}>
+        SKILL LEVEL
+      </p>
       <div className={styles.pill} style={{ backgroundColor: colors.primary[100] }}>
         <p className="fat">{props.skillLevel}</p>
       </div>
@@ -19,3 +21,11 @@ const SkillsCard: React.FunctionComponent<ISkillsCardProps> = (props) => {
 };
 
 export default SkillsCard;
+
+/* 
+
+USAGE:
+
+<SkillsCard skillLevel="beginner"></SkillsCard>;
+
+*/
