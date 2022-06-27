@@ -15,8 +15,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1em 2em;
+    min-width: 150px;
+    max-width: 150px;
+    padding: 1em 1.5em;
     color: white;
     border-radius: 50px;
+
+    p {
+      font-size: 1.1em;
+    }
   }
 }
