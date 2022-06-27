@@ -1,14 +1,22 @@
 import React from 'react';
 import { User } from '../../utils/types/User.Type';
+import { Avatar } from '../misc';
+import styles from './styles/ParticipantsPreview.Card.module.scss';
 
 export interface IParticipantsPreviewCardProps {
-  callback: () => {};
+  users: User[];
 }
 
 const ParticipantsPreviewCard: React.FunctionComponent<
   IParticipantsPreviewCardProps
-> = (props) => {
-  return <></>;
+> = ({ users }) => {
+  return (
+    <div className={styles.avatarPreview}>
+      {users.map((user) => (
+        <Avatar size={'small'} image={user.profileImage} />
+      ))}
+    </div>
+  );
 };
 
 export default ParticipantsPreviewCard;
