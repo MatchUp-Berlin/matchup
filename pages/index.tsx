@@ -4,20 +4,21 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-import { addUserToMatchUp } from '../utils/addUserToMatchUp.util'
-import { getUserById } from '../utils/getUserById.util'
+// import { addUserToMatchUp } from '../utils/addUserToMatchUp.util'
+// import { getUserMatchUps } from '../utils/Query/getUserMatchUps.util'
+import { getMatchUpUsers } from '../utils/Query/getMatchUpUsers.util'
 
 // const exampleQuery = {
-//   userId: "54955977-c461-4943-9e66-288b3ba065ba",
+//   userId: "ceb7d85e-021e-4657-90a0-e3e2f98bcc7c",
 //   matchUpId: "1367ec81-1fb2-449a-b97e-faa879d1a36c",
 //   attended: false
 // }
 
-const exampleQuery = { id: "54955977-c461-4943-9e66-288b3ba065ba" };
+const exampleQuery = { matchUpId: "1367ec81-1fb2-449a-b97e-faa879d1a36c" };
 
 const Home: NextPage = () => {
   // console.log(addUserToMatchUp(exampleQuery))
-  console.log(getUserById(exampleQuery));
+  console.log(getMatchUpUsers(exampleQuery));
   return (
     <div className={styles.container}>
       <Head>
