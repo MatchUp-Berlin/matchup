@@ -1,8 +1,13 @@
 import React from 'react';
+import { User } from '../../utils/types/User.Type';
 
-export interface IParticipantsPreviewCardProps {}
+export interface IParticipantsPreviewCardProps {
+  callback: () => {};
+}
 
-const ParticipantsPreviewCard: React.FunctionComponent<IParticipantsPreviewCardProps> = (props) => {
+const ParticipantsPreviewCard: React.FunctionComponent<
+  IParticipantsPreviewCardProps
+> = (props) => {
   return <></>;
 };
 
