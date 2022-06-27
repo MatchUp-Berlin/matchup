@@ -46,7 +46,7 @@ export function useTheme() {
 
 /* ----- PROVIDER ----- */
 export const ThemeProvider: FC<any> = ({ children }: any) => {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const value: IThemeProvider = {
     darkMode,
@@ -65,40 +65,32 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
       text: darkMode
         ? {
             '100': '#FFFFFF',
-            '60': '#F2F4F5',
-            '80': '#A2A2A2',
+            '80': '#F2F4F5',
+            '60': '#A2A2A2',
           }
         : {
             '100': '#252525',
-            '60': '#515151',
-            '80': '#7C7C7C',
+            '80': '#515151',
+            '60': '#7C7C7C',
           },
       background: darkMode
         ? {
             '100': '#252525',
-            '60': '#32333D',
-            '80': '#4F4F4F',
+            '80': '#32333D',
+            '60': '#4F4F4F',
           }
         : {
             '100': '#FFFFFF',
-            '60': '#FFFFFF',
             '80': '#FFFFFF',
+            '60': '#FFFFFF',
           },
     },
     shadows: {
-      small: darkMode
-        ? '0px 3px 8px rgba(0, 0, 0, 0.5)'
-        : '0px 3px 8px rgba(0, 0, 0, 0.1)',
-      medium: darkMode
-        ? '0px 6px 16px rgba(0, 0, 0, 0.5)'
-        : '0px 6px 16px rgba(0, 0, 0, 0.1)',
-      large: darkMode
-        ? '0px 6px 16px rgba(0, 0, 0, 0.5)'
-        : '0px 6px 16px rgba(0, 0, 0, 0.2)',
+      small: darkMode ? '0px 3px 8px rgba(0, 0, 0, 0.5)' : '0px 3px 8px rgba(0, 0, 0, 0.1)',
+      medium: darkMode ? '0px 6px 16px rgba(0, 0, 0, 0.5)' : '0px 6px 16px rgba(0, 0, 0, 0.1)',
+      large: darkMode ? '0px 6px 16px rgba(0, 0, 0, 0.5)' : '0px 6px 16px rgba(0, 0, 0, 0.2)',
     },
   };
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };
