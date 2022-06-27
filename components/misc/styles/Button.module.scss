@@ -1,0 +1,11 @@
+button {
+  min-width: 135px;
+  height: 50px;
+  display: flex;
+  border-radius: 5px;
+  .primary {
+  }
+  .secondary {
+    background-color: 'transparent';
+  }
+}
