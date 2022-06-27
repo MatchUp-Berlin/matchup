@@ -1,0 +1,17 @@
+.primary {
+  min-width: 130px;
+  border: none;
+  padding: 0.1em 2em;
+  border-radius: 5px;
+  color: white;
+}
+.secondary {
+  min-width: 130px;
+  border: none;
+  padding: 0.1em 2em;
+  outline-width: 2px;
+  outline-style: solid;
+  outline-offset: -2px;
+  border-radius: 5px;
+  background-color: transparent !important;
+}

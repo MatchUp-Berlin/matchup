@@ -36,11 +36,12 @@ export interface IThemeProvider {
   shadows: IShadows;
 }
 
-const ThemeContext = React.createContext<IThemeProvider | null>(null);
+//@ts-ignore
+const ThemeContext = React.createContext<IThemeProvider>();
 
 /* ----- HOOK ----- */
 export function useTheme() {
-  return useContext<IThemeProvider | null>(ThemeContext);
+  return useContext<IThemeProvider>(ThemeContext);
 }
 
 /* ----- PROVIDER ----- */
@@ -85,11 +86,19 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
           },
     },
     shadows: {
-      small: darkMode ? '0px 3px 8px rgba(0, 0, 0, 0.5)' : '0px 3px 8px rgba(0, 0, 0, 0.1)',
-      medium: darkMode ? '0px 6px 16px rgba(0, 0, 0, 0.5)' : '0px 6px 16px rgba(0, 0, 0, 0.1)',
-      large: darkMode ? '0px 6px 16px rgba(0, 0, 0, 0.5)' : '0px 6px 16px rgba(0, 0, 0, 0.2)',
+      small: darkMode
+        ? '0px 3px 8px rgba(0, 0, 0, 0.5)'
+        : '0px 3px 8px rgba(0, 0, 0, 0.1)',
+      medium: darkMode
+        ? '0px 6px 16px rgba(0, 0, 0, 0.5)'
+        : '0px 6px 16px rgba(0, 0, 0, 0.1)',
+      large: darkMode
+        ? '0px 6px 16px rgba(0, 0, 0, 0.5)'
+        : '0px 6px 16px rgba(0, 0, 0, 0.2)',
     },
   };
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };
