@@ -1,9 +1,9 @@
 .footer {
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   width: 100vw;
-  height: 80px;
+  height: 90px;
   background-color: white;
 }
 
@@ -20,7 +20,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1em 0;
+  padding: 1em;
 }
 
 .progressBar {
