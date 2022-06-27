@@ -1,6 +1,6 @@
 import { API } from 'aws-amplify';
-import { createMatchUp } from '../src/graphql/mutations';
-import { MatchUp } from './types/MatchUp.Type';
+import { createMatchUp } from '../../src/graphql/mutations';
+import { MatchUp } from '../types/MatchUp.Type';
 import { addUserToMatchUp } from './addUserToMatchUp.util';
 
 export async function createNewMatchUp (matchUpData: MatchUp) {
