@@ -16,19 +16,13 @@ type MatchUpMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMatchUpMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 export declare class MatchUpUser {
   readonly id: string;
-  readonly MatchUpUsers?: User | null;
-  readonly UserMatchUps?: MatchUp | null;
+  readonly user?: User | null;
+  readonly matchUp?: MatchUp | null;
   readonly attended?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly matchUpUserMatchUpUsersId?: string | null;
-  readonly matchUpUserUserMatchUpsId?: string | null;
   constructor(init: ModelInit<MatchUpUser, MatchUpUserMetaData>);
   static copyOf(source: MatchUpUser, mutator: (draft: MutableModel<MatchUpUser, MatchUpUserMetaData>) => MutableModel<MatchUpUser, MatchUpUserMetaData> | void): MatchUpUser;
 }
@@ -38,7 +32,7 @@ export declare class User {
   readonly givenName: string;
   readonly familyName: string;
   readonly email: string;
-  readonly MatchUps?: (UserMatchUp | null)[] | null;
+  readonly matchUps?: (MatchUpUser | null)[] | null;
   readonly profileImage?: string | null;
   readonly about?: string | null;
   readonly createdAt?: string | null;
@@ -50,7 +44,7 @@ export declare class User {
 export declare class MatchUp {
   readonly id: string;
   readonly title: string;
-  readonly users?: (UserMatchUp | null)[] | null;
+  readonly users?: (MatchUpUser | null)[] | null;
   readonly location: string;
   readonly organizer: string;
   readonly sportCategory: string;
@@ -68,14 +62,4 @@ export declare class MatchUp {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<MatchUp, MatchUpMetaData>);
   static copyOf(source: MatchUp, mutator: (draft: MutableModel<MatchUp, MatchUpMetaData>) => MutableModel<MatchUp, MatchUpMetaData> | void): MatchUp;
-}
-
-export declare class UserMatchUp {
-  readonly id: string;
-  readonly user: User;
-  readonly matchUp: MatchUp;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<UserMatchUp, UserMatchUpMetaData>);
-  static copyOf(source: UserMatchUp, mutator: (draft: MutableModel<UserMatchUp, UserMatchUpMetaData>) => MutableModel<UserMatchUp, UserMatchUpMetaData> | void): UserMatchUp;
 }

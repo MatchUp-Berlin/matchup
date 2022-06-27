@@ -5,12 +5,14 @@ export const getMatchUpUser = /* GraphQL */ `
   query GetMatchUpUser($id: ID!) {
     getMatchUpUser(id: $id) {
       id
-      MatchUpUsers {
+      userId
+      matchUpId
+      user {
         id
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -22,7 +24,7 @@ export const getMatchUpUser = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      UserMatchUps {
+      matchUp {
         id
         title
         users {
@@ -54,8 +56,6 @@ export const getMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      matchUpUserMatchUpUsersId
-      matchUpUserUserMatchUpsId
     }
   }
 `;
@@ -68,7 +68,9 @@ export const listMatchUpUsers = /* GraphQL */ `
     listMatchUpUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        MatchUpUsers {
+        userId
+        matchUpId
+        user {
           id
           givenName
           familyName
@@ -81,7 +83,7 @@ export const listMatchUpUsers = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        UserMatchUps {
+        matchUp {
           id
           title
           location
@@ -109,8 +111,6 @@ export const listMatchUpUsers = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        matchUpUserMatchUpUsersId
-        matchUpUserUserMatchUpsId
       }
       nextToken
       startedAt
@@ -132,7 +132,9 @@ export const syncMatchUpUsers = /* GraphQL */ `
     ) {
       items {
         id
-        MatchUpUsers {
+        userId
+        matchUpId
+        user {
           id
           givenName
           familyName
@@ -145,7 +147,7 @@ export const syncMatchUpUsers = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        UserMatchUps {
+        matchUp {
           id
           title
           location
@@ -173,8 +175,138 @@ export const syncMatchUpUsers = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        matchUpUserMatchUpUsersId
-        matchUpUserUserMatchUpsId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const byUser = /* GraphQL */ `
+  query ByUser(
+    $userId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelMatchUpUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byUser(
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          organizer
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        attended
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const byMatchUp = /* GraphQL */ `
+  query ByMatchUp(
+    $matchUpId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelMatchUpUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byMatchUp(
+      matchUpId: $matchUpId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          organizer
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        attended
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt
@@ -189,8 +321,9 @@ export const getMatchUp = /* GraphQL */ `
       users {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -310,11 +443,12 @@ export const getUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      matchUps {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -346,7 +480,7 @@ export const listUsers = /* GraphQL */ `
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -381,189 +515,12 @@ export const syncUsers = /* GraphQL */ `
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
         profileImage
         about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getUserMatchUp = /* GraphQL */ `
-  query GetUserMatchUp($id: ID!) {
-    getUserMatchUp(id: $id) {
-      id
-      matchUpID
-      userID
-      matchUp {
-        id
-        title
-        users {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        description
-        image
-        date
-        currency
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        givenName
-        familyName
-        email
-        MatchUps {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listUserMatchUps = /* GraphQL */ `
-  query ListUserMatchUps(
-    $filter: ModelUserMatchUpFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserMatchUps(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        matchUpID
-        userID
-        matchUp {
-          id
-          title
-          location
-          organizer
-          sportCategory
-          skillLevel
-          totalCost
-          reservedCourt
-          attendanceMin
-          attendanceMax
-          cancelled
-          description
-          image
-          date
-          currency
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        user {
-          id
-          givenName
-          familyName
-          email
-          profileImage
-          about
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUserMatchUps = /* GraphQL */ `
-  query SyncUserMatchUps(
-    $filter: ModelUserMatchUpFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUserMatchUps(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        matchUpID
-        userID
-        matchUp {
-          id
-          title
-          location
-          organizer
-          sportCategory
-          skillLevel
-          totalCost
-          reservedCourt
-          attendanceMin
-          attendanceMax
-          cancelled
-          description
-          image
-          date
-          currency
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        user {
-          id
-          givenName
-          familyName
-          email
-          profileImage
-          about
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
         createdAt
         updatedAt
         _version
