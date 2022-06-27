@@ -17,20 +17,26 @@ const Button: React.FunctionComponent<IButtonProps> = ({
   if (variant === 'primary') {
     return (
       <button
-        style={{ backgroundColor: colors.primary['100'] }}
+        className={styles.primary}
+        style={{
+          backgroundColor: colors.primary['100'],
+        }}
         onClick={callback}
       >
-        {text}
+        <p className='fat'>{text}</p>
       </button>
     );
   } else {
     return (
       <button
-        className='secondary'
-        style={{ borderColor: colors.primary['100'] }}
+        className={styles.secondary}
+        style={{
+          outlineColor: colors.primary['100'],
+          color: colors.primary['100'],
+        }}
         onClick={callback}
       >
-        {text}
+        <p className='fat'>{text}</p>
       </button>
     );
   }
