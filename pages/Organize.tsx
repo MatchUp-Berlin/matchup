@@ -197,7 +197,7 @@ const OrganizePage: NextPage = () => {
             </div>
           </form>
 
-          {/* <Switch callback={() => console.log("switched")} /> */}
+          <Switch callback={() => console.log("switched")} />
 
           <Footer
             progress={50}
