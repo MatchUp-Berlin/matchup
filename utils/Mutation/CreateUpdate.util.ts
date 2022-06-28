@@ -15,8 +15,9 @@ export async function createNewUpdate (updateData: Update) {
     const newUpdate = await API.graphql({
         query: createUpdate,
             variables: { input: updateData },
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
+            // authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
+        console.log(newUpdate)
     const newUpdateData = newUpdate.data.createUpdate
 
     return newUpdateData;
