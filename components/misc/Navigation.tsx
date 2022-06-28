@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getUserById } from '../../utils/Query/getUserById.util';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Navigation.module.scss';
-import Image from 'next/image';
 
 export interface INavigationProps {}
 
@@ -19,6 +17,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
         borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',
       }}
     >
+      {/* ------ ORGANIZE ------ */}
       <Link href="/Organize">
         <div className={styles.link}>
           <svg
@@ -51,6 +50,8 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
           </p>
         </div>
       </Link>
+
+      {/* ------ WATCHLIST ------ */}
       <Link href="/Watchlist">
         <div className={styles.link}>
           <svg
@@ -83,6 +84,8 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
           </p>
         </div>
       </Link>
+
+      {/* ------ EXPLORE ------ */}
       <Link href="/">
         <div className={styles.link}>
           <svg
@@ -115,6 +118,8 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
           </p>
         </div>
       </Link>
+
+      {/* ------ YOUR MATCHUPS ------ */}
       <Link href="/YourMatchUps">
         <div className={styles.link}>
           <svg
@@ -147,6 +152,8 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
           </p>
         </div>
       </Link>
+
+      {/* ------ PROFILE ------ */}
       <Link href="Profile/[id]">
         <div className={styles.link}>
           <svg
@@ -154,9 +161,9 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             height="20"
             viewBox="0 0 20 20"
             fill={
-              router.pathname == '/Profile/[id]' && darkMode
+              router.pathname.includes('/Profile/') && darkMode
                 ? colors.primary[80]
-                : router.pathname == '/Profile/[id]' && !darkMode
+                : router.pathname.includes('/Profile/') && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
             }
@@ -168,9 +175,9 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             className="small"
             style={{
               color:
-                router.pathname == '/Profile/[id]' && darkMode
+                router.pathname.includes('/Profile/') && darkMode
                   ? colors.primary[80]
-                  : router.pathname == '/Profile/[id]' && !darkMode
+                  : router.pathname.includes('/Profile/') && !darkMode
                   ? colors.primary[100]
                   : colors.text[60],
             }}
