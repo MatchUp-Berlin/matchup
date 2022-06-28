@@ -17,6 +17,7 @@ import beachvolleyball from '../public/beachvolleyball.jpg';
 import tennis from '../public/tennis.jpg';
 import volleyball from '../public/volleyball.jpg';
 import frisbee from '../public/frisbee.jpg';
+import { useTheme } from '../contexts/Theme';
 
 // interface MatchUp {
 //   id?: string;
@@ -39,6 +40,7 @@ import frisbee from '../public/frisbee.jpg';
 
 const OrganizePage: NextPage = () => {
   const { route } = useAuthenticator((context) => [context.route]);
+  const { colors, darkMode } = useTheme();
 
   /* Keeping track of which step the user is currently in */
   const [step, setStep] = useState<number>(0);
@@ -66,7 +68,7 @@ const OrganizePage: NextPage = () => {
 
   if (step == 0)
     return (
-      <>
+      <div style={{ backgroundColor: colors.background[100] }}>
         <Header
           title="Choose a sport you want to play"
           leftButton={
@@ -124,13 +126,15 @@ const OrganizePage: NextPage = () => {
             image={frisbee}
             callback={() => setSportCategory('frisbee')}
           ></SportCard>
+
+          <div className={styles.bottomMargin}></div>
         </div>
         <Footer
           progress={25}
           leftSide={<p onClick={() => Router.back()}>Back</p>}
           rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
         ></Footer>
-      </>
+      </div>
     );
   if (step == 1)
     return (

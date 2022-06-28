@@ -14,7 +14,10 @@ const Footer: React.FunctionComponent<IFooterProps> = ({ leftSide, rightButton, 
   return (
     <footer
       className={styles.footer}
-      style={darkMode ? { borderTop: `solid 1px #32333D` } : { borderTop: 'solid 1px #DDDDDD' }}
+      style={{
+        backgroundColor: colors.background[100],
+        borderTop: darkMode ? `solid 1px #32333D` : 'solid 1px #DDDDDD',
+      }}
     >
       {progress && (
         <div
