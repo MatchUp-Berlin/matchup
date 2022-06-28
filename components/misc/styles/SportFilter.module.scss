@@ -1,5 +1,7 @@
 .container {
-  width: 100%;
+  width: calc(100% + 1em + 1em);
+  margin-left: -1em;
+  margin-right: -1em;
   .wrapper {
     display: flex;
     flex-direction: row;
@@ -8,5 +10,13 @@
     gap: 0.5em;
     width: 100%;
     overflow-x: scroll;
+
+    div:first-of-type {
+      margin-left: 1em;
+    }
+    
+    div:last-of-type {
+      margin-right: 1em;
+    }
   }
 }
