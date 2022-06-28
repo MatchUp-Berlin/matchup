@@ -21,6 +21,10 @@ export const createMatchUpUser = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -43,10 +47,15 @@ export const createMatchUpUser = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -82,6 +91,10 @@ export const updateMatchUpUser = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -104,10 +117,15 @@ export const updateMatchUpUser = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -143,6 +161,10 @@ export const deleteMatchUpUser = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -165,10 +187,15 @@ export const deleteMatchUpUser = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -216,10 +243,26 @@ export const createMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      indoor
       description
       image
       date
       currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -260,10 +303,26 @@ export const updateMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      indoor
       description
       image
       date
       currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -304,10 +363,26 @@ export const deleteMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      indoor
       description
       image
       date
       currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -343,6 +418,21 @@ export const createUser = /* GraphQL */ `
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -378,6 +468,21 @@ export const updateUser = /* GraphQL */ `
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -413,6 +518,231 @@ export const deleteUser = /* GraphQL */ `
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createUpdate = /* GraphQL */ `
+  mutation CreateUpdate(
+    $input: CreateUpdateInput!
+    $condition: ModelUpdateConditionInput
+  ) {
+    createUpdate(input: $input, condition: $condition) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        matchUps {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        users {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateUpdate = /* GraphQL */ `
+  mutation UpdateUpdate(
+    $input: UpdateUpdateInput!
+    $condition: ModelUpdateConditionInput
+  ) {
+    updateUpdate(input: $input, condition: $condition) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        matchUps {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        users {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteUpdate = /* GraphQL */ `
+  mutation DeleteUpdate(
+    $input: DeleteUpdateInput!
+    $condition: ModelUpdateConditionInput
+  ) {
+    deleteUpdate(input: $input, condition: $condition) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        matchUps {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        users {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      content
       createdAt
       updatedAt
       _version
