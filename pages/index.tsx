@@ -9,7 +9,7 @@ import matchUps from '../mockData/machMatchUps';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 
 const Home: NextPage = () => {
-  const { colors, toggleDarkMode } = useTheme();
+  const { colors, toggleDarkMode, shadows } = useTheme();
   const [categories, setCategories] = useState<Array<string>>([]);
   const [timeFrame, setTimeFrame] = useState<{ from: string; to: string }>({
     from: new Date().toISOString(),
@@ -18,10 +18,19 @@ const Home: NextPage = () => {
   const [city, setCity] = useState<string>('Berlin');
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
-      <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
+      <div className={styles.searchBar}>
+        <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
+        <div
+          onClick={() => console.log('gehe suchen')}
+          className={styles.button}
+          style={{ backgroundColor: colors.primary[100], boxShadow: shadows.small }}
+        >
+          Go
+        </div>
+      </div>
       <SportFilter categories={categories} setCategories={setCategories} />
       <div className={styles.cardsWrapper}>
-      {/* <button onClick={toggleDarkMode}>DarkMode</button> */}
+        {/* <button onClick={toggleDarkMode}>DarkMode</button> */}
         {matchUps.map((matchup) => (
           <MatchUpCard
             key={matchup.id}

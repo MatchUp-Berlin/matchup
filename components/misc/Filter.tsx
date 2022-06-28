@@ -9,7 +9,7 @@ export interface IFilterProps {
 }
 
 const Filter: React.FunctionComponent<IFilterProps> = (props) => {
-  const { colors, darkMode } = useTheme();
+  const { colors, darkMode, shadows } = useTheme();
 
   function getNextDayOfTheWeek(dayName: string, excludeToday = true, refDate = new Date()) {
     const dayOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(dayName);
@@ -62,7 +62,7 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={{ boxShadow: shadows.small }}>
       <input
         style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
         value={props.city}

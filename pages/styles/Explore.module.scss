@@ -1,6 +1,25 @@
+
 .page {
   min-height: 100vh;
   padding: 1em;
+
+  .searchBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 4px;
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      padding: 1em;
+      border-radius: 100%;
+    }
+  }
 
   .cardsWrapper {
     margin-top: 1em;

@@ -26,7 +26,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             viewBox="0 0 16 21"
             fill={
               router.pathname == '/Organize' && darkMode
-                ? colors.primary[80]
+                ? colors.primary[100]
                 : router.pathname == '/Organize' && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
@@ -40,7 +40,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             style={{
               color:
                 router.pathname == '/Organize' && darkMode
-                  ? colors.primary[80]
+                  ? colors.primary[100]
                   : router.pathname == '/Organize' && !darkMode
                   ? colors.primary[100]
                   : colors.text[60],
@@ -60,7 +60,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             viewBox="0 0 20 20"
             fill={
               router.pathname == '/Watchlist' && darkMode
-                ? colors.primary[80]
+                ? colors.primary[100]
                 : router.pathname == '/Watchlist' && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
@@ -74,7 +74,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             style={{
               color:
                 router.pathname == '/Watchlist' && darkMode
-                  ? colors.primary[80]
+                  ? colors.primary[100]
                   : router.pathname == '/Watchlist' && !darkMode
                   ? colors.primary[100]
                   : colors.text[60],
@@ -94,7 +94,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             viewBox="0 0 21 20"
             fill={
               router.pathname == '/' && darkMode
-                ? colors.primary[80]
+                ? colors.primary[100]
                 : router.pathname == '/' && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
@@ -108,7 +108,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             style={{
               color:
                 router.pathname == '/' && darkMode
-                  ? colors.primary[80]
+                  ? colors.primary[100]
                   : router.pathname == '/' && !darkMode
                   ? colors.primary[100]
                   : colors.text[60],
@@ -128,7 +128,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             viewBox="0 0 20 20"
             fill={
               router.pathname == '/YourMatchUps' && darkMode
-                ? colors.primary[80]
+                ? colors.primary[100]
                 : router.pathname == '/YourMatchUps' && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
@@ -142,7 +142,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             style={{
               color:
                 router.pathname == '/YourMatchUps' && darkMode
-                  ? colors.primary[80]
+                  ? colors.primary[100]
                   : router.pathname == '/YourMatchUps' && !darkMode
                   ? colors.primary[100]
                   : colors.text[60],
@@ -162,7 +162,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             viewBox="0 0 20 20"
             fill={
               router.pathname.includes('/Profile/') && darkMode
-                ? colors.primary[80]
+                ? colors.primary[100]
                 : router.pathname.includes('/Profile/') && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
@@ -176,7 +176,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             style={{
               color:
                 router.pathname.includes('/Profile/') && darkMode
-                  ? colors.primary[80]
+                  ? colors.primary[100]
                   : router.pathname.includes('/Profile/') && !darkMode
                   ? colors.primary[100]
                   : colors.text[60],
