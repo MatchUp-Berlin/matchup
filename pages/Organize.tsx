@@ -408,7 +408,29 @@ const OrganizePage: NextPage = () => {
             }}
           />
           {/* image */}
-          <div className={styles.inputGroup}>Update Title Image</div>
+          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0' }}>
+            Update Title Image
+          </h4>
+          <input
+            className={styles.imageInput}
+            type='file'
+            onClick={() => console.log('input file')}
+            style={{
+              borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+            }}
+          />
+          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0' }}>
+            Description
+          </h4>
+          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0' }}>
+            Description
+          </h4>
+          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0' }}>
+            Description
+          </h4>
+          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0' }}>
+            Description
+          </h4>
 
           <Footer
             progress={75}
