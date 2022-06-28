@@ -79,3 +79,21 @@
   margin: 0 1em;
   // padding: 0.5em;
 }
+
+.selectFormSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -0.3em;
+
+  .selectInput {
+    height: 2em;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0 1em;
+    margin: 1em;
+    background-color: transparent;
+  }
+}

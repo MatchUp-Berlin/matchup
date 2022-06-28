@@ -293,7 +293,9 @@ const OrganizePage: NextPage = () => {
               style={{ color: colors.text[60] }}
             >
               <div className={styles.incrementFormSection}>
-                <label style={{ color: colors.text[100] }}>Minimum</label>
+                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                  Minimum
+                </label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
@@ -323,7 +325,9 @@ const OrganizePage: NextPage = () => {
                 </div>
               </div>
               <div className={styles.incrementFormSection}>
-                <label style={{ color: colors.text[100] }}>Maximum</label>
+                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                  Maximum
+                </label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
@@ -351,6 +355,19 @@ const OrganizePage: NextPage = () => {
                     +
                   </button>
                 </div>
+              </div>
+              <div className={styles.selectFormSection}>
+                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                  Skills level
+                </label>
+                <select
+                  className={styles.selectInput}
+                  onChange={(e) => setSkillLevel(e.target.value)}
+                >
+                  <option value='beginner'>Beginner</option>
+                  <option value='intermediate'>Intermediate</option>
+                  <option value='advanced'>Advanced</option>
+                </select>
               </div>
             </div>
             {/* optional costs */}
