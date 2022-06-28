@@ -363,6 +363,9 @@ const OrganizePage: NextPage = () => {
                 <select
                   className={styles.selectInput}
                   onChange={(e) => setSkillLevel(e.target.value)}
+                  style={{
+                    borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                  }}
                 >
                   <option value='beginner'>Beginner</option>
                   <option value='intermediate'>Intermediate</option>
@@ -371,12 +374,30 @@ const OrganizePage: NextPage = () => {
               </div>
             </div>
             {/* optional costs */}
-            <div className={styles.inputGroup}>Optional Costs</div>
-            {/* description */}
-            <div className={styles.inputGroup}>Description</div>
-            {/* image */}
-            <div className={styles.inputGroup}>Update Title Image</div>
           </div>
+          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0' }}>
+            Optional Costs
+          </h4>
+          <div className={styles.generalInfoForm}>
+            <div className={styles.rentedCourt} style={{ paddingRight: '1em' }}>
+              <p>Is there a reserved court?</p>
+              <Switch callback={() => console.log('switched')} />
+            </div>
+            <div className={styles.textFormSection}>
+              <p style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                Total Costs
+              </p>
+              <input
+                type='text'
+                className={styles.textInput}
+                placeholder='70.00€'
+              />
+            </div>
+          </div>
+          {/* description */}
+          <div className={styles.inputGroup}>Description</div>
+          {/* image */}
+          <div className={styles.inputGroup}>Update Title Image</div>
 
           <Footer
             progress={75}

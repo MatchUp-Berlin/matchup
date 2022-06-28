@@ -97,3 +97,30 @@
     background-color: transparent;
   }
 }
+
+.textInput {
+  width: 41%;
+  height: 2em;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0 1em;
+  margin: 1em;
+  background-color: transparent;
+}
+
+.rentedCourt {
+  // padding: 0 0.5em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.textFormSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -1.2em;
+}
