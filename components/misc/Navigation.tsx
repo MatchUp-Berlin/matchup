@@ -46,16 +46,16 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
       </Link>
 
       {/* ------ WATCHLIST ------ */}
-      <Link href="/Watchlist">
+      <Link href="/WatchList">
         <div className={styles.link}>
           <svg
             width="20"
             height="20"
             viewBox="0 0 20 20"
             fill={
-              router.pathname == '/Watchlist' && darkMode
+              router.pathname == '/WatchList' && darkMode
                 ? colors.primary[80]
-                : router.pathname == '/Watchlist' && !darkMode
+                : router.pathname == '/WatchList' && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
             }
