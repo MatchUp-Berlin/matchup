@@ -20,7 +20,7 @@ export interface IMatchUpCardProps {
   timestamp: string;
   title: string;
   slots?: number;
-  participating?: number;
+  participating: number;
   location: string;
   sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball';
   skill?: 'beginner' | 'intermediate' | 'advanced';
@@ -77,7 +77,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           style={props.variant == 'small' ? { justifyContent: 'space-around', height: '100%' } : {}}
         >
           <div className={styles.title}>
-            <Image width={'25px'} height={'25px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
+            <Image width={'20px'} height={'20px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
             <p className="highlight-2">{props.title}</p>
           </div>
           <div className={styles.details}>
@@ -117,7 +117,6 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             )}
             {props.variant == 'large' &&
               props.slots &&
-              props.participating &&
               props.slots - props.participating && (
                 <div
                   className={styles.pill}

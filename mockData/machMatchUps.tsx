@@ -1,6 +1,45 @@
+import { match } from 'assert';
 import { MatchUp } from '../utils/types/MatchUp.Type';
 
 const matchUps: MatchUp[] = [
+  {
+    attendanceMax: 4,
+    attendanceMin: 2,
+    cancelled: false,
+    currency: 'USD',
+    date: '2022-06-27T15:33:52.444Z',
+    description: 'its sportin time',
+    id: 'asdad-1fb2-449a-b97e-faa879d1a36c',
+    image:
+      'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80',
+    location: 'berlin',
+    organizer: '54955977-c461-4943-9e66-288b3ba065ba',
+    reservedCourt: false,
+    skillLevel: 'beginner',
+    sportCategory: 'tennis',
+    title: 'sportin at the park',
+    totalCost: 0,
+    users: [],
+  },
+  {
+    attendanceMax: 6,
+    attendanceMin: 2,
+    cancelled: false,
+    currency: 'USD',
+    date: '2022-06-27T15:33:52.444Z',
+    description: 'its sportin time',
+    id: '1367ec81-dfafd-449a-b97e-faa879d1a36c',
+    image:
+      'https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+    location: 'berlin',
+    organizer: '54955977-c461-4943-9e66-288b3ba065ba',
+    reservedCourt: false,
+    skillLevel: 'beginner',
+    sportCategory: 'football',
+    title: 'sportin at the park',
+    totalCost: 0,
+    users: [],
+  },
   {
     attendanceMax: 10,
     attendanceMin: 2,
@@ -8,15 +47,37 @@ const matchUps: MatchUp[] = [
     currency: 'USD',
     date: '2022-06-27T15:33:52.444Z',
     description: 'its sportin time',
-    id: '1367ec81-1fb2-449a-b97e-faa879d1a36c',
-    image: 'https://imageshare/image1',
+    id: '1367ec81-1fb2-addafadf-b97e-faa879d1a36c',
+    image:
+      'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80',
     location: 'berlin',
     organizer: '54955977-c461-4943-9e66-288b3ba065ba',
     reservedCourt: false,
     skillLevel: 'beginner',
-    sportCategory: 'sportball',
-    title: 'sportin at the park',
+    sportCategory: 'basketball',
+    title: 'Italo Clan 🍕',
+    totalCost: 0,
+    users: [],
+  },
+  {
+    attendanceMax: 10,
+    attendanceMin: 2,
+    cancelled: false,
+    currency: 'USD',
+    date: '2022-06-27T15:33:52.444Z',
+    description: 'AraberClan',
+    id: '1367ec81-1fb2-449a-b97e-afdadfwe',
+    image:
+      'https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+    location: 'berlin',
+    organizer: '54955977-c461-4943-9e66-288b3ba065ba',
+    reservedCourt: false,
+    skillLevel: 'beginner',
+    sportCategory: 'beach-volleyball',
+    title: 'AraberClan',
     totalCost: 0,
     users: [],
   },
 ];
+
+export default matchUps;
