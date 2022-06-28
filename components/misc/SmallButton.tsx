@@ -1,14 +1,14 @@
 import React from 'react';
 import { useTheme } from '../../contexts/Theme';
-import styles from './styles/UpdatesPreviewButton.module.scss';
+import styles from './styles/SmallButton.module.scss';
 
-export interface IUpdatesPreviewButtonProps {
+export interface ISmallButtonProps {
   icon?: any; // has to be an SVG path
   viewBox?: string;
   callback?: () => any;
 }
 
-const UpdatesPreviewButton: React.FunctionComponent<IUpdatesPreviewButtonProps> = (props) => {
+const SmallButton: React.FunctionComponent<ISmallButtonProps> = (props) => {
   const { colors, shadows, darkMode } = useTheme();
   return (
     <div
@@ -38,11 +38,11 @@ const UpdatesPreviewButton: React.FunctionComponent<IUpdatesPreviewButtonProps> 
   );
 };
 
-export default UpdatesPreviewButton;
+export default SmallButton;
 
 /*
 
-USAGE:
+USAGE: (if props.viewBox or props.icon are not passed they will default to hardcoded values)
 
 <HeaderButton
   viewBox="0 0 10 10"
