@@ -1,4 +1,3 @@
-import { match } from 'assert';
 import { MatchUp } from '../utils/types/MatchUp.Type';
 
 const matchUps: MatchUp[] = [
