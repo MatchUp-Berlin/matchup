@@ -1,14 +1,15 @@
 import { API } from 'aws-amplify';
 import { getMatchUp } from '../../src/graphql/queries';
-import { MatchUp } from '../types/MatchUp.Type';
 
 //EXAMPLE ARGUMENT
 //"ceb7d85e-021e-4657-90a0-e3e2f98bcc7c"
 
-export async function getMatchUpById (id: Object) {
+export async function getMatchUpById (id: string) {
     const matchUpData = await API.graphql({
         query: getMatchUp,
-            variables: {id: id},
+
+            variables: { id: id },
+
             // authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
         console.log(matchUpData)

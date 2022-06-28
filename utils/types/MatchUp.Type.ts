@@ -20,3 +20,20 @@ export interface MatchUp {
   currency: string;
   updates: Update[];
 }
+<<<<<<< HEAD
+
+export interface getMatchUpsByFilterReturn {
+  items: MatchUp[];
+  nextToken: string;
+  startedAt: string;
+}
+
+export interface getMatchUpsByFilterFilter {
+  and: [
+    { location: { eq: string } },
+    { or: { sportCategory: { eq: string } }[] }?,
+    { and: { date: { gt: string } | { lt: string } }[] }?
+  ];
+}
+=======
+>>>>>>> main
