@@ -7,9 +7,12 @@ import { getMatchUp } from '../../src/graphql/queries';
 export async function getMatchUpById (id: string) {
     const matchUpData = await API.graphql({
         query: getMatchUp,
+
             variables: { id: id },
+
             // authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
+        console.log(matchUpData)
     const retrievedMatchUpData = matchUpData.data.getMatchUp
 
     console.log(retrievedMatchUpData);
@@ -38,6 +41,7 @@ sportCategory: "sportball"
 title: "sportin at the park"
 totalCost: 0
 updatedAt: "2022-06-27T15:33:52.444Z"
+updates: {items: Array(4), nextToken: null, startedAt: null}
 users: {items: Array(0), nextToken: null, startedAt: null}
 _deleted: null
 _lastChangedAt: 1656344032466
