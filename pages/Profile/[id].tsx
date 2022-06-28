@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router'
+import Navigation from '../components/misc/Navigation';
 
 const ProfileDetailPage: NextPage = () => {
     const router = useRouter()
@@ -8,7 +9,13 @@ const ProfileDetailPage: NextPage = () => {
 
     if (route !== 'authenticated') {
         router.push('/')
-      }
+      } else {
+        return(
+            <>
+            <Navigation />
+            </>
+        )
+    }
 
 
 };
