@@ -19,6 +19,7 @@ import volleyball from '../public/volleyball.jpg';
 import frisbee from '../public/frisbee.jpg';
 import { useTheme } from '../contexts/Theme';
 import Switch from '../components/misc/Switch';
+import StaticMap from '../components/maps/Static.Map';
 
 // interface MatchUp {
 //   id?: string;
@@ -66,6 +67,27 @@ const OrganizePage: NextPage = () => {
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<File>();
+
+  function decreaseMinAttendance(): void {
+    if (attendanceMin > 2) {
+      setAttendanceMin((prevAttendanceMin) => prevAttendanceMin - 1);
+    }
+  }
+  function increaseMinAttendance(): void {
+    if (attendanceMin < attendanceMax) {
+      setAttendanceMin((prevAttendanceMin) => prevAttendanceMin + 1);
+    }
+  }
+  function decreaseMaxAttendance(): void {
+    if (attendanceMax > attendanceMin) {
+      setAttendanceMax((prevAttendanceMax) => prevAttendanceMax - 1);
+    }
+  }
+  function increaseMaxAttendance(): void {
+    if (attendanceMin < 30) {
+      setAttendanceMax((prevAttendanceMax) => prevAttendanceMax + 1);
+    }
+  }
 
   return (
     <div
@@ -223,6 +245,7 @@ const OrganizePage: NextPage = () => {
                   color: colors.text[60],
                 }}
               ></input>
+              <StaticMap latitude={15} longitude={50} zoom={15} />
             </div>
 
             <div className={styles.indoors}>
@@ -262,12 +285,43 @@ const OrganizePage: NextPage = () => {
             }
           ></Header>
 
-          <form className={styles.generalInfoForm}>
-            <div className={styles.inputGroup}>Participants</div>
+          <div className={styles.generalInfoForm}>
+            {/* participants */}
+            <div className={styles.inputGroup}>
+              <div className={styles.incrementFormSection}>
+                <label
+                  className={styles.label}
+                  style={{ color: colors.text[100] }}
+                >
+                  Minimum
+                </label>
+                <div className={styles.incrementButtons}>
+                  <button onClick={decreaseMinAttendance}>-</button>
+                  <div>{attendanceMin}</div>
+                  <button onClick={increaseMinAttendance}>+</button>
+                </div>
+              </div>
+              <div className={styles.incrementFormSection}>
+                <label
+                  className={styles.label}
+                  style={{ color: colors.text[100] }}
+                >
+                  Maximum
+                </label>
+                <div className={styles.incrementButtons}>
+                  <button onClick={decreaseMaxAttendance}>-</button>
+                  <div>{attendanceMax}</div>
+                  <button onClick={increaseMaxAttendance}>+</button>
+                </div>
+              </div>
+            </div>
+            {/* optional costs */}
             <div className={styles.inputGroup}>Optional Costs</div>
+            {/* description */}
             <div className={styles.inputGroup}>Description</div>
+            {/* image */}
             <div className={styles.inputGroup}>Update Title Image</div>
-          </form>
+          </div>
 
           <Footer
             progress={75}
