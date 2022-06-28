@@ -11,49 +11,52 @@ body {
 h1 {
   font-size: 40px;
   font-weight: 700;
-  line-height: 40px;
+  margin: 0;
+  line-height: 1em;
 }
 
 h2 {
   font-size: 35px;
-  font-weight: 700;
-  line-height: 42px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1em;
 }
 
 h3 {
   font-size: 30px;
-  font-weight: 700;
-  line-height: 36px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1em;
 }
 
 p {
   font-size: 15px;
   font-weight: 400;
-  line-height: 18px;
+  margin: 0;
 }
 
 p.fat {
   font-size: 15px;
   font-weight: 700;
-  line-height: 18px;
+  margin: 0;
 }
 
 p.small {
   font-size: 13px;
   font-weight: 300;
-  line-height: 16px;
+  margin: 0;
 }
 
 p.highlight-1 {
   font-size: 20px;
   font-weight: 700;
-  line-height: 24px;
+  margin: 0;
 }
 
 p.highlight-2 {
   font-size: 20px;
   font-weight: 500;
-  line-height: 24px;
+  margin: 0;
 }
 
 a {

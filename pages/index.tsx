@@ -1,12 +1,11 @@
-import type { NextPage } from 'next'
-import Link from 'next/link'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next';
+import SkillsCard from '../components/cards/Skills.Card';
+import SlotsCard from '../components/cards/Slots.Card';
 
 import { initMap } from '../utils/MapSearch.util'
 
 const Home: NextPage = () => {
+<<<<<<< HEAD
   console.log(initMap())
   return (
     <div className={styles.container}>
@@ -85,3 +84,18 @@ const Home: NextPage = () => {
 }
 
 export default Home
+=======
+<<<<<<< HEAD
+  return <h1>something</h1>;
+=======
+  return (
+    <>
+      <SkillsCard skillLevel="advanced"></SkillsCard>
+      <SlotsCard attending={2} slots={10}></SlotsCard>
+    </>
+  );
+>>>>>>> main
+};
+
+export default Home;
+>>>>>>> 190608a1041f540b509581916ee8ad8cbb558e35

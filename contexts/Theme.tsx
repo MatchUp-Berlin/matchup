@@ -13,13 +13,13 @@ interface IColors {
   };
   text: {
     '100': string;
-    '60': string;
     '80': string;
+    '60': string;
   };
   background: {
     '100': string;
-    '60': string;
     '80': string;
+    '60': string;
   };
 }
 
@@ -36,16 +36,17 @@ export interface IThemeProvider {
   shadows: IShadows;
 }
 
-const ThemeContext = React.createContext<IThemeProvider | null>(null);
+//@ts-ignore
+const ThemeContext = React.createContext<IThemeProvider>();
 
 /* ----- HOOK ----- */
 export function useTheme() {
-  return useContext<IThemeProvider | null>(ThemeContext);
+  return useContext<IThemeProvider>(ThemeContext);
 }
 
 /* ----- PROVIDER ----- */
 export const ThemeProvider: FC<any> = ({ children }: any) => {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const value: IThemeProvider = {
     darkMode,
@@ -64,24 +65,24 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
       text: darkMode
         ? {
             '100': '#FFFFFF',
-            '60': '#F2F4F5',
-            '80': '#A2A2A2',
+            '80': '#F2F4F5',
+            '60': '#A2A2A2',
           }
         : {
             '100': '#252525',
-            '60': '#515151',
-            '80': '#7C7C7C',
+            '80': '#515151',
+            '60': '#7C7C7C',
           },
       background: darkMode
         ? {
             '100': '#252525',
-            '60': '#32333D',
-            '80': '#4F4F4F',
+            '80': '#32333D',
+            '60': '#4F4F4F',
           }
         : {
             '100': '#FFFFFF',
-            '60': '#FFFFFF',
             '80': '#FFFFFF',
+            '60': '#FFFFFF',
           },
     },
     shadows: {
