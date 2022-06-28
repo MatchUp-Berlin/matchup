@@ -1,18 +1,15 @@
 import type { NextPage } from 'next';
-import SkillsCard from '../components/cards/Skills.Card';
-import SlotsCard from '../components/cards/Slots.Card';
+import { usersArray } from '../mockData/mockUsersArray';
+import { useTheme } from '../contexts/Theme';
 
 const Home: NextPage = () => {
-<<<<<<< HEAD
-  return <h1>something</h1>;
-=======
+  const { toggleDarkMode } = useTheme();
   return (
-    <>
-      <SkillsCard skillLevel="advanced"></SkillsCard>
-      <SlotsCard attending={2} slots={10}></SlotsCard>
-    </>
+    <div>
+      <h1>🐋 Blanalala 🐋</h1>
+      <button onClick={toggleDarkMode}> darkMode</button>
+    </div>
   );
->>>>>>> main
 };
 
 export default Home;
