@@ -10,13 +10,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
   const { colors, darkMode } = useTheme();
 
   return (
-    <div
-      className={styles.wrapper}
-      style={{
-        backgroundColor: colors.background[100],
-        borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',
-      }}
-    >
+    <div className={styles.wrapper} style={{ backgroundColor: colors.background[100], borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',}}>
       {/* ------ ORGANIZE ------ */}
       <Link href="/Organize">
         <div className={styles.link}>
@@ -50,16 +44,6 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
           </p>
         </div>
       </Link>
-<<<<<<< HEAD
-      <Link href="/WatchList">
-        <div className={styles.link}>
-        <svg width="25" height="25" viewBox="0 0 20 20" fill={ router.pathname == '/WatchList' ?
-        (darkMode ? colors.primary[80]: colors.primary[60]):
-        (!darkMode ? colors.secondary[80]: colors.secondary[60]) } xmlns="http://www.w3.org/2000/svg">
-          <path d="M17 0H3C2.20462 0.000868196 1.44206 0.317218 0.879638 0.879639C0.317217 1.44206 0.000868196 2.20462 0 3V17C0.000868196 17.7954 0.317217 18.5579 0.879638 19.1204C1.44206 19.6828 2.20462 19.9991 3 20H17C17.7954 19.9991 18.5579 19.6828 19.1204 19.1204C19.6828 18.5579 19.9991 17.7954 20 17V3C19.9991 2.20462 19.6828 1.44206 19.1204 0.879639C18.5579 0.317218 17.7954 0.000868196 17 0ZM3 2H17C17.2651 2.00026 17.5193 2.10571 17.7068 2.29319C17.8943 2.48066 17.9997 2.73486 18 3V11H15.5352C15.2059 10.9997 14.8816 11.0809 14.5913 11.2363C14.3009 11.3917 14.0535 11.6165 13.8711 11.8906L12.4648 14H7.53516L6.12891 11.8906C5.94648 11.6165 5.69908 11.3917 5.40874 11.2363C5.11841 11.0809 4.79415 10.9997 4.46485 11H2V3C2.00026 2.73486 2.10571 2.48066 2.29319 2.29319C2.48066 2.10571 2.73486 2.00026 3 2ZM17 18H3C2.73486 17.9997 2.48066 17.8943 2.29319 17.7068C2.10571 17.5193 2.00026 17.2651 2 17V13H4.46485L5.8711 15.1094C6.05353 15.3835 6.30093 15.6083 6.59126 15.7637C6.8816 15.9191 7.20586 16.0003 7.53516 16H12.4648C12.7942 16.0003 13.1184 15.9191 13.4087 15.7637C13.6991 15.6083 13.9465 15.3835 14.1289 15.1094L15.5352 13H18V17C17.9997 17.2651 17.8943 17.5193 17.7068 17.7068C17.5193 17.8943 17.2651 17.9997 17 18Z"/>
-        </svg>
-          <p>WatchList</p>
-=======
 
       {/* ------ WATCHLIST ------ */}
       <Link href="/Watchlist">
@@ -92,7 +76,6 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
           >
             Watchlist
           </p>
->>>>>>> main
         </div>
       </Link>
 
