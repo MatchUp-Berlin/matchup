@@ -13,31 +13,31 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
     <div className={styles.wrapper} style={darkMode ? {} : { backgroundImage: colors.primary }}>
       <Link href="/Organize">
         <div className={styles.link}>
-          <img src="/organize.svg" />
+          <img alt="organize-image" src="/organize.svg" />
           <p>Organize</p>
         </div>
       </Link>
       <Link href="/Watchlist">
         <div className={styles.link}>
-          <img src="/watchlist.svg" />
+          <img alt="watchlist-image" src="/watchlist.svg" />
           <p>Watchlist</p>
         </div>
       </Link>
       <Link href="/">
         <div className={styles.link}>
-          <img src="/explore.svg" />
+          <img alt="explore-image" src="/explore.svg" />
           <p>Explore</p>
         </div>
       </Link>
       <Link href="/YourMatchUps">
         <div className={styles.link}>
-          <img src="/mymatchups.svg" />
+          <img alt="mymatchups-image" src="/mymatchups.svg" />
           <p>MatchUps</p>
         </div>
       </Link>
       <Link href="Profile/[id]">
         <div className={styles.link}>
-          <img src="/profile.svg" />
+          <img alt="profile-image" src="/profile.svg" />
           <p>Profile</p>
         </div>
       </Link>
