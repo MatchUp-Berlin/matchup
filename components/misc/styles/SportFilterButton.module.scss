@@ -1,0 +1,14 @@
+.wrapper {
+  min-width: 70px;
+  max-width: 70px;
+  min-height: 70px;
+  max-height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  outline-style: solid;
+  border-radius: 100%;
+  outline-offset: -4px;
+  transition: 0.2s;
+}

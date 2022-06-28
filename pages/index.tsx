@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
-import SkillsCard from '../components/cards/Skills.Card';
-import SlotsCard from '../components/cards/Slots.Card';
+import { useTheme } from '../contexts/Theme';
+import Navigation from '../components/misc/Navigation';
 
 import { initMap } from '../utils/MapSearch.util'
 
 const Home: NextPage = () => {
+<<<<<<< HEAD
 <<<<<<< HEAD
   console.log(initMap())
   return (
@@ -88,13 +89,15 @@ export default Home
 <<<<<<< HEAD
   return <h1>something</h1>;
 =======
+=======
+  const { toggleDarkMode } = useTheme();
+>>>>>>> e66cfb50417eb23a5e29c73ce2ab4681cebaca4c
   return (
     <>
-      <SkillsCard skillLevel="advanced"></SkillsCard>
-      <SlotsCard attending={2} slots={10}></SlotsCard>
+      <button onClick={toggleDarkMode}>DarkMode</button>
+      <Navigation />
     </>
   );
->>>>>>> main
 };
 
 export default Home;
