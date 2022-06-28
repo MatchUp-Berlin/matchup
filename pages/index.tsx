@@ -1,18 +1,18 @@
 import type { NextPage } from 'next';
-import MatchUpCard from '../components/cards/MatchUp.Card';
-import football from '../public/football.jpg';
+import { useState } from 'react';
+import SportFilter from '../components/misc/SportFilter';
+import { useTheme } from '../contexts/Theme';
 import Navigation from '../components/misc/Navigation';
 
 const Home: NextPage = () => {
+  const { toggleDarkMode } = useTheme();
+  const [categories, setCategories] = useState<Array<string>>([]);
   return (
-    <><MatchUpCard
-      variant="small"
-      timestamp="24 August"
-      title="Arabs frommage"
-      location="Treptower Park, Berlin"
-      sport="football"
-      imageUrl={football}
-    ></MatchUpCard><Navigation /></>
+    <>
+      <SportFilter categories={categories} setCategories={setCategories} />
+      <button onClick={toggleDarkMode}>DarkMode</button>
+      <Navigation />
+    </>
   );
 };
 
