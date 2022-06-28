@@ -68,7 +68,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
       }}
     >
       <div className={styles.imageWrapper}>
-        <img src={props.imageUrl.src} alt={props.title} height="100%"></img>
+        <Image src={props.imageUrl} alt={props.title} layout="fill" objectFit="cover"></Image>
       </div>
 
       <div className={styles.infoWrapper}>
