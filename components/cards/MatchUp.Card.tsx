@@ -16,19 +16,19 @@ import euro from '../../public/euro.svg';
 //TODO: Adjust to actual types!!
 
 export interface IMatchUpCardProps {
+  variant: 'small' | 'large';
   timestamp: string;
   title: string;
-  slots: number;
-  participating: number;
+  slots?: number;
+  participating?: number;
   location: string;
   sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball';
-  skill: 'beginner' | 'intermediate' | 'advanced';
+  skill?: 'beginner' | 'intermediate' | 'advanced';
   imageUrl: any;
-  paid: boolean;
+  paid?: boolean;
   price?: number;
   rented?: boolean;
 }
-
 
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
@@ -61,14 +61,21 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   return (
     <div
       className={styles.wrapper}
-      style={{ backgroundColor: colors.background[80], boxShadow: shadows.medium }}
+      style={{
+        backgroundColor: colors.background[80],
+        boxShadow: shadows.medium,
+        height: props.variant == 'large' ? '150px' : '100px',
+      }}
     >
       <div className={styles.imageWrapper}>
         <img src={props.imageUrl.src} alt={props.title} height="100%"></img>
       </div>
 
       <div className={styles.infoWrapper}>
-        <div className={styles.info}>
+        <div
+          className={styles.info}
+          style={props.variant == 'small' ? { justifyContent: 'space-around', height: '100%' } : {}}
+        >
           <div className={styles.title}>
             <Image width={'25px'} height={'25px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
             <p className="highlight-2">{props.title}</p>
@@ -82,36 +89,45 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
               <Image src={pin} alt="taking place at"></Image>
               <p style={{ color: colors.text[60] }}>{props.location}</p>
             </div>
-            <div className={styles.detail}>
-              <Image src={euro} alt="costs"></Image>
-              <p style={{ color: colors.text[60] }}>{props.price + '.00' || 'Free'}</p>
-            </div>
+
+            {props.variant == 'large' && (
+              <div className={styles.detail}>
+                <Image src={euro} alt="costs"></Image>
+                <p style={{ color: colors.text[60] }}>{props.price + '.00' || 'Free'}</p>
+              </div>
+            )}
           </div>
         </div>
-        <div className={styles.pills}>
-          <div
-            className={styles.pill}
-            style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
-          >
-            <p style={{ color: colors.text[100] }}>{props.skill}</p>
-          </div>
-          {props.rented && (
+
+        {props.variant == 'large' && (
+          <div className={styles.pills}>
             <div
               className={styles.pill}
               style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
             >
-              <p style={{ color: colors.text[100] }}>Rented court</p>
+              <p style={{ color: colors.text[100] }}>{props.skill}</p>
             </div>
-          )}
-          {props.slots - props.participating && (
-            <div
-              className={styles.pill}
-              style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
-            >
-              <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
-            </div>
-          )}
-        </div>
+            {props.rented && (
+              <div
+                className={styles.pill}
+                style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+              >
+                <p style={{ color: colors.text[100] }}>Rented court</p>
+              </div>
+            )}
+            {props.variant == 'large' &&
+              props.slots &&
+              props.participating &&
+              props.slots - props.participating && (
+                <div
+                  className={styles.pill}
+                  style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+                >
+                  <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
+                </div>
+              )}
+          </div>
+        )}
       </div>
     </div>
   );
