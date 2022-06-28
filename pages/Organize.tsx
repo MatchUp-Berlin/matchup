@@ -262,6 +262,13 @@ const OrganizePage: NextPage = () => {
             }
           ></Header>
 
+          <form className={styles.generalInfoForm}>
+            <div className={styles.inputGroup}>Participants</div>
+            <div className={styles.inputGroup}>Optional Costs</div>
+            <div className={styles.inputGroup}>Description</div>
+            <div className={styles.inputGroup}>Update Title Image</div>
+          </form>
+
           <Footer
             progress={75}
             leftSide={<p onClick={() => goBack()}>Back</p>}
