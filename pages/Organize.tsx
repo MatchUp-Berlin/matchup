@@ -395,7 +395,18 @@ const OrganizePage: NextPage = () => {
             </div>
           </div>
           {/* description */}
-          <div className={styles.inputGroup}>Description</div>
+          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0' }}>
+            Description
+          </h4>
+          <textarea
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+            className={styles.textarea}
+            style={{
+              borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+            }}
+          />
           {/* image */}
           <div className={styles.inputGroup}>Update Title Image</div>
 
