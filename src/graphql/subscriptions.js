@@ -5,12 +5,14 @@ export const onCreateMatchUpUser = /* GraphQL */ `
   subscription OnCreateMatchUpUser {
     onCreateMatchUpUser {
       id
-      MatchUpUsers {
+      userId
+      matchUpId
+      user {
         id
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -22,7 +24,7 @@ export const onCreateMatchUpUser = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      UserMatchUps {
+      matchUp {
         id
         title
         users {
@@ -54,8 +56,6 @@ export const onCreateMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      matchUpUserMatchUpUsersId
-      matchUpUserUserMatchUpsId
     }
   }
 `;
@@ -63,12 +63,14 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
   subscription OnUpdateMatchUpUser {
     onUpdateMatchUpUser {
       id
-      MatchUpUsers {
+      userId
+      matchUpId
+      user {
         id
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -80,7 +82,7 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      UserMatchUps {
+      matchUp {
         id
         title
         users {
@@ -112,8 +114,6 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      matchUpUserMatchUpUsersId
-      matchUpUserUserMatchUpsId
     }
   }
 `;
@@ -121,12 +121,14 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
   subscription OnDeleteMatchUpUser {
     onDeleteMatchUpUser {
       id
-      MatchUpUsers {
+      userId
+      matchUpId
+      user {
         id
         givenName
         familyName
         email
-        MatchUps {
+        matchUps {
           nextToken
           startedAt
         }
@@ -138,7 +140,7 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      UserMatchUps {
+      matchUp {
         id
         title
         users {
@@ -170,8 +172,6 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      matchUpUserMatchUpUsersId
-      matchUpUserUserMatchUpsId
     }
   }
 `;
@@ -183,8 +183,9 @@ export const onCreateMatchUp = /* GraphQL */ `
       users {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -223,8 +224,9 @@ export const onUpdateMatchUp = /* GraphQL */ `
       users {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -263,8 +265,9 @@ export const onDeleteMatchUp = /* GraphQL */ `
       users {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -302,11 +305,12 @@ export const onCreateUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      matchUps {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -333,11 +337,12 @@ export const onUpdateUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      matchUps {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -364,11 +369,12 @@ export const onDeleteUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      matchUps {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
           _version
@@ -380,177 +386,6 @@ export const onDeleteUser = /* GraphQL */ `
       }
       profileImage
       about
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateUserMatchUp = /* GraphQL */ `
-  subscription OnCreateUserMatchUp {
-    onCreateUserMatchUp {
-      id
-      matchUpID
-      userID
-      matchUp {
-        id
-        title
-        users {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        description
-        image
-        date
-        currency
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        givenName
-        familyName
-        email
-        MatchUps {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateUserMatchUp = /* GraphQL */ `
-  subscription OnUpdateUserMatchUp {
-    onUpdateUserMatchUp {
-      id
-      matchUpID
-      userID
-      matchUp {
-        id
-        title
-        users {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        description
-        image
-        date
-        currency
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        givenName
-        familyName
-        email
-        MatchUps {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteUserMatchUp = /* GraphQL */ `
-  subscription OnDeleteUserMatchUp {
-    onDeleteUserMatchUp {
-      id
-      matchUpID
-      userID
-      matchUp {
-        id
-        title
-        users {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        description
-        image
-        date
-        currency
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      user {
-        id
-        givenName
-        familyName
-        email
-        MatchUps {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version

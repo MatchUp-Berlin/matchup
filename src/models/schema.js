@@ -10,8 +10,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "MatchUpUsers": {
-                    "name": "MatchUpUsers",
+                "user": {
+                    "name": "user",
                     "isArray": false,
                     "type": {
                         "model": "User"
@@ -19,13 +19,12 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "matchUpUserMatchUpUsersId"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "userId"
                     }
                 },
-                "UserMatchUps": {
-                    "name": "UserMatchUps",
+                "matchUp": {
+                    "name": "matchUp",
                     "isArray": false,
                     "type": {
                         "model": "MatchUp"
@@ -33,9 +32,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "matchUpUserUserMatchUpsId"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "matchUpId"
                     }
                 },
                 "attended": {
@@ -60,20 +58,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "matchUpUserMatchUpUsersId": {
-                    "name": "matchUpUserMatchUpUsersId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "matchUpUserUserMatchUpsId": {
-                    "name": "matchUpUserUserMatchUpsId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -82,6 +66,26 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "queryField": "byUser",
+                        "fields": [
+                            "userId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byMatchUp",
+                        "queryField": "byMatchUp",
+                        "fields": [
+                            "matchUpId"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -132,18 +136,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "MatchUps": {
-                    "name": "MatchUps",
+                "matchUps": {
+                    "name": "matchUps",
                     "isArray": true,
                     "type": {
-                        "model": "UserMatchUp"
+                        "model": "MatchUpUser"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "user"
+                        "associatedWith": "matchUpId"
                     }
                 },
                 "profileImage": {
@@ -223,14 +227,14 @@ export const schema = {
                     "name": "users",
                     "isArray": true,
                     "type": {
-                        "model": "UserMatchUp"
+                        "model": "MatchUpUser"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "matchUp"
+                        "associatedWith": "userId"
                     }
                 },
                 "location": {
@@ -365,89 +369,9 @@ export const schema = {
                     }
                 }
             ]
-        },
-        "UserMatchUp": {
-            "name": "UserMatchUp",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "user": {
-                    "name": "user",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "userID"
-                    }
-                },
-                "matchUp": {
-                    "name": "matchUp",
-                    "isArray": false,
-                    "type": {
-                        "model": "MatchUp"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "matchUpID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserMatchUps",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byMatchUp",
-                        "fields": [
-                            "matchUpID"
-                        ]
-                    }
-                }
-            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "66ae8ac6955ea0c2479fe6d360a040af"
+    "version": "3364ef43c192f4bf239d03549965ce0b"
 };
