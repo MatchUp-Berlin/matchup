@@ -1,4 +1,5 @@
 import { User } from './User.Type';
+import { Update } from './Update.Type'
 
 export interface MatchUp {
   id?: string;
@@ -17,4 +18,5 @@ export interface MatchUp {
   image: string;
   date: string;
   currency: string;
+  updates: Update[];
 }

@@ -18,6 +18,10 @@ export const getMatchUpUser = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -40,10 +44,15 @@ export const getMatchUpUser = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -95,6 +104,7 @@ export const listMatchUpUsers = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          indoor
           description
           image
           date
@@ -159,6 +169,7 @@ export const syncMatchUpUsers = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          indoor
           description
           image
           date
@@ -225,6 +236,7 @@ export const byUser = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          indoor
           description
           image
           date
@@ -291,6 +303,7 @@ export const byMatchUp = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          indoor
           description
           image
           date
@@ -342,10 +355,26 @@ export const getMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      indoor
       description
       image
       date
       currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -377,10 +406,15 @@ export const listMatchUps = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -421,10 +455,15 @@ export const syncMatchUps = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -460,6 +499,21 @@ export const getUser = /* GraphQL */ `
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -486,6 +540,10 @@ export const listUsers = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -521,6 +579,201 @@ export const syncUsers = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUpdate = /* GraphQL */ `
+  query GetUpdate($id: ID!) {
+    getUpdate(id: $id) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        matchUps {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        users {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listUpdates = /* GraphQL */ `
+  query ListUpdates(
+    $filter: ModelUpdateFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUpdates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          organizer
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          indoor
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        content
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUpdates = /* GraphQL */ `
+  query SyncUpdates(
+    $filter: ModelUpdateFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUpdates(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          organizer
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          indoor
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        content
         createdAt
         updatedAt
         _version
