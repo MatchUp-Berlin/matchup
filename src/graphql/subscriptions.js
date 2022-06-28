@@ -18,6 +18,10 @@ export const onCreateMatchUpUser = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -40,10 +44,15 @@ export const onCreateMatchUpUser = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -76,6 +85,10 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -98,10 +111,15 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -134,6 +152,10 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
         }
         profileImage
         about
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -156,10 +178,15 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        indoor
         description
         image
         date
         currency
+        updates {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -204,10 +231,26 @@ export const onCreateMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      indoor
       description
       image
       date
       currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -245,10 +288,26 @@ export const onUpdateMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      indoor
       description
       image
       date
       currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -286,10 +345,26 @@ export const onDeleteMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      indoor
       description
       image
       date
       currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -322,6 +397,21 @@ export const onCreateUser = /* GraphQL */ `
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -354,6 +444,21 @@ export const onUpdateUser = /* GraphQL */ `
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -386,6 +491,222 @@ export const onDeleteUser = /* GraphQL */ `
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateUpdate = /* GraphQL */ `
+  subscription OnCreateUpdate {
+    onCreateUpdate {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        matchUps {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        users {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateUpdate = /* GraphQL */ `
+  subscription OnUpdateUpdate {
+    onUpdateUpdate {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        matchUps {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        users {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteUpdate = /* GraphQL */ `
+  subscription OnDeleteUpdate {
+    onDeleteUpdate {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        matchUps {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        users {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      content
       createdAt
       updatedAt
       _version
