@@ -20,12 +20,12 @@ const Switch: React.FunctionComponent<ISwitchProps> = (props) => {
         <div
           className={styles.toggleContainer}
           style={{
-            backgroundColor: toggle ? 'green' : colors.background[60],
+            backgroundColor: toggle ? colors.primary[100] : colors.background[60],
             boxShadow: shadows.small,
             borderColor: darkMode ? colors.background[60] : '#DDDDDD',
           }}
         ></div>
-        <div className={styles.toggleCircle} style={toggle ? { left: '45%' } : { left: '5%' }}></div>
+        <div className={styles.toggleCircle} style={toggle ? { left: '48%' } : { left: '5%' }}></div>
       </div>
     </>
   );

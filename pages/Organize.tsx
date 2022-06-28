@@ -195,9 +195,12 @@ const OrganizePage: NextPage = () => {
                 style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD', color: colors.text[60] }}
               ></input>
             </div>
-          </form>
 
-          <Switch callback={() => console.log("switched")} />
+            <div className={styles.indoors}>
+              <p>Is this taking place indoors?</p>
+              <Switch callback={() => console.log('switched')} />
+            </div>
+          </form>
 
           <Footer
             progress={50}
