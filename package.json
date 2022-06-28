@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.0.2",
+    "@types/googlemaps": "^3.43.3",
     "@types/react-query": "^1.2.9",
     "aws-amplify": "^4.3.26",
     "aws-sdk": "^2.1162.0",
+    "dotenv": "^16.0.1",
     "next": "12.1.6",
     "node-fetch": "^3.2.6",
     "react": "18.2.0",
@@ -30,7 +32,11 @@
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
+<<<<<<< HEAD
     "babel-jest": "^28.1.1",
+=======
+    "babel-plugin-inline-react-svg": "^2.0.1",
+>>>>>>> main
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "jest": "^28.1.1",

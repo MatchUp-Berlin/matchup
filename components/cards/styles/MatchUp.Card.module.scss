@@ -1,0 +1,92 @@
+.wrapper {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 500px;
+  height: 150px;
+  overflow: hidden;
+
+  .imageWrapper {
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .infoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0.7em;
+    max-width: 66%;
+    flex: 2;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+
+      .title {
+        display: flex;
+        max-width: 100%;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0.2em;
+
+        .detail {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 5px;
+
+          p {
+            font-size: small;
+          }
+        }
+      }
+    }
+
+    .pills {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+
+      .pill {
+        border-radius: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 10px;
+
+        p {
+          white-space: nowrap;
+          font-size: 0.6em;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
