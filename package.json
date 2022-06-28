@@ -32,11 +32,7 @@
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
-<<<<<<< HEAD
     "babel-jest": "^28.1.1",
-=======
-    "babel-plugin-inline-react-svg": "^2.0.1",
->>>>>>> main
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "jest": "^28.1.1",
