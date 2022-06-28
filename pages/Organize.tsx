@@ -285,19 +285,15 @@ const OrganizePage: NextPage = () => {
             }
           ></Header>
 
+          <h4 className={styles.inputSectionTitle}>Participants</h4>
           <div className={styles.generalInfoForm}>
             {/* participants */}
             <div
               className={styles.inputGroup}
-              style={{ color: colors.text[60], fontWeight: 'bold' }}
+              style={{ color: colors.text[60] }}
             >
               <div className={styles.incrementFormSection}>
-                <label
-                  className={styles.label}
-                  style={{ color: colors.text[100] }}
-                >
-                  Minimum
-                </label>
+                <label style={{ color: colors.text[100] }}>Minimum</label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
@@ -310,7 +306,9 @@ const OrganizePage: NextPage = () => {
                   >
                     -
                   </button>
-                  <div style={{ paddingTop: '0.3em' }}>{attendanceMin}</div>
+                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>
+                    {attendanceMin}
+                  </div>
                   <button
                     className={styles.incrementBtn}
                     onClick={increaseMinAttendance}
@@ -325,12 +323,7 @@ const OrganizePage: NextPage = () => {
                 </div>
               </div>
               <div className={styles.incrementFormSection}>
-                <label
-                  className={styles.label}
-                  style={{ color: colors.text[100] }}
-                >
-                  Maximum
-                </label>
+                <label style={{ color: colors.text[100] }}>Maximum</label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
@@ -343,7 +336,9 @@ const OrganizePage: NextPage = () => {
                   >
                     -
                   </button>
-                  <div style={{ paddingTop: '0.3em' }}>{attendanceMax}</div>
+                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>
+                    {attendanceMax}
+                  </div>
                   <button
                     className={styles.incrementBtn}
                     onClick={increaseMaxAttendance}

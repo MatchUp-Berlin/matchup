@@ -50,18 +50,24 @@
   justify-content: space-between;
 }
 
+.inputSectionTitle {
+  margin-left: 1em;
+  margin-bottom: 0;
+}
+
 .incrementFormSection {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1em;
+  margin-top: 0;
 }
 
 .incrementButtons {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 0.7em;
 }
 
 .incrementBtn {
