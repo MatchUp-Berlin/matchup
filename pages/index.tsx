@@ -1,13 +1,17 @@
 import type { NextPage } from 'next';
-import SkillsCard from '../components/cards/Skills.Card';
-import SlotsCard from '../components/cards/Slots.Card';
+import MatchUpCard from '../components/cards/MatchUp.Card';
+import football from '../public/football.jpg';
 
 const Home: NextPage = () => {
   return (
-    <>
-      <SkillsCard skillLevel="advanced"></SkillsCard>
-      <SlotsCard attending={2} slots={10}></SlotsCard>
-    </>
+    <MatchUpCard
+      variant="small"
+      timestamp="24 August"
+      title="Arabs frommage"
+      location="Treptower Park, Berlin"
+      sport="football"
+      imageUrl={football}
+    ></MatchUpCard>
   );
 };
 
