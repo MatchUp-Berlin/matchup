@@ -26,10 +26,9 @@
     border-bottom-right-radius: 25px;
     flex: 1;
 
-    &::-webkit-inner-spin-button,
-    &::-webkit-calendar-picker-indicator {
-      display: none;
-      -webkit-appearance: none;
-    }
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
   }
 }
