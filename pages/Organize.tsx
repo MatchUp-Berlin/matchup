@@ -18,6 +18,7 @@ import tennis from '../public/tennis.jpg';
 import volleyball from '../public/volleyball.jpg';
 import frisbee from '../public/frisbee.jpg';
 import { useTheme } from '../contexts/Theme';
+import Switch from '../components/misc/Switch';
 
 // interface MatchUp {
 //   id?: string;
@@ -196,8 +197,7 @@ const OrganizePage: NextPage = () => {
             </div>
           </form>
 
-          {/* <div>Map going here</div>
-            <div>Switch going here</div> */}
+          {/* <Switch callback={() => console.log("switched")} /> */}
 
           <Footer
             progress={50}
