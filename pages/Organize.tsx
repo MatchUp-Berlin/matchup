@@ -42,7 +42,7 @@ import StaticMap from '../components/maps/Static.Map';
 
 const OrganizePage: NextPage = () => {
   const { route } = useAuthenticator((context) => [context.route]);
-  const { colors, darkMode } = useTheme();
+  const { colors, shadows, darkMode } = useTheme();
 
   /* Keeping track of which step the user is currently in */
   const [step, setStep] = useState<number>(0);
@@ -287,7 +287,10 @@ const OrganizePage: NextPage = () => {
 
           <div className={styles.generalInfoForm}>
             {/* participants */}
-            <div className={styles.inputGroup}>
+            <div
+              className={styles.inputGroup}
+              style={{ color: colors.text[60], fontWeight: 'bold' }}
+            >
               <div className={styles.incrementFormSection}>
                 <label
                   className={styles.label}
@@ -296,9 +299,29 @@ const OrganizePage: NextPage = () => {
                   Minimum
                 </label>
                 <div className={styles.incrementButtons}>
-                  <button onClick={decreaseMinAttendance}>-</button>
-                  <div>{attendanceMin}</div>
-                  <button onClick={increaseMinAttendance}>+</button>
+                  <button
+                    className={styles.incrementBtn}
+                    onClick={decreaseMinAttendance}
+                    style={{
+                      color: colors.text[60],
+                      fontWeight: 'bold',
+                      boxShadow: shadows.medium,
+                    }}
+                  >
+                    -
+                  </button>
+                  <div style={{ paddingTop: '0.3em' }}>{attendanceMin}</div>
+                  <button
+                    className={styles.incrementBtn}
+                    onClick={increaseMinAttendance}
+                    style={{
+                      color: colors.text[60],
+                      fontWeight: 'bold',
+                      boxShadow: shadows.medium,
+                    }}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <div className={styles.incrementFormSection}>
@@ -309,9 +332,29 @@ const OrganizePage: NextPage = () => {
                   Maximum
                 </label>
                 <div className={styles.incrementButtons}>
-                  <button onClick={decreaseMaxAttendance}>-</button>
-                  <div>{attendanceMax}</div>
-                  <button onClick={increaseMaxAttendance}>+</button>
+                  <button
+                    className={styles.incrementBtn}
+                    onClick={decreaseMaxAttendance}
+                    style={{
+                      color: colors.text[60],
+                      fontWeight: 'bold',
+                      boxShadow: shadows.medium,
+                    }}
+                  >
+                    -
+                  </button>
+                  <div style={{ paddingTop: '0.3em' }}>{attendanceMax}</div>
+                  <button
+                    className={styles.incrementBtn}
+                    onClick={increaseMaxAttendance}
+                    style={{
+                      color: colors.text[60],
+                      fontWeight: 'bold',
+                      boxShadow: shadows.medium,
+                    }}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
