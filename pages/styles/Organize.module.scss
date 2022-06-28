@@ -1,3 +1,7 @@
+.wrapper {
+  min-height: 100vh;
+}
+
 .sportCategoriesList {
   display: flex;
   flex-direction: column;
@@ -32,10 +36,7 @@
       border-style: solid;
       border-width: 1px;
       padding: 0 1em;
-
-      &::placeholder {
-        opacity: 0.5;
-      }
+      background-color: transparent;
     }
   }
 }
