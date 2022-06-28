@@ -1,17 +1,20 @@
 import type { NextPage } from 'next';
-import MatchUpCard from '../components/cards/MatchUp.Card';
-import football from '../public/football.jpg';
+import StaticMap from '../components/maps/Static.Map';
+import { useTheme } from '../contexts/Theme';
+import { getGoogleMapsLink } from '../utils/Apis/getGoogleMapsLink';
+import { getStaticMapLink } from '../utils/Apis/getStaticMapLink';
 
 const Home: NextPage = () => {
+  const { darkMode, toggleDarkMode } = useTheme();
   return (
-    <MatchUpCard
-      variant="small"
-      timestamp="24 August"
-      title="Arabs frommage"
-      location="Treptower Park, Berlin"
-      sport="football"
-      imageUrl={football}
-    ></MatchUpCard>
+    <>
+      <StaticMap
+        longitude={13.4712}
+        latitude={52.4878}
+        zoom={12}
+      ></StaticMap>
+      <button onClick={toggleDarkMode}>DarkMode</button>
+    </>
   );
 };
 
