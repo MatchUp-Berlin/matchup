@@ -1,3 +1,4 @@
 import ParticipantsPreviewCard from './ParticipantsPreview.Card';
+import ParticipantCard from './Participant.Card';
 
-export { ParticipantsPreviewCard };
+export { ParticipantsPreviewCard, ParticipantCard };
