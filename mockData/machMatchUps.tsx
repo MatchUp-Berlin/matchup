@@ -14,7 +14,7 @@ const matchUps: MatchUp[] = [
       'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80',
     location: 'berlin',
     organizer: '54955977-c461-4943-9e66-288b3ba065ba',
-    reservedCourt: false,
+    reservedCourt: true,
     skillLevel: 'beginner',
     sportCategory: 'tennis',
     title: 'sportin at the park',
