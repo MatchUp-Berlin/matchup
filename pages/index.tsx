@@ -10,6 +10,7 @@ import StaticMap from '../components/maps/Static.Map';
 import { useQuery } from 'react-query';
 
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
+import LoadingSpinner from '../components/misc/LoadingSpinner';
 
 const Home: NextPage = () => {
   const { colors, toggleDarkMode, shadows } = useTheme();
@@ -90,39 +91,46 @@ const Home: NextPage = () => {
 
       {showMap ? (
         '<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>'
-      ) : (
+      ) : isSuccess && data ? (
         <div className={styles.cardsWrapper}>
-          {isSuccess && data ? (
-            <>
-              {data.items.map((matchup) => (
-                <MatchUpCard
-                  key={matchup.id}
-                  variant="large"
-                  timestamp={matchup.date}
-                  title={matchup.title}
-                  slots={matchup.attendanceMax}
-                  participating={/* matchup.users.length */ 3} // FIX THIS ONE
-                  location={matchup.location}
-                  sport={
-                    matchup.sportCategory as
-                      | 'basketball'
-                      | 'football'
-                      | 'tennis'
-                      | 'ultimate-frisbee'
-                      | 'beach-volleyball'
-                      | 'volleyball'
-                  }
-                  skill={matchup.skillLevel as 'beginner' | 'intermediate' | 'advanced'}
-                  imageUrl={matchup.image}
-                  paid={matchup.totalCost > 0}
-                  price={matchup.totalCost}
-                  rented={matchup.reservedCourt}
-                ></MatchUpCard>
-              ))}
-            </>
-          ) : (
-            <>No Data to display</>
-          )}
+          {data.items.map((matchup) => (
+            <MatchUpCard
+              key={matchup.id}
+              variant="large"
+              timestamp={matchup.date}
+              title={matchup.title}
+              slots={matchup.attendanceMax}
+              participating={/* matchup.users.length */ 3} // FIX THIS ONE
+              location={matchup.location}
+              sport={
+                matchup.sportCategory as
+                  | 'basketball'
+                  | 'football'
+                  | 'tennis'
+                  | 'ultimate-frisbee'
+                  | 'beach-volleyball'
+                  | 'volleyball'
+              }
+              skill={matchup.skillLevel as 'beginner' | 'intermediate' | 'advanced'}
+              imageUrl={matchup.image}
+              paid={matchup.totalCost > 0}
+              price={matchup.totalCost}
+              rented={matchup.reservedCourt}
+            ></MatchUpCard>
+          ))}
+        </div>
+      ) : (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '5em',
+          }}
+        >
+          <LoadingSpinner />
         </div>
       )}
 
