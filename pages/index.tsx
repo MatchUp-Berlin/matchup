@@ -16,8 +16,13 @@ import MapButton from '../components/misc/MapButton';
 
 import { addUserToMatchUp } from '../utils/Mutation/addUserToMatchUp.util';
 import { getMatchUpById } from '../utils/Query/getMatchUpById.util';
+import { removedSignUp } from '../utils/Mutation/removeUserFromMatchUp.util';
 
 const Home: NextPage = () => {
+  // getMatchUpById('7e8ec588-8ecd-44a0-bc9a-ea86cacd5571').then((res) =>
+  //   console.log(res)
+  // );
+
   const { colors, shadows } = useTheme();
   const [showMap, setShowMap] = useState<boolean>(false);
 
