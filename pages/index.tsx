@@ -11,6 +11,7 @@ import { useQuery } from 'react-query';
 
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
 import LoadingSpinner from '../components/misc/LoadingSpinner';
+import { MatchUp } from '../utils/types/MatchUp.Type';
 
 const Home: NextPage = () => {
   const { colors, toggleDarkMode, shadows } = useTheme();
@@ -37,18 +38,13 @@ const Home: NextPage = () => {
 
   /* DATA FETCHING */
   const { isError, isLoading, isSuccess, refetch, data } = useQuery(
-    'matchups',
+    ['matchups', categories],
     () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to),
     {
       onSuccess: () => {},
       onError: () => {},
     }
   );
-
-  /* REFETCH WHEN CATEGORY CHANGES */
-  useEffect(() => {
-    refetch();
-  }, [categories]);
 
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
@@ -93,7 +89,7 @@ const Home: NextPage = () => {
         '<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>'
       ) : isSuccess && data ? (
         <div className={styles.cardsWrapper}>
-          {data.items.map((matchup) => (
+          {data.items.map((matchup: MatchUp) => (
             <MatchUpCard
               key={matchup.id}
               variant="large"
