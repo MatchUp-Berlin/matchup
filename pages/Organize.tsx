@@ -455,7 +455,9 @@ const OrganizePage: NextPage = () => {
                       borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                       color: colors.text[60],
                       backgroundImage: `url(${image})`,
-                      backgroundSize: '100% 100%',
+                      backgroundSize: 'cover',
+                      backgroundPositionY: '50%',
+                      backgroundPositionX: '50%',
                     }
                   : {
                       borderColor: darkMode ? colors.background[60] : '#DDDDDD',
