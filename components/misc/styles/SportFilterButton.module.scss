@@ -7,8 +7,14 @@
   justify-content: center;
   align-items: center;
   padding: 1em;
-  outline-style: solid;
-  border-radius: 100%;
+  border-style: solid;
+  border-radius: 50em 50em 50em 50em;
   outline-offset: -4px;
   transition: 0.2s;
+
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 }

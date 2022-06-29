@@ -1,15 +1,16 @@
-import React, { Dispatch, LegacyRef, SetStateAction, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useTheme } from '../../contexts/Theme';
+import { TCity } from '../../utils/types/MatchUp.Type';
 import styles from './styles/Filter.module.scss';
 
 export interface IFilterProps {
   setTimeFrame: Dispatch<SetStateAction<{ from: string; to: string }>>;
-  setCity: Dispatch<SetStateAction<string>>;
-  city: string;
+  setCity: Dispatch<SetStateAction<TCity>>;
+  city: TCity;
 }
 
 const Filter: React.FunctionComponent<IFilterProps> = (props) => {
-  const { colors, darkMode } = useTheme();
+  const { colors, darkMode, shadows } = useTheme();
 
   function getNextDayOfTheWeek(dayName: string, excludeToday = true, refDate = new Date()) {
     const dayOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(dayName);
@@ -62,14 +63,26 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <input
+    <div className={styles.wrapper} style={{ boxShadow: shadows.small }}>
+      <select
         style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
         value={props.city}
-        onChange={(e) => props.setCity(e.target.value)}
+        onChange={(e) => props.setCity(e.target.value as TCity)}
         placeholder="Search for a city"
         className={styles.input + ' ' + styles.location}
-      ></input>
+      >
+        <option value="berlin">berlin</option>
+        <option value="hamburg">hamburg</option>
+        <option value="munich">munich</option>
+        <option value="cologne">cologne</option>
+        <option value="frankfurt-am-Main">frankfurt am Main</option>
+        <option value="essen">essen</option>
+        <option value="stuttgart">stuttgart</option>
+        <option value="dortmund">dortmund</option>
+        <option value="düsseldorf">düsseldorf</option>
+        <option value="bremen">bremen</option>
+        <option value="hanover">hanover</option>
+      </select>
       <select
         style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
         placeholder="Select time"

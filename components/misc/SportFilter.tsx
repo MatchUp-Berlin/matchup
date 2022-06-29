@@ -10,7 +10,11 @@ import beachvolleyball from '../../public/beachvolleyball-icon.png';
 import frisbee from '../../public/frisbee-icon.png';
 
 export interface ISportFilterProps {
-  setCategories: Dispatch<SetStateAction<string[]>>; // adding and removing sports
+  setCategories: Dispatch<
+    SetStateAction<
+      ('basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball')[]
+    >
+  >; // adding and removing sports
   categories: Array<string>;
 }
 
