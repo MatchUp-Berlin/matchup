@@ -4,7 +4,7 @@ import Router, { useRouter } from 'next/router';
 import Header from '../components/misc/Header';
 import { useEffect, useState } from 'react';
 import HeaderButton from '../components/misc/HeaderButton';
-import { Button, Footer } from '../components/misc';
+import { Button, Footer, Divider } from '../components/misc';
 import MainInfo from '../components/misc/MainInfo';
 import SportCard from '../components/cards/Sport.Card';
 import SkillCard from '../components/cards/Skills.Card';
@@ -522,16 +522,20 @@ const OrganizePage: NextPage = () => {
               />
             }
           ></Header>
-          <MainInfo
-            title={title}
-            timestamp={date}
-            sport={sportCategory}
-            city={location}
-            costs={totalCost}
-          />
-          <div className='pills'>
-            <SkillCard skillLevel={skillLevel} />
-          </div>
+          <section className={styles.geneticallySuperiorWrapper}>
+            <MainInfo
+              title={title}
+              timestamp={date}
+              sport={sportCategory}
+              city={location}
+              costs={totalCost}
+            />
+            <div className={styles.pills}>
+              <SkillCard skillLevel={skillLevel} />
+              <SlotsCard slots={attendanceMin} attending={1} />
+            </div>
+            <Divider />
+          </section>
           <Footer
             progress={100}
             leftSide={<p onClick={() => goBack()}>Back</p>}

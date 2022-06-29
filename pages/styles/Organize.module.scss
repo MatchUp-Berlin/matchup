@@ -2,6 +2,11 @@
   min-height: 100vh;
 }
 
+.geneticallySuperiorWrapper {
+  min-height: 100vh;
+  padding: 1em;
+}
+
 .sportCategoriesList {
   display: flex;
   flex-direction: column;
@@ -148,4 +153,11 @@
 
 .uploadImageWrapper {
   margin-bottom: 90px;
+}
+
+.pills {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1em;
 }
