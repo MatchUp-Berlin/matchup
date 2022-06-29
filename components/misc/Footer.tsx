@@ -5,29 +5,21 @@ import styles from './styles/Footer.module.scss';
 export interface IFooterProps {
   leftSide: React.ReactNode;
   rightButton: React.ReactNode;
-  progress: number | null;
+  progress?: number | null;
 }
 
-const Footer: React.FunctionComponent<IFooterProps> = ({
-  leftSide,
-  rightButton,
-  progress,
-}) => {
+const Footer: React.FunctionComponent<IFooterProps> = ({ leftSide, rightButton, progress }) => {
   const { colors, darkMode } = useTheme();
 
   return (
     <footer
       className={styles.footer}
-      style={
-        darkMode
-          ? { borderTop: `solid 1px #32333D` }
-          : { borderTop: 'solid 1px #DDDDDD' }
-      }
+      style={{ borderTopColor: darkMode ? '#515157' : '#DDDDDD', backgroundColor: colors.background[100] }}
     >
       <div
         className={styles.progressBar}
         style={{
-          width: `${progress}%`,
+          width: progress ? `${progress}%` : 0,
           backgroundColor: colors.primary['100'],
         }}
       ></div>

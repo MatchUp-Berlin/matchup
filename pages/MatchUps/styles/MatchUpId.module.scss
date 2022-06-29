@@ -1,0 +1,75 @@
+.page {
+  min-height: 100vh;
+
+  .contentWrapper {
+    padding: 1em;
+    margin-bottom: 5em;
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      margin: 10px auto;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+
+    .info {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1em;
+
+      span {
+        margin-left: 0.2em;
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0.2em;
+
+        .detail {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 0.8em;
+
+          p {
+            text-transform: capitalize;
+            font-size: 1.2em;
+          }
+        }
+      }
+    }
+
+    .bigPills {
+      margin: 2em 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: baseline;
+      flex-direction: row;
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      p {
+        max-height: 10em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .footerInfo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
