@@ -66,7 +66,7 @@ const OrganizePage: NextPage = () => {
   const [reservedCourt, setReservedCourt] = useState<boolean>(false);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<any>();
+  const [image, setImage] = useState<any>(null);
   // const [imagePlaceholder, setImagePlaceholder] = useState<any>(null);
 
   function decreaseMinAttendance(): void {
@@ -101,20 +101,23 @@ const OrganizePage: NextPage = () => {
   // }
 
   return (
-    <div className={styles.wrapper} style={{ backgroundColor: colors.background[100] }}>
+    <div
+      className={styles.wrapper}
+      style={{ backgroundColor: colors.background[100] }}
+    >
       {step == 0 ? (
         /////////////////////////////// STEP 0
         <>
           <Header
-            title="Choose a sport you want to play"
+            title='Choose a sport you want to play'
             leftButton={
               <HeaderButton
-                viewBox="0 0 10 10"
+                viewBox='0 0 10 10'
                 callback={() => Router.back()}
                 icon={
                   <path
-                    xmlns="http://www.w3.org/2000/svg"
-                    d="M5.96126 5L8.89307 2.075C9.02146 1.94661 9.09359 1.77248 9.09359 1.59091C9.09359 1.40934 9.02146 1.23521 8.89307 1.10682C8.76468 0.978432 8.59055 0.906303 8.40898 0.906303C8.22741 0.906303 8.05328 0.978432 7.92489 1.10682L4.99989 4.03864L2.07489 1.10682C1.9465 0.978432 1.77237 0.906303 1.5908 0.906303C1.40923 0.906303 1.2351 0.978432 1.10671 1.10682C0.978321 1.23521 0.906193 1.40934 0.906193 1.59091C0.906193 1.77248 0.978321 1.94661 1.10671 2.075L4.03853 5L1.10671 7.925C1.0428 7.98839 0.992081 8.0638 0.957466 8.14688C0.922851 8.22997 0.905029 8.31908 0.905029 8.40909C0.905029 8.4991 0.922851 8.58822 0.957466 8.6713C0.992081 8.75439 1.0428 8.8298 1.10671 8.89318C1.17009 8.95709 1.2455 9.00781 1.32859 9.04243C1.41168 9.07704 1.50079 9.09486 1.5908 9.09486C1.68081 9.09486 1.76993 9.07704 1.85301 9.04243C1.9361 9.00781 2.01151 8.95709 2.07489 8.89318L4.99989 5.96137L7.92489 8.89318C7.98828 8.95709 8.06369 9.00781 8.14677 9.04243C8.22986 9.07704 8.31897 9.09486 8.40898 9.09486C8.49899 9.09486 8.58811 9.07704 8.67119 9.04243C8.75428 9.00781 8.82969 8.95709 8.89307 8.89318C8.95698 8.8298 9.0077 8.75439 9.04232 8.6713C9.07693 8.58822 9.09475 8.4991 9.09475 8.40909C9.09475 8.31908 9.07693 8.22997 9.04232 8.14688C9.0077 8.0638 8.95698 7.98839 8.89307 7.925L5.96126 5Z"
+                    xmlns='http://www.w3.org/2000/svg'
+                    d='M5.96126 5L8.89307 2.075C9.02146 1.94661 9.09359 1.77248 9.09359 1.59091C9.09359 1.40934 9.02146 1.23521 8.89307 1.10682C8.76468 0.978432 8.59055 0.906303 8.40898 0.906303C8.22741 0.906303 8.05328 0.978432 7.92489 1.10682L4.99989 4.03864L2.07489 1.10682C1.9465 0.978432 1.77237 0.906303 1.5908 0.906303C1.40923 0.906303 1.2351 0.978432 1.10671 1.10682C0.978321 1.23521 0.906193 1.40934 0.906193 1.59091C0.906193 1.77248 0.978321 1.94661 1.10671 2.075L4.03853 5L1.10671 7.925C1.0428 7.98839 0.992081 8.0638 0.957466 8.14688C0.922851 8.22997 0.905029 8.31908 0.905029 8.40909C0.905029 8.4991 0.922851 8.58822 0.957466 8.6713C0.992081 8.75439 1.0428 8.8298 1.10671 8.89318C1.17009 8.95709 1.2455 9.00781 1.32859 9.04243C1.41168 9.07704 1.50079 9.09486 1.5908 9.09486C1.68081 9.09486 1.76993 9.07704 1.85301 9.04243C1.9361 9.00781 2.01151 8.95709 2.07489 8.89318L4.99989 5.96137L7.92489 8.89318C7.98828 8.95709 8.06369 9.00781 8.14677 9.04243C8.22986 9.07704 8.31897 9.09486 8.40898 9.09486C8.49899 9.09486 8.58811 9.07704 8.67119 9.04243C8.75428 9.00781 8.82969 8.95709 8.89307 8.89318C8.95698 8.8298 9.0077 8.75439 9.04232 8.6713C9.07693 8.58822 9.09475 8.4991 9.09475 8.40909C9.09475 8.31908 9.07693 8.22997 9.04232 8.14688C9.0077 8.0638 8.95698 7.98839 8.89307 7.925L5.96126 5Z'
                   />
                 }
               />
@@ -122,43 +125,43 @@ const OrganizePage: NextPage = () => {
           ></Header>
           <div className={styles.sportCategoriesList}>
             <SportCard
-              title="Football (Soccer)"
-              subTitle="Start a football match with locals"
+              title='Football (Soccer)'
+              subTitle='Start a football match with locals'
               image={football}
               callback={() => setSportCategory('football')}
             ></SportCard>
 
             <SportCard
-              title="Basketball"
-              subTitle="Organize a basketball game"
+              title='Basketball'
+              subTitle='Organize a basketball game'
               image={basketball}
               callback={() => setSportCategory('basketball')}
             ></SportCard>
 
             <SportCard
-              title="Beach Volleyball"
-              subTitle="Step on the warm sand for a round of volleyball"
+              title='Beach Volleyball'
+              subTitle='Step on the warm sand for a round of volleyball'
               image={beachvolleyball}
               callback={() => setSportCategory('beachvolleyball')}
             ></SportCard>
 
             <SportCard
-              title="Tennis"
-              subTitle="Challange yourself with new tennis opponents"
+              title='Tennis'
+              subTitle='Challange yourself with new tennis opponents'
               image={tennis}
               callback={() => setSportCategory('tennis')}
             ></SportCard>
 
             <SportCard
-              title="Volleyball"
-              subTitle="Level up your volley skills?"
+              title='Volleyball'
+              subTitle='Level up your volley skills?'
               image={volleyball}
               callback={() => setSportCategory('volleyball')}
             ></SportCard>
 
             <SportCard
-              title="Ultimate Frisbee"
-              subTitle="I have no ideas for cool prompts?"
+              title='Ultimate Frisbee'
+              subTitle='I have no ideas for cool prompts?'
               image={frisbee}
               callback={() => setSportCategory('frisbee')}
             ></SportCard>
@@ -168,22 +171,28 @@ const OrganizePage: NextPage = () => {
           <Footer
             progress={25}
             leftSide={<p onClick={() => Router.back()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+            rightButton={
+              <Button
+                variant='primary'
+                callback={goToNext}
+                text='Next'
+              ></Button>
+            }
           ></Footer>
         </>
       ) : step == 1 ? (
         /////////////////////////////// STEP 1
         <>
           <Header
-            title="Give us some general information"
+            title='Give us some general information'
             leftButton={
               <HeaderButton
-                viewBox="0 0 10 10"
+                viewBox='0 0 10 10'
                 callback={() => Router.back()}
                 icon={
                   <path
-                    xmlns="http://www.w3.org/2000/svg"
-                    d="M5.96126 5L8.89307 2.075C9.02146 1.94661 9.09359 1.77248 9.09359 1.59091C9.09359 1.40934 9.02146 1.23521 8.89307 1.10682C8.76468 0.978432 8.59055 0.906303 8.40898 0.906303C8.22741 0.906303 8.05328 0.978432 7.92489 1.10682L4.99989 4.03864L2.07489 1.10682C1.9465 0.978432 1.77237 0.906303 1.5908 0.906303C1.40923 0.906303 1.2351 0.978432 1.10671 1.10682C0.978321 1.23521 0.906193 1.40934 0.906193 1.59091C0.906193 1.77248 0.978321 1.94661 1.10671 2.075L4.03853 5L1.10671 7.925C1.0428 7.98839 0.992081 8.0638 0.957466 8.14688C0.922851 8.22997 0.905029 8.31908 0.905029 8.40909C0.905029 8.4991 0.922851 8.58822 0.957466 8.6713C0.992081 8.75439 1.0428 8.8298 1.10671 8.89318C1.17009 8.95709 1.2455 9.00781 1.32859 9.04243C1.41168 9.07704 1.50079 9.09486 1.5908 9.09486C1.68081 9.09486 1.76993 9.07704 1.85301 9.04243C1.9361 9.00781 2.01151 8.95709 2.07489 8.89318L4.99989 5.96137L7.92489 8.89318C7.98828 8.95709 8.06369 9.00781 8.14677 9.04243C8.22986 9.07704 8.31897 9.09486 8.40898 9.09486C8.49899 9.09486 8.58811 9.07704 8.67119 9.04243C8.75428 9.00781 8.82969 8.95709 8.89307 8.89318C8.95698 8.8298 9.0077 8.75439 9.04232 8.6713C9.07693 8.58822 9.09475 8.4991 9.09475 8.40909C9.09475 8.31908 9.07693 8.22997 9.04232 8.14688C9.0077 8.0638 8.95698 7.98839 8.89307 7.925L5.96126 5Z"
+                    xmlns='http://www.w3.org/2000/svg'
+                    d='M5.96126 5L8.89307 2.075C9.02146 1.94661 9.09359 1.77248 9.09359 1.59091C9.09359 1.40934 9.02146 1.23521 8.89307 1.10682C8.76468 0.978432 8.59055 0.906303 8.40898 0.906303C8.22741 0.906303 8.05328 0.978432 7.92489 1.10682L4.99989 4.03864L2.07489 1.10682C1.9465 0.978432 1.77237 0.906303 1.5908 0.906303C1.40923 0.906303 1.2351 0.978432 1.10671 1.10682C0.978321 1.23521 0.906193 1.40934 0.906193 1.59091C0.906193 1.77248 0.978321 1.94661 1.10671 2.075L4.03853 5L1.10671 7.925C1.0428 7.98839 0.992081 8.0638 0.957466 8.14688C0.922851 8.22997 0.905029 8.31908 0.905029 8.40909C0.905029 8.4991 0.922851 8.58822 0.957466 8.6713C0.992081 8.75439 1.0428 8.8298 1.10671 8.89318C1.17009 8.95709 1.2455 9.00781 1.32859 9.04243C1.41168 9.07704 1.50079 9.09486 1.5908 9.09486C1.68081 9.09486 1.76993 9.07704 1.85301 9.04243C1.9361 9.00781 2.01151 8.95709 2.07489 8.89318L4.99989 5.96137L7.92489 8.89318C7.98828 8.95709 8.06369 9.00781 8.14677 9.04243C8.22986 9.07704 8.31897 9.09486 8.40898 9.09486C8.49899 9.09486 8.58811 9.07704 8.67119 9.04243C8.75428 9.00781 8.82969 8.95709 8.89307 8.89318C8.95698 8.8298 9.0077 8.75439 9.04232 8.6713C9.07693 8.58822 9.09475 8.4991 9.09475 8.40909C9.09475 8.31908 9.07693 8.22997 9.04232 8.14688C9.0077 8.0638 8.95698 7.98839 8.89307 7.925L5.96126 5Z'
                   />
                 }
               />
@@ -192,13 +201,16 @@ const OrganizePage: NextPage = () => {
 
           <form className={styles.generalInfoForm}>
             <div className={styles.inputGroup}>
-              <label className={styles.label} style={{ color: colors.text[100] }}>
+              <label
+                className={styles.label}
+                style={{ color: colors.text[100] }}
+              >
                 Title
               </label>
               <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Give your MatchUp a cool name"
+                placeholder='Give your MatchUp a cool name'
                 className={styles.input}
                 style={{
                   borderColor: darkMode ? colors.background[60] : '#DDDDDD',
@@ -208,15 +220,18 @@ const OrganizePage: NextPage = () => {
             </div>
 
             <div className={styles.inputGroup}>
-              <label className={styles.label} style={{ color: colors.text[100] }}>
+              <label
+                className={styles.label}
+                style={{ color: colors.text[100] }}
+              >
                 Time
               </label>
               <input
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                placeholder="Choose a day and time to MatchUp"
+                placeholder='Choose a day and time to MatchUp'
                 className={styles.input}
-                type="datetime-local"
+                type='datetime-local'
                 style={{
                   borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                   color: colors.text[60],
@@ -225,13 +240,16 @@ const OrganizePage: NextPage = () => {
             </div>
 
             <div className={styles.inputGroup}>
-              <label className={styles.label} style={{ color: colors.text[100] }}>
+              <label
+                className={styles.label}
+                style={{ color: colors.text[100] }}
+              >
                 Location
               </label>
               <input
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="Where do you want to meet?"
+                placeholder='Where do you want to meet?'
                 className={styles.input}
                 style={{
                   borderColor: darkMode ? colors.background[60] : '#DDDDDD',
@@ -250,7 +268,13 @@ const OrganizePage: NextPage = () => {
           <Footer
             progress={50}
             leftSide={<p onClick={() => goBack()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+            rightButton={
+              <Button
+                variant='primary'
+                callback={goToNext}
+                text='Next'
+              ></Button>
+            }
           ></Footer>
         </>
       ) : (
@@ -260,12 +284,12 @@ const OrganizePage: NextPage = () => {
             title="Let's figure out some more information"
             leftButton={
               <HeaderButton
-                viewBox="0 0 10 10"
+                viewBox='0 0 10 10'
                 callback={() => Router.back()}
                 icon={
                   <path
-                    xmlns="http://www.w3.org/2000/svg"
-                    d="M5.96126 5L8.89307 2.075C9.02146 1.94661 9.09359 1.77248 9.09359 1.59091C9.09359 1.40934 9.02146 1.23521 8.89307 1.10682C8.76468 0.978432 8.59055 0.906303 8.40898 0.906303C8.22741 0.906303 8.05328 0.978432 7.92489 1.10682L4.99989 4.03864L2.07489 1.10682C1.9465 0.978432 1.77237 0.906303 1.5908 0.906303C1.40923 0.906303 1.2351 0.978432 1.10671 1.10682C0.978321 1.23521 0.906193 1.40934 0.906193 1.59091C0.906193 1.77248 0.978321 1.94661 1.10671 2.075L4.03853 5L1.10671 7.925C1.0428 7.98839 0.992081 8.0638 0.957466 8.14688C0.922851 8.22997 0.905029 8.31908 0.905029 8.40909C0.905029 8.4991 0.922851 8.58822 0.957466 8.6713C0.992081 8.75439 1.0428 8.8298 1.10671 8.89318C1.17009 8.95709 1.2455 9.00781 1.32859 9.04243C1.41168 9.07704 1.50079 9.09486 1.5908 9.09486C1.68081 9.09486 1.76993 9.07704 1.85301 9.04243C1.9361 9.00781 2.01151 8.95709 2.07489 8.89318L4.99989 5.96137L7.92489 8.89318C7.98828 8.95709 8.06369 9.00781 8.14677 9.04243C8.22986 9.07704 8.31897 9.09486 8.40898 9.09486C8.49899 9.09486 8.58811 9.07704 8.67119 9.04243C8.75428 9.00781 8.82969 8.95709 8.89307 8.89318C8.95698 8.8298 9.0077 8.75439 9.04232 8.6713C9.07693 8.58822 9.09475 8.4991 9.09475 8.40909C9.09475 8.31908 9.07693 8.22997 9.04232 8.14688C9.0077 8.0638 8.95698 7.98839 8.89307 7.925L5.96126 5Z"
+                    xmlns='http://www.w3.org/2000/svg'
+                    d='M5.96126 5L8.89307 2.075C9.02146 1.94661 9.09359 1.77248 9.09359 1.59091C9.09359 1.40934 9.02146 1.23521 8.89307 1.10682C8.76468 0.978432 8.59055 0.906303 8.40898 0.906303C8.22741 0.906303 8.05328 0.978432 7.92489 1.10682L4.99989 4.03864L2.07489 1.10682C1.9465 0.978432 1.77237 0.906303 1.5908 0.906303C1.40923 0.906303 1.2351 0.978432 1.10671 1.10682C0.978321 1.23521 0.906193 1.40934 0.906193 1.59091C0.906193 1.77248 0.978321 1.94661 1.10671 2.075L4.03853 5L1.10671 7.925C1.0428 7.98839 0.992081 8.0638 0.957466 8.14688C0.922851 8.22997 0.905029 8.31908 0.905029 8.40909C0.905029 8.4991 0.922851 8.58822 0.957466 8.6713C0.992081 8.75439 1.0428 8.8298 1.10671 8.89318C1.17009 8.95709 1.2455 9.00781 1.32859 9.04243C1.41168 9.07704 1.50079 9.09486 1.5908 9.09486C1.68081 9.09486 1.76993 9.07704 1.85301 9.04243C1.9361 9.00781 2.01151 8.95709 2.07489 8.89318L4.99989 5.96137L7.92489 8.89318C7.98828 8.95709 8.06369 9.00781 8.14677 9.04243C8.22986 9.07704 8.31897 9.09486 8.40898 9.09486C8.49899 9.09486 8.58811 9.07704 8.67119 9.04243C8.75428 9.00781 8.82969 8.95709 8.89307 8.89318C8.95698 8.8298 9.0077 8.75439 9.04232 8.6713C9.07693 8.58822 9.09475 8.4991 9.09475 8.40909C9.09475 8.31908 9.07693 8.22997 9.04232 8.14688C9.0077 8.0638 8.95698 7.98839 8.89307 7.925L5.96126 5Z'
                   />
                 }
               />
@@ -275,9 +299,14 @@ const OrganizePage: NextPage = () => {
           <h4 className={styles.inputSectionTitle}>Participants</h4>
           <div className={styles.generalInfoForm}>
             {/* participants */}
-            <div className={styles.inputGroup} style={{ color: colors.text[60] }}>
+            <div
+              className={styles.inputGroup}
+              style={{ color: colors.text[60] }}
+            >
               <div className={styles.incrementFormSection}>
-                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>Minimum</label>
+                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                  Minimum
+                </label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
@@ -290,7 +319,9 @@ const OrganizePage: NextPage = () => {
                   >
                     -
                   </button>
-                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>{attendanceMin}</div>
+                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>
+                    {attendanceMin}
+                  </div>
                   <button
                     className={styles.incrementBtn}
                     onClick={increaseMinAttendance}
@@ -305,7 +336,9 @@ const OrganizePage: NextPage = () => {
                 </div>
               </div>
               <div className={styles.incrementFormSection}>
-                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>Maximum</label>
+                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                  Maximum
+                </label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
@@ -318,7 +351,9 @@ const OrganizePage: NextPage = () => {
                   >
                     -
                   </button>
-                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>{attendanceMax}</div>
+                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>
+                    {attendanceMax}
+                  </div>
                   <button
                     className={styles.incrementBtn}
                     onClick={increaseMaxAttendance}
@@ -333,7 +368,9 @@ const OrganizePage: NextPage = () => {
                 </div>
               </div>
               <div className={styles.selectFormSection}>
-                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>Skills level</label>
+                <label style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                  Skills level
+                </label>
                 <select
                   className={styles.selectInput}
                   onChange={(e) => setSkillLevel(e.target.value)}
@@ -341,9 +378,9 @@ const OrganizePage: NextPage = () => {
                     borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                   }}
                 >
-                  <option value="beginner">Beginner</option>
-                  <option value="intermediate">Intermediate</option>
-                  <option value="advanced">Advanced</option>
+                  <option value='beginner'>Beginner</option>
+                  <option value='intermediate'>Intermediate</option>
+                  <option value='advanced'>Advanced</option>
                 </select>
               </div>
             </div>
@@ -358,8 +395,14 @@ const OrganizePage: NextPage = () => {
               <Switch callback={() => console.log('switched')} />
             </div>
             <div className={styles.textFormSection}>
-              <p style={{ color: colors.text[100], paddingTop: '0.7em' }}>Total Costs</p>
-              <input type="text" className={styles.textInput} placeholder="70.00€" />
+              <p style={{ color: colors.text[100], paddingTop: '0.7em' }}>
+                Total Costs
+              </p>
+              <input
+                type='text'
+                className={styles.textInput}
+                placeholder='70.00€'
+              />
             </div>
           </div>
           {/* description */}
@@ -380,38 +423,44 @@ const OrganizePage: NextPage = () => {
             Update Title Image
           </h4>
 
-          <div
-            className={styles.uploadImageWrapper}
-          >
+          <div className={styles.uploadImageWrapper}>
             <button
               className={styles.inputImageBtn}
-              type="button"
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                color: colors.text[60],
-                // backgroundImage: imagePlaceholder | url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='grey' stroke-width='1' stroke-dasharray='6%2c 6' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e")
-              }}
+              type='button'
+              style={
+                image
+                  ? {
+                      borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                      color: colors.text[60],
+                      backgroundImage: `url(${image})`,
+                      backgroundSize: '100% 100%',
+                    }
+                  : {
+                      borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                      color: colors.text[60],
+                      // backgroundImage: imagePlaceholder | url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='grey' stroke-width='1' stroke-dasharray='6%2c 6' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e")
+                    }
+              }
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                className="bi bi-upload"
-                viewBox="0 0 16 16"
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                fill='currentColor'
+                className='bi bi-upload'
+                viewBox='0 0 16 16'
                 style={{
                   color: colors.text[60],
                 }}
               >
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z' />
+                <path d='M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z' />
               </svg>
               {'    '}
-              Upload your image
+              {!image && 'Upload your image'}
               <input
                 className={styles.imageInput}
-                style={{ backgroundImage: image ? `url(${image})` : '' }}
-                type="file"
+                type='file'
                 onChange={(e) => {
                   setImage(URL.createObjectURL(e.target.files[0]));
                   console.log(e);
@@ -423,7 +472,13 @@ const OrganizePage: NextPage = () => {
           <Footer
             progress={75}
             leftSide={<p onClick={() => goBack()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+            rightButton={
+              <Button
+                variant='primary'
+                callback={goToNext}
+                text='Next'
+              ></Button>
+            }
           ></Footer>
         </>
       )}
