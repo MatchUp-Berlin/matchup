@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
-<<<<<<< HEAD
 import Router, { useRouter } from 'next/router';
 import Header from '../components/misc/Header';
 import { useEffect, useState } from 'react';
@@ -40,12 +39,6 @@ import StaticMap from '../components/maps/Static.Map';
 //   date: string;
 //   currency: string;
 // }
-=======
-import { useRouter } from 'next/router'
-import Navigation from '../components/misc/Navigation';
-import Header from '../components/misc/Header'
-import Footer from '../components/misc/Footer'
->>>>>>> main
 
 const OrganizePage: NextPage = () => {
   const { route } = useAuthenticator((context) => [context.route]);
@@ -284,7 +277,7 @@ const OrganizePage: NextPage = () => {
             }
           ></Footer>
         </>
-      ) : (
+      ) : step === 2 ? (
         /////////////////////////////// STEP 2
         <>
           <Header
@@ -430,7 +423,6 @@ const OrganizePage: NextPage = () => {
             Update Title Image
           </h4>
 
-<<<<<<< HEAD
           <div className={styles.uploadImageWrapper}>
             <button
               className={styles.inputImageBtn}
@@ -476,18 +468,6 @@ const OrganizePage: NextPage = () => {
               />
             </button>
           </div>
-=======
-    if (route !== 'authenticated') {
-        router.push('/Profile/SignIn')
-    } else {
-        return(
-            <>
-            <Header />
-            <Navigation />
-            </>
-        )
-    }
->>>>>>> main
 
           <Footer
             progress={75}
@@ -501,6 +481,8 @@ const OrganizePage: NextPage = () => {
             }
           ></Footer>
         </>
+      ) : (
+        <h1> blanlalala</h1>
       )}
     </div>
   );
