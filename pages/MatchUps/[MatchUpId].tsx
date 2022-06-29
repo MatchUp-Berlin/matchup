@@ -90,10 +90,10 @@ const MatchUpDetail: NextPage = () => {
   const router = useRouter();
   const { MatchUpId } = router.query;
 
-  // const { isLoading, isSuccess, isError, data, refetch } = useQuery(
-  //   ['matchup', MatchUpId],
-  //   () => getMatchUpById(MatchUpId as string),
-  // );
+  const { isLoading, isSuccess, isError, data, refetch } = useQuery(
+    ['matchup', MatchUpId],
+    () => getMatchUpById(MatchUpId as string),
+  );
 
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
