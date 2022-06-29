@@ -47,16 +47,6 @@ const OrganizePage: NextPage = () => {
   const { route } = useAuthenticator((context) => [context.route]);
   const { colors, shadows, darkMode } = useTheme();
 
-  /* Keeping track of which step the user is currently in */
-  const [step, setStep] = useState<number>(0);
-  function goToNext() {
-    setStep(step + 1);
-  }
-
-  function goBack() {
-    if (step > 0) setStep(step - 1);
-  }
-
   /* Keeping track of all of the answers */
   const [sportCategory, setSportCategory] = useState<string>();
   const [title, setTitle] = useState<string>();
@@ -71,7 +61,29 @@ const OrganizePage: NextPage = () => {
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<any>(null);
 
-  // const reader = new FileReader();
+  /* Keeping track of which step the user is currently in --- form validation */
+  const [step, setStep] = useState<number>(0);
+  function goToNext() {
+    setStep(step + 1);
+  }
+
+  // with validation
+  // function goToNext() {
+  //   if (step <= 3) {
+  //     if (step === 0 && sportCategory) {
+  //       setStep(step + 1);
+  //     }
+  //     if (step === 1 && title && date && location) {
+  //       setStep(step + 1);
+  //     }
+  //   }
+  // }
+
+  function goBack() {
+    if (step > 0) setStep(step - 1);
+  }
+
+  /* Managing the increment buttons in step 2 */
 
   function decreaseMinAttendance(): void {
     if (attendanceMin > 2) {
@@ -132,42 +144,60 @@ const OrganizePage: NextPage = () => {
               title='Football (Soccer)'
               subTitle='Start a football match with locals'
               image={football}
-              callback={() => setSportCategory('football')}
+              callback={() => {
+                setSportCategory('football');
+                goToNext();
+              }}
             ></SportCard>
 
             <SportCard
               title='Basketball'
               subTitle='Organize a basketball game'
               image={basketball}
-              callback={() => setSportCategory('basketball')}
+              callback={() => {
+                setSportCategory('basketball');
+                goToNext();
+              }}
             ></SportCard>
 
             <SportCard
               title='Beach Volleyball'
               subTitle='Step on the warm sand for a round of volleyball'
               image={beachvolleyball}
-              callback={() => setSportCategory('beachvolleyball')}
+              callback={() => {
+                setSportCategory('beachvolleyball');
+                goToNext();
+              }}
             ></SportCard>
 
             <SportCard
               title='Tennis'
               subTitle='Challange yourself with new tennis opponents'
               image={tennis}
-              callback={() => setSportCategory('tennis')}
+              callback={() => {
+                setSportCategory('tennis');
+                goToNext();
+              }}
             ></SportCard>
 
             <SportCard
               title='Volleyball'
               subTitle='Level up your volley skills?'
               image={volleyball}
-              callback={() => setSportCategory('volleyball')}
+              callback={() => {
+                setSportCategory('volleyball');
+                goToNext();
+              }}
             ></SportCard>
 
             <SportCard
               title='Ultimate Frisbee'
               subTitle='I have no ideas for cool prompts?'
               image={frisbee}
-              callback={() => setSportCategory('frisbee')}
+              callback={() => {
+                setSportCategory('frisbee');
+                goToNext();
+              }}
             ></SportCard>
 
             <div className={styles.bottomMargin}></div>
