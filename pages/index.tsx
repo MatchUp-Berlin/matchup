@@ -10,12 +10,18 @@ import MatchUpCard from '../components/cards/MatchUp.Card';
 
 const Home: NextPage = () => {
   const { colors, toggleDarkMode, shadows } = useTheme();
+
+  /* FILTER STATE */
   const [categories, setCategories] = useState<Array<string>>([]);
   const [timeFrame, setTimeFrame] = useState<{ from: string; to: string }>({
     from: new Date().toISOString(),
     to: new Date().toISOString(),
   });
   const [city, setCity] = useState<string>('Berlin');
+
+  /* MAP VS CARD STATE */
+  
+
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
       <div className={styles.searchBar}>
