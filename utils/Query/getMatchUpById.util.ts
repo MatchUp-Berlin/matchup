@@ -5,6 +5,7 @@ import { getMatchUp } from '../../src/graphql/queries';
 //"ceb7d85e-021e-4657-90a0-e3e2f98bcc7c"
 
 export async function getMatchUpById (id: string) {
+  try {
     const matchUpData = await API.graphql({
         query: getMatchUp,
 
@@ -18,6 +19,9 @@ export async function getMatchUpById (id: string) {
     console.log(retrievedMatchUpData);
 
     return retrievedMatchUpData;
+      } catch (error) {
+        throw (error);
+      }
 }
 
 /*

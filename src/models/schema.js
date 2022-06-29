@@ -1,7 +1,206 @@
 export const schema = {
     "models": {
-        "MatchUpUser": {
-            "name": "MatchUpUser",
+        "MatchUp": {
+            "name": "MatchUp",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "signups": {
+                    "name": "signups",
+                    "isArray": true,
+                    "type": {
+                        "model": "SignUp"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "matchUp"
+                    }
+                },
+                "location": {
+                    "name": "location",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "organizer": {
+                    "name": "organizer",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sportCategory": {
+                    "name": "sportCategory",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "skillLevel": {
+                    "name": "skillLevel",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "totalCost": {
+                    "name": "totalCost",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "reservedCourt": {
+                    "name": "reservedCourt",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "attendanceMin": {
+                    "name": "attendanceMin",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "attendanceMax": {
+                    "name": "attendanceMax",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "cancelled": {
+                    "name": "cancelled",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "indoor": {
+                    "name": "indoor",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "image": {
+                    "name": "image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "date": {
+                    "name": "date",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "currency": {
+                    "name": "currency",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "updates": {
+                    "name": "updates",
+                    "isArray": true,
+                    "type": {
+                        "model": "Update"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "matchUp"
+                    }
+                },
+                "WatchList": {
+                    "name": "WatchList",
+                    "isArray": true,
+                    "type": {
+                        "model": "WatchList"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "matchUp"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "MatchUps",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "SignUp": {
+            "name": "SignUp",
             "fields": {
                 "id": {
                     "name": "id",
@@ -61,7 +260,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "MatchUpUsers",
+            "pluralName": "SignUps",
             "attributes": [
                 {
                     "type": "model",
@@ -70,8 +269,7 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byUser",
-                        "queryField": "byUser",
+                        "name": "byUserSignUps",
                         "fields": [
                             "userId"
                         ]
@@ -80,8 +278,7 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byMatchUp",
-                        "queryField": "byMatchUp",
+                        "name": "byMatchUpSignUps",
                         "fields": [
                             "matchUpId"
                         ]
@@ -136,18 +333,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "matchUps": {
-                    "name": "matchUps",
+                "signups": {
+                    "name": "signups",
                     "isArray": true,
                     "type": {
-                        "model": "MatchUpUser"
+                        "model": "SignUp"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "matchUpId"
+                        "associatedWith": "user"
                     }
                 },
                 "profileImage": {
@@ -169,6 +366,20 @@ export const schema = {
                     "isArray": true,
                     "type": {
                         "model": "Update"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "user"
+                    }
+                },
+                "WatchList": {
+                    "name": "WatchList",
+                    "isArray": true,
+                    "type": {
+                        "model": "WatchList"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -323,8 +534,8 @@ export const schema = {
                 }
             ]
         },
-        "MatchUp": {
-            "name": "MatchUp",
+        "WatchList": {
+            "name": "WatchList",
             "fields": {
                 "id": {
                     "name": "id",
@@ -333,137 +544,30 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "title": {
-                    "name": "title",
+                "user": {
+                    "name": "user",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "users": {
-                    "name": "users",
-                    "isArray": true,
                     "type": {
-                        "model": "MatchUpUser"
+                        "model": "User"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userId"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "userId"
                     }
                 },
-                "location": {
-                    "name": "location",
+                "matchUp": {
+                    "name": "matchUp",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "organizer": {
-                    "name": "organizer",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "sportCategory": {
-                    "name": "sportCategory",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "skillLevel": {
-                    "name": "skillLevel",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "totalCost": {
-                    "name": "totalCost",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "reservedCourt": {
-                    "name": "reservedCourt",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "attendanceMin": {
-                    "name": "attendanceMin",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "attendanceMax": {
-                    "name": "attendanceMax",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "cancelled": {
-                    "name": "cancelled",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "indoor": {
-                    "name": "indoor",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "description": {
-                    "name": "description",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "image": {
-                    "name": "image",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "date": {
-                    "name": "date",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "currency": {
-                    "name": "currency",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "updates": {
-                    "name": "updates",
-                    "isArray": true,
                     "type": {
-                        "model": "Update"
+                        "model": "MatchUp"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "matchUp"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "matchUpId"
                     }
                 },
                 "createdAt": {
@@ -484,11 +588,29 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "MatchUps",
+            "pluralName": "WatchLists",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUserWatchList",
+                        "fields": [
+                            "userId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byMatchUpWatchList",
+                        "fields": [
+                            "matchUpId"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -511,5 +633,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "eee2c00e9c22d3c5e622b47bbca93c0a"
+    "version": "7e72b501070a10f001da3cb9eb82f81d"
 };

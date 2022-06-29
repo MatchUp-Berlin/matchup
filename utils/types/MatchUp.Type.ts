@@ -1,10 +1,11 @@
-import { User } from './User.Type';
+import { SignUp } from './SignUp.Type'
 import { Update } from './Update.Type'
+import { WatchList } from './WatchList.Type';
 
 export interface MatchUp {
   id?: string;
   title: string;
-  users: User[];
+  signups: SignUp[];
   location: string;
   organizer: string;
   sportCategory: string;
@@ -19,6 +20,7 @@ export interface MatchUp {
   date: string;
   currency: string;
   updates: Update[];
+  watchList: WatchList[]
 }
 
 export interface getMatchUpsByFilterReturn {
