@@ -16,5 +16,9 @@
     flex-direction: column;
     gap: 5px;
     align-items: center;
+    
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

@@ -23,7 +23,11 @@ const Home: NextPage = () => {
         <div
           onClick={() => console.log('gehe suchen')}
           className={styles.button}
-          style={{ backgroundColor: colors.primary[100], boxShadow: shadows.small }}
+          style={{
+            backgroundColor: colors.primary[100],
+            boxShadow: shadows.small,
+            color: colors.background[100],
+          }}
         >
           Go
         </div>
