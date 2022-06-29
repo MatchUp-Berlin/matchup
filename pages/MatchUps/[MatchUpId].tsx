@@ -20,6 +20,7 @@ import { Divider } from '@aws-amplify/ui-react';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
 import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
+import MainInfo from '../../components/misc/MainInfo';
 
 const updates = [
   {
@@ -149,40 +150,9 @@ const MatchUpDetail: NextPage = () => {
         ]}
       ></Header>
 
-      {/*  ------HEADER------  */}
+      {/*  ------MAIN INFO------  */}
       <div className={styles.contentWrapper}>
-        <div className={styles.info}>
-          {/* TITLE */}
-          <h1 style={{ color: colors.text[100] }}>
-            Arabs vs. Italians Basketball
-            <span>
-              <Image
-                width={'30px'}
-                height={'30px'}
-                src={getSportIcon('basketball')}
-                alt={'basketball'}
-              ></Image>
-            </span>
-          </h1>
-          {/* DETAILS */}
-          <div className={styles.details}>
-            <div className={styles.detail}>
-              <Image width={'18em'} height="18em" src={clock} alt="taking place on"></Image>
-              <p style={{ color: colors.text[60] }}>
-                {moment('2022-06-27T15:33:52.444Z').format('H:m dddd')}
-              </p>
-            </div>
-            <div className={styles.detail}>
-              <Image width={'18em'} height="18em" src={pin} alt="taking place at"></Image>
-              <p style={{ color: colors.text[60] }}>{'berlin'}</p>
-            </div>
-
-            <div className={styles.detail}>
-              <Image width={'18em'} height="18em" src={euro} alt="costs"></Image>
-              <p style={{ color: colors.text[60] }}>{10 > 0 ? 10 + '.00' : 'Free'}</p>
-            </div>
-          </div>
-        </div>
+        <MainInfo />
 
         {/*  ------BIG PILLS------  */}
         <div className={styles.bigPills}>

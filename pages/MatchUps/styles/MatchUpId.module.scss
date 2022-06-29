@@ -13,37 +13,7 @@
       border-bottom-style: solid;
     }
 
-    .info {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1em;
-
-      span {
-        margin-left: 0.2em;
-      }
-
-      .details {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-left: 0.2em;
-
-        .detail {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: flex-start;
-          gap: 0.8em;
-
-          p {
-            text-transform: capitalize;
-            font-size: 1.2em;
-          }
-        }
-      }
-    }
+    
 
     .bigPills {
       margin: 2em 0;
