@@ -5,9 +5,9 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { useState } from 'react';
-// import awsExports from '../src/aws-exports';
+import awsExports from '../src/aws-exports';
 import { ThemeProvider } from '../contexts/Theme';
-// Amplify.configure(awsExports);
+Amplify.configure(awsExports);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(

@@ -4,10 +4,11 @@ import { schema } from './schema';
 
 
 
-const { MatchUpUser, User, MatchUp } = initSchema(schema);
+const { MatchUpUser, User, Update, MatchUp } = initSchema(schema);
 
 export {
   MatchUpUser,
   User,
+  Update,
   MatchUp
 };

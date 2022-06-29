@@ -10,6 +10,7 @@ import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
 import { useQuery } from 'react-query';
 
+
 const Home: NextPage = () => {
   const { colors, toggleDarkMode, shadows } = useTheme();
 

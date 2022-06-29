@@ -7,7 +7,7 @@ export async function createNewMatchUp (matchUpData: MatchUp) {
     const newMatchUp = await API.graphql({
         query: createMatchUp,
             variables: { input: matchUpData },
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
+            // authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
     const newMatchUpData = newMatchUp.data.createMatchUp
 

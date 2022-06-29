@@ -10,13 +10,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
   const { colors, darkMode } = useTheme();
 
   return (
-    <div
-      className={styles.wrapper}
-      style={{
-        backgroundColor: colors.background[100],
-        borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',
-      }}
-    >
+    <div className={styles.wrapper} style={{ backgroundColor: colors.background[100], borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',}}>
       {/* ------ ORGANIZE ------ */}
       <Link href="/Organize">
         <div className={styles.link}>
@@ -52,7 +46,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
       </Link>
 
       {/* ------ WATCHLIST ------ */}
-      <Link href="/Watchlist">
+      <Link href="/WatchList">
         <div className={styles.link}>
           <svg
             width="20"

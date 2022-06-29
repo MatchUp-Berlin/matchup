@@ -164,6 +164,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "updates": {
+                    "name": "updates",
+                    "isArray": true,
+                    "type": {
+                        "model": "Update"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "user"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -187,6 +201,109 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Update": {
+            "name": "Update",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "userId"
+                    }
+                },
+                "matchUp": {
+                    "name": "matchUp",
+                    "isArray": false,
+                    "type": {
+                        "model": "MatchUp"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "matchUpId"
+                    }
+                },
+                "content": {
+                    "name": "content",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Updates",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUserUpdates",
+                        "fields": [
+                            "userId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byMatchUpUpdates",
+                        "fields": [
+                            "matchUpId"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -300,6 +417,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "indoor": {
+                    "name": "indoor",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "description": {
                     "name": "description",
                     "isArray": false,
@@ -327,6 +451,20 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "updates": {
+                    "name": "updates",
+                    "isArray": true,
+                    "type": {
+                        "model": "Update"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "matchUp"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -373,5 +511,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "3364ef43c192f4bf239d03549965ce0b"
+    "version": "eee2c00e9c22d3c5e622b47bbca93c0a"
 };
