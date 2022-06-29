@@ -67,7 +67,8 @@ const OrganizePage: NextPage = () => {
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<any>(null);
-  // const [imagePlaceholder, setImagePlaceholder] = useState<any>(null);
+
+  // const reader = new FileReader();
 
   function decreaseMinAttendance(): void {
     if (attendanceMin > 2) {
@@ -481,7 +482,7 @@ const OrganizePage: NextPage = () => {
                 type='file'
                 onChange={(e) => {
                   setImage(URL.createObjectURL(e.target.files[0]));
-                  console.log(e);
+                  console.log(URL.createObjectURL(e.target.files[0]));
                 }}
               />
             </button>

@@ -15,7 +15,10 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   /* ---- NO IMAGE VERSION ---- */
   if (!props.imageUrl)
     return (
-      <div className={styles.wrapper} style={darkMode ? {} : { backgroundImage: colors.gradient.primary }}>
+      <div
+        className={styles.wrapper}
+        style={darkMode ? {} : { backgroundImage: colors.gradient.primary }}
+      >
         <div className={styles.buttons}>
           <div className={styles.leftButton}>{props.leftButton}</div>
           <div className={styles.rightButtons}>{props.rightButtons}</div>
@@ -27,17 +30,13 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     return (
       <div
         className={styles.wrapper}
-        style={
-          darkMode
-            ? {}
-            : {
-                backgroundImage: `url(${props.imageUrl})`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPositionY: '50%',
-                height: '25vh',
-              }
-        }
+        style={{
+          backgroundImage: `url(${props.imageUrl})`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPositionY: '50%',
+          height: '25vh',
+        }}
       >
         <div className={styles.buttons}>
           <div className={styles.leftButton}>{props.leftButton}</div>
