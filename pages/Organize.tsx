@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import HeaderButton from '../components/misc/HeaderButton';
 import { Button, Footer } from '../components/misc';
 import SportCard from '../components/cards/Sport.Card';
+import SkillCard from '../components/cards/Skills.Card';
+import SlotsCard from '../components/cards/Slots.Card';
 
 /* STYLES */
 import styles from './styles/Organize.module.scss';
@@ -62,7 +64,7 @@ const OrganizePage: NextPage = () => {
   const [indoors, setIndoors] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
-  const [skillLevel, setSkillLevel] = useState<string>();
+  const [skillLevel, setSkillLevel] = useState<string>('intermediate');
   const [reservedCourt, setReservedCourt] = useState<boolean>(false);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
@@ -517,6 +519,9 @@ const OrganizePage: NextPage = () => {
               />
             }
           ></Header>
+          <div className='pills'>
+            <SkillCard skillLevel={skillLevel} />
+          </div>
           <Footer
             progress={100}
             leftSide={<p onClick={() => goBack()}>Back</p>}
