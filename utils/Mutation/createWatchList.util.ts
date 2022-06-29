@@ -1,8 +1,14 @@
 import { API } from 'aws-amplify';
 import { createWatchList } from '../../src/graphql/mutations';
 import { WatchList } from '../types/WatchList.Type';
-export async function createNewWatchList (watchListData: WatchList): Promise<WatchList> {
+import { getUserById } from '../Query/getUserById.util';
+
+export async function createNewWatchList (watchListData: WatchList): Promise<WatchList | string> {
     try {
+    const queryUser = await getUserById(watchListData.userId);
+    if ((queryUser.watchList.items.filter(el => el.matchUpId === watchListData.matchUpId)).length > 0) {
+        return 'this MatchUp is already on your Watch List'
+    }
     const newWatchList = await API.graphql({
         query: createWatchList,
             variables: { input: watchListData },
