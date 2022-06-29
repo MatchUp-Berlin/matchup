@@ -1,35 +1,53 @@
 import type { NextPage } from 'next';
 import { useTheme } from '../contexts/Theme';
 import Navigation from '../components/misc/Navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Filter from '../components/misc/Filter';
 import SportFilter from '../components/misc/SportFilter';
 import styles from './styles/Explore.module.scss';
-import matchUps from '../mockData/machMatchUps';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
 import { useQuery } from 'react-query';
 
+import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
 
 const Home: NextPage = () => {
   const { colors, toggleDarkMode, shadows } = useTheme();
 
   /* FILTER STATE */
-  const [categories, setCategories] = useState<Array<string>>([]);
+  const [categories, setCategories] = useState<
+    Array<'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball'>
+  >(['football', 'volleyball', 'beach-volleyball']);
+
+  const from = new Date();
+  from.setUTCHours(0, 0, 0, 0); // Default From: Start of today
+
+  const to = new Date();
+  to.setUTCHours(23, 59, 59, 999); // Default To: End of today
+
   const [timeFrame, setTimeFrame] = useState<{ from: string; to: string }>({
-    from: new Date().toISOString(),
-    to: new Date().toISOString(),
+    from: from.toISOString(),
+    to: to.toISOString(),
   });
-  const [city, setCity] = useState<string>('Berlin');
+  const [city, setCity] = useState<string>('berlin');
 
   /* MAP VS CARD STATE */
   const [showMap, setShowMap] = useState<boolean>(false);
 
   /* DATA FETCHING */
-  const { isError, isLoading, isSuccess, refetch, data } = useQuery(["matchups", city, categories], () => fetch(""), {
-    onSuccess: () => { },
-    onError: () => {}
-  });
+  const { isError, isLoading, isSuccess, refetch, data } = useQuery(
+    'matchups',
+    () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to),
+    {
+      onSuccess: () => {},
+      onError: () => {},
+    }
+  );
+
+  /* REFETCH WHEN CATEGORY CHANGES */
+  useEffect(() => {
+    refetch();
+  }, [categories]);
 
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
@@ -37,7 +55,7 @@ const Home: NextPage = () => {
       <div className={styles.searchBar}>
         <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
         <div
-          onClick={() => console.log('gehe suchen')}
+          onClick={() => refetch()}
           className={styles.button}
           style={{
             backgroundColor: colors.primary[100],
@@ -71,35 +89,40 @@ const Home: NextPage = () => {
       </button>
 
       {showMap ? (
-        "<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>"
+        '<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>'
       ) : (
         <div className={styles.cardsWrapper}>
-          {/* ------LIST------ */}
-          {matchUps.map((matchup) => (
-            <MatchUpCard
-              key={matchup.id}
-              variant="large"
-              timestamp={matchup.date}
-              title={matchup.title}
-              slots={matchup.attendanceMax}
-              participating={matchup.users.length}
-              location={matchup.location}
-              sport={
-                matchup.sportCategory as
-                  | 'basketball'
-                  | 'football'
-                  | 'tennis'
-                  | 'ultimate-frisbee'
-                  | 'beach-volleyball'
-                  | 'volleyball'
-              }
-              skill={matchup.skillLevel as 'beginner' | 'intermediate' | 'advanced'}
-              imageUrl={matchup.image}
-              paid={matchup.totalCost > 0}
-              price={matchup.totalCost}
-              rented={matchup.reservedCourt}
-            ></MatchUpCard>
-          ))}
+          {isSuccess && data ? (
+            <>
+              {data.items.map((matchup) => (
+                <MatchUpCard
+                  key={matchup.id}
+                  variant="large"
+                  timestamp={matchup.date}
+                  title={matchup.title}
+                  slots={matchup.attendanceMax}
+                  participating={/* matchup.users.length */ 3} // FIX THIS ONE
+                  location={matchup.location}
+                  sport={
+                    matchup.sportCategory as
+                      | 'basketball'
+                      | 'football'
+                      | 'tennis'
+                      | 'ultimate-frisbee'
+                      | 'beach-volleyball'
+                      | 'volleyball'
+                  }
+                  skill={matchup.skillLevel as 'beginner' | 'intermediate' | 'advanced'}
+                  imageUrl={matchup.image}
+                  paid={matchup.totalCost > 0}
+                  price={matchup.totalCost}
+                  rented={matchup.reservedCourt}
+                ></MatchUpCard>
+              ))}
+            </>
+          ) : (
+            <>No Data to display</>
+          )}
         </div>
       )}
 

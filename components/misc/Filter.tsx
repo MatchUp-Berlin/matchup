@@ -63,13 +63,25 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
 
   return (
     <div className={styles.wrapper} style={{ boxShadow: shadows.small }}>
-      <input
+      <select
         style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
         value={props.city}
         onChange={(e) => props.setCity(e.target.value)}
         placeholder="Search for a city"
         className={styles.input + ' ' + styles.location}
-      ></input>
+      >
+        <option value="berlin">berlin</option>
+        <option value="hamburg">hamburg</option>
+        <option value="munich">munich</option>
+        <option value="cologne">cologne</option>
+        <option value="frankfurt-am-Main">frankfurt am Main</option>
+        <option value="essen">essen</option>
+        <option value="stuttgart">stuttgart</option>
+        <option value="dortmund">dortmund</option>
+        <option value="düsseldorf">düsseldorf</option>
+        <option value="bremen">bremen</option>
+        <option value="hanover">hanover</option>
+      </select>
       <select
         style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
         placeholder="Select time"
