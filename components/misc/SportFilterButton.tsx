@@ -4,7 +4,7 @@ import { useTheme } from '../../contexts/Theme';
 import styles from './styles/SportFilterButton.module.scss';
 
 export interface ISportFilterButtonProps {
-  setCategories: Dispatch<SetStateAction<string[]>>;
+  setCategories: Dispatch<SetStateAction<('basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball')[]>>;
   icon: any;
   active?: boolean;
   category: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball';

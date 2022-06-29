@@ -1,5 +1,28 @@
 import { User } from './User.Type';
-import { Update } from './Update.Type'
+import { Update } from './Update.Type';
+
+export type TSportCategories =
+  | 'basketball'
+  | 'football'
+  | 'tennis'
+  | 'ultimate-frisbee'
+  | 'beach-volleyball'
+  | 'volleyball';
+
+export type TSkillLevels = 'beginner' | 'intermediate' | 'advanced';
+
+export type TCity =
+  | 'berlin'
+  | 'hamburg'
+  | 'munich'
+  | 'cologne'
+  | 'frankfurt-am-Main'
+  | 'essen'
+  | 'stuttgart'
+  | 'dortmund'
+  | 'düsseldorf'
+  | 'bremen'
+  | 'hanover';
 
 export interface MatchUp {
   id?: string;
@@ -7,8 +30,8 @@ export interface MatchUp {
   users: User[];
   location: string;
   organizer: string;
-  sportCategory: string;
-  skillLevel: string;
+  sportCategory: TSportCategories;
+  skillLevel: TSkillLevels;
   totalCost: number;
   reservedCourt: boolean;
   attendanceMin: number;
