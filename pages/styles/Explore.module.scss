@@ -26,6 +26,33 @@
     }
   }
 
+  .errorWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+  }
+
+  .loadingWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+  }
+  
+  .emptyWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+  }
+
   .cardsWrapper {
     margin-top: 1em;
     margin-bottom: 8em;
@@ -42,30 +69,4 @@
     margin-right: -10px;
   }
 
-  .mapButton {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 6em;
-    z-index: 10;
-
-    padding: 0.8em 1.3em;
-    border-radius: 50px;
-
-    border: none;
-    color: white;
-    background-color: #303030;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5em;
-
-    transition: 0.3s;
-    &:hover {
-      cursor: pointer;
-      transform: translateX(-50%) scale(1.1);
-    }
-  }
 }
