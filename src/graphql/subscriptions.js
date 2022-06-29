@@ -14,12 +14,8 @@ export const onCreateMatchUp = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       location
       organizer
@@ -43,12 +39,8 @@ export const onCreateMatchUp = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -57,18 +49,11 @@ export const onCreateMatchUp = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -85,12 +70,8 @@ export const onUpdateMatchUp = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       location
       organizer
@@ -114,12 +95,8 @@ export const onUpdateMatchUp = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -128,18 +105,11 @@ export const onUpdateMatchUp = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -156,12 +126,8 @@ export const onDeleteMatchUp = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       location
       organizer
@@ -185,12 +151,8 @@ export const onDeleteMatchUp = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -199,18 +161,11 @@ export const onDeleteMatchUp = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -229,12 +184,8 @@ export const onCreateUser = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       profileImage
       about
@@ -246,12 +197,8 @@ export const onCreateUser = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -260,18 +207,11 @@ export const onCreateUser = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -290,12 +230,8 @@ export const onUpdateUser = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       profileImage
       about
@@ -307,12 +243,8 @@ export const onUpdateUser = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -321,18 +253,11 @@ export const onUpdateUser = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -351,12 +276,8 @@ export const onDeleteUser = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       profileImage
       about
@@ -368,12 +289,8 @@ export const onDeleteUser = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -382,18 +299,11 @@ export const onDeleteUser = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -410,30 +320,23 @@ export const onCreateSignUp = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -451,24 +354,16 @@ export const onCreateSignUp = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       attended
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -485,30 +380,23 @@ export const onUpdateSignUp = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -526,24 +414,16 @@ export const onUpdateSignUp = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       attended
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -560,30 +440,23 @@ export const onDeleteSignUp = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -601,24 +474,16 @@ export const onDeleteSignUp = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       attended
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -635,30 +500,23 @@ export const onCreateUpdate = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -676,24 +534,16 @@ export const onCreateUpdate = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       content
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -710,30 +560,23 @@ export const onUpdateUpdate = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -751,24 +594,16 @@ export const onUpdateUpdate = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       content
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -785,30 +620,23 @@ export const onDeleteUpdate = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -826,24 +654,16 @@ export const onDeleteUpdate = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       content
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -860,30 +680,23 @@ export const onCreateWatchList = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -901,23 +714,15 @@ export const onCreateWatchList = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -934,30 +739,23 @@ export const onUpdateWatchList = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -975,23 +773,15 @@ export const onUpdateWatchList = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1008,30 +798,23 @@ export const onDeleteWatchList = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
         organizer
@@ -1049,23 +832,15 @@ export const onDeleteWatchList = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
