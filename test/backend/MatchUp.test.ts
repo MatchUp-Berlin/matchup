@@ -1,4 +1,4 @@
-import { createNewMatchUp } from '../../utils/Mutation/CreateMatchUp.util';
+import { createNewMatchUp } from '../../utils/Mutation/createMatchUp.util';
 import { getMatchUpById } from '../../utils/Query/getMatchUpById.util';
 import { getUserById } from '../../utils/Query/getUserById.util';
 import { getUserByIdMock } from '../mocks/getUserById.mock';
