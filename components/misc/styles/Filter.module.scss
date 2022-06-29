@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+  border-radius: 25px;
+
+  .input {
+    height: 50px;
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0 1em;
+    background-color: transparent;
+    text-transform: capitalize;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
+  }
+
+  .location {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 0;
+    flex: 1.5;
+  }
+
+  .date {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    flex: 1;
+  }
+}

@@ -1,0 +1,23 @@
+.wrapper {
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border-top-width: 1px;
+  border-top-style: solid;
+
+  .link {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
