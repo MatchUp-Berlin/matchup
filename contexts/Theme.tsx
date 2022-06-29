@@ -76,7 +76,7 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
       background: darkMode
         ? {
             '100': '#252525',
-            '80': '#32333D',
+            '80': '#383838',
             '60': '#4F4F4F',
           }
         : {

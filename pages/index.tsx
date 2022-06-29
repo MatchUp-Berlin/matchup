@@ -8,6 +8,7 @@ import styles from './styles/Explore.module.scss';
 import matchUps from '../mockData/machMatchUps';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
+import { useQuery } from 'react-query';
 
 const Home: NextPage = () => {
   const { colors, toggleDarkMode, shadows } = useTheme();
@@ -22,6 +23,12 @@ const Home: NextPage = () => {
 
   /* MAP VS CARD STATE */
   const [showMap, setShowMap] = useState<boolean>(false);
+
+  /* DATA FETCHING */
+  const { isError, isLoading, isSuccess, refetch, data } = useQuery(["matchups", city, categories], () => fetch(""), {
+    onSuccess: () => { },
+    onError: () => {}
+  });
 
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
@@ -63,7 +70,7 @@ const Home: NextPage = () => {
       </button>
 
       {showMap ? (
-        <StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>
+        "<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>"
       ) : (
         <div className={styles.cardsWrapper}>
           {/* ------LIST------ */}
