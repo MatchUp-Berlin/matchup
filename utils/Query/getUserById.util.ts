@@ -1,20 +1,21 @@
 import { API } from 'aws-amplify';
 import { getUser } from '../../src/graphql/queries';
+import { User } from '../types/User.Type';
 
 //EXAMPLE ARGUMENT
 // "ceb7d85e-021e-4657-90a0-e3e2f98bcc7c"
 
-export async function getUserById (id: string) {
-    const userData = await API.graphql({
-        query: getUser,
-            variables: {id: id},
-            // authMode: 'AMAZON_COGNITO_USER_POOLS'
-        });
-    const retrievedUserData = userData.data.getUser
+export async function getUserById(id: string): Promise<User> {
+  const userData = await API.graphql({
+    query: getUser,
+    variables: { id: id },
+    // authMode: 'AMAZON_COGNITO_USER_POOLS'
+  });
+  const retrievedUserData = userData.data.getUser;
 
-    console.log(retrievedUserData);
+  console.log(retrievedUserData);
 
-    return retrievedUserData;
+  return retrievedUserData;
 }
 
 /*
