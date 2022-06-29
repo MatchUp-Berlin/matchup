@@ -8,8 +8,8 @@ import styles from './styles/Explore.module.scss';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
 import { useQuery } from 'react-query';
-
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
+
 import LoadingSpinner from '../components/misc/LoadingSpinner';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
 import MapButton from '../components/misc/MapButton';
