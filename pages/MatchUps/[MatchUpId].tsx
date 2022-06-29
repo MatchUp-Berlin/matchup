@@ -20,6 +20,7 @@ import { Divider } from '@aws-amplify/ui-react';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
 import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
+import LoadingSpinner from '../../components/misc/LoadingSpinner';
 
 const updates = [
   {
@@ -90,16 +91,15 @@ const MatchUpDetail: NextPage = () => {
   const router = useRouter();
   const { MatchUpId } = router.query;
 
-  const { isLoading, isSuccess, isError, data, refetch } = useQuery(
-    ['matchup', MatchUpId],
-    () => getMatchUpById(MatchUpId as string),
+  const { isLoading, isSuccess, isError, data, refetch } = useQuery(['matchup', MatchUpId], () =>
+    getMatchUpById(MatchUpId as string)
   );
 
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
       {/*  ------HEADER------  */}
       <Header
-        imageUrl={placeholder.src} // replace!!
+        imageUrl={data ? data.image : placeholder.src} // replace!!
         leftButton={
           <HeaderButton /* Later fix coloring of buttons to always be white! */
             viewBox="0 0 10 10"
@@ -149,138 +149,103 @@ const MatchUpDetail: NextPage = () => {
         ]}
       ></Header>
 
-      {/*  ------HEADER------  */}
-      <div className={styles.contentWrapper}>
-        <div className={styles.info}>
-          {/* TITLE */}
-          <h1 style={{ color: colors.text[100] }}>
-            Arabs vs. Italians Basketball
-            <span>
-              <Image
-                width={'30px'}
-                height={'30px'}
-                src={getSportIcon('basketball')}
-                alt={'basketball'}
-              ></Image>
-            </span>
-          </h1>
-          {/* DETAILS */}
-          <div className={styles.details}>
-            <div className={styles.detail}>
-              <Image width={'18em'} height="18em" src={clock} alt="taking place on"></Image>
-              <p style={{ color: colors.text[60] }}>
-                {moment('2022-06-27T15:33:52.444Z').format('H:m dddd')}
-              </p>
-            </div>
-            <div className={styles.detail}>
-              <Image width={'18em'} height="18em" src={pin} alt="taking place at"></Image>
-              <p style={{ color: colors.text[60] }}>{'berlin'}</p>
+      {isLoading ? (
+        <LoadingSpinner></LoadingSpinner>
+      ) : isError ? (
+        <>Oopsie, something went wront</>
+      ) : (
+        isSuccess && (
+          <div className={styles.contentWrapper}>
+            <div className={styles.info}>
+              {/* TITLE */}
+              <h1 style={{ color: colors.text[100] }}>
+                {data.title}
+                <span>
+                  <Image
+                    width={'30px'}
+                    height={'30px'}
+                    src={getSportIcon(data.sportCategory)}
+                    alt={data.sportCategory}
+                  ></Image>
+                </span>
+              </h1>
+              {/* DETAILS */}
+              <div className={styles.details}>
+                <div className={styles.detail}>
+                  <Image width={'18em'} height="18em" src={clock} alt="taking place on"></Image>
+                  <p style={{ color: colors.text[60] }}>{moment(data.date).format('H:m dddd')}</p>
+                </div>
+                <div className={styles.detail}>
+                  <Image width={'18em'} height="18em" src={pin} alt="taking place at"></Image>
+                  <p style={{ color: colors.text[60] }}>{data.location}</p>
+                </div>
+
+                <div className={styles.detail}>
+                  <Image width={'18em'} height="18em" src={euro} alt="costs"></Image>
+                  <p style={{ color: colors.text[60] }}>
+                    {data.totalCost > 0 ? data.totalCost + '.00' : 'Free'}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className={styles.detail}>
-              <Image width={'18em'} height="18em" src={euro} alt="costs"></Image>
-              <p style={{ color: colors.text[60] }}>{10 > 0 ? 10 + '.00' : 'Free'}</p>
+            {/*  ------BIG PILLS------  */}
+            <div className={styles.bigPills}>
+              <SkillsCard skillLevel={data.skillLevel}></SkillsCard>
+              <SlotsCard slots={data.attendanceMax} attending={data.signups.items.length}></SlotsCard>
             </div>
+
+            <div
+              className={styles.divider}
+              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+            ></div>
+
+            {/*  ------ORGANIZER------  */}
+            <OrganizerCard></OrganizerCard>
+
+            <div
+              className={styles.divider}
+              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+            ></div>
+
+            {/*  ------PARTICIPATING PREVIEW------  */}
+            <ParticipantsPreviewCard users={data.signups.items}></ParticipantsPreviewCard>
+            <div
+              className={styles.divider}
+              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+            ></div>
+
+            {/*  ------DESCRIPTION PREVIEW------  */}
+            <div className={styles.description}>
+              <p style={{ color: colors.text[80] }}>{data.description}</p>
+              <p style={{ color: colors.primary[100] }}>Read more</p>
+            </div>
+
+            <div
+              className={styles.divider}
+              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+            ></div>
+
+            <UpdatesPreviewCard updates={data.updates.items} organizerId="98736432"></UpdatesPreviewCard>
+
+            <div
+              className={styles.divider}
+              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+            ></div>
+
+            <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
           </div>
-        </div>
-
-        {/*  ------BIG PILLS------  */}
-        <div className={styles.bigPills}>
-          <SkillsCard skillLevel="advanced"></SkillsCard>
-          <SlotsCard slots={8} attending={7}></SlotsCard>
-        </div>
-
-        <div
-          className={styles.divider}
-          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-        ></div>
-
-        {/*  ------ORGANIZER------  */}
-        <OrganizerCard></OrganizerCard>
-
-        <div
-          className={styles.divider}
-          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-        ></div>
-
-        {/*  ------PARTICIPATING PREVIEW------  */}
-        <ParticipantsPreviewCard
-          users={[
-            {
-              id: 'asfjnadf',
-              profileImage:
-                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80',
-            },
-            {
-              id: 'asfjnadf',
-              profileImage:
-                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80',
-            },
-            {
-              id: 'asfjnadf',
-              profileImage:
-                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80',
-            },
-            {
-              id: 'asfjnadf',
-              profileImage:
-                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80',
-            },
-            {
-              id: 'asfjnadf',
-              profileImage:
-                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80',
-            },
-            {
-              id: 'asfjnadf',
-              profileImage:
-                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80',
-            },
-            {
-              id: 'asfjnadf',
-              profileImage:
-                'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80',
-            },
-          ]}
-        ></ParticipantsPreviewCard>
-        <div
-          className={styles.divider}
-          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-        ></div>
-
-        {/*  ------DESCRIPTION PREVIEW------  */}
-        <div className={styles.description}>
-          <p style={{ color: colors.text[80] }}>
-            afuheinsufhwn eifuhwoefuh aksdbfoiadf bsoldfzbilsdiladugfliadguf weofuh owefhnowefhmifhen
-            owfhhwefmhwpoefhum weofhue nwofhenwfhewnop niweufhnowf henwfnow efhnewoufhenow
-            upfhenwfnoefhnweofhenwopfhnwpoefhnopw
-          </p>
-          <p style={{ color: colors.primary[100] }}>Read more</p>
-        </div>
-
-        <div
-          className={styles.divider}
-          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-        ></div>
-
-        <UpdatesPreviewCard updates={updates} organizerId="98736432"></UpdatesPreviewCard>
-
-        <div
-          className={styles.divider}
-          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-        ></div>
-
-        <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
-      </div>
+        )
+      )}
 
       <Footer
         leftSide={
           <div className={styles.footerInfo}>
             <p className="fat" style={{ color: colors.text[100] }}>
-              3/10 players already joined
+              {data?.signups.items.length} / {data?.attendanceMax} players already joined
             </p>
             <p className="small" style={{ color: colors.text[100] }}>
-              Free + 5€ deposit
+              {data.totalCost > 0 ? data.totalCost + '.00 ' + data?.currency : 'Free'} + 5€ deposit
             </p>
           </div>
         }
