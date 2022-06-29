@@ -1,5 +1,6 @@
-import { User } from './User.Type';
+import { SignUp } from './SignUp.Type';
 import { Update } from './Update.Type';
+import { WatchList } from './WatchList.Type';
 
 export type TSportCategories =
   | 'basketball'
@@ -27,7 +28,7 @@ export type TCity =
 export interface MatchUp {
   id?: string;
   title: string;
-  users: User[];
+  signups: SignUp[];
   location: string;
   organizer: string;
   sportCategory: TSportCategories;
@@ -42,12 +43,13 @@ export interface MatchUp {
   date: string;
   currency: string;
   updates: Update[];
+  watchList: WatchList[];
 }
 
 export interface getMatchUpsReturn {
   items: MatchUp[];
-  nextToken: string;
-  startedAt: string;
+  nextToken: string | null;
+  startedAt: string | null;
 }
 
 export interface getMatchUpsByFilterFilter {
