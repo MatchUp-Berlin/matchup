@@ -1,7 +1,7 @@
 import { API } from 'aws-amplify';
 import { listMatchUps } from '../../src/graphql/queries';
 import {
-  getMatchUpsByFilterReturn,
+  getMatchUpsReturn,
   getMatchUpsByFilterFilter,
 } from '../types/MatchUp.Type';
 
@@ -11,13 +11,14 @@ export async function getMatchUpsByFilter(
   startDate?: string | undefined,
   endDate?: string | undefined,
   completed?: boolean | undefined
-): Promise<getMatchUpsByFilterReturn> {
+): Promise<getMatchUpsReturn> {
   try {
-    let filter: getMatchUpsByFilterFilter = {
+    const filter: getMatchUpsByFilterFilter = {
       and: [{ location: { eq: location } }],
     };
 
-    sportCategory.length > 0 &&
+    sportCategory &&
+      sportCategory.length > 0 &&
       filter.and.push({
         or: sportCategory?.map((cat) => {
           return { sportCategory: { eq: cat } };

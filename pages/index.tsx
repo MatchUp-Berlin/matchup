@@ -10,11 +10,7 @@ import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
 import { useQuery } from 'react-query';
 
-import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
-
 const Home: NextPage = () => {
-  getMatchUpsByFilter('berlin', []).then((res) => console.log(res));
-
   const { colors, toggleDarkMode, shadows } = useTheme();
 
   /* FILTER STATE */
