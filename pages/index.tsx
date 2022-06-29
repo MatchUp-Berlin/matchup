@@ -87,7 +87,15 @@ const Home: NextPage = () => {
 
       {showMap ? (
         '<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>'
-      ) : isSuccess && data ? (
+      ) : isError ? (
+        <div className={styles.errorWrapper} style={{ color: colors.text[60] }}>
+          Oops, something went wrong!
+        </div>
+      ) : isLoading ? (
+        <div className={styles.loadingWrapper}>
+          <LoadingSpinner />
+        </div>
+      ) : data.items.length > 0 ? (
         <div className={styles.cardsWrapper}>
           {data.items.map((matchup: MatchUp) => (
             <MatchUpCard
@@ -116,17 +124,8 @@ const Home: NextPage = () => {
           ))}
         </div>
       ) : (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '5em',
-          }}
-        >
-          <LoadingSpinner />
+        <div className={styles.emptyWrapper} style={{ color: colors.text[60] }}>
+          Nothing to show!
         </div>
       )}
 
