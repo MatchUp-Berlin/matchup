@@ -1,11 +1,10 @@
 .footer {
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   width: 100vw;
   border-top-style: solid;
   border-top-width: 1px;
-  padding: 1em;
 }
 
 .mainWrapper {
@@ -13,6 +12,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 1em;
 }
 
 .progressBar {
