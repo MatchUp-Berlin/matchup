@@ -37,10 +37,17 @@ const Home: NextPage = () => {
   );
 
   return (
-    <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
+    <div
+      style={{ backgroundColor: colors.background[100] }}
+      className={styles.page}
+    >
       {/* ------FILTERING------ */}
       <div className={styles.searchBar}>
-        <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
+        <Filter
+          city={city}
+          setCity={setCity}
+          setTimeFrame={setTimeFrame}
+        ></Filter>
         <div
           onClick={() => refetch()}
           className={styles.button}
@@ -53,7 +60,10 @@ const Home: NextPage = () => {
           Go
         </div>
       </div>
-      <SportFilter categories={categories} setCategories={setCategories} /* refetch={refetch} */ />
+      <SportFilter
+        categories={categories}
+        setCategories={setCategories} /* refetch={refetch} */
+      />
 
       {/* ------MAP BUTTON------ */}
       <MapButton map={showMap} callback={() => setShowMap(!showMap)}></MapButton>
@@ -74,7 +84,7 @@ const Home: NextPage = () => {
           {data?.items.map((matchup: MatchUp) => (
             <MatchUpCard
               key={matchup.id}
-              variant="large"
+              variant='large'
               timestamp={matchup.date}
               title={matchup.title}
               slots={matchup.attendanceMax}

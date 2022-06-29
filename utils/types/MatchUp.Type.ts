@@ -44,7 +44,7 @@ export interface MatchUp {
   updates: Update[];
 }
 
-export interface getMatchUpsByFilterReturn {
+export interface getMatchUpsReturn {
   items: MatchUp[];
   nextToken: string;
   startedAt: string;
