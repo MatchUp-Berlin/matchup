@@ -5,6 +5,7 @@ import Header from '../components/misc/Header';
 import { useEffect, useState } from 'react';
 import HeaderButton from '../components/misc/HeaderButton';
 import { Button, Footer } from '../components/misc';
+import MainInfo from '../components/misc/MainInfo';
 import SportCard from '../components/cards/Sport.Card';
 import SkillCard from '../components/cards/Skills.Card';
 import SlotsCard from '../components/cards/Slots.Card';
@@ -519,6 +520,13 @@ const OrganizePage: NextPage = () => {
               />
             }
           ></Header>
+          <MainInfo
+            title={title}
+            timestamp={date}
+            sport={sportCategory}
+            city={location}
+            costs={totalCost}
+          />
           <div className='pills'>
             <SkillCard skillLevel={skillLevel} />
           </div>
