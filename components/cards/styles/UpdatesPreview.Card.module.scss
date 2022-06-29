@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.4em;
+}
+
+.updates {
+  background-color: transparent;
+}
+
+.update {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2em 0;
+}
+
+.left {
+  display: flex;
+  overflow: hidden;
+}
+
+.message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time {
+  font-size: 0.7em;
+  margin-left: 0.5em;
+  white-space: nowrap;
+}
