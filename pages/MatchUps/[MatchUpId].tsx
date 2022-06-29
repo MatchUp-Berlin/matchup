@@ -16,9 +16,77 @@ import Image from 'next/image';
 import moment from 'moment';
 import { ParticipantsPreviewCard, SkillsCard, SlotsCard } from '../../components/cards';
 import OrganizerCard from '../../components/cards/Organizer.Card';
+import { Divider } from '@aws-amplify/ui-react';
+import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
+import StaticMap from '../../components/maps/Static.Map';
+import { Button, Footer } from '../../components/misc';
+
+const updates = [
+  {
+    id: '3234',
+    userId: '98736432',
+    matchUpId: '87d87ew',
+    user: {
+      id: '98736432',
+      givenName: 'Sam',
+      familyName: 'Svelte',
+      photo: './path',
+    },
+    content: 'this is the latest message',
+    timestamp: '20:32',
+  },
+  {
+    id: '5467',
+    userId: '67523476',
+    matchUpId: '87d87ew',
+    user: {
+      givenName: 'Max',
+      familyName: 'Butts',
+      photo: './path',
+    },
+    content: 'this is the second latest message',
+    timestamp: '19:43',
+  },
+  {
+    id: '3677',
+    userId: '98734986',
+    matchUpId: '87d87ew',
+    user: {
+      givenName: 'Manu',
+      familyName: 'Bauer',
+      photo: './path',
+    },
+    content: 'this is the third latest message',
+    timestamp: 'Yesterday',
+  },
+  {
+    id: '8576',
+    userId: '82764387',
+    matchUpId: '87d87ew',
+    user: {
+      givenName: 'Luca',
+      familyName: 'Giordano',
+      photo: './path',
+    },
+    content: 'this is the second latest message',
+    timestamp: 'Jun 26',
+  },
+  {
+    id: '7367',
+    userId: '8763487',
+    matchUpId: '87d87ew',
+    user: {
+      givenName: 'Mitch',
+      familyName: 'Man',
+      photo: './path',
+    },
+    content: 'this is the second latest message',
+    timestamp: 'Jun 25',
+  },
+];
 
 const MatchUpDetail: NextPage = () => {
-  const { colors, shadows } = useTheme();
+  const { colors, shadows, darkMode } = useTheme();
   const router = useRouter();
   const { MatchUpId } = router.query;
 
@@ -122,8 +190,18 @@ const MatchUpDetail: NextPage = () => {
           <SlotsCard slots={8} attending={7}></SlotsCard>
         </div>
 
+        <div
+          className={styles.divider}
+          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+        ></div>
+
         {/*  ------ORGANIZER------  */}
         <OrganizerCard></OrganizerCard>
+
+        <div
+          className={styles.divider}
+          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+        ></div>
 
         {/*  ------PARTICIPATING PREVIEW------  */}
         <ParticipantsPreviewCard
@@ -165,7 +243,49 @@ const MatchUpDetail: NextPage = () => {
             },
           ]}
         ></ParticipantsPreviewCard>
+        <div
+          className={styles.divider}
+          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+        ></div>
+
+        {/*  ------DESCRIPTION PREVIEW------  */}
+        <div className={styles.description}>
+          <p style={{ color: colors.text[80] }}>
+            afuheinsufhwn eifuhwoefuh aksdbfoiadf bsoldfzbilsdiladugfliadguf weofuh owefhnowefhmifhen
+            owfhhwefmhwpoefhum weofhue nwofhenwfhewnop niweufhnowf henwfnow efhnewoufhenow
+            upfhenwfnoefhnweofhenwopfhnwpoefhnopw
+          </p>
+          <p style={{ color: colors.primary[100] }}>Read more</p>
+        </div>
+
+        <div
+          className={styles.divider}
+          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+        ></div>
+
+        <UpdatesPreviewCard updates={updates} organizerId="98736432"></UpdatesPreviewCard>
+
+        <div
+          className={styles.divider}
+          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+        ></div>
+
+        <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
       </div>
+
+      <Footer
+        leftSide={
+          <div className={styles.footerInfo}>
+            <p className="fat" style={{ color: colors.text[100] }}>
+              3/10 players already joined
+            </p>
+            <p className="small" style={{ color: colors.text[100] }}>
+              Free + 5€ deposit
+            </p>
+          </div>
+        }
+        rightButton={<Button variant="primary" text="Join" callback={() => console.log('clicked')}></Button>}
+      ></Footer>
     </div>
   );
 };

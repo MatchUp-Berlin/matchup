@@ -3,6 +3,15 @@
 
   .contentWrapper {
     padding: 1em;
+    margin-bottom: 5em;
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      margin: 10px auto;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
 
     .info {
       display: flex;
@@ -43,5 +52,25 @@
       align-items: baseline;
       flex-direction: row;
     }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.5em;
+
+      p {
+        max-height: 10em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .footerInfo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

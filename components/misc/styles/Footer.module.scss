@@ -3,16 +3,9 @@
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 80px;
-  background-color: white;
-}
-
-.leftSide {
-  margin-left: 0.8em;
-  font-weight: bold;
-}
-.rightSide {
-  margin-right: 0.8em;
+  border-top-style: solid;
+  border-top-width: 1px;
+  padding: 1em;
 }
 
 .mainWrapper {
@@ -20,7 +13,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1em 0;
 }
 
 .progressBar {
