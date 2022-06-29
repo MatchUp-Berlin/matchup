@@ -20,9 +20,8 @@ export interface MatchUp {
   currency: string;
   updates: Update[];
 }
-<<<<<<< HEAD
 
-export interface getMatchUpsByFilterReturn {
+export interface getMatchUpsReturn {
   items: MatchUp[];
   nextToken: string;
   startedAt: string;
@@ -35,5 +34,3 @@ export interface getMatchUpsByFilterFilter {
     { and: { date: { gt: string } | { lt: string } }[] }?
   ];
 }
-=======
->>>>>>> main
