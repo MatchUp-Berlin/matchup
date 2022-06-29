@@ -20,8 +20,8 @@ export const createMatchUp = /* GraphQL */ `
         }
         nextToken
       }
-      city
       location
+      coordinates
       organizer
       sportCategory
       skillLevel
@@ -80,8 +80,8 @@ export const updateMatchUp = /* GraphQL */ `
         }
         nextToken
       }
-      city
       location
+      coordinates
       organizer
       sportCategory
       skillLevel
@@ -140,8 +140,8 @@ export const deleteMatchUp = /* GraphQL */ `
         }
         nextToken
       }
-      city
       location
+      coordinates
       organizer
       sportCategory
       skillLevel
@@ -362,8 +362,8 @@ export const createSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -426,8 +426,8 @@ export const updateSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -490,8 +490,8 @@ export const deleteSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -554,8 +554,8 @@ export const createUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -618,8 +618,8 @@ export const updateUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -682,8 +682,8 @@ export const deleteUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -746,8 +746,8 @@ export const createWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -809,8 +809,8 @@ export const updateWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -872,8 +872,8 @@ export const deleteWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
-        city
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
