@@ -58,6 +58,7 @@ const Home: NextPage = () => {
       {/* ------MAP BUTTON------ */}
       <MapButton map={showMap} callback={() => setShowMap(!showMap)}></MapButton>
 
+      {/* ------MATCHUP LIST OR MAP------ */}
       {showMap ? (
         '<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>'
       ) : isError ? (
