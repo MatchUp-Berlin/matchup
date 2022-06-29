@@ -20,6 +20,7 @@ import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
 import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
+import MainInfo from '../../components/misc/MainInfo';
 
 const MatchUpDetail: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -84,51 +85,20 @@ const MatchUpDetail: NextPage = () => {
         ]}
       ></Header>
 
-      {isLoading ? (
-        <LoadingSpinner></LoadingSpinner>
-      ) : isError ? (
-        <>Oopsie, something went wront</>
-      ) : (
-        isSuccess && data && (
-          <div className={styles.contentWrapper}>
-            <div className={styles.info}>
-              {/* TITLE */}
-              <h1 style={{ color: colors.text[100] }}>
-                {data.title}
-                <span>
-                  <Image
-                    width={'30px'}
-                    height={'30px'}
-                    src={getSportIcon(data.sportCategory)}
-                    alt={data.sportCategory}
-                  ></Image>
-                </span>
-              </h1>
-              {/* DETAILS */}
-              <div className={styles.details}>
-                <div className={styles.detail}>
-                  <Image width={'18em'} height="18em" src={clock} alt="taking place on"></Image>
-                  <p style={{ color: colors.text[60] }}>{moment(data.date).format('H:m dddd')}</p>
-                </div>
-                <div className={styles.detail}>
-                  <Image width={'18em'} height="18em" src={pin} alt="taking place at"></Image>
-                  <p style={{ color: colors.text[60] }}>{data.location}</p>
-                </div>
+      {/*  ------MAIN INFO------  */}
+      <div className={styles.contentWrapper}>
+        <MainInfo />
 
-                <div className={styles.detail}>
-                  <Image width={'18em'} height="18em" src={euro} alt="costs"></Image>
-                  <p style={{ color: colors.text[60] }}>
-                    {data.totalCost > 0 ? data.totalCost + '.00' : 'Free'}
-                  </p>
-                </div>
-              </div>
-            </div>
+        {/*  ------BIG PILLS------  */}
+        <div className={styles.bigPills}>
+          <SkillsCard skillLevel="advanced"></SkillsCard>
+          <SlotsCard slots={8} attending={7}></SlotsCard>
+        </div>
 
-            {/*  ------BIG PILLS------  */}
-            <div className={styles.bigPills}>
-              <SkillsCard skillLevel={data.skillLevel}></SkillsCard>
-              <SlotsCard slots={data.attendanceMax} attending={data.signups.items.length}></SlotsCard>
-            </div>
+        <div
+          className={styles.divider}
+          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+        ></div>
 
             <div
               className={styles.divider}

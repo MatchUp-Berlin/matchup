@@ -15,7 +15,10 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   /* ---- NO IMAGE VERSION ---- */
   if (!props.imageUrl)
     return (
-      <div className={styles.wrapper} style={darkMode ? {} : { backgroundImage: colors.gradient.secondary }}>
+      <div
+        className={styles.wrapper}
+        style={darkMode ? {} : { backgroundImage: colors.gradient.primary }}
+      >
         <div className={styles.buttons}>
           <div className={styles.leftButton}>{props.leftButton}</div>
           <div className={styles.rightButtons}>{props.rightButtons}</div>

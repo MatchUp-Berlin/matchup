@@ -1,0 +1,40 @@
+.toggle {
+  touch-action: pan-x;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  width: 3.5em;
+  height: 2em;
+}
+
+.toggleContainer {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 30px;
+  border-style: solid;
+  border-width: 1px;
+  transition: all 0.2s ease;
+}
+
+.toggleCircle {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  position: absolute;
+  top: 0.2em;
+  width: 1.6em;
+  height: 1.6em;
+  border: 1px solid #DDDDDD;
+  border-radius: 50%;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}

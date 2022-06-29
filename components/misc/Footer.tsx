@@ -8,13 +8,20 @@ export interface IFooterProps {
   progress?: number | null;
 }
 
-const Footer: React.FunctionComponent<IFooterProps> = ({ leftSide, rightButton, progress }) => {
+const Footer: React.FunctionComponent<IFooterProps> = ({
+  leftSide,
+  rightButton,
+  progress,
+}) => {
   const { colors, darkMode } = useTheme();
 
   return (
     <footer
       className={styles.footer}
-      style={{ borderTopColor: darkMode ? '#515157' : '#DDDDDD', backgroundColor: colors.background[100] }}
+      style={{
+        borderTopColor: darkMode ? '#515157' : '#DDDDDD',
+        backgroundColor: colors.background[100],
+      }}
     >
       <div
         className={styles.progressBar}
@@ -27,6 +34,7 @@ const Footer: React.FunctionComponent<IFooterProps> = ({ leftSide, rightButton, 
         <div className={styles.leftSide} style={{ color: colors.text[100] }}>
           {leftSide}
         </div>
+
         <div className={styles.rightSide}>{rightButton}</div>
       </div>
     </footer>
