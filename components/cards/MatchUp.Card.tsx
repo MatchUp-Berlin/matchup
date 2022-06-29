@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/MatchUp.Card.module.scss';
+import moment from 'moment';
 
 import basketball from '../../public/basketball-icon.png';
 import football from '../../public/football-icon.png';
@@ -20,7 +21,7 @@ export interface IMatchUpCardProps {
   timestamp: string;
   title: string;
   slots?: number;
-  participating?: number;
+  participating: number;
   location: string;
   sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball';
   skill?: 'beginner' | 'intermediate' | 'advanced';
@@ -76,14 +77,14 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           className={styles.info}
           style={props.variant == 'small' ? { justifyContent: 'space-around', height: '100%' } : {}}
         >
-          <div className={styles.title}>
-            <Image width={'25px'} height={'25px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
+          <div className={styles.title} style={{ color: colors.text[100] }}>
+            <Image width={'20px'} height={'20px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
             <p className="highlight-2">{props.title}</p>
           </div>
           <div className={styles.details}>
             <div className={styles.detail}>
               <Image src={clock} alt="taking place on"></Image>
-              <p style={{ color: colors.text[60] }}>{props.timestamp}</p>
+              <p style={{ color: colors.text[60] }}>{moment(props.timestamp).format('H:m dddd')}</p>
             </div>
             <div className={styles.detail}>
               <Image src={pin} alt="taking place at"></Image>
@@ -93,7 +94,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             {props.variant == 'large' && (
               <div className={styles.detail}>
                 <Image src={euro} alt="costs"></Image>
-                <p style={{ color: colors.text[60] }}>{props.price + '.00' || 'Free'}</p>
+                <p style={{ color: colors.text[60] }}>{props.price > 0 ? props.price + '.00' : 'Free'}</p>
               </div>
             )}
           </div>
@@ -112,20 +113,17 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                 className={styles.pill}
                 style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
               >
-                <p style={{ color: colors.text[100] }}>Rented court</p>
+                <p style={{ color: colors.text[100] }}>Rented</p>
               </div>
             )}
-            {props.variant == 'large' &&
-              props.slots &&
-              props.participating &&
-              props.slots - props.participating && (
-                <div
-                  className={styles.pill}
-                  style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
-                >
-                  <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
-                </div>
-              )}
+            {props.variant == 'large' && props.slots && props.slots - props.participating && (
+              <div
+                className={styles.pill}
+                style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+              >
+                <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
+              </div>
+            )}
           </div>
         )}
       </div>

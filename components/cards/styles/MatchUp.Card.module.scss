@@ -45,6 +45,7 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          text-transform: capitalize;
         }
       }
 
@@ -63,6 +64,7 @@
 
           p {
             font-size: small;
+            text-transform: capitalize;
           }
         }
       }
@@ -83,8 +85,9 @@
 
         p {
           white-space: nowrap;
-          font-size: 0.6em;
+          font-size: xx-small;
           font-weight: bold;
+          text-transform: capitalize;
         }
       }
     }

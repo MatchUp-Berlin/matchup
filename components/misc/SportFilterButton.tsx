@@ -23,8 +23,8 @@ const SportFilterButton: React.FunctionComponent<ISportFilterButtonProps> = (pro
       style={{
         boxShadow: shadows.small,
         backgroundColor: props.active ? colors.background[60] : colors.background[80],
-        outlineColor: colors.primary[100],
-        outlineWidth: props.active ? 4 : 0,
+        borderColor: colors.primary[100],
+        borderWidth: props.active ? 4 : 0,
       }}
     >
       <Image src={props.icon} alt="sports-filter-button" width="35px" height="35px"></Image>

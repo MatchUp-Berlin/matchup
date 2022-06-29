@@ -46,7 +46,7 @@ export function useTheme() {
 
 /* ----- PROVIDER ----- */
 export const ThemeProvider: FC<any> = ({ children }: any) => {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   const value: IThemeProvider = {
     darkMode,
@@ -76,7 +76,7 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
       background: darkMode
         ? {
             '100': '#252525',
-            '80': '#32333D',
+            '80': '#383838',
             '60': '#4F4F4F',
           }
         : {
@@ -87,13 +87,13 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
     },
     shadows: {
       small: darkMode
-        ? '0px 3px 8px rgba(0, 0, 0, 0.5)'
+        ? '0px 3px 8px rgba(0, 0, 0, 0.2)'
         : '0px 3px 8px rgba(0, 0, 0, 0.1)',
       medium: darkMode
         ? '0px 6px 16px rgba(0, 0, 0, 0.5)'
         : '0px 6px 16px rgba(0, 0, 0, 0.1)',
       large: darkMode
-        ? '0px 6px 16px rgba(0, 0, 0, 0.5)'
+        ? '0px 6px 16px rgba(0, 0, 0, 0.2)'
         : '0px 6px 16px rgba(0, 0, 0, 0.2)',
     },
   };
