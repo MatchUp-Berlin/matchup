@@ -17,7 +17,7 @@ export async function getMatchUpsByFilter(
       and: [{ location: { eq: location } }],
     };
 
-    sportCategory &&
+    sportCategory.length > 0 &&
       filter.and.push({
         or: sportCategory?.map((cat) => {
           return { sportCategory: { eq: cat } };
