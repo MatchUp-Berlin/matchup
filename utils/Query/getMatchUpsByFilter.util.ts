@@ -6,7 +6,7 @@ import {
 } from '../types/MatchUp.Type';
 
 export async function getMatchUpsByFilter(
-  location: string,
+  city: string,
   sportCategory?: string[] | null,
   startDate?: string | undefined,
   endDate?: string | undefined,
@@ -14,7 +14,7 @@ export async function getMatchUpsByFilter(
 ): Promise<getMatchUpsReturn> {
   try {
     const filter: getMatchUpsByFilterFilter = {
-      and: [{ location: { eq: location } }],
+      and: [{ city: { eq: city } }],
     };
 
     sportCategory &&

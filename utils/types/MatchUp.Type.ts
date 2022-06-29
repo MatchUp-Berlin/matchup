@@ -29,7 +29,8 @@ export interface MatchUp {
   id?: string;
   title: string;
   signups: SignUp[];
-  location: string;
+  city: string;
+  location: number[];
   organizer: string;
   sportCategory: TSportCategories;
   skillLevel: TSkillLevels;
@@ -54,7 +55,7 @@ export interface getMatchUpsReturn {
 
 export interface getMatchUpsByFilterFilter {
   and: [
-    { location: { eq: string } },
+    { city: { eq: string } },
     { or: { sportCategory: { eq: string } }[] }?,
     { and: { date: { gt: string } | { lt: string } }[] }?
   ];

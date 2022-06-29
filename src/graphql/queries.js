@@ -17,6 +17,7 @@ export const getMatchUp = /* GraphQL */ `
         }
         nextToken
       }
+      city
       location
       organizer
       sportCategory
@@ -70,6 +71,7 @@ export const listMatchUps = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -204,6 +206,7 @@ export const getSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -257,6 +260,7 @@ export const listSignUps = /* GraphQL */ `
         matchUp {
           id
           title
+          city
           location
           organizer
           sportCategory
@@ -313,6 +317,7 @@ export const getUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -366,6 +371,7 @@ export const listUpdates = /* GraphQL */ `
         matchUp {
           id
           title
+          city
           location
           organizer
           sportCategory
@@ -422,6 +428,7 @@ export const getWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -474,6 +481,7 @@ export const listWatchLists = /* GraphQL */ `
         matchUp {
           id
           title
+          city
           location
           organizer
           sportCategory

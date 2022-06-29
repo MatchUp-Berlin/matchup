@@ -20,6 +20,7 @@ export const createMatchUp = /* GraphQL */ `
         }
         nextToken
       }
+      city
       location
       organizer
       sportCategory
@@ -79,6 +80,7 @@ export const updateMatchUp = /* GraphQL */ `
         }
         nextToken
       }
+      city
       location
       organizer
       sportCategory
@@ -138,6 +140,7 @@ export const deleteMatchUp = /* GraphQL */ `
         }
         nextToken
       }
+      city
       location
       organizer
       sportCategory
@@ -359,6 +362,7 @@ export const createSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -422,6 +426,7 @@ export const updateSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -485,6 +490,7 @@ export const deleteSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -548,6 +554,7 @@ export const createUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -611,6 +618,7 @@ export const updateUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -674,6 +682,7 @@ export const deleteUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -737,6 +746,7 @@ export const createWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -799,6 +809,7 @@ export const updateWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -861,6 +872,7 @@ export const deleteWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory

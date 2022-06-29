@@ -2,7 +2,8 @@ type MatchUp @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   signups: [SignUp] @hasMany(indexName: "byMatchUpSignUps", fields: ["id"])
-  location: String!
+  city: String!
+  location: [Float]
   organizer: String!
   sportCategory: String!
   skillLevel: String

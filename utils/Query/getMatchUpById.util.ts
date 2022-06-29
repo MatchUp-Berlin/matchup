@@ -7,17 +7,13 @@ import { MatchUp } from '../types/MatchUp.Type';
 
 export async function getMatchUpById(id: string): Promise<MatchUp> {
   try {
-    const matchUpData = await API.graphql({
+      const matchUpData = await API.graphql({
       query: getMatchUp,
-
       variables: { id: id },
-
       // authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
-
-    const retrievedMatchUpData = matchUpData.data.getMatchUp;
-
-    return retrievedMatchUpData;
+      const retrievedMatchUpData = matchUpData.data.getMatchUp;
+      return retrievedMatchUpData;
   } catch (error) {
     throw error;
   }
@@ -36,7 +32,8 @@ date: "2022-06-27T15:33:52.444Z"
 description: "its sportin time"
 id: "1367ec81-1fb2-449a-b97e-faa879d1a36c"
 image: "https://imageshare/image1"
-location: "berlin"
+city: "berlin"
+location: [-73.98597609730648, 40.751874635721734]
 organizer: "54955977-c461-4943-9e66-288b3ba065ba"
 reservedCourt: false
 skillLevel: "beginner"

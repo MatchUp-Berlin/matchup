@@ -17,6 +17,7 @@ export const onCreateMatchUp = /* GraphQL */ `
         }
         nextToken
       }
+      city
       location
       organizer
       sportCategory
@@ -73,6 +74,7 @@ export const onUpdateMatchUp = /* GraphQL */ `
         }
         nextToken
       }
+      city
       location
       organizer
       sportCategory
@@ -129,6 +131,7 @@ export const onDeleteMatchUp = /* GraphQL */ `
         }
         nextToken
       }
+      city
       location
       organizer
       sportCategory
@@ -338,6 +341,7 @@ export const onCreateSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -398,6 +402,7 @@ export const onUpdateSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -458,6 +463,7 @@ export const onDeleteSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -518,6 +524,7 @@ export const onCreateUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -578,6 +585,7 @@ export const onUpdateUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -638,6 +646,7 @@ export const onDeleteUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -698,6 +707,7 @@ export const onCreateWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -757,6 +767,7 @@ export const onUpdateWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
@@ -816,6 +827,7 @@ export const onDeleteWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        city
         location
         organizer
         sportCategory
