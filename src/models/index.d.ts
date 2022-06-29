@@ -43,7 +43,7 @@ export declare class MatchUp {
   readonly date?: string | null;
   readonly currency?: string | null;
   readonly updates?: (Update | null)[] | null;
-  readonly WatchList?: (WatchList | null)[] | null;
+  readonly watchList?: (WatchList | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<MatchUp, MatchUpMetaData>);
@@ -70,7 +70,7 @@ export declare class User {
   readonly profileImage?: string | null;
   readonly about?: string | null;
   readonly updates?: (Update | null)[] | null;
-  readonly WatchList?: (WatchList | null)[] | null;
+  readonly watchList?: (WatchList | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);

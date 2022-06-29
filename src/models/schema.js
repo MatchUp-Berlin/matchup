@@ -143,8 +143,8 @@ export const schema = {
                         "associatedWith": "matchUp"
                     }
                 },
-                "WatchList": {
-                    "name": "WatchList",
+                "watchList": {
+                    "name": "watchList",
                     "isArray": true,
                     "type": {
                         "model": "WatchList"
@@ -375,8 +375,8 @@ export const schema = {
                         "associatedWith": "user"
                     }
                 },
-                "WatchList": {
-                    "name": "WatchList",
+                "watchList": {
+                    "name": "watchList",
                     "isArray": true,
                     "type": {
                         "model": "WatchList"
@@ -633,5 +633,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "7e72b501070a10f001da3cb9eb82f81d"
+    "version": "9b288d6a931be404dd9068f4695b38f6"
 };

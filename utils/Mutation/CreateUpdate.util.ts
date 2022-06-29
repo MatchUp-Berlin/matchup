@@ -12,6 +12,7 @@ import { Update } from '../types/Update.Type';
 */
 
 export async function createNewUpdate (updateData: Update) {
+    try {
     const newUpdate = await API.graphql({
         query: createUpdate,
             variables: { input: updateData },
@@ -19,6 +20,8 @@ export async function createNewUpdate (updateData: Update) {
         });
         console.log(newUpdate)
     const newUpdateData = newUpdate.data.createUpdate
-
     return newUpdateData;
+    } catch (error) {
+        throw error;
+    }
 }
