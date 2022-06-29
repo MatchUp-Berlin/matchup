@@ -66,7 +66,8 @@ const OrganizePage: NextPage = () => {
   const [reservedCourt, setReservedCourt] = useState<boolean>(false);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<File>();
+  const [image, setImage] = useState<any>();
+  // const [imagePlaceholder, setImagePlaceholder] = useState<any>(null);
 
   function decreaseMinAttendance(): void {
     if (attendanceMin > 2) {
@@ -88,6 +89,16 @@ const OrganizePage: NextPage = () => {
       setAttendanceMax((prevAttendanceMax) => prevAttendanceMax + 1);
     }
   }
+
+  // function imageHandler(e: any): void {
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     if (reader.readyState === 2) {
+  //       setImage(reader.result);
+  //     }
+  //   };
+  //   reader.readAsDataURL(e.target.files[0]);
+  // }
 
   return (
     <div
@@ -412,13 +423,17 @@ const OrganizePage: NextPage = () => {
             Update Title Image
           </h4>
 
-          <div className={styles.uploadImageWrapper}>
+          <div
+            className={styles.uploadImageWrapper}
+            style={image ? { backgroundImage: `url(${image})` } : {}}
+          >
             <button
               className={styles.inputImageBtn}
               type='button'
               style={{
                 borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                 color: colors.text[60],
+                // backgroundImage: imagePlaceholder | url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='grey' stroke-width='1' stroke-dasharray='6%2c 6' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e")
               }}
             >
               <svg
@@ -436,8 +451,15 @@ const OrganizePage: NextPage = () => {
                 <path d='M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z' />
               </svg>
               {'    '}
-              How do you like it, little white boy?
-              <input className={styles.imageInput} type='file' />
+              Upload your image
+              <input
+                className={styles.imageInput}
+                type='file'
+                onChange={(e) => {
+                  setImage(e.target.value);
+                  console.log(e);
+                }}
+              />
             </button>
           </div>
 
