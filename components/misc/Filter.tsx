@@ -1,11 +1,12 @@
-import React, { Dispatch, LegacyRef, SetStateAction, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useTheme } from '../../contexts/Theme';
+import { TCity } from '../../utils/types/MatchUp.Type';
 import styles from './styles/Filter.module.scss';
 
 export interface IFilterProps {
   setTimeFrame: Dispatch<SetStateAction<{ from: string; to: string }>>;
-  setCity: Dispatch<SetStateAction<string>>;
-  city: string;
+  setCity: Dispatch<SetStateAction<TCity>>;
+  city: TCity;
 }
 
 const Filter: React.FunctionComponent<IFilterProps> = (props) => {
@@ -66,7 +67,7 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
       <select
         style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
         value={props.city}
-        onChange={(e) => props.setCity(e.target.value)}
+        onChange={(e) => props.setCity(e.target.value as TCity)}
         placeholder="Search for a city"
         className={styles.input + ' ' + styles.location}
       >

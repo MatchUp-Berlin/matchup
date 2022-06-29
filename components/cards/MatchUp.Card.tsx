@@ -13,6 +13,7 @@ import tennis from '../../public/tennis-icon.png';
 import clock from '../../public/clock.svg';
 import pin from '../../public/pin.svg';
 import euro from '../../public/euro.svg';
+import { TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
 
 //TODO: Adjust to actual types!!
 
@@ -23,8 +24,8 @@ export interface IMatchUpCardProps {
   slots?: number;
   participating: number;
   location: string;
-  sport: 'basketball' | 'football' | 'tennis' | 'ultimate-frisbee' | 'beach-volleyball' | 'volleyball';
-  skill?: 'beginner' | 'intermediate' | 'advanced';
+  sport: TSportCategories;
+  skill?: TSkillLevels;
   imageUrl: any;
   paid?: boolean;
   price?: number;
