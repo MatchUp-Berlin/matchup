@@ -28,8 +28,8 @@ export type TCity =
 export interface MatchUp {
   id?: string;
   title: string;
-  city: string;
-  location: number[];
+  location: string;
+  coordinates: number[];
   signups: SignUpsReturn;
   organizer: string;
   sportCategory: TSportCategories;
@@ -55,7 +55,7 @@ export interface getMatchUpsReturn {
 
 export interface getMatchUpsByFilterFilter {
   and: [
-    { city: { eq: string } },
+    { location: { eq: string } },
     { or: { sportCategory: { eq: string } }[] }?,
     { and: { date: { gt: string } | { lt: string } }[] }?
   ];

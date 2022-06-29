@@ -32,8 +32,8 @@ date: "2022-06-27T15:33:52.444Z"
 description: "its sportin time"
 id: "1367ec81-1fb2-449a-b97e-faa879d1a36c"
 image: "https://imageshare/image1"
-city: "berlin"
-location: [-73.98597609730648, 40.751874635721734]
+location: "berlin"
+coordinates: [-73.98597609730648, 40.751874635721734]
 organizer: "54955977-c461-4943-9e66-288b3ba065ba"
 reservedCourt: false
 skillLevel: "beginner"
