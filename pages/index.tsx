@@ -14,9 +14,22 @@ import LoadingSpinner from '../components/misc/LoadingSpinner';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
 import MapButton from '../components/misc/MapButton';
 
+import { addUserToMatchUp } from '../utils/Mutation/addUserToMatchUp.util';
+import { getMatchUpById } from '../utils/Query/getMatchUpById.util';
+
 const Home: NextPage = () => {
   const { colors, shadows } = useTheme();
   const [showMap, setShowMap] = useState<boolean>(false);
+
+  getMatchUpById('7e8ec588-37ba-44a0-bc9a-ea86cacd5572').then((res) =>
+    console.log(res)
+  );
+
+  // addUserToMatchUp({
+  //   userId: '54955977-c461-4943-9e66-288b3ba065ba',
+  //   matchUpId: '7e8ec588-37ba-44a0-bc9a-ea86cacd5572',
+  //   attended: true,
+  // }).then((res) => console.log(res));
 
   /* FILTER STATE */
   const [categories, setCategories] = useState<TSportCategories[]>([

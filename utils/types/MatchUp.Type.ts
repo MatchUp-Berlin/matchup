@@ -1,4 +1,4 @@
-import { SignUp } from './SignUp.Type';
+import { SignUp, SignUpsReturn } from './SignUp.Type';
 import { Update } from './Update.Type';
 import { WatchList } from './WatchList.Type';
 
@@ -28,7 +28,7 @@ export type TCity =
 export interface MatchUp {
   id?: string;
   title: string;
-  signups: SignUp[];
+  signups: SignUpsReturn;
   location: string;
   organizer: string;
   sportCategory: TSportCategories;
