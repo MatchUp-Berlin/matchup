@@ -90,7 +90,7 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
         ? '0px 3px 8px rgba(0, 0, 0, 0.2)'
         : '0px 3px 8px rgba(0, 0, 0, 0.1)',
       medium: darkMode
-        ? '0px 6px 16px rgba(0, 0, 0, 0.2)'
+        ? '0px 6px 16px rgba(0, 0, 0, 0.5)'
         : '0px 6px 16px rgba(0, 0, 0, 0.1)',
       large: darkMode
         ? '0px 6px 16px rgba(0, 0, 0, 0.2)'
