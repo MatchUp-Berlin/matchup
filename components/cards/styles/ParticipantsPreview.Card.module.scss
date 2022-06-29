@@ -1,6 +1,14 @@
-.avatarPreview {
+.wrapper {
   display: flex;
-  flex-direction: row;
-  justify-content: left;
-  gap: 0.3em;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 0.5em;
+
+  .avatarPreview {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 0.3em;
+  }
 }

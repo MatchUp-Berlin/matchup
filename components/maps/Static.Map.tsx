@@ -32,7 +32,7 @@ const StaticMap: React.FunctionComponent<IStaticMapProps> = (props) => {
       <div
         onClick={() => {}}
         className={styles.wrapper}
-        style={{ borderColor: darkMode ? colors.text[60] : '#DDDDDD' }}
+        style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
       >
         {isLoading ? (
           <p>Loading...</p>

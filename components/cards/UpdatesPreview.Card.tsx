@@ -15,7 +15,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
   return (
     <>
       <div className={styles.header}>
-        <p className={'highlight-1'} style={{ color: colors.text[100] }}>
+        <p className={'highlight-1'} style={{ color: colors.text[80] }}>
           Latest Updates
         </p>
         <SmallButton callback={() => console.log('Pressed')} />
@@ -27,7 +27,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
               <div key={update.id} className={styles.update}>
                 <div className={styles.left}>
                   <p className={styles.message + ' small'} style={{ color: colors.text[80] }}>
-                    <b style={{ color: props.organizerId === update.userId ? colors.primary[100] : colors.text[100] }}>
+                    <b style={{ color: props.organizerId === update.userId ? colors.primary[100] : colors.text[80] }}>
                       {update.user.givenName}:{' '}
                     </b>
                     {update.content}

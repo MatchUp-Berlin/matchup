@@ -14,6 +14,7 @@ const Footer: React.FunctionComponent<IFooterProps> = ({ leftSide, rightButton, 
   return (
     <footer
       className={styles.footer}
+<<<<<<< HEAD
       style={{
         backgroundColor: colors.background[100],
         borderTop: darkMode ? `solid 1px #32333D` : 'solid 1px #DDDDDD',
@@ -28,6 +29,17 @@ const Footer: React.FunctionComponent<IFooterProps> = ({ leftSide, rightButton, 
           }}
         ></div>
       )}
+=======
+      style={{ borderTopColor: darkMode ? '#515157' : '#DDDDDD', backgroundColor: colors.background[100] }}
+    >
+      <div
+        className={styles.progressBar}
+        style={{
+          width: progress ? `${progress}%` : 0,
+          backgroundColor: colors.primary['100'],
+        }}
+      ></div>
+>>>>>>> e5531494085f759558be81326920ac7deb4c1b87
       <div className={styles.mainWrapper}>
         <div className={styles.leftSide} style={{ color: colors.text[100] }}>
           {leftSide}

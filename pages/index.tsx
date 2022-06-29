@@ -8,8 +8,8 @@ import styles from './styles/Explore.module.scss';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
 import { useQuery } from 'react-query';
-
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
+
 import LoadingSpinner from '../components/misc/LoadingSpinner';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
 import MapButton from '../components/misc/MapButton';
@@ -19,7 +19,9 @@ const Home: NextPage = () => {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   /* FILTER STATE */
-  const [categories, setCategories] = useState<TSportCategories[]>(['football']);
+  const [categories, setCategories] = useState<TSportCategories[]>([
+    'football',
+  ]);
   const [city, setCity] = useState<TCity>('berlin');
 
   const from = new Date();
@@ -32,8 +34,9 @@ const Home: NextPage = () => {
   });
 
   /* DATA FETCHING */
-  const { isError, isLoading, isSuccess, refetch, data } = useQuery(['matchups', categories], () =>
-    getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
+  const { isError, isLoading, isSuccess, refetch, data } = useQuery(
+    ['matchups', categories],
+    () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
   );
 
   return (
@@ -66,7 +69,10 @@ const Home: NextPage = () => {
       />
 
       {/* ------MAP BUTTON------ */}
-      <MapButton map={showMap} callback={() => setShowMap(!showMap)}></MapButton>
+      <MapButton
+        map={showMap}
+        callback={() => setShowMap(!showMap)}
+      ></MapButton>
 
       {/* ------MATCHUP LIST OR MAP------ */}
       {showMap ? (

@@ -1,17 +1,18 @@
 import { API } from 'aws-amplify';
-import { createMatchUpUser } from '../../src/graphql/mutations';
-import { MatchUpUser } from '../types/MatchUpUser.Type';
+import { createSignUp } from '../../src/graphql/mutations';
+import { SignUp } from '../types/SignUp.Type';
 
-export async function addUserToMatchUp (MatchUpUserData: MatchUpUser) {
-    const newMatchUpUser = await API.graphql({
-        query: createMatchUpUser,
-            variables: { input: MatchUpUserData },
-            // authMode: 'AMAZON_COGNITO_USER_POOLS'
-        });
-    const newSignedUpUser = newMatchUpUser.data.createMatchUpUser;
-
+export async function addUserToMatchUp(SignUpData: SignUp): Promise<SignUp> {
+  try {
+    const newSignUp = await API.graphql({
+      query: createSignUp,
+      variables: { input: SignUpData },
+      // authMode: 'AMAZON_COGNITO_USER_POOLS'
+    });
+    const newSignedUpUser = newSignUp.data.createSignUp;
     console.log(newSignedUpUser);
-
-
     return newSignedUpUser;
+  } catch (error) {
+    throw error;
+  }
 }
