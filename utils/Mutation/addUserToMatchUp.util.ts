@@ -8,11 +8,13 @@ export async function addUserToMatchUp(
 ): Promise<SignUp | string> {
   try {
     const matchup = await getMatchUpById(SignUpData.matchUpId);
-    // Validate if there is still a free spot available
     if (matchup.attendanceMax === matchup.signups.items.length)
       return 'MatchUp is fully booked';
-    // Validate if user is already signed up
-    if (matchup.signups.items.some((signup) => signup.id === SignUpData.userId))
+    if (
+      matchup.signups.items.some(
+        (signup) => signup.userId === SignUpData.userId
+      )
+    )
       return 'You are already signed up';
 
     const newSignUp = await API.graphql({
