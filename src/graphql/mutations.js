@@ -1,27 +1,29 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createMatchUpUser = /* GraphQL */ `
-  mutation CreateMatchUpUser(
-    $input: CreateMatchUpUserInput!
-    $condition: ModelMatchUpUserConditionInput
+export const createSignUp = /* GraphQL */ `
+  mutation CreateSignUp(
+    $input: CreateSignUpInput!
+    $condition: ModelSignUpConditionInput
   ) {
-    createMatchUpUser(input: $input, condition: $condition) {
+    createSignUp(input: $input, condition: $condition) {
       id
-      userId
-      matchUpId
       user {
         id
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -34,7 +36,7 @@ export const createMatchUpUser = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -56,6 +58,10 @@ export const createMatchUpUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -68,30 +74,34 @@ export const createMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      matchUpSignupsId
+      userSignupsId
     }
   }
 `;
-export const updateMatchUpUser = /* GraphQL */ `
-  mutation UpdateMatchUpUser(
-    $input: UpdateMatchUpUserInput!
-    $condition: ModelMatchUpUserConditionInput
+export const updateSignUp = /* GraphQL */ `
+  mutation UpdateSignUp(
+    $input: UpdateSignUpInput!
+    $condition: ModelSignUpConditionInput
   ) {
-    updateMatchUpUser(input: $input, condition: $condition) {
+    updateSignUp(input: $input, condition: $condition) {
       id
-      userId
-      matchUpId
       user {
         id
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -104,7 +114,7 @@ export const updateMatchUpUser = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -126,6 +136,10 @@ export const updateMatchUpUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -138,30 +152,34 @@ export const updateMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      matchUpSignupsId
+      userSignupsId
     }
   }
 `;
-export const deleteMatchUpUser = /* GraphQL */ `
-  mutation DeleteMatchUpUser(
-    $input: DeleteMatchUpUserInput!
-    $condition: ModelMatchUpUserConditionInput
+export const deleteSignUp = /* GraphQL */ `
+  mutation DeleteSignUp(
+    $input: DeleteSignUpInput!
+    $condition: ModelSignUpConditionInput
   ) {
-    deleteMatchUpUser(input: $input, condition: $condition) {
+    deleteSignUp(input: $input, condition: $condition) {
       id
-      userId
-      matchUpId
       user {
         id
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -174,7 +192,7 @@ export const deleteMatchUpUser = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -196,6 +214,10 @@ export const deleteMatchUpUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -208,6 +230,8 @@ export const deleteMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      matchUpSignupsId
+      userSignupsId
     }
   }
 `;
@@ -219,17 +243,17 @@ export const createMatchUp = /* GraphQL */ `
     createMatchUp(input: $input, condition: $condition) {
       id
       title
-      users {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -254,6 +278,20 @@ export const createMatchUp = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -279,17 +317,17 @@ export const updateMatchUp = /* GraphQL */ `
     updateMatchUp(input: $input, condition: $condition) {
       id
       title
-      users {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -314,6 +352,20 @@ export const updateMatchUp = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -339,17 +391,17 @@ export const deleteMatchUp = /* GraphQL */ `
     deleteMatchUp(input: $input, condition: $condition) {
       id
       title
-      users {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -374,6 +426,20 @@ export const deleteMatchUp = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -401,17 +467,17 @@ export const createUser = /* GraphQL */ `
       givenName
       familyName
       email
-      matchUps {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -424,6 +490,20 @@ export const createUser = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -451,17 +531,17 @@ export const updateUser = /* GraphQL */ `
       givenName
       familyName
       email
-      matchUps {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -474,6 +554,20 @@ export const updateUser = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -501,17 +595,17 @@ export const deleteUser = /* GraphQL */ `
       givenName
       familyName
       email
-      matchUps {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -524,6 +618,20 @@ export const deleteUser = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -555,13 +663,17 @@ export const createUpdate = /* GraphQL */ `
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -574,7 +686,7 @@ export const createUpdate = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -593,6 +705,10 @@ export const createUpdate = /* GraphQL */ `
         date
         currency
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -625,13 +741,17 @@ export const updateUpdate = /* GraphQL */ `
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -644,7 +764,7 @@ export const updateUpdate = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -663,6 +783,10 @@ export const updateUpdate = /* GraphQL */ `
         date
         currency
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -695,13 +819,17 @@ export const deleteUpdate = /* GraphQL */ `
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -714,7 +842,7 @@ export const deleteUpdate = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -736,6 +864,10 @@ export const deleteUpdate = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -743,6 +875,237 @@ export const deleteUpdate = /* GraphQL */ `
         _lastChangedAt
       }
       content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createWatchList = /* GraphQL */ `
+  mutation CreateWatchList(
+    $input: CreateWatchListInput!
+    $condition: ModelWatchListConditionInput
+  ) {
+    createWatchList(input: $input, condition: $condition) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateWatchList = /* GraphQL */ `
+  mutation UpdateWatchList(
+    $input: UpdateWatchListInput!
+    $condition: ModelWatchListConditionInput
+  ) {
+    updateWatchList(input: $input, condition: $condition) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteWatchList = /* GraphQL */ `
+  mutation DeleteWatchList(
+    $input: DeleteWatchListInput!
+    $condition: ModelWatchListConditionInput
+  ) {
+    deleteWatchList(input: $input, condition: $condition) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version

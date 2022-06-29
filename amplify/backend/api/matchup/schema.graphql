@@ -1,16 +1,14 @@
-type MatchUpUser @model @auth(rules: [{ allow: public }]) {
+type SignUp @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  userId: ID @index(name: "byUser", queryField: "byUser")
-  matchUpId: ID @index(name: "byMatchUp", queryField: "byMatchUp")
-  user: User @belongsTo(fields: ["userId"])
-  matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
+  user: User @belongsTo
+  matchUp: MatchUp @belongsTo
   attended: Boolean
 }
 
 type MatchUp @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
-  users: [MatchUpUser] @hasMany(indexName: "byUser", fields: ["id"])
+  signups: [SignUp] @hasMany
   location: String!
   organizer: String!
   sportCategory: String!
@@ -26,6 +24,8 @@ type MatchUp @model @auth(rules: [{ allow: public }]) {
   date: AWSDateTime
   currency: String
   updates: [Update] @hasMany(indexName: "byMatchUpUpdates", fields: ["id"])
+  WatchList: [WatchList]
+    @hasMany(indexName: "byMatchUpWatchList", fields: ["id"])
 }
 
 type User @model @auth(rules: [{ allow: public }]) {
@@ -33,10 +33,11 @@ type User @model @auth(rules: [{ allow: public }]) {
   givenName: String!
   familyName: String!
   email: String!
-  matchUps: [MatchUpUser] @hasMany(indexName: "byMatchUp", fields: ["id"])
+  signups: [SignUp] @hasMany
   profileImage: String
   about: String
   updates: [Update] @hasMany(indexName: "byUserUpdates", fields: ["id"])
+  WatchList: [WatchList] @hasMany(indexName: "byUserWatchList", fields: ["id"])
 }
 
 type Update @model @auth(rules: [{ allow: public }]) {
@@ -46,4 +47,12 @@ type Update @model @auth(rules: [{ allow: public }]) {
   user: User @belongsTo(fields: ["userId"])
   matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
   content: String
+}
+
+type WatchList @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  userId: ID @index(name: "byUserWatchList")
+  matchUpId: ID @index(name: "byMatchUpWatchList")
+  user: User @belongsTo(fields: ["userId"])
+  matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
 }

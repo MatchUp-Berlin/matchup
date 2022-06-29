@@ -1,24 +1,26 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateMatchUpUser = /* GraphQL */ `
-  subscription OnCreateMatchUpUser {
-    onCreateMatchUpUser {
+export const onCreateSignUp = /* GraphQL */ `
+  subscription OnCreateSignUp {
+    onCreateSignUp {
       id
-      userId
-      matchUpId
       user {
         id
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -31,7 +33,7 @@ export const onCreateMatchUpUser = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -53,6 +55,10 @@ export const onCreateMatchUpUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -65,27 +71,31 @@ export const onCreateMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      matchUpSignupsId
+      userSignupsId
     }
   }
 `;
-export const onUpdateMatchUpUser = /* GraphQL */ `
-  subscription OnUpdateMatchUpUser {
-    onUpdateMatchUpUser {
+export const onUpdateSignUp = /* GraphQL */ `
+  subscription OnUpdateSignUp {
+    onUpdateSignUp {
       id
-      userId
-      matchUpId
       user {
         id
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -98,7 +108,7 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -120,6 +130,10 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -132,27 +146,31 @@ export const onUpdateMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      matchUpSignupsId
+      userSignupsId
     }
   }
 `;
-export const onDeleteMatchUpUser = /* GraphQL */ `
-  subscription OnDeleteMatchUpUser {
-    onDeleteMatchUpUser {
+export const onDeleteSignUp = /* GraphQL */ `
+  subscription OnDeleteSignUp {
+    onDeleteSignUp {
       id
-      userId
-      matchUpId
       user {
         id
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -165,7 +183,7 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -187,6 +205,10 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -199,6 +221,8 @@ export const onDeleteMatchUpUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      matchUpSignupsId
+      userSignupsId
     }
   }
 `;
@@ -207,17 +231,17 @@ export const onCreateMatchUp = /* GraphQL */ `
     onCreateMatchUp {
       id
       title
-      users {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -242,6 +266,20 @@ export const onCreateMatchUp = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -264,17 +302,17 @@ export const onUpdateMatchUp = /* GraphQL */ `
     onUpdateMatchUp {
       id
       title
-      users {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -299,6 +337,20 @@ export const onUpdateMatchUp = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -321,17 +373,17 @@ export const onDeleteMatchUp = /* GraphQL */ `
     onDeleteMatchUp {
       id
       title
-      users {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -356,6 +408,20 @@ export const onDeleteMatchUp = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -380,17 +446,17 @@ export const onCreateUser = /* GraphQL */ `
       givenName
       familyName
       email
-      matchUps {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -403,6 +469,20 @@ export const onCreateUser = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -427,17 +507,17 @@ export const onUpdateUser = /* GraphQL */ `
       givenName
       familyName
       email
-      matchUps {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -450,6 +530,20 @@ export const onUpdateUser = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -474,17 +568,17 @@ export const onDeleteUser = /* GraphQL */ `
       givenName
       familyName
       email
-      matchUps {
+      signups {
         items {
           id
-          userId
-          matchUpId
           attended
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          matchUpSignupsId
+          userSignupsId
         }
         nextToken
         startedAt
@@ -497,6 +591,20 @@ export const onDeleteUser = /* GraphQL */ `
           userId
           matchUpId
           content
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      WatchList {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
           _version
@@ -525,13 +633,17 @@ export const onCreateUpdate = /* GraphQL */ `
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -544,7 +656,7 @@ export const onCreateUpdate = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -563,6 +675,10 @@ export const onCreateUpdate = /* GraphQL */ `
         date
         currency
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -592,13 +708,17 @@ export const onUpdateUpdate = /* GraphQL */ `
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -611,7 +731,7 @@ export const onUpdateUpdate = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -630,6 +750,10 @@ export const onUpdateUpdate = /* GraphQL */ `
         date
         currency
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -659,13 +783,17 @@ export const onDeleteUpdate = /* GraphQL */ `
         givenName
         familyName
         email
-        matchUps {
+        signups {
           nextToken
           startedAt
         }
         profileImage
         about
         updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
           nextToken
           startedAt
         }
@@ -678,7 +806,7 @@ export const onDeleteUpdate = /* GraphQL */ `
       matchUp {
         id
         title
-        users {
+        signups {
           nextToken
           startedAt
         }
@@ -700,6 +828,10 @@ export const onDeleteUpdate = /* GraphQL */ `
           nextToken
           startedAt
         }
+        WatchList {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -707,6 +839,228 @@ export const onDeleteUpdate = /* GraphQL */ `
         _lastChangedAt
       }
       content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateWatchList = /* GraphQL */ `
+  subscription OnCreateWatchList {
+    onCreateWatchList {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateWatchList = /* GraphQL */ `
+  subscription OnUpdateWatchList {
+    onUpdateWatchList {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteWatchList = /* GraphQL */ `
+  subscription OnDeleteWatchList {
+    onDeleteWatchList {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+          startedAt
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+          startedAt
+        }
+        location
+        organizer
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+          startedAt
+        }
+        WatchList {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
