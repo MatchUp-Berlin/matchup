@@ -16,82 +16,17 @@ import Image from 'next/image';
 import moment from 'moment';
 import { ParticipantsPreviewCard, SkillsCard, SlotsCard } from '../../components/cards';
 import OrganizerCard from '../../components/cards/Organizer.Card';
-import { Divider } from '@aws-amplify/ui-react';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
 import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
 
-const updates = [
-  {
-    id: '3234',
-    userId: '98736432',
-    matchUpId: '87d87ew',
-    user: {
-      id: '98736432',
-      givenName: 'Sam',
-      familyName: 'Svelte',
-      photo: './path',
-    },
-    content: 'this is the latest message',
-    timestamp: '20:32',
-  },
-  {
-    id: '5467',
-    userId: '67523476',
-    matchUpId: '87d87ew',
-    user: {
-      givenName: 'Max',
-      familyName: 'Butts',
-      photo: './path',
-    },
-    content: 'this is the second latest message',
-    timestamp: '19:43',
-  },
-  {
-    id: '3677',
-    userId: '98734986',
-    matchUpId: '87d87ew',
-    user: {
-      givenName: 'Manu',
-      familyName: 'Bauer',
-      photo: './path',
-    },
-    content: 'this is the third latest message',
-    timestamp: 'Yesterday',
-  },
-  {
-    id: '8576',
-    userId: '82764387',
-    matchUpId: '87d87ew',
-    user: {
-      givenName: 'Luca',
-      familyName: 'Giordano',
-      photo: './path',
-    },
-    content: 'this is the second latest message',
-    timestamp: 'Jun 26',
-  },
-  {
-    id: '7367',
-    userId: '8763487',
-    matchUpId: '87d87ew',
-    user: {
-      givenName: 'Mitch',
-      familyName: 'Man',
-      photo: './path',
-    },
-    content: 'this is the second latest message',
-    timestamp: 'Jun 25',
-  },
-];
-
 const MatchUpDetail: NextPage = () => {
-  const { colors, shadows, darkMode } = useTheme();
+  const { colors, darkMode } = useTheme();
   const router = useRouter();
   const { MatchUpId } = router.query;
 
-  const { isLoading, isSuccess, isError, data, refetch } = useQuery(['matchup', MatchUpId], () =>
+  const { isLoading, isSuccess, isError, data } = useQuery(['matchup', MatchUpId], () =>
     getMatchUpById(MatchUpId as string)
   );
 
