@@ -71,5 +71,6 @@
       "service": "Lambda",
       "dependsOn": []
     }
-  }
+  },
+  "geo": {}
 }

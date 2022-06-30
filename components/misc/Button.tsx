@@ -6,13 +6,10 @@ export interface IButtonProps {
   variant: 'primary' | 'secondary';
   callback: () => any;
   text: string;
+  disabled?: boolean;
 }
 
-const Button: React.FunctionComponent<IButtonProps> = ({
-  variant,
-  callback,
-  text,
-}) => {
+const Button: React.FunctionComponent<IButtonProps> = ({ variant, callback, text, disabled }) => {
   const { colors } = useTheme();
   if (variant === 'primary') {
     return (
@@ -20,10 +17,11 @@ const Button: React.FunctionComponent<IButtonProps> = ({
         className={styles.primary}
         style={{
           backgroundColor: colors.primary['100'],
+          opacity: disabled ? 0.4 : 1,
         }}
-        onClick={callback}
+        onClick={() => !disabled && callback()}
       >
-        <p className='fat'>{text}</p>
+        <p className="fat">{text}</p>
       </button>
     );
   } else {
@@ -33,10 +31,11 @@ const Button: React.FunctionComponent<IButtonProps> = ({
         style={{
           outlineColor: colors.primary['100'],
           color: colors.primary['100'],
+          opacity: disabled ? 0.4 : 1,
         }}
-        onClick={callback}
+        onClick={() => !disabled && callback()}
       >
-        <p className='fat'>{text}</p>
+        <p className="fat">{text}</p>
       </button>
     );
   }

@@ -8,6 +8,7 @@ export interface ISportCardProps {
   subTitle: string;
   image: any;
   callback: () => void;
+  active: boolean;
 }
 
 const SportCard: React.FunctionComponent<ISportCardProps> = (props) => {
@@ -15,8 +16,12 @@ const SportCard: React.FunctionComponent<ISportCardProps> = (props) => {
   return (
     <div
       onClick={props.callback}
-      className={styles.wrapper}
-      style={{ boxShadow: shadows.small, backgroundColor: colors.background[80] }}
+      className={props.active ? `${styles.wrapper} ${styles.active}` : styles.wrapper}
+      style={{
+        boxShadow: props.active ? shadows.large : shadows.small,
+        backgroundColor: colors.background[80],
+        borderColor: colors.primary[100],
+      }}
     >
       <div className={styles.imageWrapper}>
         <Image className={styles.cover} alt={props.subTitle} layout={'responsive'} src={props.image}></Image>
