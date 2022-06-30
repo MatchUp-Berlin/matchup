@@ -4,7 +4,8 @@ type MatchUp @model @auth(rules: [{ allow: public }]) {
   signups: [SignUp] @hasMany(indexName: "byMatchUpSignUps", fields: ["id"])
   location: String!
   coordinates: [Float]
-  organizer: String!
+  organizerId: ID
+  organizer: User @hasOne(fields: ["organizerId"])
   sportCategory: String!
   skillLevel: String
   totalCost: Int
