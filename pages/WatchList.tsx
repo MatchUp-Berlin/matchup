@@ -5,18 +5,18 @@ import Navigation from '../components/misc/Navigation';
 
 
 const WatchListPage: NextPage = () => {
-    // const router = useRouter()
-    // const { route } = useAuthenticator((context) => [context.route]);
+    const router = useRouter()
+    const { route } = useAuthenticator((context) => [context.route]);
 
-    // if (route !== 'authenticated') {
-    //     router.push('/SignIn')
-    //   } else {
-    //       return(
-    //           <>
-    //           <h1>Watch List</h1>
-    //           <Navigation />
-    //           </>
-    //       )
-    //   }
+    if (route !== 'authenticated') {
+        {() => {router.push('/SignIn')}}
+      } else {
+          return(
+              <>
+              <h1>Watch List</h1>
+              <Navigation />
+              </>
+          )
+      }
 };
 export default WatchListPage;

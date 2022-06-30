@@ -27,17 +27,17 @@ interface IParams extends ParsedUrlQuery {
 // };
 
 const ProfileDetailPage: NextPage = () => {
-  // const router = useRouter()
-  // const { route } = useAuthenticator((context) => [context.route]);
+  const router = useRouter()
+  const { route } = useAuthenticator((context) => [context.route]);
 
-  // if (route !== 'authenticated') {
-  //     router.push('/')
-  //   } else {
-  // return (
-  //   <>
-  //     <Navigation />
-  //   </>
-  // );
-  //  }
+  if (route !== 'authenticated') {
+    {() => {router.push('/SignIn')}}
+    } else {
+  return (
+    <>
+      <Navigation />
+    </>
+  );
+   }
 };
 export default ProfileDetailPage;
