@@ -13,14 +13,14 @@ export async function getOrganizerMatchUps(
     };
 
     const matchUpsData = await API.graphql({
-      query: listMatchUps,
-      variables: { filter: filter },
+    query: listMatchUps,
+    variables: { filter: filter },
     });
 
     const retrievedData = await matchUpsData.data.listMatchUps;
 
     return retrievedData;
   } catch (err) {
-    throw err;
+      throw err;
   }
 }
