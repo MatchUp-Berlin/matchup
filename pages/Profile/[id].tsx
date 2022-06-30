@@ -5,9 +5,13 @@ import { getUserById } from '../../utils/Query/getUserById.util';
 import { useTheme } from '../../contexts/Theme';
 import { useQuery } from 'react-query';
 import styles from './styles/id.module.scss';
-import { Avatar, Divider } from '../../components/misc';
+import { Avatar, Button, Divider } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
 import moment from 'moment';
+import { getMatchUp } from '../../src/graphql/queries';
+import { API } from 'aws-amplify';
+import MatchUpCard from '../../components/cards/MatchUp.Card';
+import { getOrganizerMatchUps } from '../../utils/Query/getOrganizerMatchUps.util';
 
 const ProfileDetailPage: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -17,6 +21,32 @@ const ProfileDetailPage: NextPage = () => {
   const { isLoading, isSuccess, isError, data } = useQuery(['user', id], () => {
     return getUserById(id as string);
   });
+
+  const {
+    isLoading: isMatchUpsLoading,
+    isSuccess: isMatchUpsSuccess,
+    isError: isMatchUpsError,
+    data: matchUpsData,
+  } = useQuery(['matchUps', id], () => getOrganizerMatchUps(id as string));
+
+  // const {
+  //   isLoading: isMatchUpsLoading,
+  //   isSuccess: isMatchUpsSuccess,
+  //   isError: isMatchUpsError,
+  //   data: matchUpsData,
+  // } = useQuery(['matchUps', id], async () => {
+  //   const matchUpsData = await API.graphql({
+  //     query: getMatchUp,
+  //     variables: {
+  //       id: id,
+  //       offset: 3,
+  //     },
+  //     // authMode: 'AMAZON_COGNITO_USER_POOLS'
+  //   });
+  //   console.log(matchUpsData);
+
+  //   return matchUpsData;
+  // });
 
   return (
     <>
@@ -74,6 +104,26 @@ const ProfileDetailPage: NextPage = () => {
               </div>
             </div>
             <Divider />
+            <div className='aboutInfos'>
+              <h4 style={{ color: colors.text['100'] }}>About</h4>
+              <p style={{ color: colors.text['80'] }}>{data.about}</p>
+            </div>
+            <Divider />
+            <div className='participatedGames'>
+              <h4>Participated to {data.signups.items.length} MatchUps</h4>
+              {isMatchUpsLoading ? (
+                <p>loading</p>
+              ) : isMatchUpsSuccess ? (
+                <p>success</p>
+              ) : (
+                isMatchUpsError && <p>error</p>
+              )}
+              <Button
+                variant='secondary'
+                callback={() => {}}
+                text={'Load more'}
+              />
+            </div>
           </section>
         )
       )}
