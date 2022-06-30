@@ -16,7 +16,7 @@ export interface IOrganizeConfirmationFormProps {
   skillLevel: TSkillLevels;
   attendanceMax: number;
   description: string;
-  indoors: boolean;
+  indoor: boolean;
 }
 
 const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFormProps> = (props) => {
@@ -30,7 +30,7 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         timestamp={props.timestamp}
         city={props.location}
         costs={props.totalCost}
-        indoors={props.indoors}
+        indoor={props.indoor}
       />
 
       {/*  ------BIG PILLS------  */}

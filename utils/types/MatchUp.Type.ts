@@ -49,6 +49,24 @@ export interface MatchUp {
   watchList: WatchList[];
 }
 
+export interface CreateMatchUpInput {
+  title: string;
+  location: TCity;
+  sportCategory: TSportCategories;
+  organizerId: string;
+  date: string;
+
+  coordinates?: number[];
+  skillLevel?: TSkillLevels;
+  totalCost?: number;
+  reservedCourt?: boolean ;
+  attendanceMin?: number;
+  attendanceMax?: number;
+  description?: string;
+  image?: string;
+  indoor?: boolean;
+}
+
 export interface getMatchUpsReturn {
   items: MatchUp[];
   nextToken: string | null;

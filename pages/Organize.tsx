@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Header from '../components/misc/Header';
 import { useState } from 'react';
 import HeaderButton from '../components/misc/HeaderButton';
@@ -32,13 +32,14 @@ import { createNewMatchUp } from '../utils/Mutation/createMatchUp.util';
 const OrganizePage: NextPage = () => {
   const { route, user } = useAuthenticator((context) => [context.route, context.user]);
   const { colors } = useTheme();
+  const router = useRouter();
 
   /* Keeping track of all of the answers */
   const [sportCategory, setSportCategory] = useState<TSportCategories>();
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [location, setLocation] = useState<TCity>('berlin');
-  const [indoors, setIndoors] = useState<boolean>(false);
+  const [indoor, setIndoor] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
   const [skillLevel, setSkillLevel] = useState<TSkillLevels>('intermediate');
@@ -62,10 +63,15 @@ const OrganizePage: NextPage = () => {
   }
 
   /* Submitting event */
-  // const mutation = useMutation(() => createNewMatchUp(), {
-  //   onSuccess: () => { },
-  //   onError: () => {}
-  // });
+  const mutation = useMutation(createNewMatchUp, {
+    onSuccess: () => {
+      console.log('submitted');
+      router.push('/');
+    },
+    onError: () => {
+      console.log('fail');
+    },
+  });
 
   return (
     <div className={styles.wrapper} style={{ backgroundColor: colors.background[100] }}>
@@ -186,11 +192,11 @@ const OrganizePage: NextPage = () => {
             title={title}
             date={date}
             location={location}
-            indoors={indoors}
+            indoor={indoor}
             setTitle={setTitle}
             setDate={setDate}
             setLocation={setLocation}
-            setIndoors={setIndoors}
+            setIndoor={setIndoor}
           />
 
           <Footer
@@ -283,12 +289,34 @@ const OrganizePage: NextPage = () => {
             skillLevel={skillLevel}
             attendanceMax={attendanceMax}
             description={description}
-            indoors={indoors}
+            indoor={indoor}
           />
           <Footer
             progress={95}
             leftSide={<p onClick={() => goBack()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Save"></Button>}
+            rightButton={
+              <Button
+                variant="primary"
+                callback={() =>
+                  mutation.mutate({
+                    sportCategory: sportCategory as TSportCategories,
+                    title,
+                    date: new Date(date).toISOString(),
+                    location,
+                    indoor,
+                    attendanceMin,
+                    attendanceMax,
+                    skillLevel,
+                    reservedCourt,
+                    totalCost,
+                    description,
+                    image,
+                    organizerId: user.username as string,
+                  })
+                }
+                text="Save"
+              ></Button>
+            }
           ></Footer>
         </>
       )}

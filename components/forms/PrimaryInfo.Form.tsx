@@ -10,12 +10,12 @@ export interface IPrimaryInfoFormProps {
   title: string;
   date: string;
   location: TCity;
-  indoors: boolean;
+  indoor: boolean;
 
   setTitle: Dispatch<SetStateAction<string>>;
   setDate: Dispatch<SetStateAction<string>>;
   setLocation: Dispatch<SetStateAction<TCity>>;
-  setIndoors: Dispatch<SetStateAction<boolean>>;
+  setIndoor: Dispatch<SetStateAction<boolean>>;
 }
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
@@ -88,9 +88,9 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
         <StaticMap latitude={15} longitude={50} zoom={15} />
       </div>
 
-      <div className={styles.indoors} style={{ color: colors.text[60] }}>
-        <p>Is this taking place indoors?</p>
-        <Switch callback={() => props.setIndoors(!props.indoors)} />
+      <div className={styles.indoor} style={{ color: colors.text[60] }}>
+        <p>Is this taking place indoor?</p>
+        <Switch callback={() => props.setIndoor(!props.indoor)} />
       </div>
     </form>
   );
