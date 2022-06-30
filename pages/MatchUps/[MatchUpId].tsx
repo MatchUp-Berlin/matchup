@@ -138,9 +138,7 @@ const MatchUpDetail: NextPage = () => {
               </p>
               <p style={{ color: colors.text[60] }}>
                 {data.description}
-                {data.description.length > 100 && (
-                  <span style={{ color: colors.primary[100] }}> Read more</span>
-                )}
+                {data.description.length > 100 && <span style={{ color: colors.primary[100] }}> Read more</span>}
               </p>
             </div>
 
@@ -151,10 +149,7 @@ const MatchUpDetail: NextPage = () => {
               }}
             ></div>
 
-            <UpdatesPreviewCard
-              updates={data.updates.items}
-              organizerId={data.organizer?.id}
-            ></UpdatesPreviewCard>
+            <UpdatesPreviewCard updates={data.updates.items} organizer={data.organizer}></UpdatesPreviewCard>
 
             <div
               className={styles.divider}

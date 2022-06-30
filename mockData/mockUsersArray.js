@@ -47,23 +47,22 @@ export const usersArray = [
   },
 ];
 
-
-organizer {
-  id
-  givenName
-  familyName
-  email
-  signups {
-    nextToken
-  }
-  profileImage
-  about
-  updates {
-    nextToken
-  }
-  watchList {
-    nextToken
-  }
-  createdAt
-  updatedAt
-}
+// organizer {
+//   id
+//   givenName
+//   familyName
+//   email
+//   signups {
+//     nextToken
+//   }
+//   profileImage
+//   about
+//   updates {
+//     nextToken
+//   }
+//   watchList {
+//     nextToken
+//   }
+//   createdAt
+//   updatedAt
+// }
