@@ -16,7 +16,7 @@ const SignInPage: NextPage = () => {
   const { route } = useAuthenticator((context) => [context.authStatus, context.user]);
 
   /* LOG IN */
-  const [loginError, setLoginError] = useState<string>();
+  const [loginError, setLoginError] = useState<string>("");
   async function handleLogin(e) {
     e.preventDefault();
     const email = e.target['login-email'].value;
@@ -33,7 +33,7 @@ const SignInPage: NextPage = () => {
 
   /* REGISTRATION */
   const [showRegistration, setShowRegistration] = useState(false);
-  const [registrationError, setRegistrationError] = useState<string>();
+  const [registrationError, setRegistrationError] = useState<string>("");
   async function handleRegistration(e) {
     e.preventDefault();
     const username = e.target['registration-email'].value;
@@ -60,7 +60,8 @@ const SignInPage: NextPage = () => {
   }
 
   if (route === 'authenticated') {
-    return router.push('/');
+    typeof window !== 'undefined' && router.push('/');
+    return <></>
   }
 
   return (
