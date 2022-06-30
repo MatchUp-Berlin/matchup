@@ -9,7 +9,11 @@ const WatchListPage: NextPage = () => {
     const { route } = useAuthenticator((context) => [context.route]);
 
     if (route !== 'authenticated') {
+<<<<<<< HEAD
         {() => {router.push('/SignIn')}}
+=======
+        router.push('/SignIn')
+>>>>>>> parent of f721d29 (added pwa functionality)
       } else {
           return(
               <>

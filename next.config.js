@@ -1,11 +1,9 @@
-const withPWA = require('next-pwa');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 };
 
-module.exports = withPWA({
-  typescript: { ignoreBuildErrors: true },
+module.exports = {
   nextConfig,
   images: {
     domains: [
@@ -13,9 +11,4 @@ module.exports = withPWA({
       'matchup-storage-b0c9ab6f155447-staging.s3.us-east-1.amazonaws.com',
     ],
   },
-  pwa: {
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-  },
-});
+};
