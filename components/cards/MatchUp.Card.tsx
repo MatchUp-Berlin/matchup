@@ -26,7 +26,7 @@ export interface IMatchUpCardProps {
   location: string;
   sport: TSportCategories;
   skill?: TSkillLevels;
-  imageUrl: any;
+  imageUrl?: string;
   paid?: boolean;
   price?: number;
   rented?: boolean;
@@ -70,7 +70,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
       }}
     >
       <div className={styles.imageWrapper}>
-        <Image src={props.imageUrl} alt={props.title} layout="fill" objectFit="cover"></Image>
+        <Image src={props.imageUrl || } alt={props.title} layout="fill" objectFit="cover"></Image>
       </div>
 
       <div className={styles.infoWrapper}>
