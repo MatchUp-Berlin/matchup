@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   /* FILTER STATE */
-  const [categories, setCategories] = useState<TSportCategories[]>(['football']);
+  const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
 
   const from = new Date();

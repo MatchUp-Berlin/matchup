@@ -1,43 +1,28 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next';
-import { ParsedUrlQuery } from 'querystring';
+import { useState } from 'react';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import Navigation from '../../components/misc/Navigation';
-import { listUser } from '../../src/graphql/queries';
-import { User } from '../../src/models';
-
-interface IParams extends ParsedUrlQuery {
-  userPath: string;
-}
-
-export const getStaticPaths = async () => {
-  const res = await listUser;
-  const data = await res.json();
-
-  const paths = data.map((user) => {
-    return {
-      params: { id: user.id.toString() },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
+import { getUserById } from '../../utils/Query/getUserById.util';
+import { User } from '../../utils/types/User.Type'
+import { useQuery } from 'react-query';
 
 const ProfileDetailPage: NextPage = () => {
-  // const router = useRouter()
-  // const { route } = useAuthenticator((context) => [context.route]);
+  const { user } = useAuthenticator((context: any) => [context.user]);
 
-  // if (route !== 'authenticated') {
-  //     router.push('/')
-  //   } else {
-  return (
-    <>
-      <Navigation />
-    </>
-  );
-  // }
-};
+  const [userProfile, setUserProfile] = useState<User>();
+
+  const { isError, isLoading, isSuccess, refetch, data } = useQuery(['userInfo', userProfile], () =>
+  getUserById(user.attributes.sub).then(data => {
+    setUserProfile(data);
+  })
+);
+
+  return(
+        <>
+        <h1>{userProfile?.familyName}</h1>
+        <Navigation />
+        </>
+  )
+      };
 export default ProfileDetailPage;
