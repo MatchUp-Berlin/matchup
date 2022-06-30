@@ -24,11 +24,6 @@
     }
 
     .description {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-
       p {
         max-height: 10em;
         overflow: hidden;
@@ -41,5 +36,9 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+      svg {
+        position: relative;
+        bottom: -2px;
+      }
   }
 }
