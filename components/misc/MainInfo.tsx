@@ -14,7 +14,7 @@ export interface IMainInfoProps {
   sport: TSportCategories;
   timestamp: string;
   city: TCity;
-  indoors: boolean;
+  indoor: boolean;
   costs: number;
 }
 
@@ -38,7 +38,7 @@ const MainInfo: React.FunctionComponent<IMainInfoProps> = (props) => {
           <Image width={'18em'} height="18em" src={pin} alt="taking place at"></Image>
           <p style={{ color: colors.text[60] }}>
             {props.city}
-            {props.indoors ? ' | indoors' : ''}
+            {props.indoor ? ' | indoor' : ''}
           </p>
         </div>
 

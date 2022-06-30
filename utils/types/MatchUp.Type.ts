@@ -47,6 +47,7 @@ export interface MatchUp {
   currency: string;
   updates: Update[];
   watchList: WatchList[];
+  indoor: boolean;
 }
 
 export interface CreateMatchUpInput {

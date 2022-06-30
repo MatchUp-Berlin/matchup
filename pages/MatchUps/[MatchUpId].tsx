@@ -16,6 +16,7 @@ import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
 import MainInfo from '../../components/misc/MainInfo';
 import getDefaultImage from '../../utils/getDefaultImage';
+import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 
 const MatchUpDetail: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -30,7 +31,7 @@ const MatchUpDetail: NextPage = () => {
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
       {/*  ------HEADER------  */}
       <Header
-        imageUrl={data ? (data.image || getDefaultImage(data.sportCategory).src) : placeholder.src} // replace!!
+        imageUrl={data ? data.image || getDefaultImage(data.sportCategory).src : placeholder.src} // replace!!
         leftButton={
           <HeaderButton /* Later fix coloring of buttons to always be white! */
             viewBox="0 0 10 10"
@@ -88,7 +89,14 @@ const MatchUpDetail: NextPage = () => {
         isSuccess &&
         data && (
           <div className={styles.contentWrapper}>
-            <MainInfo />
+            <MainInfo
+              title={data.title}
+              sport={data.sportCategory as TSportCategories}
+              timestamp={data.date}
+              city={data.location as TCity}
+              costs={data.totalCost}
+              indoor={data.indoor}
+            />
 
             {/*  ------BIG PILLS------  */}
             <div className={styles.bigPills}>
