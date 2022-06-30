@@ -1,4 +1,3 @@
-import { match } from 'assert';
 import { API, Storage } from 'aws-amplify';
 import { listMatchUps } from '../../src/graphql/queries';
 import {
