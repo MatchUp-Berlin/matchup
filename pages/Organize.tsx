@@ -153,8 +153,8 @@ const OrganizePage: NextPage = () => {
               image={football}
               callback={() => {
                 setSportCategory('football');
-                goToNext();
               }}
+              active={sportCategory == 'football'}
             ></SportCard>
 
             <SportCard
@@ -163,8 +163,8 @@ const OrganizePage: NextPage = () => {
               image={basketball}
               callback={() => {
                 setSportCategory('basketball');
-                goToNext();
               }}
+              active={sportCategory == 'basketball'}
             ></SportCard>
 
             <SportCard
@@ -173,8 +173,8 @@ const OrganizePage: NextPage = () => {
               image={beachvolleyball}
               callback={() => {
                 setSportCategory('beach-volleyball');
-                goToNext();
               }}
+              active={sportCategory == 'beach-volleyball'}
             ></SportCard>
 
             <SportCard
@@ -183,8 +183,8 @@ const OrganizePage: NextPage = () => {
               image={tennis}
               callback={() => {
                 setSportCategory('tennis');
-                goToNext();
               }}
+              active={sportCategory == 'tennis'}
             ></SportCard>
 
             <SportCard
@@ -193,8 +193,8 @@ const OrganizePage: NextPage = () => {
               image={volleyball}
               callback={() => {
                 setSportCategory('volleyball');
-                goToNext();
               }}
+              active={sportCategory == 'volleyball'}
             ></SportCard>
 
             <SportCard
@@ -203,8 +203,8 @@ const OrganizePage: NextPage = () => {
               image={frisbee}
               callback={() => {
                 setSportCategory('ultimate-frisbee');
-                goToNext();
               }}
+              active={sportCategory == 'ultimate-frisbee'}
             ></SportCard>
 
             <div className={styles.bottomMargin}></div>
