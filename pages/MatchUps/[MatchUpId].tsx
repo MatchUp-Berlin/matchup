@@ -16,7 +16,8 @@ import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
 import MainInfo from '../../components/misc/MainInfo';
-import { TCity } from '../../utils/types/MatchUp.Type';
+import getDefaultImage from '../../utils/getDefaultImage';
+import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 
 const MatchUpDetail: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -31,11 +32,11 @@ const MatchUpDetail: NextPage = () => {
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
       {/*  ------HEADER------  */}
       <Header
-        imageUrl={data ? data.image : placeholder.src} // replace!!
+        imageUrl={data ? data.image || getDefaultImage(data.sportCategory).src : placeholder.src} // replace!!
         leftButton={
           <HeaderButton /* Later fix coloring of buttons to always be white! */
             viewBox="0 0 10 10"
-            callback={() => {}}
+            callback={() => router.back()}
             icon={
               <path
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,19 +105,6 @@ const MatchUpDetail: NextPage = () => {
               <SlotsCard slots={data.attendanceMax} attending={data.signups.items.length}></SlotsCard>
             </div>
 
-            {/*  ------BIG PILLS------  */}
-            <div className={styles.bigPills}>
-              <SkillsCard skillLevel="advanced"></SkillsCard>
-              <SlotsCard slots={8} attending={7}></SlotsCard>
-            </div>
-
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
             <div
               className={styles.divider}
               style={{
@@ -165,7 +153,7 @@ const MatchUpDetail: NextPage = () => {
 
             <UpdatesPreviewCard
               updates={data.updates.items}
-              organizerId={data.organizer.id}
+              organizerId={data.organizer?.id}
             ></UpdatesPreviewCard>
 
             <div

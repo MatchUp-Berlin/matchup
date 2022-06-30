@@ -4,6 +4,7 @@ import { User } from '../../utils/types/User.Type';
 import { Avatar } from '../misc';
 import SmallButton from '../misc/SmallButton';
 import styles from './styles/ParticipantsPreview.Card.module.scss';
+import avatar from '../../public/default-avatar.png';
 
 export interface IParticipantsPreviewCardProps {
   users: Pick<User, 'profileImage' | 'id'>[];
@@ -28,7 +29,9 @@ const ParticipantsPreviewCard: React.FunctionComponent<IParticipantsPreviewCardP
             <p style={{ color: colors.text[60] }}>No one has signed up yet...</p>
           </div>
         ) : (
-          users.slice(0, 5).map((user) => <Avatar key={user.id} size={'small'} image={user.profileImage} />)
+          users
+            .slice(0, 5)
+            .map((user) => <Avatar key={user.id} size={'small'} image={user.profileImage || avatar} />)
         )}
       </div>
       <SmallButton callback={() => console.log('clicked')} />
