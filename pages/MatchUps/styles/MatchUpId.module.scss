@@ -13,8 +13,6 @@
       border-bottom-style: solid;
     }
 
-    
-
     .bigPills {
       margin: 2em 0;
       display: flex;
@@ -36,9 +34,9 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-      svg {
-        position: relative;
-        bottom: -2px;
-      }
+    svg {
+      position: relative;
+      bottom: -2px;
+    }
   }
 }
