@@ -1,7 +1,15 @@
-.container {
-  color: red;
+.overlay {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: red;
+  z-index: 10;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.modal {
+}
+
+// How to apply colors

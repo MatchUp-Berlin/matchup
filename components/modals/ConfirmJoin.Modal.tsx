@@ -14,7 +14,14 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
 ) => {
   const { colors, shadows } = useTheme();
 
-  return <div className={styles.container}>Hallo</div>;
+  return (
+    <div
+      style={{ backgroundColor: colors.secondary }}
+      className={styles.overlay}
+    >
+      <div style={{ backgroundColor: 'white' }}>Hallo</div>
+    </div>
+  );
 };
 
 export default ConfirmJoinModal;
