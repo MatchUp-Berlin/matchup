@@ -25,7 +25,8 @@ export const usersArray = [
     email: 'idiot@gmail.com',
     signups: [],
     profileImage: '/../public/buz.jpg',
-    about: '  as you can say from the picture, NOT a sport person and many more NOT',
+    about:
+      '  as you can say from the picture, NOT a sport person and many more NOT',
   },
   {
     id: '4',
@@ -47,23 +48,22 @@ export const usersArray = [
   },
 ];
 
-
-organizer {
-  id
-  givenName
-  familyName
-  email
-  signups {
-    nextToken
-  }
-  profileImage
-  about
-  updates {
-    nextToken
-  }
-  watchList {
-    nextToken
-  }
-  createdAt
-  updatedAt
-}
+// organizer {
+//   id
+//   givenName
+//   familyName
+//   email
+//   signups {
+//     nextToken
+//   }
+//   profileImage
+//   about
+//   updates {
+//     nextToken
+//   }
+//   watchList {
+//     nextToken
+//   }
+//   createdAt
+//   updatedAt
+// }
