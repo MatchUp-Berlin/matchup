@@ -26,11 +26,11 @@ import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Ty
 import PrimaryInfoForm from '../components/forms/PrimaryInfo.Form';
 import SecondaryInfoForm from '../components/forms/SecondaryInfo.Form';
 import OrganizeConfirmationForm from '../components/forms/OrganizeConfirmation.Form';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { createNewMatchUp } from '../utils/Mutation/createMatchUp.util';
 
 const OrganizePage: NextPage = () => {
-  const { route, user } = useAuthenticator((context) => [context.route, context.user]);
+  const { user } = useAuthenticator((context) => [context.user]);
   const { colors } = useTheme();
   const router = useRouter();
 
