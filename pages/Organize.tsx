@@ -47,21 +47,13 @@ const OrganizePage: NextPage = () => {
 
   /* Keeping track of which step the user is currently in --- form validation */
   const [step, setStep] = useState<number>(0);
+  const disableNextStepZero = !!sportCategory;
+  const disableNextStepOne = title != '' && date != '';
+  const disableNextStepTwo = description != '';
+
   function goToNext() {
     setStep(step + 1);
   }
-
-  // with validation
-  // function goToNext() {
-  //   if (step <= 3) {
-  //     if (step === 0 && sportCategory) {
-  //       setStep(step + 1);
-  //     }
-  //     if (step === 1 && title && date && location) {
-  //       setStep(step + 1);
-  //     }
-  //   }
-  // }
 
   function goBack() {
     if (step > 0) setStep(step - 1);
