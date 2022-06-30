@@ -19,9 +19,7 @@ const Home: NextPage = () => {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   /* FILTER STATE */
-  const [categories, setCategories] = useState<TSportCategories[]>([
-    'football',
-  ]);
+  const [categories, setCategories] = useState<TSportCategories[]>(['football']);
   const [city, setCity] = useState<TCity>('berlin');
 
   const from = new Date();
@@ -34,23 +32,15 @@ const Home: NextPage = () => {
   });
 
   /* DATA FETCHING */
-  const { isError, isLoading, isSuccess, refetch, data } = useQuery(
-    ['matchups', categories],
-    () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
+  const { isError, isLoading, isSuccess, refetch, data } = useQuery(['matchups', categories], () =>
+    getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
   );
 
   return (
-    <div
-      style={{ backgroundColor: colors.background[100] }}
-      className={styles.page}
-    >
+    <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
       {/* ------FILTERING------ */}
       <div className={styles.searchBar}>
-        <Filter
-          city={city}
-          setCity={setCity}
-          setTimeFrame={setTimeFrame}
-        ></Filter>
+        <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
         <div
           onClick={() => refetch()}
           className={styles.button}
@@ -63,16 +53,10 @@ const Home: NextPage = () => {
           Go
         </div>
       </div>
-      <SportFilter
-        categories={categories}
-        setCategories={setCategories} /* refetch={refetch} */
-      />
+      <SportFilter categories={categories} setCategories={setCategories} /* refetch={refetch} */ />
 
       {/* ------MAP BUTTON------ */}
-      <MapButton
-        map={showMap}
-        callback={() => setShowMap(!showMap)}
-      ></MapButton>
+      <MapButton map={showMap} callback={() => setShowMap(!showMap)}></MapButton>
 
       {/* ------MATCHUP LIST OR MAP------ */}
       {showMap ? (
@@ -89,8 +73,9 @@ const Home: NextPage = () => {
         <div className={styles.cardsWrapper}>
           {data?.items.map((matchup: MatchUp) => (
             <MatchUpCard
+              id={matchup.id as string}
               key={matchup.id}
-              variant='large'
+              variant="large"
               timestamp={matchup.date}
               title={matchup.title}
               slots={matchup.attendanceMax}
