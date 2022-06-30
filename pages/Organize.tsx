@@ -26,9 +26,11 @@ import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Ty
 import PrimaryInfoForm from '../components/forms/PrimaryInfo.Form';
 import SecondaryInfoForm from '../components/forms/SecondaryInfo.Form';
 import OrganizeConfirmationForm from '../components/forms/OrganizeConfirmation.Form';
+import { useMutation } from 'react-query';
+import { createNewMatchUp } from '../utils/Mutation/createMatchUp.util';
 
 const OrganizePage: NextPage = () => {
-  const { route } = useAuthenticator((context) => [context.route]);
+  const { route, user } = useAuthenticator((context) => [context.route, context.user]);
   const { colors } = useTheme();
 
   /* Keeping track of all of the answers */
@@ -45,11 +47,11 @@ const OrganizePage: NextPage = () => {
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<string>('');
 
-  /* Keeping track of which step the user is currently in --- form validation */
+  /* Keeping track of which step the user is currently in */
   const [step, setStep] = useState<number>(0);
-  const disableNextStepZero = !!sportCategory;
-  const disableNextStepOne = title != '' && date != '';
-  const disableNextStepTwo = description != '';
+  const disableNextStepZero = sportCategory === undefined;
+  const disableNextStepOne = title == '' || date == '';
+  const disableNextStepTwo = description == '';
 
   function goToNext() {
     setStep(step + 1);
@@ -58,6 +60,12 @@ const OrganizePage: NextPage = () => {
   function goBack() {
     if (step > 0) setStep(step - 1);
   }
+
+  /* Submitting event */
+  // const mutation = useMutation(() => createNewMatchUp(), {
+  //   onSuccess: () => { },
+  //   onError: () => {}
+  // });
 
   return (
     <div className={styles.wrapper} style={{ backgroundColor: colors.background[100] }}>
@@ -145,7 +153,14 @@ const OrganizePage: NextPage = () => {
           <Footer
             progress={25}
             leftSide={<p onClick={() => Router.back()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+            rightButton={
+              <Button
+                variant="primary"
+                disabled={disableNextStepZero}
+                callback={goToNext}
+                text="Next"
+              ></Button>
+            }
           ></Footer>
         </>
       ) : step == 1 ? (
@@ -181,7 +196,14 @@ const OrganizePage: NextPage = () => {
           <Footer
             progress={50}
             leftSide={<p onClick={() => goBack()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+            rightButton={
+              <Button
+                variant="primary"
+                disabled={disableNextStepOne}
+                callback={goToNext}
+                text="Next"
+              ></Button>
+            }
           ></Footer>
         </>
       ) : step === 2 ? (
@@ -223,7 +245,14 @@ const OrganizePage: NextPage = () => {
           <Footer
             progress={75}
             leftSide={<p onClick={() => goBack()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+            rightButton={
+              <Button
+                variant="primary"
+                disabled={disableNextStepTwo}
+                callback={goToNext}
+                text="Next"
+              ></Button>
+            }
           ></Footer>
         </>
       ) : (

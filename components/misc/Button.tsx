@@ -17,7 +17,7 @@ const Button: React.FunctionComponent<IButtonProps> = ({ variant, callback, text
         className={styles.primary}
         style={{
           backgroundColor: colors.primary['100'],
-          opacity: disabled ? 0.5 : 1,
+          opacity: disabled ? 0.4 : 1,
         }}
         onClick={() => !disabled && callback()}
       >
@@ -31,7 +31,7 @@ const Button: React.FunctionComponent<IButtonProps> = ({ variant, callback, text
         style={{
           outlineColor: colors.primary['100'],
           color: colors.primary['100'],
-          opacity: disabled ? 0.5 : 1,
+          opacity: disabled ? 0.4 : 1,
         }}
         onClick={() => !disabled && callback()}
       >
