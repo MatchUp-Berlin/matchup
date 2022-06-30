@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1em;
+
+  .indoor {
+    padding: 0 0.5em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .inputGroup {
+    width: 100%;
+
+    .input {
+      height: 50px;
+      border-radius: 25px;
+      width: 100%;
+      border-style: solid;
+      border-width: 1px;
+      padding: 0 1em;
+      background-color: transparent;
+      text-transform: capitalize;
+    }
+  }
+}

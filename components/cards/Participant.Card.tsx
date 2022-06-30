@@ -3,6 +3,8 @@ import { User } from '../../utils/types/User.Type';
 import { Avatar } from '../misc';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Participant.Card.module.scss';
+import avatar from '../../public/default-avatar.png';
+
 
 export interface IParticipantCardProps {
   user: User;
@@ -25,7 +27,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({ user 
         <p style={{ color: colors.text[60] }}>Speaks: </p>
       </div>
       <div className="avatarContainer">
-        <Avatar size={'medium'} image={profileImage} />
+        <Avatar size={'medium'} image={profileImage || avatar} />
       </div>
     </article>
   );
