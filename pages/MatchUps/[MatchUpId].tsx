@@ -113,7 +113,7 @@ const MatchUpDetail: NextPage = () => {
             ></div>
 
             {/*  ------ORGANIZER------  */}
-            <OrganizerCard user={data.organizer as User}></OrganizerCard>
+            <OrganizerCard organizer={data.organizer as User}></OrganizerCard>
 
             <div
               className={styles.divider}
