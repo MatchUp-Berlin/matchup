@@ -24,6 +24,9 @@ import { useTheme } from '../contexts/Theme';
 import Switch from '../components/misc/Switch';
 import StaticMap from '../components/maps/Static.Map';
 
+/* LOCATION */
+import { Geo } from 'aws-amplify';
+
 // interface MatchUp {
 //   id?: string;
 //   title: string;
@@ -106,15 +109,21 @@ const OrganizePage: NextPage = () => {
     }
   }
 
-  // function imageHandler(e: any): void {
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     if (reader.readyState === 2) {
-  //       setImage(reader.result);
-  //     }
-  //   };
-  //   reader.readAsDataURL(e.target.files[0]);
-  // }
+  /* Managing the location input field  */
+
+  async function searchLocation(event: any) {
+    const searchOptions = { maxResults: 10, language: 'en' };
+    const results = await Geo.searchByText(event, searchOptions);
+    console.log(results);
+    if (results.length > 0) {
+      // setLocationSearchResult(true);
+      setLocation(results);
+    }
+    if (results.length <= 0) {
+      setLocation([]);
+      // setLocationSearchResult(false);
+    }
+  }
 
   return (
     <div
@@ -282,7 +291,7 @@ const OrganizePage: NextPage = () => {
               </label>
               <input
                 value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={(e) => searchLocation(e)}
                 placeholder='Where do you want to meet?'
                 className={styles.input}
                 style={{
@@ -517,12 +526,10 @@ const OrganizePage: NextPage = () => {
                 type='file'
                 onChange={(e) => {
                   setImage(URL.createObjectURL(e.target.files[0]));
-                  console.log(URL.createObjectURL(e.target.files[0]));
                 }}
               />
             </button>
           </div>
-
           <Footer
             progress={75}
             leftSide={<p onClick={() => goBack()}>Back</p>}
