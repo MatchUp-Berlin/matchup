@@ -71,7 +71,7 @@ const OrganizePage: NextPage = () => {
       router.push('/');
     },
     onError: () => {
-      console.log('fail');
+      console.log('failed to submit');
     },
   });
 
