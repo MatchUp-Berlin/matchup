@@ -11,7 +11,7 @@ export interface SignUp {
 }
 
 export interface SignUpsReturn {
-  items: SignUp
+  items: SignUp[];
   nextToken: string | null;
-  startedAt: string | null
+  startedAt: string | null;
 }
