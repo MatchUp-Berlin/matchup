@@ -46,3 +46,24 @@ export const usersArray = [
     about: ' burns of desire to see the stars',
   },
 ];
+
+
+organizer {
+  id
+  givenName
+  familyName
+  email
+  signups {
+    nextToken
+  }
+  profileImage
+  about
+  updates {
+    nextToken
+  }
+  watchList {
+    nextToken
+  }
+  createdAt
+  updatedAt
+}
