@@ -20,7 +20,6 @@ import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
 import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
-import MainInfo from '../../components/misc/MainInfo';
 
 const MatchUpDetail: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -85,20 +84,32 @@ const MatchUpDetail: NextPage = () => {
         ]}
       ></Header>
 
-      {/*  ------MAIN INFO------  */}
-      <div className={styles.contentWrapper}>
-        <MainInfo />
+      {isLoading ? (
+        <LoadingSpinner></LoadingSpinner>
+      ) : isError ? (
+        <>Oopsie, something went wront</>
+      ) : (
+        isSuccess &&
+        data && (
+          <div className={styles.contentWrapper}>
+            <MainInfo />
 
-        {/*  ------BIG PILLS------  */}
-        <div className={styles.bigPills}>
-          <SkillsCard skillLevel="advanced"></SkillsCard>
-          <SlotsCard slots={8} attending={7}></SlotsCard>
-        </div>
+            {/*  ------BIG PILLS------  */}
+            <div className={styles.bigPills}>
+              <SkillsCard skillLevel={data.skillLevel}></SkillsCard>
+              <SlotsCard slots={data.attendanceMax} attending={data.signups.items.length}></SlotsCard>
+            </div>
 
-        <div
-          className={styles.divider}
-          style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-        ></div>
+            {/*  ------BIG PILLS------  */}
+            <div className={styles.bigPills}>
+              <SkillsCard skillLevel="advanced"></SkillsCard>
+              <SlotsCard slots={8} attending={7}></SlotsCard>
+            </div>
+
+            <div
+              className={styles.divider}
+              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+            ></div>
 
             <div
               className={styles.divider}
