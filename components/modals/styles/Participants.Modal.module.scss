@@ -1,0 +1,21 @@
+.wrapper {
+  width: 100%;
+  height: 70vh;
+  position: absolute;
+  z-index: 20;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  padding: 1em;
+
+  transition: 0.5s;
+}
+
+.closed, .closing {
+  bottom: -100%;
+}
+
+.open, .opening {
+  bottom: 0;
+}

@@ -1,20 +1,40 @@
 import type { NextPage } from 'next';
-import UpdatesPreviewCard from '../components/cards/UpdatesPreview.Card';
-import ParticipantCard from '../components/cards/Participant.Card';
-import OrganizerCard from '../components/cards/Organizer.Card';
-import { usersArray } from './../mockData/mockUsersArray';
-import UpdatesMessageCard from '../components/cards/UpdatesMessage.Card';
-import MatchUpDetail from './MatchUps/[MatchUpId]';
-import { mockUpdate } from './../mockData/mockUpdate';
+import { useState } from 'react';
+import ParticipantsModal from '../components/modals/Participants.Modal';
 
 const Home: NextPage = () => {
+  const [display, setDisplay] = useState(true);
+  const [opening, setOpening] = useState(false);
+  const [closing, setClosing] = useState(false);
+  const [opened, setOpened] = useState(true);
+
+  async function hide(ms: number) {
+    setClosing(true);
+    await new Promise((resolve) => setTimeout(resolve, ms));
+    setClosing(false);
+    setDisplay(false);
+    setOpened(false);
+  }
+
+  async function open(ms: number) {
+    setDisplay(true);
+    setOpening(true);
+    await new Promise((resolve) => setTimeout(resolve, ms));
+    setOpening(false);
+    setOpened(true);
+  }
+
   return (
     <>
-      {/* <UpdatesPreviewCard updates={updates} organizerId={organizerId} /> */}
-      {/* <ParticipantCard user={usersArray[0]} /> */}
-      {/* <OrganizerCard user={usersArray[3]} /> */}
-      {/* <UpdatesMessageCard update={mockUpdate} /> */}
-      <MatchUpDetail />
+      <button onClick={() => open(1000)}>Open</button>
+      {display && (
+        <ParticipantsModal
+          opened={opened}
+          hide={hide}
+          opening={opening}
+          closing={closing}
+        ></ParticipantsModal>
+      )}
     </>
   );
 };

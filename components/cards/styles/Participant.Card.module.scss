@@ -6,4 +6,15 @@
   padding: 1em;
   margin: 2em 0;
   border-radius: 10px;
+
+  .info {
+    width: 75%;
+  }
+  
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+  }
 }
