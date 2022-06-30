@@ -20,6 +20,7 @@ import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
 import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
+import MainInfo from '../../components/misc/MainInfo';
 
 const MatchUpDetail: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -92,7 +93,7 @@ const MatchUpDetail: NextPage = () => {
         isSuccess &&
         data && (
           <div className={styles.contentWrapper}>
-            <MainInfo />
+            <MainInfo  />
 
             {/*  ------BIG PILLS------  */}
             <div className={styles.bigPills}>
