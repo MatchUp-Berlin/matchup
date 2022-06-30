@@ -63,7 +63,7 @@ export interface CreateMatchUpInput {
   attendanceMin?: number;
   attendanceMax?: number;
   description?: string;
-  image?: string;
+  image?: File;
   indoor?: boolean;
 }
 

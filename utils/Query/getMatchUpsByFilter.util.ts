@@ -1,4 +1,5 @@
-import { API } from 'aws-amplify';
+import { match } from 'assert';
+import { API, Storage } from 'aws-amplify';
 import { listMatchUps } from '../../src/graphql/queries';
 import {
   getMatchUpsReturn,
@@ -41,6 +42,14 @@ export async function getMatchUpsByFilter(
     });
 
     const retrievedMatchUpData = await matchUpData.data.listMatchUps;
+
+    const imageData = await Promise.all(
+      retrievedMatchUpData.items.map(async (matchUp) => {
+      const headerImage = await Storage.get(matchUp.id);
+      matchUp.image = headerImage;
+      return matchUp;
+      })
+    )
 
     return retrievedMatchUpData;
   } catch (err) {

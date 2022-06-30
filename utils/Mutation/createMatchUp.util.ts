@@ -17,6 +17,7 @@ export async function createNewMatchUp(matchUpData: CreateMatchUpInput): Promise
       attended: false,
     };
     addUserToMatchUp(matchUpUserData);
+    console.log(newMatchUpData)
     return newMatchUpData;
   } catch (error) {
     throw error;

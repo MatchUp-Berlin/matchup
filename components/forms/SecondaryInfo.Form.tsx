@@ -8,7 +8,7 @@ export interface ISecondaryInfoFormProps {
   attendanceMin: number;
   attendanceMax: number;
   description: string;
-  image: string;
+  image: File;
   skillLevel: TSkillLevels;
   reservedCourt: boolean;
   totalCost: number;
@@ -16,7 +16,7 @@ export interface ISecondaryInfoFormProps {
   setAttendanceMin: Dispatch<SetStateAction<number>>;
   setAttendanceMax: Dispatch<SetStateAction<number>>;
   setDescription: Dispatch<SetStateAction<string>>;
-  setImage: Dispatch<SetStateAction<string>>;
+  setImage: Dispatch<SetStateAction<File>>;
   setSkillLevel: Dispatch<SetStateAction<TSkillLevels>>;
   setReservedCourt: Dispatch<SetStateAction<boolean>>;
   setTotalCost: Dispatch<SetStateAction<number>>;
@@ -175,7 +175,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
           style={
             props.image
               ? {
-                  backgroundImage: `url(${props.image})`,
+                  backgroundImage: `url(${(URL.createObjectURL(props.image))})`,
                   backgroundSize: 'cover',
                   backgroundPositionY: '50%',
                   backgroundPositionX: '50%',
@@ -200,7 +200,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             className={styles.imageInput}
             type="file"
             onChange={(e) => {
-              e.target.files && props.setImage(URL.createObjectURL(e.target.files[0]) as string);
+              e.target.files && props.setImage(e.target.files[0]);
             }}
           />
         </div>
