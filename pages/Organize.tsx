@@ -523,7 +523,7 @@ const OrganizePage: NextPage = () => {
             ></div>
 
             {/*  ------ORGANIZER------  */}
-            <OrganizerCard></OrganizerCard>
+            {/* <OrganizerCard></OrganizerCard> */}
 
             <div
               className={styles.divider}
