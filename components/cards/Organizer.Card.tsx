@@ -1,34 +1,40 @@
 import React from 'react';
-import { User } from '../../utils/types/User.Type';
+import { User } from '../../utils/types/user.Type';
 import { Avatar } from '../misc';
 import { useTheme } from '../../contexts/Theme';
+import avatar from '../../public/default-avatar.png';
 import styles from './styles/Organizer.Card.module.scss';
 
 export interface IOrganizerCardProps {
-  user: User;
+  organizer: User;
 }
 
-const OrganizerCard: React.FunctionComponent<IOrganizerCardProps> = ({
-  user,
-}) => {
-  const { profileImage, givenName, familyName, signups } = user;
+const OrganizerCard: React.FunctionComponent<IOrganizerCardProps> = (props) => {
   const { colors } = useTheme();
+  console.log(props);
+
   return (
     <>
       <div className={styles.organizerCardWrapper}>
-        <div className='infoContainer'>
-          <h3
+        <div>
+          <p
+            className="highlight-1"
             style={{ color: colors.text[100] }}
-          >{`${givenName} ${familyName}`}</h3>
+          >{`${props.organizer?.givenName} ${props.organizer?.familyName}`}</p>
           <div className={styles.subtext}>
-            <p
-              style={{ color: colors.text[60] }}
-            >{`Participated in ${signups.length} MatchUps`}</p>
-            <p style={{ color: colors.text[60] }}>Organizer</p>
+            <p style={{ color: colors.text[60] }}>{`Participated in ${
+              props?.organizer?.signups?.items ? props?.organizer?.signups?.items.length : 0
+            } MatchUps`}</p>
+            <p className="small" style={{ color: colors.text[60] }}>
+              Organizer
+            </p>
           </div>
         </div>
         <div className={styles.avatarContainer}>
-          <Avatar size={'medium'} image={profileImage} />
+          <Avatar
+            size={'medium'}
+            image={props?.organizer?.profileImage ? props?.organizer?.profileImage : avatar}
+          />
         </div>
       </div>
     </>

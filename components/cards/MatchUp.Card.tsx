@@ -62,17 +62,17 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             </div>
             <div className={styles.details}>
               <div className={styles.detail}>
-                <Image src={clock} alt="taking place on"></Image>
+                <Image width={'10px'} height={'10px'} src={clock} alt="taking place on"></Image>
                 <p style={{ color: colors.text[60] }}>{moment(props.timestamp).format('H:m dddd')}</p>
               </div>
               <div className={styles.detail}>
-                <Image src={pin} alt="taking place at"></Image>
+                <Image width={'10px'} height={'10px'} src={pin} alt="taking place at"></Image>
                 <p style={{ color: colors.text[60] }}>{props.location}</p>
               </div>
 
               {props.variant == 'large' && (
                 <div className={styles.detail}>
-                  <Image src={euro} alt="costs"></Image>
+                  <Image width={'10px'} height={'10px'} src={euro} alt="costs"></Image>
                   <p style={{ color: colors.text[60] }}>{props.price > 0 ? props.price + '.00' : 'Free'}</p>
                 </div>
               )}

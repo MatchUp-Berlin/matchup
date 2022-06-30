@@ -68,7 +68,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             >
               -
             </button>
-            <div>{props.attendanceMin}</div>
+            <p style={{ color: colors.text[100] }}>{props.attendanceMin}</p>
             <button
               className={styles.incrementBtn}
               onClick={increaseMinAttendance}
@@ -94,7 +94,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             >
               -
             </button>
-            <div>{props.attendanceMax}</div>
+            <p style={{ color: colors.text[100] }}>{props.attendanceMax}</p>
             <button
               className={styles.incrementBtn}
               onClick={increaseMaxAttendance}

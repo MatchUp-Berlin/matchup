@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity, TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
 import { SkillsCard, SlotsCard, ParticipantsPreviewCard } from '../cards';
@@ -38,23 +38,6 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         <SkillsCard skillLevel={props.skillLevel}></SkillsCard>
         <SlotsCard slots={props.attendanceMax} attending={0}></SlotsCard>
       </div>
-
-      <div
-        className={styles.divider}
-        style={{
-          borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-        }}
-      ></div>
-
-      <div
-        className={styles.divider}
-        style={{
-          borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-        }}
-      ></div>
-
-      {/*  ------ORGANIZER------  */}
-      {/* <OrganizerCard></OrganizerCard> */}
 
       <div
         className={styles.divider}

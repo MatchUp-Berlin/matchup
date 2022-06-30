@@ -8,6 +8,7 @@ import { getMatchUpById } from '../../utils/Query/getMatchUpById.util';
 
 import styles from './styles/MatchUpId.module.scss';
 import placeholder from '../../public/placeholder-header.jpeg';
+import { User } from '../../utils/types/User.Type';
 import { ParticipantsPreviewCard, SkillsCard, SlotsCard } from '../../components/cards';
 import OrganizerCard from '../../components/cards/Organizer.Card';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
@@ -35,7 +36,7 @@ const MatchUpDetail: NextPage = () => {
         leftButton={
           <HeaderButton /* Later fix coloring of buttons to always be white! */
             viewBox="0 0 10 10"
-            callback={() => {}}
+            callback={() => router.back()}
             icon={
               <path
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,19 +105,6 @@ const MatchUpDetail: NextPage = () => {
               <SlotsCard slots={data.attendanceMax} attending={data.signups.items.length}></SlotsCard>
             </div>
 
-            {/*  ------BIG PILLS------  */}
-            <div className={styles.bigPills}>
-              <SkillsCard skillLevel="advanced"></SkillsCard>
-              <SlotsCard slots={8} attending={7}></SlotsCard>
-            </div>
-
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
             <div
               className={styles.divider}
               style={{
@@ -125,7 +113,7 @@ const MatchUpDetail: NextPage = () => {
             ></div>
 
             {/*  ------ORGANIZER------  */}
-            <OrganizerCard></OrganizerCard>
+            <OrganizerCard organizer={data.organizer as User}></OrganizerCard>
 
             <div
               className={styles.divider}
@@ -165,7 +153,7 @@ const MatchUpDetail: NextPage = () => {
 
             <UpdatesPreviewCard
               updates={data.updates.items}
-              organizerId={data.organizer}
+              organizerId={data.organizer?.id}
             ></UpdatesPreviewCard>
 
             <div
