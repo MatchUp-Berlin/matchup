@@ -65,11 +65,10 @@ const OrganizePage: NextPage = () => {
   /* Submitting event */
   const mutation = useMutation(createNewMatchUp, {
     onSuccess: () => {
-      console.log('submitted');
       router.push('/');
     },
     onError: () => {
-      console.log('fail');
+      console.log('failed to submit');
     },
   });
 
