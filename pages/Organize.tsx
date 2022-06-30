@@ -288,6 +288,7 @@ const OrganizePage: NextPage = () => {
                 style={{
                   borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                   color: colors.text[60],
+                  marginBottom: "1em"
                 }}
               ></input>
               <StaticMap latitude={15} longitude={50} zoom={15} />
