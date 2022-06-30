@@ -16,15 +16,7 @@ export interface IOrganizeConfirmationFormProps {
   skillLevel: TSkillLevels;
   attendanceMax: number;
   description: string;
-
-  setTitle: Dispatch<SetStateAction<string>>;
-  setSportCategory: Dispatch<SetStateAction<TSportCategories | undefined>>;
-  setTimestamp: Dispatch<SetStateAction<string>>;
-  setLocation: Dispatch<SetStateAction<TCity>>;
-  setTotalCost: Dispatch<SetStateAction<number>>;
-  setSkillLevel: Dispatch<SetStateAction<TSkillLevels>>;
-  setAttendanceMax: Dispatch<SetStateAction<number>>;
-  setDescription: Dispatch<SetStateAction<string>>;
+  indoors: boolean;
 }
 
 const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFormProps> = (props) => {
@@ -38,6 +30,7 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         timestamp={props.timestamp}
         city={props.location}
         costs={props.totalCost}
+        indoors={props.indoors}
       />
 
       {/*  ------BIG PILLS------  */}

@@ -283,14 +283,7 @@ const OrganizePage: NextPage = () => {
             skillLevel={skillLevel}
             attendanceMax={attendanceMax}
             description={description}
-            setTitle={setTitle}
-            setSportCategory={setSportCategory}
-            setTimestamp={setDate}
-            setLocation={setLocation}
-            setTotalCost={setTotalCost}
-            setSkillLevel={setSkillLevel}
-            setAttendanceMax={setAttendanceMax}
-            setDescription={setDescription}
+            indoors={indoors}
           />
           <Footer
             progress={95}
