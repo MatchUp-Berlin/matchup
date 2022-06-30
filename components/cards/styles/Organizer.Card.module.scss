@@ -1,0 +1,13 @@
+.organizerCardWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1.4em;
+}
+.avatarContainer {
+  transform: scale(1.5);
+  padding-left: 1em;
+}
+.subtext {
+  margin-top: 0.3em;
+}
