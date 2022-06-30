@@ -9,14 +9,43 @@ import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
 import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
+import { createNewMatchUp } from '../utils/Mutation/createMatchUp.util';
+import { getMatchUpById } from '../utils/Query/getMatchUpById.util';
 
 import LoadingSpinner from '../components/misc/LoadingSpinner';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
 import MapButton from '../components/misc/MapButton';
 
+const matchUp = {
+  attendanceMax: 4,
+  attendanceMin: 2,
+  cancelled: false,
+  currency: 'USD',
+  date: '2022-06-27T15:33:52.444Z',
+  description: 'its sportin time',
+  id: 'asdad-1fb2-449a-b97e-faa879d1a36c',
+  image:
+    'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80',
+  location: 'berlin',
+  organizerId: 'ef3fff68-ce16-448c-8268-b93359a96e4a',
+  reservedCourt: true,
+  skillLevel: 'beginner',
+  sportCategory: 'tennis',
+  title: 'sportin at the park',
+  totalCost: 0,
+};
+
 const Home: NextPage = () => {
   const { colors, shadows } = useTheme();
   const [showMap, setShowMap] = useState<boolean>(false);
+
+  createNewMatchUp(matchUp)
+    .then((res: any) => console.log(res))
+    .catch((err) => console.log(err));
+
+  // getMatchUpById('asdad-1fb2-449a-b97e-faa879d1a36c')
+  //   .then((res) => console.log(res))
+  //   .catch((err) => console.log(err));
 
   /* FILTER STATE */
   const [categories, setCategories] = useState<TSportCategories[]>([

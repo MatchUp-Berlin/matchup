@@ -1,6 +1,7 @@
 import { SignUp, SignUpsReturn } from './SignUp.Type';
 import { Update } from './Update.Type';
 import { WatchList } from './WatchList.Type';
+import { User } from './User.Type';
 
 export type TSportCategories =
   | 'basketball'
@@ -31,7 +32,8 @@ export interface MatchUp {
   location: string;
   coordinates: number[];
   signups: SignUpsReturn;
-  organizer: string;
+  organizerId: string;
+  organizer?: User;
   sportCategory: TSportCategories;
   skillLevel: TSkillLevels;
   totalCost: number;
