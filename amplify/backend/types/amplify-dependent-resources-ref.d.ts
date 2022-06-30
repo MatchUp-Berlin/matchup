@@ -30,12 +30,5 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         }
-    },
-    "geo": {
-        "MatchUpLocationIndex": {
-            "Name": "string",
-            "Region": "string",
-            "Arn": "string"
-        }
     }
 }
