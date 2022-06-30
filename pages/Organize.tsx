@@ -31,6 +31,7 @@ import UpdatesPreviewCard from '../components/cards/UpdatesPreview.Card';
 import SkillsCard from '../components/cards/Skills.Card';
 import OrganizerCard from '../components/cards/Organizer.Card';
 import { ParticipantsPreviewCard } from '../components/cards';
+import PrimaryInfoForm from '../components/forms/PrimaryInfo.Form';
 
 // interface MatchUp {
 //   id?: string;
@@ -59,7 +60,7 @@ const OrganizePage: NextPage = () => {
   const [sportCategory, setSportCategory] = useState<TSportCategories>();
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
-  const [location, setLocation] = useState<TCity>();
+  const [location, setLocation] = useState<TCity>('berlin');
   const [indoors, setIndoors] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
@@ -238,63 +239,16 @@ const OrganizePage: NextPage = () => {
             }
           ></Header>
 
-          <form className={styles.generalInfoForm}>
-            <div className={styles.inputGroup}>
-              <label className={styles.label} style={{ color: colors.text[100] }}>
-                Title
-              </label>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Give your MatchUp a cool name"
-                className={styles.input}
-                style={{
-                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                  color: colors.text[60],
-                }}
-              ></input>
-            </div>
-
-            <div className={styles.inputGroup}>
-              <label className={styles.label} style={{ color: colors.text[100] }}>
-                Time
-              </label>
-              <input
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                placeholder="Choose a day and time to MatchUp"
-                className={styles.input}
-                type="datetime-local"
-                style={{
-                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                  color: colors.text[60],
-                }}
-              ></input>
-            </div>
-
-            <div className={styles.inputGroup}>
-              <label className={styles.label} style={{ color: colors.text[100] }}>
-                Location
-              </label>
-              <input
-                value={location}
-                onChange={(e) => setLocation(e.target.value as TCity)}
-                placeholder="Where do you want to meet?"
-                className={styles.input}
-                style={{
-                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                  color: colors.text[60],
-                  marginBottom: '1em',
-                }}
-              ></input>
-              <StaticMap latitude={15} longitude={50} zoom={15} />
-            </div>
-
-            <div className={styles.indoors} style={{ color: colors.text[60] }}>
-              <p>Is this taking place indoors?</p>
-              <Switch callback={() => console.log('switched')} />
-            </div>
-          </form>
+          <PrimaryInfoForm
+            title={title}
+            date={date}
+            location={location}
+            indoors={indoors}
+            setTitle={setTitle}
+            setDate={setDate}
+            setLocation={setLocation}
+            setIndoors={setIndoors}
+          />
 
           <Footer
             progress={50}
@@ -486,7 +440,7 @@ const OrganizePage: NextPage = () => {
         <>
           <Header
             imageUrl={image}
-            title={"Is everything correct?"}
+            title={'Is everything correct?'}
             leftButton={
               <HeaderButton
                 viewBox="0 0 10 10"
