@@ -486,6 +486,7 @@ const OrganizePage: NextPage = () => {
         <>
           <Header
             imageUrl={image}
+            title={"Is everything correct?"}
             leftButton={
               <HeaderButton
                 viewBox="0 0 10 10"
@@ -569,6 +570,11 @@ const OrganizePage: NextPage = () => {
             ></div>
 
             <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
+            <Footer
+              progress={95}
+              leftSide={<p onClick={() => goBack()}>Back</p>}
+              rightButton={<Button variant="primary" callback={goToNext} text="Save"></Button>}
+            ></Footer>
           </div>
         </>
       )}
