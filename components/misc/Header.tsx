@@ -36,12 +36,14 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           backgroundRepeat: 'no-repeat',
           backgroundPositionY: '50%',
           height: '25vh',
+          
         }}
       >
         <div className={styles.buttons}>
           <div className={styles.leftButton}>{props.leftButton}</div>
           <div className={styles.rightButtons}>{props.rightButtons}</div>
         </div>
+        {props.title && <h2>{props.title}</h2>}
       </div>
     );
   }

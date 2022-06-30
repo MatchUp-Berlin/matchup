@@ -5,6 +5,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  transition: 0.3s;
 
   .imageWrapper {
     height: 80%;
@@ -23,6 +24,16 @@
     gap: 5px;
     p {
       line-height: 1em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
+}
+
+.active {
+  border-width: 6px;
+  border-radius: 16px;
+  border-style: solid;
+  transform: scale(0.95);
 }

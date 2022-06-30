@@ -19,7 +19,26 @@ export const onCreateMatchUp = /* GraphQL */ `
       }
       location
       coordinates
-      organizer
+      organizerId
+      organizer {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       sportCategory
       skillLevel
       totalCost
@@ -76,7 +95,26 @@ export const onUpdateMatchUp = /* GraphQL */ `
       }
       location
       coordinates
-      organizer
+      organizerId
+      organizer {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       sportCategory
       skillLevel
       totalCost
@@ -133,7 +171,26 @@ export const onDeleteMatchUp = /* GraphQL */ `
       }
       location
       coordinates
-      organizer
+      organizerId
+      organizer {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       sportCategory
       skillLevel
       totalCost
@@ -343,7 +400,17 @@ export const onCreateSignUp = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -404,7 +471,17 @@ export const onUpdateSignUp = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -465,7 +542,17 @@ export const onDeleteSignUp = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -526,7 +613,17 @@ export const onCreateUpdate = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -587,7 +684,17 @@ export const onUpdateUpdate = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -648,7 +755,17 @@ export const onDeleteUpdate = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -709,7 +826,17 @@ export const onCreateWatchList = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -769,7 +896,17 @@ export const onUpdateWatchList = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost
@@ -829,7 +966,17 @@ export const onDeleteWatchList = /* GraphQL */ `
         }
         location
         coordinates
-        organizer
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
         sportCategory
         skillLevel
         totalCost

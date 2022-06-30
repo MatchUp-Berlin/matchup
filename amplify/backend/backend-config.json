@@ -65,16 +65,12 @@
     }
   },
   "function": {
-    "matchupa8ac8198": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "matchupe757c159": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": []
     }
-  }
+  },
+  "geo": {}
 }
