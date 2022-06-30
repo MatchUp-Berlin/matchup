@@ -14,14 +14,11 @@ export const getMatchUp = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       location
+      coordinates
       organizer
       sportCategory
       skillLevel
@@ -43,12 +40,8 @@ export const getMatchUp = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -57,18 +50,11 @@ export const getMatchUp = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -84,9 +70,9 @@ export const listMatchUps = /* GraphQL */ `
         title
         signups {
           nextToken
-          startedAt
         }
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -102,73 +88,14 @@ export const listMatchUps = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncMatchUps = /* GraphQL */ `
-  query SyncMatchUps(
-    $filter: ModelMatchUpFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncMatchUps(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        signups {
-          nextToken
-          startedAt
-        }
-        location
-        organizer
-        sportCategory
-        skillLevel
-        totalCost
-        reservedCourt
-        attendanceMin
-        attendanceMax
-        cancelled
-        indoor
-        description
-        image
-        date
-        currency
-        updates {
-          nextToken
-          startedAt
-        }
-        watchList {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -187,12 +114,8 @@ export const getUser = /* GraphQL */ `
           attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       profileImage
       about
@@ -204,12 +127,8 @@ export const getUser = /* GraphQL */ `
           content
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       watchList {
         items {
@@ -218,18 +137,11 @@ export const getUser = /* GraphQL */ `
           matchUpId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -247,69 +159,19 @@ export const listUsers = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUsers = /* GraphQL */ `
-  query SyncUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUsers(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        givenName
-        familyName
-        email
-        signups {
-          nextToken
-          startedAt
-        }
-        profileImage
-        about
-        updates {
-          nextToken
-          startedAt
-        }
-        watchList {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -326,32 +188,26 @@ export const getSignUp = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -367,24 +223,16 @@ export const getSignUp = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       attended
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -408,14 +256,12 @@ export const listSignUps = /* GraphQL */ `
           about
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         matchUp {
           id
           title
           location
+          coordinates
           organizer
           sportCategory
           skillLevel
@@ -431,84 +277,12 @@ export const listSignUps = /* GraphQL */ `
           currency
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         attended
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSignUps = /* GraphQL */ `
-  query SyncSignUps(
-    $filter: ModelSignUpFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSignUps(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userId
-        matchUpId
-        user {
-          id
-          givenName
-          familyName
-          email
-          profileImage
-          about
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        matchUp {
-          id
-          title
-          location
-          organizer
-          sportCategory
-          skillLevel
-          totalCost
-          reservedCourt
-          attendanceMin
-          attendanceMax
-          cancelled
-          indoor
-          description
-          image
-          date
-          currency
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        attended
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -525,32 +299,26 @@ export const getUpdate = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -566,24 +334,16 @@ export const getUpdate = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       content
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -607,14 +367,12 @@ export const listUpdates = /* GraphQL */ `
           about
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         matchUp {
           id
           title
           location
+          coordinates
           organizer
           sportCategory
           skillLevel
@@ -630,84 +388,12 @@ export const listUpdates = /* GraphQL */ `
           currency
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         content
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUpdates = /* GraphQL */ `
-  query SyncUpdates(
-    $filter: ModelUpdateFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUpdates(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userId
-        matchUpId
-        user {
-          id
-          givenName
-          familyName
-          email
-          profileImage
-          about
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        matchUp {
-          id
-          title
-          location
-          organizer
-          sportCategory
-          skillLevel
-          totalCost
-          reservedCourt
-          attendanceMin
-          attendanceMax
-          cancelled
-          indoor
-          description
-          image
-          date
-          currency
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        content
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -724,32 +410,26 @@ export const getWatchList = /* GraphQL */ `
         email
         signups {
           nextToken
-          startedAt
         }
         profileImage
         about
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       matchUp {
         id
         title
         signups {
           nextToken
-          startedAt
         }
         location
+        coordinates
         organizer
         sportCategory
         skillLevel
@@ -765,23 +445,15 @@ export const getWatchList = /* GraphQL */ `
         currency
         updates {
           nextToken
-          startedAt
         }
         watchList {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -805,14 +477,12 @@ export const listWatchLists = /* GraphQL */ `
           about
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         matchUp {
           id
           title
           location
+          coordinates
           organizer
           sportCategory
           skillLevel
@@ -828,82 +498,11 @@ export const listWatchLists = /* GraphQL */ `
           currency
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncWatchLists = /* GraphQL */ `
-  query SyncWatchLists(
-    $filter: ModelWatchListFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncWatchLists(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userId
-        matchUpId
-        user {
-          id
-          givenName
-          familyName
-          email
-          profileImage
-          about
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        matchUp {
-          id
-          title
-          location
-          organizer
-          sportCategory
-          skillLevel
-          totalCost
-          reservedCourt
-          attendanceMin
-          attendanceMax
-          cancelled
-          indoor
-          description
-          image
-          date
-          currency
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;

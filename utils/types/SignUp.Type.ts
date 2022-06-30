@@ -7,11 +7,11 @@ export interface SignUp {
   matchUpId: string;
   user?: User;
   matchUp?: MatchUp;
-  attended: boolean;
+  attended?: boolean;
 }
 
 export interface SignUpsReturn {
-  items: SignUp
+  items: SignUp[];
   nextToken: string | null;
-  startedAt: string | null
+  startedAt: string | null;
 }
