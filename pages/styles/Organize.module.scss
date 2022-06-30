@@ -2,11 +2,6 @@
   min-height: 100vh;
 }
 
-.geneticallySuperiorWrapper {
-  min-height: 100vh;
-  padding: 1em;
-}
-
 .sportCategoriesList {
   display: flex;
   flex-direction: column;
@@ -20,6 +15,7 @@
   }
 }
 
+/* ---------GENERAL INFO--------- */
 .generalInfoForm {
   display: flex;
   justify-content: center;
@@ -30,10 +26,6 @@
 
   .inputGroup {
     width: 100%;
-    .label {
-      margin-left: 1em;
-      font-weight: bold;
-    }
 
     .input {
       height: 50px;
@@ -47,112 +39,152 @@
   }
 }
 
-.indoors {
-  padding: 0 0.5em;
-  width: 100%;
+/* ---------DETAILED INFO--------- */
+.detailInfoForm {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.inputSectionTitle {
-  margin-left: 1em;
-  margin-bottom: 0;
-}
-
-.incrementFormSection {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0;
-}
-
-.incrementButtons {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
-  margin-top: 0.7em;
-}
-
-.incrementBtn {
-  border: none;
-  width: 2em;
-  height: 2em;
-  border-radius: 50%;
-  background-color: transparent;
-  margin: 0 1em;
-  // padding: 0.5em;
-}
-
-.selectFormSection {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  margin-top: -0.3em;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1em;
+  margin-bottom: 6em;
 
-  .selectInput {
+  .label {
+    width: 100%;
+    margin: 1em 0 -0.5em 0;
+    font-weight: bold;
+  }
+
+  .indoors {
+    padding: 0 0.5em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .inputSectionTitle {
+    margin-left: 1em;
+    margin-bottom: 0;
+  }
+
+  .participantsSection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .participantsRow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .selectInput {
+      padding: 0.5em 1em;
+      border-radius: 25px;
+      border-style: solid;
+      border-width: 1px;
+      background-color: transparent;
+      text-align: center;
+
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: none;
+    }
+  }
+
+  .incrementButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .incrementBtn {
+    border: none;
+    width: 2em;
     height: 2em;
-    border-radius: 25px;
-    border-style: solid;
-    border-width: 1px;
-    padding: 0 1em;
-    margin: 1em;
+    border-radius: 50%;
     background-color: transparent;
   }
-}
 
-.textInput {
-  width: 41%;
-  height: 2em;
-  border-radius: 25px;
-  border-style: solid;
-  border-width: 1px;
-  padding: 0 1em;
-  margin: 1em;
-  background-color: transparent;
-}
+  .rentedCourt {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-.rentedCourt {
-  // padding: 0 0.5em;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  .costRow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .costInput {
+      padding: 0.5em 1em;
+      max-width: 8em;
+      border-radius: 25px;
+      border-style: solid;
+      border-width: 1px;
+      background-color: transparent;
+      text-align: center;
+    }
+  }
 
-.textFormSection {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: -1.2em;
-}
+  .textarea {
+    height: 10em;
+    width: 90vw;
+    border-radius: 10px;
+  }
 
-.textarea {
-  height: 10em;
-  width: 90vw;
-  margin: 5vw;
-  border-radius: 10px;
-}
+  .uploadImageWrapper {
+    width: 100%;
+    height: 10em;
+    border-style: dashed;
+    border-radius: 10px;
+    position: relative;
 
-.imageInput::-webkit-file-upload-button {
-  visibility: hidden;
-}
+    .imageInput::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    input[type='file'] {
+      color: transparent;
+    }
 
-.inputImageBtn {
-  height: 16em;
-  width: 90vw;
-  margin: 5vw;
-  border-radius: 10px;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='grey' stroke-width='1' stroke-dasharray='6%2c 6' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e");
-  border: none;
-}
+    .inputImageBtn {
+      background-color: transparent;
+      border: none;
+      width: 100%;
+      height: 100%;
 
-.uploadImageWrapper {
-  margin-bottom: 90px;
+      padding: 0;
+      margin: 0;
+
+      svg {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+      }
+
+      input {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
 }
 
 .pills {

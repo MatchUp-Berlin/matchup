@@ -316,71 +316,67 @@ const OrganizePage: NextPage = () => {
               />
             }
           ></Header>
-
-          <h4 className={styles.inputSectionTitle} style={{ color: colors.text[80] }}>
-            Participants
-          </h4>
-          <div className={styles.generalInfoForm}>
+          <div className={styles.detailInfoForm}>
+            <h4 className={styles.label} style={{ color: colors.text[80] }}>
+              Participants
+            </h4>
             {/* participants */}
-            <div className={styles.inputGroup} style={{ color: colors.text[60] }}>
-              <div className={styles.incrementFormSection}>
-                <label style={{ color: colors.text[60], paddingTop: '0.7em' }}>Minimum</label>
+
+            <div className={styles.participantsSection}>
+              <div className={styles.participantsRow}>
+                <label style={{ color: colors.text[60] }}>Minimum</label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
                     onClick={decreaseMinAttendance}
                     style={{
                       color: colors.text[60],
-                      fontWeight: 'bold',
-                      boxShadow: shadows.medium,
+                      boxShadow: shadows.small,
                     }}
                   >
                     -
                   </button>
-                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>{attendanceMin}</div>
+                  <div>{attendanceMin}</div>
                   <button
                     className={styles.incrementBtn}
                     onClick={increaseMinAttendance}
                     style={{
                       color: colors.text[60],
-                      fontWeight: 'bold',
-                      boxShadow: shadows.medium,
+                      boxShadow: shadows.small,
                     }}
                   >
                     +
                   </button>
                 </div>
               </div>
-              <div className={styles.incrementFormSection}>
-                <label style={{ color: colors.text[60], paddingTop: '0.7em' }}>Maximum</label>
+              <div className={styles.participantsRow}>
+                <label style={{ color: colors.text[60] }}>Maximum</label>
                 <div className={styles.incrementButtons}>
                   <button
                     className={styles.incrementBtn}
                     onClick={decreaseMaxAttendance}
                     style={{
                       color: colors.text[60],
-                      fontWeight: 'bold',
-                      boxShadow: shadows.medium,
+                      boxShadow: shadows.small,
                     }}
                   >
                     -
                   </button>
-                  <div style={{ paddingTop: '0.3em', fontWeight: 'bold' }}>{attendanceMax}</div>
+                  <div>{attendanceMax}</div>
                   <button
                     className={styles.incrementBtn}
                     onClick={increaseMaxAttendance}
                     style={{
                       color: colors.text[60],
-                      fontWeight: 'bold',
-                      boxShadow: shadows.medium,
+                      boxShadow: shadows.small,
                     }}
                   >
                     +
                   </button>
                 </div>
               </div>
-              <div className={styles.selectFormSection}>
-                <label style={{ color: colors.text[60], paddingTop: '0.7em' }}>Skills level</label>
+              <div className={styles.participantsRow}>
+                <label style={{ color: colors.text[60] }}>Skills level</label>
                 <select
                   className={styles.selectInput}
                   onChange={(e) => setSkillLevel(e.target.value)}
@@ -394,92 +390,93 @@ const OrganizePage: NextPage = () => {
                   <option value="advanced">Advanced</option>
                 </select>
               </div>
+              {/* optional costs */}
             </div>
-            {/* optional costs */}
-          </div>
-          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0', color: colors.text[80] }}>
-            Optional Costs
-          </h4>
-          <div className={styles.generalInfoForm}>
-            <div className={styles.rentedCourt} style={{ paddingRight: '1em' }}>
+            <h4 className={styles.label} style={{ color: colors.text[80] }}>
+              Optional Costs
+            </h4>
+            <div className={styles.rentedCourt}>
               <p style={{ color: colors.text[60] }}>Is there a reserved court?</p>
               <Switch callback={() => console.log('switched')} />
             </div>
-            <div className={styles.textFormSection}>
-              <p style={{ color: colors.text[60], paddingTop: '0.7em' }}>Total Costs</p>
-              <input type="text" className={styles.textInput} placeholder="70.00€" />
-            </div>
-          </div>
-          {/* description */}
-          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0', color: colors.text[80] }}>
-            Description
-          </h4>
-          <textarea
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-            className={styles.textarea}
-            style={{
-              borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              backgroundColor: colors.background[80],
-            }}
-          />
-          {/* image */}
-          <h4 className={styles.inputSectionTitle} style={{ marginTop: '0', color: colors.text[80] }}>
-            Update Title Image
-          </h4>
-
-          <div className={styles.uploadImageWrapper}>
-            <button
-              className={styles.inputImageBtn}
-              type="button"
-              style={
-                image
-                  ? {
-                      borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                      color: colors.text[60],
-                      backgroundImage: `url(${image})`,
-                      backgroundSize: 'cover',
-                      backgroundPositionY: '50%',
-                      backgroundPositionX: '50%',
-                    }
-                  : {
-                      borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                      color: colors.text[60],
-                      // backgroundImage: imagePlaceholder | url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='grey' stroke-width='1' stroke-dasharray='6%2c 6' stroke-dashoffset='10' stroke-linecap='square'/%3e%3c/svg%3e")
-                    }
-              }
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                className="bi bi-upload"
-                viewBox="0 0 16 16"
+            <div className={styles.costRow}>
+              <p style={{ color: colors.text[60] }}>Total Costs</p>
+              <input
                 style={{
+                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                   color: colors.text[60],
                 }}
-              >
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-              </svg>
-              {'    '}
-              {!image && 'Upload your image'}
-              <input
-                className={styles.imageInput}
-                type="file"
-                onChange={(e) => {
-                  setImage(URL.createObjectURL(e.target.files[0]));
-                }}
+                type="currency"
+                step="any"
+                className={styles.costInput}
+                placeholder="0.00€"
               />
-            </button>
+            </div>
+            {/* description */}
+            <h4 className={styles.label} style={{ color: colors.text[80] }}>
+              Description
+            </h4>
+            <textarea
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+              className={styles.textarea}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                backgroundColor: colors.background[80],
+              }}
+            />
+            {/* image */}
+            <h4 className={styles.label} style={{ color: colors.text[80] }}>
+              Upload Image
+            </h4>
+
+            <div
+              className={styles.uploadImageWrapper}
+              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+            >
+              <div
+                className={styles.inputImageBtn}
+                style={
+                  image
+                    ? {
+                        backgroundImage: `url(${image})`,
+                        backgroundSize: 'cover',
+                        backgroundPositionY: '50%',
+                        backgroundPositionX: '50%',
+                      }
+                    : {}
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  fill={darkMode ? colors.background[60] : '#DDDDDD'}
+                  className="bi bi-upload"
+                  viewBox="0 0 16 16"
+                  style={{
+                    color: colors.text[60],
+                  }}
+                >
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                  <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                </svg>
+                <input
+                  className={styles.imageInput}
+                  type="file"
+                  onChange={(e) => {
+                    setImage(URL.createObjectURL(e.target.files[0]));
+                  }}
+                />
+              </div>
+            </div>
+            <Footer
+              progress={75}
+              leftSide={<p onClick={() => goBack()}>Back</p>}
+              rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+            ></Footer>
           </div>
-          <Footer
-            progress={75}
-            leftSide={<p onClick={() => goBack()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
-          ></Footer>
         </>
       ) : (
         <>
