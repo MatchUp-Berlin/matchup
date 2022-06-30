@@ -24,6 +24,14 @@
   gap: 15px;
   padding: 1em;
 
+  .indoors {
+    padding: 0 0.5em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .inputGroup {
     width: 100%;
 
@@ -53,14 +61,6 @@
     width: 100%;
     margin: 1em 0 -0.5em 0;
     font-weight: bold;
-  }
-
-  .indoors {
-    padding: 0 0.5em;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
 
   .inputSectionTitle {
@@ -164,6 +164,8 @@
       border: none;
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      background-clip: border-box;
 
       padding: 0;
       margin: 0;
@@ -173,6 +175,7 @@
         top: 50%;
         right: 50%;
         transform: translate(50%, -50%);
+        pointer-events: none;
       }
 
       input {
@@ -182,14 +185,38 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        pointer-events: auto;
       }
     }
   }
 }
 
-.pills {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 1em;
+/* ---------SUMMARY-------- */
+.contentWrapper {
+  padding: 1em;
+  margin-bottom: 5em;
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    margin: 10px auto;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+
+  .bigPills {
+    margin: 2em 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    flex-direction: row;
+  }
+
+  .description {
+    p {
+      max-height: 10em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }

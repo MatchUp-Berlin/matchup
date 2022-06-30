@@ -23,10 +23,14 @@ import frisbee from '../public/frisbee.jpg';
 import { useTheme } from '../contexts/Theme';
 import Switch from '../components/misc/Switch';
 import StaticMap from '../components/maps/Static.Map';
-import { TCity, TSportCategories } from '../utils/types/MatchUp.Type';
+import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 
 /* LOCATION */
 import { Geo } from 'aws-amplify';
+import UpdatesPreviewCard from '../components/cards/UpdatesPreview.Card';
+import SkillsCard from '../components/cards/Skills.Card';
+import OrganizerCard from '../components/cards/Organizer.Card';
+import { ParticipantsPreviewCard } from '../components/cards';
 
 // interface MatchUp {
 //   id?: string;
@@ -59,7 +63,7 @@ const OrganizePage: NextPage = () => {
   const [indoors, setIndoors] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
-  const [skillLevel, setSkillLevel] = useState<string>('intermediate');
+  const [skillLevel, setSkillLevel] = useState<TSkillLevels>('intermediate');
   const [reservedCourt, setReservedCourt] = useState<boolean>(false);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
@@ -453,7 +457,6 @@ const OrganizePage: NextPage = () => {
                   width="30"
                   height="30"
                   fill={darkMode ? colors.background[60] : '#DDDDDD'}
-                  className="bi bi-upload"
                   viewBox="0 0 16 16"
                   style={{
                     color: colors.text[60],
@@ -479,6 +482,7 @@ const OrganizePage: NextPage = () => {
           </div>
         </>
       ) : (
+        /////////////////////////// SUMMARY
         <>
           <Header
             imageUrl={image}
@@ -495,25 +499,77 @@ const OrganizePage: NextPage = () => {
               />
             }
           ></Header>
-          <section className={styles.geneticallySuperiorWrapper}>
-            <MainInfo
-              title={title}
-              timestamp={date}
-              sport={sportCategory}
-              city={location}
-              costs={totalCost}
-            />
-            <div className={styles.pills}>
-              <SkillCard skillLevel={skillLevel} />
-              <SlotsCard slots={attendanceMin} attending={1} />
+          <div className={styles.contentWrapper}>
+            <MainInfo />
+
+            {/*  ------BIG PILLS------  */}
+            <div className={styles.bigPills}>
+              <SkillsCard skillLevel={skillLevel}></SkillsCard>
+              <SlotsCard slots={attendanceMax} attending={0}></SlotsCard>
             </div>
-            <Divider />
-          </section>
-          <Footer
-            progress={100}
-            leftSide={<p onClick={() => goBack()}>Back</p>}
-            rightButton={<Button variant="primary" callback={goToNext} text="Save"></Button>}
-          ></Footer>
+
+            <div
+              className={styles.divider}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
+            ></div>
+
+            <div
+              className={styles.divider}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
+            ></div>
+
+            {/*  ------ORGANIZER------  */}
+            <OrganizerCard></OrganizerCard>
+
+            <div
+              className={styles.divider}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
+            ></div>
+
+            {/*  ------PARTICIPATING PREVIEW------  */}
+            <ParticipantsPreviewCard users={[]}></ParticipantsPreviewCard>
+            <div
+              className={styles.divider}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
+            ></div>
+
+            {/*  ------DESCRIPTION PREVIEW------  */}
+            <div className={styles.description}>
+              <p style={{ color: colors.text[80] }} className="highlight-1">
+                Description
+              </p>
+              <p style={{ color: colors.text[60] }}>
+                {description}
+                {description.length > 100 && <span style={{ color: colors.primary[100] }}> Read more</span>}
+              </p>
+            </div>
+
+            <div
+              className={styles.divider}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
+            ></div>
+
+            <UpdatesPreviewCard updates={[]} organizerId={''}></UpdatesPreviewCard>
+
+            <div
+              className={styles.divider}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
+            ></div>
+
+            <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
+          </div>
         </>
       )}
     </div>
