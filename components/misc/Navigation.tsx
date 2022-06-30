@@ -1,13 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { userInfo } from 'os';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Navigation.module.scss';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 export interface INavigationProps {}
 
 const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
   const router = useRouter();
   const { colors, darkMode } = useTheme();
+  const user = useAuthenticator((context: any) => [context.user]);
 
   return (
     <div className={styles.wrapper} style={{ backgroundColor: colors.background[100], borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',}}>
@@ -148,7 +151,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
       </Link>
 
       {/* ------ PROFILE ------ */}
-      <Link href="Profile/[id]">
+      <Link href={user.user ? `Profile/${user.user.username}`: "/SignIn"}>
         <div className={styles.link}>
           <svg
             width="20"
