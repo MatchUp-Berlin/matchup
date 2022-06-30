@@ -9,7 +9,7 @@ const YourMatchUpsPage: NextPage = () => {
     const { route } = useAuthenticator((context) => [context.route]);
 
     if (route !== 'authenticated') {
-        router.push('/Profile/SignIn')
+        router.push('/SignIn')
       } else {
           return(
             <>

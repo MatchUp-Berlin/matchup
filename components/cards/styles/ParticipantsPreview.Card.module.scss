@@ -3,6 +3,7 @@
   justify-content: space-around;
   align-items: center;
   margin: 0 0.5em;
+  min-height: 3em;
 
   .avatarPreview {
     width: 100%;
@@ -10,5 +11,12 @@
     flex-direction: row;
     justify-content: left;
     gap: 0.3em;
+  }
+
+  .empty {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
   }
 }

@@ -7,7 +7,7 @@ export interface SignUp {
   matchUpId: string;
   user?: User;
   matchUp?: MatchUp;
-  attended: boolean;
+  attended?: boolean;
 }
 
 export interface SignUpsReturn {
