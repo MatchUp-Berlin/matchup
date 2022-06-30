@@ -1,3 +1,4 @@
+import { Geo } from 'aws-amplify';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity } from '../../utils/types/MatchUp.Type';
@@ -19,6 +20,21 @@ export interface IPrimaryInfoFormProps {
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
   const { colors, darkMode } = useTheme();
+
+  async function searchLocation(event: any) {
+    const searchOptions = { maxResults: 10, language: 'en' };
+    const results = await Geo.searchByText(event, searchOptions);
+    console.log(results);
+    if (results.length > 0) {
+      // setLocationSearchResult(true);
+      props.setLocation(results);
+    }
+    if (results.length <= 0) {
+      props.setLocation([]);
+      // setLocationSearchResult(false);
+    }
+  }
+
   return (
     <form className={styles.wrapper}>
       <div className={styles.inputGroup}>

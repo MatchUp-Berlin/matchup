@@ -1,14 +1,12 @@
 import type { NextPage } from 'next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import Header from '../components/misc/Header';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import HeaderButton from '../components/misc/HeaderButton';
-import { Button, Footer, Divider } from '../components/misc';
-import MainInfo from '../components/misc/MainInfo';
+import { Button, Footer } from '../components/misc';
+
 import SportCard from '../components/cards/Sport.Card';
-import SkillCard from '../components/cards/Skills.Card';
-import SlotsCard from '../components/cards/Slots.Card';
 
 /* STYLES */
 import styles from './styles/Organize.module.scss';
@@ -21,40 +19,17 @@ import tennis from '../public/tennis.jpg';
 import volleyball from '../public/volleyball.jpg';
 import frisbee from '../public/frisbee.jpg';
 import { useTheme } from '../contexts/Theme';
-import Switch from '../components/misc/Switch';
-import StaticMap from '../components/maps/Static.Map';
+
 import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 
 /* LOCATION */
-import { Geo } from 'aws-amplify';
-import UpdatesPreviewCard from '../components/cards/UpdatesPreview.Card';
-import SkillsCard from '../components/cards/Skills.Card';
-import OrganizerCard from '../components/cards/Organizer.Card';
-import { ParticipantsPreviewCard } from '../components/cards';
 import PrimaryInfoForm from '../components/forms/PrimaryInfo.Form';
-
-// interface MatchUp {
-//   id?: string;
-//   title: string;
-//   users: User[];
-//   location: string;
-//   organizer: string;
-//   sportCategory: string;
-//   skillLevel: string;
-//   totalCost: number;
-//   reservedCourt: boolean;
-//   attendanceMin: number;
-//   attendanceMax: number;
-//   cancelled: boolean;
-//   description: string;
-//   image: string;
-//   date: string;
-//   currency: string;
-// }
+import SecondaryInfoForm from '../components/forms/SecondaryInfo.Form';
+import OrganizeConfirmationForm from '../components/forms/OrganizeConfirmation.Form';
 
 const OrganizePage: NextPage = () => {
   const { route } = useAuthenticator((context) => [context.route]);
-  const { colors, shadows, darkMode } = useTheme();
+  const { colors } = useTheme();
 
   /* Keeping track of all of the answers */
   const [sportCategory, setSportCategory] = useState<TSportCategories>();
@@ -68,7 +43,7 @@ const OrganizePage: NextPage = () => {
   const [reservedCourt, setReservedCourt] = useState<boolean>(false);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<string>('');
 
   /* Keeping track of which step the user is currently in --- form validation */
   const [step, setStep] = useState<number>(0);
@@ -90,45 +65,6 @@ const OrganizePage: NextPage = () => {
 
   function goBack() {
     if (step > 0) setStep(step - 1);
-  }
-
-  /* Managing the increment buttons in step 2 */
-
-  function decreaseMinAttendance(): void {
-    if (attendanceMin > 2) {
-      setAttendanceMin((prevAttendanceMin) => prevAttendanceMin - 1);
-    }
-  }
-  function increaseMinAttendance(): void {
-    if (attendanceMin < attendanceMax) {
-      setAttendanceMin((prevAttendanceMin) => prevAttendanceMin + 1);
-    }
-  }
-  function decreaseMaxAttendance(): void {
-    if (attendanceMax > attendanceMin) {
-      setAttendanceMax((prevAttendanceMax) => prevAttendanceMax - 1);
-    }
-  }
-  function increaseMaxAttendance(): void {
-    if (attendanceMin < 30) {
-      setAttendanceMax((prevAttendanceMax) => prevAttendanceMax + 1);
-    }
-  }
-
-  /* Managing the location input field  */
-
-  async function searchLocation(event: any) {
-    const searchOptions = { maxResults: 10, language: 'en' };
-    const results = await Geo.searchByText(event, searchOptions);
-    console.log(results);
-    if (results.length > 0) {
-      // setLocationSearchResult(true);
-      setLocation(results);
-    }
-    if (results.length <= 0) {
-      setLocation([]);
-      // setLocationSearchResult(false);
-    }
   }
 
   return (
@@ -274,166 +210,29 @@ const OrganizePage: NextPage = () => {
               />
             }
           ></Header>
-          <div className={styles.detailInfoForm}>
-            <h4 className={styles.label} style={{ color: colors.text[80] }}>
-              Participants
-            </h4>
-            {/* participants */}
 
-            <div className={styles.participantsSection}>
-              <div className={styles.participantsRow}>
-                <label style={{ color: colors.text[60] }}>Minimum</label>
-                <div className={styles.incrementButtons}>
-                  <button
-                    className={styles.incrementBtn}
-                    onClick={decreaseMinAttendance}
-                    style={{
-                      color: colors.text[60],
-                      boxShadow: shadows.small,
-                    }}
-                  >
-                    -
-                  </button>
-                  <div>{attendanceMin}</div>
-                  <button
-                    className={styles.incrementBtn}
-                    onClick={increaseMinAttendance}
-                    style={{
-                      color: colors.text[60],
-                      boxShadow: shadows.small,
-                    }}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <div className={styles.participantsRow}>
-                <label style={{ color: colors.text[60] }}>Maximum</label>
-                <div className={styles.incrementButtons}>
-                  <button
-                    className={styles.incrementBtn}
-                    onClick={decreaseMaxAttendance}
-                    style={{
-                      color: colors.text[60],
-                      boxShadow: shadows.small,
-                    }}
-                  >
-                    -
-                  </button>
-                  <div>{attendanceMax}</div>
-                  <button
-                    className={styles.incrementBtn}
-                    onClick={increaseMaxAttendance}
-                    style={{
-                      color: colors.text[60],
-                      boxShadow: shadows.small,
-                    }}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <div className={styles.participantsRow}>
-                <label style={{ color: colors.text[60] }}>Skills level</label>
-                <select
-                  className={styles.selectInput}
-                  onChange={(e) => setSkillLevel(e.target.value)}
-                  style={{
-                    borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                    color: colors.text[60],
-                  }}
-                >
-                  <option value="beginner">Beginner</option>
-                  <option value="intermediate">Intermediate</option>
-                  <option value="advanced">Advanced</option>
-                </select>
-              </div>
-              {/* optional costs */}
-            </div>
-            <h4 className={styles.label} style={{ color: colors.text[80] }}>
-              Optional Costs
-            </h4>
-            <div className={styles.rentedCourt}>
-              <p style={{ color: colors.text[60] }}>Is there a reserved court?</p>
-              <Switch callback={() => console.log('switched')} />
-            </div>
-            <div className={styles.costRow}>
-              <p style={{ color: colors.text[60] }}>Total Costs</p>
-              <input
-                style={{
-                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                  color: colors.text[60],
-                }}
-                type="currency"
-                step="any"
-                className={styles.costInput}
-                placeholder="0.00€"
-              />
-            </div>
-            {/* description */}
-            <h4 className={styles.label} style={{ color: colors.text[80] }}>
-              Description
-            </h4>
-            <textarea
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-              className={styles.textarea}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                backgroundColor: colors.background[80],
-              }}
-            />
-            {/* image */}
-            <h4 className={styles.label} style={{ color: colors.text[80] }}>
-              Upload Image
-            </h4>
+          <SecondaryInfoForm
+            attendanceMin={attendanceMin}
+            attendanceMax={attendanceMax}
+            description={description}
+            image={image as string}
+            skillLevel={skillLevel}
+            reservedCourt={reservedCourt}
+            setReservedCourt={setReservedCourt}
+            totalCost={totalCost}
+            setTotalCost={setTotalCost}
+            setAttendanceMin={setAttendanceMin}
+            setAttendanceMax={setAttendanceMax}
+            setDescription={setDescription}
+            setImage={setImage}
+            setSkillLevel={setSkillLevel}
+          />
 
-            <div
-              className={styles.uploadImageWrapper}
-              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-            >
-              <div
-                className={styles.inputImageBtn}
-                style={
-                  image
-                    ? {
-                        backgroundImage: `url(${image})`,
-                        backgroundSize: 'cover',
-                        backgroundPositionY: '50%',
-                        backgroundPositionX: '50%',
-                      }
-                    : {}
-                }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="30"
-                  height="30"
-                  fill={darkMode ? colors.background[60] : '#DDDDDD'}
-                  viewBox="0 0 16 16"
-                  style={{
-                    color: colors.text[60],
-                  }}
-                >
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                  <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                </svg>
-                <input
-                  className={styles.imageInput}
-                  type="file"
-                  onChange={(e) => {
-                    setImage(URL.createObjectURL(e.target.files[0]));
-                  }}
-                />
-              </div>
-            </div>
-            <Footer
-              progress={75}
-              leftSide={<p onClick={() => goBack()}>Back</p>}
-              rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
-            ></Footer>
-          </div>
+          <Footer
+            progress={75}
+            leftSide={<p onClick={() => goBack()}>Back</p>}
+            rightButton={<Button variant="primary" callback={goToNext} text="Next"></Button>}
+          ></Footer>
         </>
       ) : (
         /////////////////////////// SUMMARY
@@ -454,82 +253,29 @@ const OrganizePage: NextPage = () => {
               />
             }
           ></Header>
-          <div className={styles.contentWrapper}>
-            <MainInfo />
-
-            {/*  ------BIG PILLS------  */}
-            <div className={styles.bigPills}>
-              <SkillsCard skillLevel={skillLevel}></SkillsCard>
-              <SlotsCard slots={attendanceMax} attending={0}></SlotsCard>
-            </div>
-
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
-            {/*  ------ORGANIZER------  */}
-            {/* <OrganizerCard></OrganizerCard> */}
-
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
-            {/*  ------PARTICIPATING PREVIEW------  */}
-            <ParticipantsPreviewCard users={[]}></ParticipantsPreviewCard>
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
-            {/*  ------DESCRIPTION PREVIEW------  */}
-            <div className={styles.description}>
-              <p style={{ color: colors.text[80] }} className="highlight-1">
-                Description
-              </p>
-              <p style={{ color: colors.text[60] }}>
-                {description}
-                {description.length > 100 && <span style={{ color: colors.primary[100] }}> Read more</span>}
-              </p>
-            </div>
-
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
-            <UpdatesPreviewCard updates={[]} organizerId={''}></UpdatesPreviewCard>
-
-            <div
-              className={styles.divider}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-              }}
-            ></div>
-
-            <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
-            <Footer
-              progress={95}
-              leftSide={<p onClick={() => goBack()}>Back</p>}
-              rightButton={<Button variant="primary" callback={goToNext} text="Save"></Button>}
-            ></Footer>
-          </div>
+          <OrganizeConfirmationForm
+            title={title}
+            sportCategory={sportCategory as TSportCategories}
+            timestamp={date}
+            location={location}
+            totalCost={totalCost}
+            skillLevel={skillLevel}
+            attendanceMax={attendanceMax}
+            description={description}
+            setTitle={setTitle}
+            setSportCategory={setSportCategory}
+            setTimestamp={setDate}
+            setLocation={setLocation}
+            setTotalCost={setTotalCost}
+            setSkillLevel={setSkillLevel}
+            setAttendanceMax={setAttendanceMax}
+            setDescription={setDescription}
+          />
+          <Footer
+            progress={95}
+            leftSide={<p onClick={() => goBack()}>Back</p>}
+            rightButton={<Button variant="primary" callback={goToNext} text="Save"></Button>}
+          ></Footer>
         </>
       )}
     </div>
