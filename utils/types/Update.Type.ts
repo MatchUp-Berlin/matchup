@@ -8,7 +8,7 @@ export interface Update {
   user?: User;
   matchUp?: MatchUp;
   content: string;
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface UpdatesReturn {
