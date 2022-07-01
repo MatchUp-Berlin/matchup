@@ -11,6 +11,7 @@ import { TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
 import getSportIcon from '../../utils/getSportIcon';
 import getDefaultImage from '../../utils/getDefaultImage';
 import Link from 'next/link';
+import ImageFallback from '../misc/ImageFallback';
 
 //TODO: Adjust to actual types!!
 
@@ -43,12 +44,13 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
         }}
       >
         <div className={styles.imageWrapper}>
-          <Image
-            src={props.imageUrl || getDefaultImage(props.sport)}
+          <ImageFallback
+            src={props.imageUrl as string}
+            fallbackSrc={getDefaultImage(props.sport).src}
             alt={props.title}
             layout="fill"
             objectFit="cover"
-          ></Image>
+          ></ImageFallback>
         </div>
 
         <div className={styles.infoWrapper}>

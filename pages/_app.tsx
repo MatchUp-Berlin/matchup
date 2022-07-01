@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </ThemeProvider>
         </Authenticator.Provider>
       </Hydrate>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

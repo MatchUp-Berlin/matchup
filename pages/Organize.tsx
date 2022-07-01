@@ -28,6 +28,7 @@ import SecondaryInfoForm from '../components/forms/SecondaryInfo.Form';
 import OrganizeConfirmationForm from '../components/forms/OrganizeConfirmation.Form';
 import { useMutation, useQuery } from 'react-query';
 import { createNewMatchUp } from '../utils/Mutation/createMatchUp.util';
+import { Storage } from 'aws-amplify';
 
 const OrganizePage: NextPage = () => {
   const { user } = useAuthenticator((context) => [context.user]);
@@ -46,7 +47,7 @@ const OrganizePage: NextPage = () => {
   const [reservedCourt, setReservedCourt] = useState<boolean>(false);
   const [totalCost, setTotalCost] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
-  const [image, setImage] = useState<string>('');
+  const [image, setImage] = useState<File>();
 
   /* Keeping track of which step the user is currently in */
   const [step, setStep] = useState<number>(0);
@@ -64,12 +65,13 @@ const OrganizePage: NextPage = () => {
 
   /* Submitting event */
   const mutation = useMutation(createNewMatchUp, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      Storage.put(data.id, image, {level: 'public'})
       console.log('submitted');
       router.push('/');
     },
     onError: () => {
-      console.log('fail');
+      console.log('failed to submit');
     },
   });
 
@@ -235,7 +237,7 @@ const OrganizePage: NextPage = () => {
             attendanceMin={attendanceMin}
             attendanceMax={attendanceMax}
             description={description}
-            image={image as string}
+            image={image}
             skillLevel={skillLevel}
             reservedCourt={reservedCourt}
             setReservedCourt={setReservedCourt}
@@ -265,7 +267,7 @@ const OrganizePage: NextPage = () => {
         /////////////////////////// SUMMARY
         <>
           <Header
-            imageUrl={image}
+            imageUrl={URL.createObjectURL(image)}
             title={'Is everything correct?'}
             leftButton={
               <HeaderButton
