@@ -8,29 +8,32 @@ export async function getOrganizerMatchUps(
 ): Promise<getMatchUpsReturn> {
   try {
     const filter = {
-      organizer: {
+      organizerId: {
         eq: id,
       },
     };
 
     const matchUpsData = await API.graphql({
       query: listMatchUps,
+<<<<<<< HEAD
       variables: {
         filter: filter,
         offset: showCards,
       },
+=======
+      variables: { filter: filter },
+>>>>>>> main
     });
 
     const retrievedData = await matchUpsData.data.listMatchUps;
 
-
     const imageData = await Promise.all(
       retrievedData.items.map(async (matchUp) => {
-      const headerImage = await Storage.get(matchUp.id);
-      matchUp.image = headerImage;
-      return matchUp;
+        const headerImage = await Storage.get(matchUp.id);
+        matchUp.image = headerImage;
+        return matchUp;
       })
-    )
+    );
 
     return retrievedData;
   } catch (err) {
