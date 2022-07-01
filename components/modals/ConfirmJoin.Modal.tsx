@@ -41,36 +41,77 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         className={styles.modalContainer}
       >
         <div className={styles.modalInfo}>
-          <h2 className={styles.modalHeading}>
-            {props.join ? 'Join' : 'Cancel'} {props.matchUp.title}
-          </h2>
+          <h2 className={styles.modalHeading2}>{props.matchUp.title}</h2>
         </div>
 
         {props.join && !props.isWithin24Hours && (
           <>
             <p className={styles.modalCommitTextPrimary}>
-              "In order to join this MatchUp you have to commit a deposit of
-              5€."
+              In order to join this MatchUp you have to commit a deposit of 5€.
             </p>
 
             <p className={styles.modalCommitTextSecondary}>
-              "You will get the deposit back once the organizer confirms your
+              You will get the deposit back once the organizer confirms your
               attendance. In case you cannot make it, you can cancel the MatchUp
-              up to hours in advance. If you fail to do so, your deposit will
-              not be returned to you. Instead it will be donated to a local
-              charity in your city." : "blabla"
+              up to 24 hours in advance and get your deposit back. If you don't
+              show up or cancel later, your deposit will be donated to one of
+              our local charities.
+            </p>
+          </>
+        )}
+
+        {props.join && props.isWithin24Hours && (
+          <>
+            <p className={styles.modalCommitTextPrimary}>
+              In order to join this MatchUp you have to commit a deposit of 5€.
+            </p>
+
+            <p className={styles.modalCommitTextSecondary}>
+              This MatchUp starts within 24 hours. You will get the deposit back
+              once the organizer confirms your attendance. If you cancel or not
+              show up your deposit will be donated to one of our local
+              charities.
+            </p>
+          </>
+        )}
+
+        {!props.join && !props.isWithin24Hours && (
+          <>
+            <p className={styles.modalCommitTextPrimary}>
+              If you cancel now you will get back your deposit.
+            </p>
+
+            <p className={styles.modalCommitTextSecondary}>
+              If you don't cancel within 24 hours in advance or if you don't
+              show up to the MatchUp, you will donate your deposit to one of our
+              local charities.
+            </p>
+          </>
+        )}
+
+        {!props.join && props.isWithin24Hours && (
+          <>
+            <p className={styles.modalCommitTextPrimary}>
+              The MatchUp starts within 24 hours. If you cancel now, you donate
+              your deposit to one of our local charities.
             </p>
           </>
         )}
 
         <a className={styles.modalPolicyLink}>
-          Read more about our commitment policy
+          Read more about our local charities and commitment policy
         </a>
         <Button
           className={styles.modalButton}
           variant='primary'
           callback={() => handleCommitClick()}
-          text={props.join ? 'Commit' : 'Cancel'}
+          text={
+            props.join
+              ? 'Commit'
+              : props.isWithin24Hours
+              ? 'Donate 5€'
+              : 'Cancel'
+          }
           disabled={false}
         ></Button>
       </div>

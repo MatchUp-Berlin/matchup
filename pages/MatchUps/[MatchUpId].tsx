@@ -80,9 +80,12 @@ const MatchUpDetail: NextPage = () => {
       {/*  ------Modal------  */}
       {showConfirmJoinModal && data && (
         <ConfirmJoinModal
-          join={!userSignedUp()}
           matchUp={data}
-          isWithin24Hours={isWithin24Hours()}
+          // join={!userSignedUp()}
+          // isWithin24Hours={isWithin24Hours()}
+
+          join={false}
+          isWithin24Hours={false}
         ></ConfirmJoinModal>
       )}
       {/*  ------HEADER------  */}
