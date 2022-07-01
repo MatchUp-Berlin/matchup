@@ -12,6 +12,7 @@ import { getMatchUp } from '../../src/graphql/queries';
 import { API } from 'aws-amplify';
 import MatchUpCard from '../../components/cards/MatchUp.Card';
 import { getOrganizerMatchUps } from '../../utils/Query/getOrganizerMatchUps.util';
+import ThemeButton from '../../components/misc/ThemeButton';
 
 const ProfileDetailPage: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -27,7 +28,7 @@ const ProfileDetailPage: NextPage = () => {
     isSuccess: isMatchUpsSuccess,
     isError: isMatchUpsError,
     data: matchUpsData,
-  } = useQuery(['matchUps', id], () => getOrganizerMatchUps(id as string));
+  } = useQuery(['matchUps', id], () => getOrganizerMatchUps(id as string, 3));
 
   // const {
   //   isLoading: isMatchUpsLoading,
@@ -127,6 +128,7 @@ const ProfileDetailPage: NextPage = () => {
           </section>
         )
       )}
+      <ThemeButton />
       <Navigation />
     </>
 
