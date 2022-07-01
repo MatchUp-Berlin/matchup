@@ -1,29 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Update } from '../../utils/types/Update.Type';
 import { User } from '../../utils/types/User.Type';
 import styles from './styles/Updates.Modal.module.scss';
 import { useTheme } from '../../contexts/Theme';
 import UpdatesMessageCard from '../cards/UpdatesMessage.Card';
 import SmallButton from '../misc/SmallButton';
-import { Button } from '../misc';
 
 export interface IUpdatesModalProps {
   updates: Update[];
   organizer: User;
+  close: () => void;
 }
 
 const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
-  console.log(props.organizer);
-  console.log(props.updates);
   const { colors, shadows, darkMode } = useTheme();
+  const [animating, setAnimating] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1));
+      setAnimating(true);
+    })();
+  }, []);
+
   return (
     <>
       <div
         className={styles.updatesModalWrapper}
-        style={{ backgroundColor: colors.background[100], boxShadow: shadows.medium }}
+        style={{
+          backgroundColor: colors.background[100],
+          boxShadow: shadows.medium,
+          bottom: animating ? 0 : '-100%',
+        }}
       >
         <div>
           <SmallButton
+            callback={props.close}
             viewBox="0 0 10 10"
             icon={
               <path
