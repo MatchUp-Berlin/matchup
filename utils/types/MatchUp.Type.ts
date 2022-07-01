@@ -27,7 +27,7 @@ export type TCity =
   | 'hanover';
 
 export interface MatchUp {
-  id?: string;
+  id: string;
   title: string;
   location: string;
   coordinates: number[];
@@ -60,7 +60,7 @@ export interface CreateMatchUpInput {
   coordinates?: number[];
   skillLevel?: TSkillLevels;
   totalCost?: number;
-  reservedCourt?: boolean ;
+  reservedCourt?: boolean;
   attendanceMin?: number;
   attendanceMax?: number;
   description?: string;

@@ -16,7 +16,6 @@ import MapButton from '../components/misc/MapButton';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import moment from 'moment';
 
-import { getOrganizerMatchUps } from '../utils/Query/getOrganizerMatchUps.util';
 import { getUserMatchUpsAttended } from '../utils/Query/getUserMatchUpsAttended.util';
 
 const Home: NextPage = () => {
