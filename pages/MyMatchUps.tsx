@@ -16,7 +16,7 @@ import { TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 const YourMatchUpsPage: NextPage = () => {
   const { colors } = useTheme();
   const router = useRouter();
-  const { route, user } = useAuthenticator((context) => [context.route, context.user]);
+  const { route, user } = useAuthenticator((context) => [context.user]);
 
   const [showOrganizing, setShowOrganizing] = useState<boolean>(false);
 
@@ -33,7 +33,6 @@ const YourMatchUpsPage: NextPage = () => {
   );
 
   useEffect(() => {
-    console.log(user, route);
     if (user) {
       if (route !== 'authenticated') {
         typeof window !== 'undefined' && router.push('/SignIn');
