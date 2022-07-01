@@ -11,20 +11,22 @@ export interface IUpdatesMessageCardProps {
 }
 
 const UpdatesMessageCard: React.FunctionComponent<IUpdatesMessageCardProps> = (props) => {
-  const { givenName, familyName } = props.organizer;
-  const { content, createdAt } = props.update;
-  const { colors, shadows } = useTheme();
+  const { givenName, familyName } = props.update.user;
+  const { content, createdAt, userId } = props.update;
+  const { colors, shadows, darkMode } = useTheme();
+  console.log('message card: ', props.organizer);
+  const { id } = props.organizer;
 
   return (
     <>
       <div
         className={styles.updateMessageCardWrapper}
         style={{
-          backgroundColor: colors.background[60],
-          boxShadow: shadows.medium,
+          backgroundColor: colors.background[80],
+          boxShadow: darkMode ? shadows.medium : shadows.small,
         }}
       >
-        <p className={'fat'} style={{ color: colors.text[80] }}>
+        <p className={'fat'} style={{ color: userId === id ? colors.primary[100] : colors.text[80] }}>
           {givenName} {familyName}
         </p>
         <p style={{ color: colors.text[80] }}>{content}</p>
