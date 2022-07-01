@@ -70,9 +70,9 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
             <p className={styles.modalCommitTextSecondary}>
               You will get the deposit back once the organizer confirms your
               attendance. In case you cannot make it, you can cancel the MatchUp
-              up to 24 hours in advance and get your deposit back. If you don't
-              show up or cancel later, your deposit will be donated to one of
-              our local charities.
+              up to 24 hours in advance and get your deposit back. If you
+              don&apos;t show up or cancel later, your deposit will be donated
+              to one of our local charities.
             </p>
           </>
         )}
@@ -99,9 +99,9 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
             </p>
 
             <p className={styles.modalCommitTextSecondary}>
-              If you don't cancel within 24 hours in advance or if you don't
-              show up to the MatchUp, you will donate your deposit to one of our
-              local charities.
+              If you don&apos;t cancel within 24 hours in advance or if you
+              don&apos;t show up to the MatchUp, you will donate your deposit to
+              one of our local charities.
             </p>
           </>
         )}
