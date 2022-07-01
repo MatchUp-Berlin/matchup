@@ -3,7 +3,6 @@ import { useTheme } from '../../contexts/Theme';
 import { MatchUp } from '../../utils/types/MatchUp.Type';
 import styles from './styles/ConfirmJoin.Modal.module.scss';
 import Button from '../misc/Button';
-import moment from 'moment';
 
 export interface IConfirmJoinModalProps {
   matchUp: MatchUp;
@@ -15,6 +14,10 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
   props
 ) => {
   const { colors, shadows } = useTheme();
+
+  const handleCommitClick = () => {
+    console.log('click');
+  };
 
   return (
     <div
@@ -49,7 +52,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         <Button
           className={styles.modalButton}
           variant='primary'
-          callback={() => console.log('clicked')}
+          callback={() => handleCommitClick()}
           text='Commit'
           disabled={false}
         ></Button>
