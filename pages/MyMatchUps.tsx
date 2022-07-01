@@ -21,20 +21,25 @@ const YourMatchUpsPage: NextPage = () => {
   const [showOrganizing, setShowOrganizing] = useState<boolean>(false);
 
   // fetch user profile
-  const userQuery = useQuery(['user', user?.username], () => getUserById(user.username as string));
+  const userQuery = useQuery(['user', user?.username], () => getUserById(user.username as string), {
+    enabled: !!user,
+  });
 
   // fetch organized events by this user
-  const organizedQuery = useQuery(['organized', user?.username], () =>
-    getOrganizerMatchUps(user.username as string, 3)
+  const organizedQuery = useQuery(
+    ['organized', user?.username],
+    () => getOrganizerMatchUps(user.username as string, 3),
+    { enabled: !!user }
   );
 
   useEffect(() => {
+    console.log(user, route);
     if (user) {
       if (route !== 'authenticated') {
         typeof window !== 'undefined' && router.push('/SignIn');
       }
     }
-  }, [organizedQuery.data, user]);
+  }, [organizedQuery.data, user, route]);
 
   return (
     <>
