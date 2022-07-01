@@ -57,7 +57,7 @@ export interface CreateMatchUpInput {
   organizerId: string;
   date: string;
 
-  coordinates?: number[];
+  coordinates?: Object;
   skillLevel?: TSkillLevels;
   totalCost?: number;
   reservedCourt?: boolean ;

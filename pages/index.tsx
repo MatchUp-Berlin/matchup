@@ -1,14 +1,17 @@
 import type { NextPage } from 'next';
 import { useTheme } from '../contexts/Theme';
 import Navigation from '../components/misc/Navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Filter from '../components/misc/Filter';
 import SportFilter from '../components/misc/SportFilter';
 import styles from './styles/Explore.module.scss';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
+import { createMap } from "maplibre-gl-js-amplify"
+import { drawPoints } from "maplibre-gl-js-amplify";
 import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
+import { cityLatLong, TCoordinates } from '../utils/types/cityLatLong';
 
 import LoadingSpinner from '../components/misc/LoadingSpinner';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
@@ -19,8 +22,9 @@ const Home: NextPage = () => {
   const [showMap, setShowMap] = useState<boolean>(false);
 
   /* FILTER STATE */
-  const [categories, setCategories] = useState<TSportCategories[]>(['football']);
+  const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
+  const [cityCoordinates, setCityCoordinates] = useState<TCoordinates>({latitude: 100, longitude: 100})
 
   const from = new Date();
   from.setUTCHours(0, 0, 0, 0);
@@ -30,6 +34,21 @@ const Home: NextPage = () => {
     from: from.toISOString(),
     to: to.toISOString(),
   });
+
+  useQuery(['coordinates', city], () =>
+    setCityCoordinates(cityLatLong[city])
+  );
+
+  async function initializeMap() {
+    const map = await createMap({
+        container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
+        center: [52.531677, 13.381777], // [Longitude, Latitude]
+        zoom: 11,
+    })
+}
+
+initializeMap();
+
 
   /* DATA FETCHING */
   const { isError, isLoading, isSuccess, refetch, data } = useQuery(['matchups', categories], () =>
@@ -60,7 +79,7 @@ const Home: NextPage = () => {
 
       {/* ------MATCHUP LIST OR MAP------ */}
       {showMap ? (
-        '<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>'
+        <div id="map"></div>
       ) : isError ? (
         <div className={styles.errorWrapper} style={{ color: colors.text[60] }}>
           Oops, something went wrong!

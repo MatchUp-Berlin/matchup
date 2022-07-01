@@ -21,6 +21,7 @@ import frisbee from '../public/frisbee.jpg';
 import { useTheme } from '../contexts/Theme';
 
 import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
+import { TCoordinates } from '../utils/types/cityLatLong';
 
 /* LOCATION */
 import PrimaryInfoForm from '../components/forms/PrimaryInfo.Form';
@@ -40,6 +41,7 @@ const OrganizePage: NextPage = () => {
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [location, setLocation] = useState<TCity>('berlin');
+  const [coordinates, SetCoordinates] = useState<TCoordinates>({latitude: 0, longitude: 0})
   const [indoor, setIndoor] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
@@ -194,10 +196,12 @@ const OrganizePage: NextPage = () => {
             title={title}
             date={date}
             location={location}
+            coordinates={coordinates}
             indoor={indoor}
             setTitle={setTitle}
             setDate={setDate}
             setLocation={setLocation}
+            setCoordinates={SetCoordinates}
             setIndoor={setIndoor}
           />
 
@@ -305,6 +309,7 @@ const OrganizePage: NextPage = () => {
                     title,
                     date: new Date(date).toISOString(),
                     location,
+                    coordinates,
                     indoor,
                     attendanceMin,
                     attendanceMax,

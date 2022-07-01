@@ -2,24 +2,47 @@ import { Geo } from 'aws-amplify';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity } from '../../utils/types/MatchUp.Type';
+import { TCoordinates } from '../../utils/types/cityLatLong';
 import StaticMap from '../maps/Static.Map';
 import Switch from '../misc/Switch';
 import styles from './styles/PrimaryInfo.Form.module.scss';
+import { createMap } from "maplibre-gl-js-amplify";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 export interface IPrimaryInfoFormProps {
   title: string;
   date: string;
   location: TCity;
+  coordinates: TCoordinates;
   indoor: boolean;
 
   setTitle: Dispatch<SetStateAction<string>>;
   setDate: Dispatch<SetStateAction<string>>;
   setLocation: Dispatch<SetStateAction<TCity>>;
+  setCoordinates: Dispatch<SetStateAction<TCoordinates>>;
   setIndoor: Dispatch<SetStateAction<boolean>>;
 }
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
   const { colors, darkMode } = useTheme();
+
+  async function initializeMap() {
+    if (props.coordinates) {
+      const map = await createMap({
+        container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
+        center: [props.coordinates.latitude, props.coordinates.longitude], // [Longitude, Latitude]
+        zoom: 11,
+    })
+    } else {
+    const map = await createMap({
+        container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
+        center: [52.531677, 13.381777], // [Longitude, Latitude]
+        zoom: 11,
+    })
+  }
+}
+
+initializeMap();
 
   async function searchLocation(event: any) {
     const searchOptions = { maxResults: 10, language: 'en' };
@@ -28,6 +51,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
     if (results.length > 0) {
       // setLocationSearchResult(true);
       props.setLocation(results);
+      props.setCoordinates(results.coordinates);
     }
     if (results.length <= 0) {
       props.setLocation([]);
@@ -85,7 +109,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
             marginBottom: '1em',
           }}
         ></input>
-        <StaticMap latitude={15} longitude={50} zoom={15} />
+        <div id="map"></div>
       </div>
 
       <div className={styles.indoor} style={{ color: colors.text[60] }}>
