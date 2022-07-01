@@ -16,6 +16,8 @@
     "aws-amplify": "^4.3.26",
     "aws-sdk": "^2.1162.0",
     "dotenv": "^16.0.1",
+    "maplibre-gl": "^1.15.3",
+    "maplibre-gl-js-amplify": "^1.6.0",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "node-fetch": "^3.2.6",

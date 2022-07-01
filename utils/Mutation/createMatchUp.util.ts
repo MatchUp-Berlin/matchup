@@ -5,6 +5,7 @@ import { addUserToMatchUp } from './addUserToMatchUp.util';
 
 export async function createNewMatchUp(matchUpData: CreateMatchUpInput): Promise<MatchUp> {
   try {
+    matchUpData.address = JSON.stringify(matchUpData.address);
     const newMatchUp = await API.graphql({
       query: createMatchUp,
       variables: { input: matchUpData },
