@@ -13,11 +13,13 @@ import { API } from 'aws-amplify';
 import MatchUpCard from '../../components/cards/MatchUp.Card';
 import { getOrganizerMatchUps } from '../../utils/Query/getOrganizerMatchUps.util';
 import ThemeButton from '../../components/misc/ThemeButton';
+import { useEffect, useState } from 'react';
 
 const ProfileDetailPage: NextPage = () => {
   const { colors, darkMode } = useTheme();
   const router = useRouter();
   const { id } = router.query;
+  const [organizedEventsLimit, setOrganizedEventsLimit] = useState<number>(2);
 
   // getting user info
   const { isLoading, isSuccess, isError, data } = useQuery(['user', id], () => {
@@ -30,26 +32,17 @@ const ProfileDetailPage: NextPage = () => {
     isSuccess: isMatchUpsSuccess,
     isError: isMatchUpsError,
     data: matchUpsData,
-  } = useQuery(['matchUps', id], () => getOrganizerMatchUps(id as string, 3));
+    refetch: matchUpsRefetch,
+    isRefetching: isMatchUpsRefetching,
+  } = useQuery(['matchUps', id], () =>
+    getOrganizerMatchUps(id as string, organizedEventsLimit)
+  );
 
-  // const {
-  //   isLoading: isMatchUpsLoading,
-  //   isSuccess: isMatchUpsSuccess,
-  //   isError: isMatchUpsError,
-  //   data: matchUpsData,
-  // } = useQuery(['matchUps', id], async () => {
-  //   const matchUpsData = await API.graphql({
-  //     query: getMatchUp,
-  //     variables: {
-  //       id: id,
-  //       offset: 3,
-  //     },
-  //     // authMode: 'AMAZON_COGNITO_USER_POOLS'
-  //   });
-  //   console.log(matchUpsData);
-
-  //   return matchUpsData;
-  // });
+  useEffect(() => {
+    matchUpsRefetch();
+    console.log('trying to refetch');
+    console.log(organizedEventsLimit);
+  }, [organizedEventsLimit]);
 
   return (
     <>
@@ -121,6 +114,7 @@ const ProfileDetailPage: NextPage = () => {
               ) : (
                 isMatchUpsError && <p>error</p>
               )}
+              {isMatchUpsRefetching && <h4>refetching</h4>}
               <div>
                 {isMatchUpsSuccess &&
                   matchUpsData.items.map((match) => {
@@ -154,7 +148,11 @@ const ProfileDetailPage: NextPage = () => {
               </div>
               <Button
                 variant='secondary'
-                callback={() => {}}
+                callback={() =>
+                  setOrganizedEventsLimit(
+                    (prevOrganizedEventsLimit) => prevOrganizedEventsLimit + 3
+                  )
+                }
                 text={'Load more'}
               />
             </div>
