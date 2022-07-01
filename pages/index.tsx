@@ -6,18 +6,19 @@ import Filter from '../components/misc/Filter';
 import SportFilter from '../components/misc/SportFilter';
 import styles from './styles/Explore.module.scss';
 import MatchUpCard from '../components/cards/MatchUp.Card';
-import StaticMap from '../components/maps/Static.Map';
 import { createMap } from "maplibre-gl-js-amplify";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "maplibre-gl-js-amplify/dist/public/amplify-map.css";
 import { drawPoints } from "maplibre-gl-js-amplify";
 import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
-import { cityLatLong, TCoordinates } from '../utils/types/cityLatLong';
+import { cityLatLong, TAddress } from '../utils/types/Address.Type';
+import { initializeMapExplorer } from '../utils/Maps/initializeMapExplorer.util';
 
 import LoadingSpinner from '../components/misc/LoadingSpinner';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
 import MapButton from '../components/misc/MapButton';
+import matchUps from '../mockData/machMatchUps';
 
 const Home: NextPage = () => {
   const { colors, shadows } = useTheme();
@@ -26,7 +27,7 @@ const Home: NextPage = () => {
   /* FILTER STATE */
   const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
-  const [cityCoordinates, setCityCoordinates] = useState<TCoordinates>({latitude: 100, longitude: 100})
+  const [address, setAddress] = useState<TAddress>(cityLatLong[city])
 
   const from = new Date();
   from.setUTCHours(0, 0, 0, 0);
@@ -37,34 +38,15 @@ const Home: NextPage = () => {
     to: to.toISOString(),
   });
 
-  useQuery(['coordinates', city], () =>
-    setCityCoordinates(cityLatLong[city])
-  );
-
-  function mapToggle() {
-    setShowMap(!showMap)
-    initializeMap();
-  }
-
-  async function initializeMap() {
-    if (!showMap) {
-    let map = await createMap({
-        container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
-        center: [cityCoordinates.longitude, cityCoordinates.latitude], // [Longitude, Latitude]
-        zoom: 12.5,
-    })
-  } else {
-    let map = null;
-  }
-}
-
-// initializeMap();
-
-
   /* DATA FETCHING */
   const { isError, isLoading, isSuccess, refetch, data } = useQuery(['matchups', categories], () =>
     getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
   );
+
+  function mapToggle() {
+    setShowMap(!showMap)
+    initializeMapExplorer(data.items, city)
+  }
 
   return (
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>

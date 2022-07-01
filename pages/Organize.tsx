@@ -34,6 +34,7 @@ import { Storage } from 'aws-amplify';
 
 const OrganizePage: NextPage = () => {
   const { user } = useAuthenticator((context) => [context.user]);
+  console.log(user)
   const { colors } = useTheme();
   const router = useRouter();
 
@@ -292,6 +293,7 @@ const OrganizePage: NextPage = () => {
             sportCategory={sportCategory as TSportCategories}
             timestamp={date}
             location={location}
+            address={address}
             totalCost={totalCost}
             skillLevel={skillLevel}
             attendanceMax={attendanceMax}
@@ -310,7 +312,7 @@ const OrganizePage: NextPage = () => {
                     title,
                     date: new Date(date).toISOString(),
                     location,
-                    coordinates,
+                    address,
                     indoor,
                     attendanceMin,
                     attendanceMax,
@@ -319,7 +321,7 @@ const OrganizePage: NextPage = () => {
                     totalCost,
                     description,
                     image,
-                    organizerId: user.username as string,
+                    organizerId: 'banana' as string,
                   })
                 }
                 text="Save"

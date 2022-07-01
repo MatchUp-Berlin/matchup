@@ -30,7 +30,7 @@ export interface MatchUp {
   id?: string;
   title: string;
   location: string;
-  coordinates: number[];
+  address: Object;
   signups: SignUpsReturn;
   organizerId: string;
   organizer?: User;
@@ -56,8 +56,7 @@ export interface CreateMatchUpInput {
   sportCategory: TSportCategories;
   organizerId: string;
   date: string;
-
-  coordinates?: Object;
+  address?: Object;
   skillLevel?: TSkillLevels;
   totalCost?: number;
   reservedCourt?: boolean ;
