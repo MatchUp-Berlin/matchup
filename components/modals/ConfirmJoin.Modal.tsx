@@ -5,11 +5,13 @@ import styles from './styles/ConfirmJoin.Modal.module.scss';
 import Button from '../misc/Button';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { addUserToMatchUp } from '../../utils/Mutation/addUserToMatchUp.util';
+import { removeUserFromMatchUp } from '../../utils/Mutation/removeUserFromMatchUp.util';
 
 export interface IConfirmJoinModalProps {
   matchUp: MatchUp;
-  join: boolean;
+  isSignedUp: boolean;
   isWithin24Hours: boolean;
+  setShowModal: Function;
 }
 
 const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
@@ -22,13 +24,23 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
     context.user,
   ]);
 
-  const handleCommitClick = () => {
+  const handleCommit = () => {
     addUserToMatchUp({
       userId: user.username || '',
       matchUpId: props.matchUp.id || '',
     }).then((res) => {
-      console.log('Successfully signed up');
+      props.setShowModal(false);
     });
+  };
+
+  const handleCancel = () => {
+    console.log('HANDLE CANCEL');
+
+    removeUserFromMatchUp(user.username || '', props.matchUp.id || '')
+      .then((res: any) => {
+        props.setShowModal(false);
+      })
+      .catch((err: any) => console.log(err));
   };
 
   return (
@@ -44,7 +56,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
           <h2 className={styles.modalHeading2}>{props.matchUp.title}</h2>
         </div>
 
-        {props.join && !props.isWithin24Hours && (
+        {!props.isSignedUp && !props.isWithin24Hours && (
           <>
             <p className={styles.modalCommitTextPrimary}>
               In order to join this MatchUp you have to commit a deposit of 5€.
@@ -60,7 +72,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
           </>
         )}
 
-        {props.join && props.isWithin24Hours && (
+        {!props.isSignedUp && props.isWithin24Hours && (
           <>
             <p className={styles.modalCommitTextPrimary}>
               In order to join this MatchUp you have to commit a deposit of 5€.
@@ -75,7 +87,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
           </>
         )}
 
-        {!props.join && !props.isWithin24Hours && (
+        {props.isSignedUp && !props.isWithin24Hours && (
           <>
             <p className={styles.modalCommitTextPrimary}>
               If you cancel now you will get back your deposit.
@@ -89,7 +101,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
           </>
         )}
 
-        {!props.join && props.isWithin24Hours && (
+        {props.isSignedUp && props.isWithin24Hours && (
           <>
             <p className={styles.modalCommitTextPrimary}>
               The MatchUp starts within 24 hours. If you cancel now, you donate
@@ -104,9 +116,11 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         <Button
           className={styles.modalButton}
           variant='primary'
-          callback={() => handleCommitClick()}
+          callback={
+            props.isSignedUp ? () => handleCancel() : () => handleCommit()
+          }
           text={
-            props.join
+            !props.isSignedUp
               ? 'Commit'
               : props.isWithin24Hours
               ? 'Donate 5€'

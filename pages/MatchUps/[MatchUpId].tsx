@@ -42,7 +42,8 @@ const MatchUpDetail: NextPage = () => {
   ]);
 
   const userSignedUp = () =>
-    data?.signups.items.some((signup) => signup.userId === user.username);
+    data?.signups.items.some((signup) => signup.userId === user.username) ||
+    false;
 
   const eventHasStarted = () => {
     return (
@@ -60,16 +61,16 @@ const MatchUpDetail: NextPage = () => {
     );
   };
 
-  const [showConfirmJoinModal, setShowConfirmJoinModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleJoin = () => {
     // Check here if its possible to sign in. Show different modal then.
-    setShowConfirmJoinModal((prev) => !prev);
+    setShowModal((prev) => !prev);
   };
 
   const handleCancel = () => {
     // Check here if its possible to sign in. Show different modal then.
-    setShowConfirmJoinModal((prev) => !prev);
+    setShowModal((prev) => !prev);
   };
 
   return (
@@ -78,14 +79,12 @@ const MatchUpDetail: NextPage = () => {
       className={styles.page}
     >
       {/*  ------Modal------  */}
-      {showConfirmJoinModal && data && (
+      {showModal && data && (
         <ConfirmJoinModal
           matchUp={data}
-          // join={!userSignedUp()}
-          // isWithin24Hours={isWithin24Hours()}
-
-          join={false}
-          isWithin24Hours={false}
+          isSignedUp={userSignedUp()}
+          isWithin24Hours={isWithin24Hours()}
+          setShowModal={setShowModal}
         ></ConfirmJoinModal>
       )}
       {/*  ------HEADER------  */}
