@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTheme } from '../../contexts/Theme';
+import { getNextDayOfTheWeek } from '../../utils/getNextDayOfTheWeek';
 import { TCity } from '../../utils/types/MatchUp.Type';
 import styles from './styles/Filter.module.scss';
 
@@ -12,32 +13,13 @@ export interface IFilterProps {
 const Filter: React.FunctionComponent<IFilterProps> = (props) => {
   const { colors, darkMode, shadows } = useTheme();
 
-  function getNextDayOfTheWeek(dayName: string, excludeToday = true, refDate = new Date()) {
-    const dayOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(dayName);
-    refDate.setHours(0, 0, 0, 0);
-    refDate.setDate(
-      refDate.getDate() + +!!excludeToday + ((dayOfWeek + 7 - refDate.getDay() - +!!excludeToday) % 7)
-    );
-    return refDate;
-  }
-
+  
   function handleTimeFrameChange(e: any) {
     switch (e.target.value) {
-      case '0': {
+      case 'this-week': {
         const start = new Date();
         start.setUTCHours(0, 0, 0, 0);
 
-        const end = new Date();
-        end.setHours(23, 59, 59, 999);
-
-        props.setTimeFrame({
-          from: start.toISOString(),
-          to: end.toISOString(),
-        });
-        break;
-      }
-      case '1': {
-        const start = getNextDayOfTheWeek('fri');
         const end = getNextDayOfTheWeek('sun');
         end.setHours(23, 59, 59, 999);
 
@@ -47,10 +29,20 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         });
         break;
       }
-      case '2': {
-        // ACHTUNG BUG!!!
+      case 'this-weekend': {
+        const start = getNextDayOfTheWeek('fri', false);
+        const end = getNextDayOfTheWeek('sun');
+        end.setHours(23, 59, 59, 999);
+
+        props.setTimeFrame({
+          from: start.toISOString(),
+          to: end.toISOString(),
+        });
+        break;
+      }
+      case 'next-week': {
         const start = getNextDayOfTheWeek('mon');
-        const end = getNextDayOfTheWeek('sun', false, start);
+        const end = getNextDayOfTheWeek('sun', false, new Date(start));
         end.setHours(23, 59, 59, 999);
 
         props.setTimeFrame({
@@ -89,9 +81,9 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         className={styles.input + ' ' + styles.date}
         onChange={handleTimeFrameChange}
       >
-        <option value="0">Today</option>
-        <option value="1">This Weekend</option>
-        <option value="2">Next Week</option>
+        <option value="this-week">This week</option>
+        <option value="this-weekend">This Weekend</option>
+        <option value="next-week">Next Week</option>
       </select>
     </div>
   );
