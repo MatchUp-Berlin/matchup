@@ -1,0 +1,15 @@
+.contentWrapper {
+  padding: 1em;
+  margin-bottom: 5em;
+}
+
+.singleStat {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 0.7em;
+
+  svg {
+    margin-right: 0.4em;
+  }
+}

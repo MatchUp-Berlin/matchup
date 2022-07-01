@@ -19,7 +19,7 @@ export interface IConfirmJoinModalProps {
 const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (props) => {
   const { colors, shadows } = useTheme();
   const queryClient = useQueryClient();
-  const { user } = useAuthenticator((context) => [context.authStatus, context.user]);
+  const { user } = useAuthenticator((context) => [context.user]);
 
   const handleCommit = () => {
     addUserToMatchUp({

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity, TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
 import { SkillsCard, SlotsCard, ParticipantsPreviewCard } from '../cards';
 import UpdatesPreviewCard from '../cards/UpdatesPreview.Card';
-import StaticMap from '../maps/Static.Map';
+import { initializeMap } from '../../utils/Maps/initializeMap.util';
 import MainInfo from '../misc/MainInfo';
 import styles from './styles/OrganizeConfirmation.Form.module.scss';
+import { TAddress } from '../../utils/types/Address.Type';
 
 export interface IOrganizeConfirmationFormProps {
   title: string;
+  address: TAddress
   sportCategory: TSportCategories | undefined;
   timestamp: string;
   location: TCity;
@@ -21,6 +23,10 @@ export interface IOrganizeConfirmationFormProps {
 
 const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFormProps> = (props) => {
   const { colors, darkMode } = useTheme();
+
+  useEffect(() => {
+    initializeMap(props.address)
+  })
 
   return (
     <div className={styles.wrapper}>
@@ -82,7 +88,7 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         }}
       ></div>
 
-      <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
+      <div id="map" className={styles.map}></div>
     </div>
   );
 };

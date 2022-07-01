@@ -21,7 +21,7 @@ export const createMatchUp = /* GraphQL */ `
         nextToken
       }
       location
-      coordinates
+      address
       organizerId
       organizer {
         id
@@ -100,7 +100,7 @@ export const updateMatchUp = /* GraphQL */ `
         nextToken
       }
       location
-      coordinates
+      address
       organizerId
       organizer {
         id
@@ -179,7 +179,7 @@ export const deleteMatchUp = /* GraphQL */ `
         nextToken
       }
       location
-      coordinates
+      address
       organizerId
       organizer {
         id
@@ -420,7 +420,7 @@ export const createSignUp = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -494,7 +494,7 @@ export const updateSignUp = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -568,7 +568,7 @@ export const deleteSignUp = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -642,7 +642,7 @@ export const createUpdate = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -716,7 +716,7 @@ export const updateUpdate = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -790,7 +790,7 @@ export const deleteUpdate = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -864,7 +864,7 @@ export const createWatchList = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -937,7 +937,7 @@ export const updateWatchList = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -1010,7 +1010,7 @@ export const deleteWatchList = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
