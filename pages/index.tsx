@@ -17,14 +17,19 @@ import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import moment from 'moment';
 
 import { getOrganizerMatchUps } from '../utils/Query/getOrganizerMatchUps.util';
+import { getUserMatchUpsAttended } from '../utils/Query/getUserMatchUpsAttended.util';
 
 const Home: NextPage = () => {
   const { colors, shadows } = useTheme();
   const [showMap, setShowMap] = useState<boolean>(false);
 
-  getOrganizerMatchUps('5131b0a9-0d19-4897-89d5-f42f03e9df4c')
-    .then((res) => console.log('organizer', res))
-    .catch((err) => console.log(err));
+  // getOrganizerMatchUps('5131b0a9-0d19-4897-89d5-f42f03e9df4c')
+  //   .then((res) => console.log('organizer', res))
+  //   .catch((err) => console.log(err));
+
+  getUserMatchUpsAttended('54955977-c461-4943-9e66-288b3ba065ba')
+    .then((res: any) => console.log(res))
+    .catch((err: any) => console.log(err));
 
   /* FILTER STATE */
   const [categories, setCategories] = useState<TSportCategories[]>([
