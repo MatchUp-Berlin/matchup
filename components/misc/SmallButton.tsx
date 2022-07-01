@@ -15,16 +15,11 @@ const SmallButton: React.FunctionComponent<ISmallButtonProps> = (props) => {
       onClick={props.callback}
       className={styles.btn}
       style={{
-        backgroundColor: colors.background[100],
-        boxShadow: darkMode ? '' : shadows.small,
-        border: darkMode ? `1px solid ${colors.primary[100]}` : '',
+        backgroundColor: colors.background[80],
+        boxShadow: darkMode ? shadows.medium : shadows.small,
       }}
     >
-      <svg
-        className={styles.icon}
-        viewBox={props.viewBox ? props.viewBox : '0 0 6 10'}
-        fill={darkMode ? colors.primary[100] : colors.text[60]}
-      >
+      <svg className={styles.icon} viewBox={props.viewBox ? props.viewBox : '0 0 6 10'} fill={colors.primary[100]}>
         {props.icon ? (
           props.icon
         ) : (

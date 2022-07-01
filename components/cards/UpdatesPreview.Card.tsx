@@ -3,10 +3,12 @@ import { Update } from '../../utils/types/Update.Type';
 import React from 'react';
 import SmallButton from '../misc/SmallButton';
 import styles from './styles/UpdatesPreview.Card.module.scss';
+import { User } from '../../utils/types/User.Type';
+import moment from 'moment';
 
 export interface IUpdatesPreviewCardProps {
   updates: Update[];
-  organizerId: string;
+  organizer: User;
 }
 
 const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (props) => {
@@ -32,15 +34,15 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         </div>
       ) : (
         <div className={styles.updates}>
-          {props.updates.map((update) => {
+          {props.updates.map((update, index) => {
             return (
               <>
-                <div key={update.id} className={styles.update}>
+                <div key={index} className={styles.update}>
                   <div className={styles.left}>
                     <p className={styles.message + ' small'} style={{ color: colors.text[80] }}>
                       <b
                         style={{
-                          color: props.organizerId === update.userId ? colors.primary[100] : colors.text[80],
+                          color: props.organizer.id === update.userId ? colors.primary[100] : colors.text[80],
                         }}
                       >
                         {update.user.givenName}:{' '}
@@ -49,7 +51,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
                     </p>
                   </div>
                   <p className={styles.time} style={{ color: colors.secondary }}>
-                    {update.timestamp}
+                    {moment(update.createdAt).format('MMM D, H:mm')}
                   </p>
                 </div>
               </>
