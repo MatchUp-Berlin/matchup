@@ -1,5 +1,6 @@
-import React from 'react';
 import { useTheme } from '../../contexts/Theme';
+import { Update } from '../../utils/types/Update.Type';
+import React from 'react';
 import SmallButton from '../misc/SmallButton';
 import styles from './styles/UpdatesPreview.Card.module.scss';
 import { Update } from '../../utils/types/Update.Type';
@@ -20,7 +21,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         <p className={'highlight-1'} style={{ color: colors.text[80] }}>
           Latest Updates
         </p>
-        <SmallButton callback={() => console.log('Pressed')} />
+        <SmallButton callback={() => console.log('pressed')} />
       </div>
 
       {props.updates.length === 0 ? (
