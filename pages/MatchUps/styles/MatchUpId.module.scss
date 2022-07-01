@@ -1,14 +1,24 @@
 .overlay {
+  // position: fixed;
+  // width: 100vw;
+  // min-height: 100%;
+  // overflow-y: visible;
+  // z-index: 10;
+  // opacity: 0.8;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // background-color: grey;
   position: fixed;
   width: 100vw;
-  min-height: 100%;
-  overflow-y: visible;
-  z-index: 10;
-  opacity: 0.8;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  z-index: 5;
+  background-color: #ffffff8f;
+  backdrop-filter: blur(2px);
+  background-blend-mode: multiply;
 }
 
 .page {
