@@ -29,6 +29,7 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
         className={styles.updatesModalWrapper}
         style={{
           backgroundColor: colors.background[100],
+          borderColor: colors.background[60],
           boxShadow: shadows.medium,
           bottom: animating ? 0 : '-100%',
         }}

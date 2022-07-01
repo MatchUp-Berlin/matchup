@@ -91,14 +91,14 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
           },
       overlay: darkMode
         ? {
-            '100': '#2525256f',
-            '80': '#2525253d',
-            '60': '#25252523',
+            '100': '#6c6c6c6e',
+            '80': '#7171713c',
+            '60': '#75757522',
           }
         : {
             '100': '#ffffff5e',
-            '80': '#ffffff3c',
-            '60': '#ffffff23',
+            '80': '#cacaca3b',
+            '60': '#b2b2b222',
           },
     },
     shadows: {

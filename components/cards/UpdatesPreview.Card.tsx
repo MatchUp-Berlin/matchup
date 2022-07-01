@@ -9,6 +9,7 @@ import moment from 'moment';
 export interface IUpdatesPreviewCardProps {
   updates: Update[];
   organizer: User;
+  callback: () => void;
 }
 
 const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (props) => {
@@ -20,7 +21,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         <p className={'highlight-1'} style={{ color: colors.text[80] }}>
           Latest Updates
         </p>
-        <SmallButton callback={() => console.log('pressed')} />
+        <SmallButton callback={props.callback} highlight />
       </div>
 
       {props.updates.length === 0 ? (
