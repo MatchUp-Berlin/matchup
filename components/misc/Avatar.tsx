@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTheme } from '../../contexts/Theme';
-import Image from 'next/image';
+import ImageFallback from './ImageFallback';
+import getDefaultImage from '../../utils/getDefaultImage';
+import defaultAvatar from '../../public/default-avatar.png';
 
 export interface IAvatarProps {
   size: string;
@@ -31,8 +33,9 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({ size, image }) => {
         overflow: 'hidden',
       }}
     >
-      <Image
+      <ImageFallback
         src={image}
+        fallbackSrc={defaultAvatar.src}
         layout="responsive"
         objectFit="cover"
         width={avatarSize}

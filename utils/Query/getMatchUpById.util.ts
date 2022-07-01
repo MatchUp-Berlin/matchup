@@ -1,4 +1,4 @@
-import { API } from 'aws-amplify';
+import { API, Storage } from 'aws-amplify';
 import { getMatchUp } from '../../src/graphql/queries';
 import { MatchUp } from '../types/MatchUp.Type';
 
@@ -13,6 +13,9 @@ export async function getMatchUpById(id: string): Promise<MatchUp> {
       // authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
       const retrievedMatchUpData = matchUpData.data.getMatchUp;
+
+      retrievedMatchUpData.image = await Storage.get(retrievedMatchUpData.id);
+
       return retrievedMatchUpData;
   } catch (error) {
     throw error;

@@ -3,15 +3,15 @@ import { User } from '../../utils/types/User.Type';
 import { Avatar } from '../misc';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Participant.Card.module.scss';
+import avatar from '../../public/default-avatar.png';
+
 
 export interface IParticipantCardProps {
   user: User;
 }
 
-const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
-  user,
-}) => {
-  const { profileImage, givenName, familyName, matchUps } = user;
+const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({ user }) => {
+  const { profileImage, givenName, familyName, signups } = user;
   const { colors, shadows } = useTheme();
   return (
     <article
@@ -21,18 +21,14 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
         boxShadow: shadows.medium,
       }}
     >
-      <div className='infoContainer'>
-        <p
-          className='highlight-1'
-          style={{ color: colors.text[100] }}
-        >{`${givenName} ${familyName}`}</p>
-        <p
-          style={{ color: colors.text[100] }}
-        >{`${matchUps.length} games played on MatchUp`}</p>
-        <p style={{ color: colors.text[60] }}>Some other info</p>
+      <div className={styles.info}>
+        <p className="highlight-1" style={{ color: colors.text[100] }}>{`${givenName} ${familyName}`}</p>
+        <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p>
+        <p style={{ color: colors.text[60] }}>Speaks: </p>
       </div>
-      <div className='avatarContainer'>
-        <Avatar size={'medium'} image={profileImage} />
+      
+      <div className={styles.avatar}>
+        <Avatar size={'medium'} image={profileImage || avatar} />
       </div>
     </article>
   );

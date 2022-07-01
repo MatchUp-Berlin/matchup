@@ -8,12 +8,7 @@ import { getMatchUpById } from '../../utils/Query/getMatchUpById.util';
 
 import styles from './styles/MatchUpId.module.scss';
 import placeholder from '../../public/placeholder-header.jpeg';
-import clock from '../../public/clock.svg';
-import pin from '../../public/pin.svg';
-import euro from '../../public/euro.svg';
-import getSportIcon from '../../utils/getSportIcon';
-import Image from 'next/image';
-import moment from 'moment';
+import { User } from '../../utils/types/User.Type';
 import { ParticipantsPreviewCard, SkillsCard, SlotsCard } from '../../components/cards';
 import OrganizerCard from '../../components/cards/Organizer.Card';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
@@ -21,6 +16,8 @@ import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
 import MainInfo from '../../components/misc/MainInfo';
+import getDefaultImage from '../../utils/getDefaultImage';
+import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 
 const MatchUpDetail: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -35,11 +32,11 @@ const MatchUpDetail: NextPage = () => {
     <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
       {/*  ------HEADER------  */}
       <Header
-        imageUrl={data ? data.image : placeholder.src} // replace!!
+        imageUrl={data ? data.image || getDefaultImage(data.sportCategory).src : placeholder.src} // replace!!
         leftButton={
           <HeaderButton /* Later fix coloring of buttons to always be white! */
             viewBox="0 0 10 10"
-            callback={() => {}}
+            callback={() => router.back()}
             icon={
               <path
                 xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +90,14 @@ const MatchUpDetail: NextPage = () => {
         isSuccess &&
         data && (
           <div className={styles.contentWrapper}>
-            <MainInfo  />
+            <MainInfo
+              title={data.title}
+              sport={data.sportCategory as TSportCategories}
+              timestamp={data.date}
+              city={data.location as TCity}
+              costs={data.totalCost}
+              indoor={data.indoor}
+            />
 
             {/*  ------BIG PILLS------  */}
             <div className={styles.bigPills}>
@@ -101,35 +105,30 @@ const MatchUpDetail: NextPage = () => {
               <SlotsCard slots={data.attendanceMax} attending={data.signups.items.length}></SlotsCard>
             </div>
 
-            {/*  ------BIG PILLS------  */}
-            <div className={styles.bigPills}>
-              <SkillsCard skillLevel="advanced"></SkillsCard>
-              <SlotsCard slots={8} attending={7}></SlotsCard>
-            </div>
-
             <div
               className={styles.divider}
-              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-            ></div>
-
-            <div
-              className={styles.divider}
-              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
             ></div>
 
             {/*  ------ORGANIZER------  */}
-            <OrganizerCard></OrganizerCard>
+            <OrganizerCard organizer={data.organizer as User}></OrganizerCard>
 
             <div
               className={styles.divider}
-              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
             ></div>
 
             {/*  ------PARTICIPATING PREVIEW------  */}
             <ParticipantsPreviewCard users={data.signups.items}></ParticipantsPreviewCard>
             <div
               className={styles.divider}
-              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
             ></div>
 
             {/*  ------DESCRIPTION PREVIEW------  */}
@@ -139,25 +138,24 @@ const MatchUpDetail: NextPage = () => {
               </p>
               <p style={{ color: colors.text[60] }}>
                 {data.description}
-                {data.description.length > 100 && (
-                  <span style={{ color: colors.primary[100] }}> Read more</span>
-                )}
+                {data.description.length > 100 && <span style={{ color: colors.primary[100] }}> Read more</span>}
               </p>
             </div>
 
             <div
               className={styles.divider}
-              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
             ></div>
 
-            <UpdatesPreviewCard
-              updates={data.updates.items}
-              organizerId={data.organizer}
-            ></UpdatesPreviewCard>
+            <UpdatesPreviewCard updates={data.updates.items} organizer={data.organizer}></UpdatesPreviewCard>
 
             <div
               className={styles.divider}
-              style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+              }}
             ></div>
 
             <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
