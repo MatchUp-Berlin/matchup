@@ -24,6 +24,7 @@ import getDefaultImage from '../../utils/getDefaultImage';
 import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 import ConfirmJoinModal from '../../components/modals/ConfirmJoin.Modal';
 import { useState } from 'react';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 const MatchUpDetail: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -35,9 +36,39 @@ const MatchUpDetail: NextPage = () => {
     () => getMatchUpById(MatchUpId as string)
   );
 
+  const { user } = useAuthenticator((context) => [
+    context.authStatus,
+    context.user,
+  ]);
+
+  const userSignedUp = () =>
+    data?.signups.items.some((signup) => signup.userId === user.username);
+
+  const eventHasStarted = () => {
+    return (
+      data && Date.parse(data?.date) < Date.parse(new Date().toISOString())
+    );
+  };
+
+  const isWithin24Hours = () => {
+    const twentyFourHoursInMilSec = 24 * 60 * 60 * 1000;
+    return (
+      (data &&
+        Date.parse(data?.date) - twentyFourHoursInMilSec <
+          Date.parse(new Date().toISOString())) ||
+      false
+    );
+  };
+
   const [showConfirmJoinModal, setShowConfirmJoinModal] = useState(false);
 
   const handleJoin = () => {
+    // Check here if its possible to sign in. Show different modal then.
+    setShowConfirmJoinModal((prev) => !prev);
+  };
+
+  const handleCancel = () => {
+    // Check here if its possible to sign in. Show different modal then.
     setShowConfirmJoinModal((prev) => !prev);
   };
 
@@ -48,7 +79,11 @@ const MatchUpDetail: NextPage = () => {
     >
       {/*  ------Modal------  */}
       {showConfirmJoinModal && data && (
-        <ConfirmJoinModal matchUp={data}></ConfirmJoinModal>
+        <ConfirmJoinModal
+          join={!userSignedUp()}
+          matchUp={data}
+          isWithin24Hours={isWithin24Hours()}
+        ></ConfirmJoinModal>
       )}
       {/*  ------HEADER------  */}
       <Header
@@ -226,11 +261,16 @@ const MatchUpDetail: NextPage = () => {
           </div>
         }
         rightButton={
-          <Button
-            variant='primary'
-            text='Join'
-            callback={() => handleJoin()}
-          ></Button>
+          // !eventHasStarted()
+          true && (
+            <Button
+              variant='primary'
+              text={userSignedUp() ? 'Cancel' : 'Join'}
+              callback={
+                userSignedUp() ? () => handleCancel() : () => handleJoin()
+              }
+            ></Button>
+          )
         }
       ></Footer>
     </div>
