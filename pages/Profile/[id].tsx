@@ -19,7 +19,7 @@ const ProfileDetailPage: NextPage = () => {
   const { colors, darkMode } = useTheme();
   const router = useRouter();
   const { id } = router.query;
-  const [organizedEventsLimit, setOrganizedEventsLimit] = useState<number>(2);
+  const [organizedEventsLimit, setOrganizedEventsLimit] = useState<number>(4);
 
   // getting user info
   const { isLoading, isSuccess, isError, data } = useQuery(['user', id], () => {
@@ -115,7 +115,8 @@ const ProfileDetailPage: NextPage = () => {
                 isMatchUpsError && <p>error</p>
               )}
               {isMatchUpsRefetching && <h4>refetching</h4>}
-              <div>
+              <div style={{ marginBottom: '5em' }}>
+                <h4>Organized {matchUpsData?.items.length} Matchups</h4>
                 {isMatchUpsSuccess &&
                   matchUpsData.items.map((match) => {
                     console.log(match);
@@ -145,16 +146,24 @@ const ProfileDetailPage: NextPage = () => {
                       />
                     );
                   })}
+                <Button
+                  variant='secondary'
+                  callback={
+                    organizedEventsLimit < 5
+                      ? () =>
+                          setOrganizedEventsLimit(
+                            (prevOrganizedEventsLimit) =>
+                              prevOrganizedEventsLimit + 3
+                          )
+                      : () =>
+                          setOrganizedEventsLimit(
+                            (prevOrganizedEventsLimit) =>
+                              prevOrganizedEventsLimit - 3
+                          )
+                  }
+                  text={organizedEventsLimit < 5 ? 'Show More' : 'Show Less'}
+                />
               </div>
-              <Button
-                variant='secondary'
-                callback={() =>
-                  setOrganizedEventsLimit(
-                    (prevOrganizedEventsLimit) => prevOrganizedEventsLimit + 3
-                  )
-                }
-                text={'Load more'}
-              />
             </div>
           </section>
         )
