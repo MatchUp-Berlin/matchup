@@ -19,10 +19,12 @@ const ProfileDetailPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  // getting user info
   const { isLoading, isSuccess, isError, data } = useQuery(['user', id], () => {
     return getUserById(id as string);
   });
 
+  // getting events organized events
   const {
     isLoading: isMatchUpsLoading,
     isSuccess: isMatchUpsSuccess,
@@ -121,9 +123,33 @@ const ProfileDetailPage: NextPage = () => {
               )}
               <div>
                 {isMatchUpsSuccess &&
-                  matchUpsData.items.map((item) => {
-                    console.log(item);
-                    return <p>nnn</p>;
+                  matchUpsData.items.map((match) => {
+                    console.log(match);
+                    return (
+                      <MatchUpCard
+                        variant={'small'}
+                        id={match.id as string}
+                        title={match.title}
+                        location={match.location}
+                        coordinates={match.coordinates}
+                        signups={match.signups}
+                        organizerId={match.organizerId}
+                        sportCategory={match.sportCategory}
+                        skillLevel={match.skillLevel}
+                        totalCost={match.totalCost}
+                        reservedCourt={match.reservedCourt}
+                        attendanceMin={match.attendanceMin}
+                        attendanceMax={match.attendanceMax}
+                        cancelled={match.cancelled}
+                        description={match.description}
+                        image={match.image}
+                        date={match.date}
+                        currency={match.currency}
+                        updates={match.updates}
+                        watchList={match.watchList}
+                        indoor={match.indoor}
+                      />
+                    );
                   })}
               </div>
               <Button
