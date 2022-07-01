@@ -22,7 +22,7 @@ const UpdatesMessageCard: React.FunctionComponent<IUpdatesMessageCardProps> = (p
       <div
         className={styles.updateMessageCardWrapper}
         style={{
-          backgroundColor: colors.background[80],
+          backgroundColor: colors.background[60],
           boxShadow: darkMode ? shadows.medium : shadows.small,
         }}
       >
