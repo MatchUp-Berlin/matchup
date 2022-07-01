@@ -3,19 +3,31 @@
   height: 70vh;
   position: absolute;
   z-index: 20;
+  bottom: 0;
 
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 
-  padding: 1em;
+  padding: 1em 1em 0 1em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 
   transition: 0.5s;
-}
+  .scrollable {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    gap: 1em;
+    padding-bottom: 2em;
 
-.closed, .closing {
-  bottom: -100%;
-}
+    /* Shadows not being cut off */
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
 
-.open, .opening {
-  bottom: 0;
+  }
 }
