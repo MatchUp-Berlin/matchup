@@ -1,5 +1,5 @@
 import { Geo } from 'aws-amplify';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity } from '../../utils/types/MatchUp.Type';
 import { TCoordinates } from '../../utils/types/cityLatLong';
@@ -8,6 +8,7 @@ import Switch from '../misc/Switch';
 import styles from './styles/PrimaryInfo.Form.module.scss';
 import { createMap } from "maplibre-gl-js-amplify";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { callbackify } from 'util';
 
 export interface IPrimaryInfoFormProps {
   title: string;
@@ -25,6 +26,9 @@ export interface IPrimaryInfoFormProps {
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
   const { colors, darkMode } = useTheme();
+  const [LocationSearchResult, setLocationSearchResult] = useState(false);
+  const [locationResult, setLocationResult] = useState([]);
+
 
   async function initializeMap() {
       const map = await createMap({
@@ -34,21 +38,25 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
     })
 }
 
-initializeMap();
+useEffect(() => {
+  initializeMap();
+}, []);
+
+function selectLocation(location) {
+  props.setCoordinates({
+    longitude: location.geometry.point[0],
+    latitude: location.geometry.point[1]
+  })
+  console.log(location)
+  props.setLocation(location.region.toLowerCase())
+}
 
   async function searchLocation(event: any) {
-    const searchOptions = { maxResults: 10, language: 'en' };
-    const results = await Geo.searchByText(event, searchOptions);
+    if (event.target.value.length === 0) return;
+    const searchOptions = { maxResults: 5, language: 'en', countries: ["DEU"]};
+    const results = await Geo.searchByText(event.target.value, searchOptions);
     console.log(results);
-    if (results.length > 0) {
-      // setLocationSearchResult(true);
-      props.setLocation(results);
-      props.setCoordinates(results.coordinates);
-    }
-    if (results.length <= 0) {
-      props.setLocation([]);
-      // setLocationSearchResult(false);
-    }
+    if (results.length > 0) setLocationResult(results);
   }
 
   return (
@@ -93,6 +101,7 @@ initializeMap();
         <input
           value={props.location}
           onChange={(e) => props.setLocation(e.target.value as TCity)}
+          onKeyUp={e => searchLocation(e)}
           placeholder="Where do you want to meet?"
           className={styles.input}
           style={{
@@ -101,6 +110,15 @@ initializeMap();
             marginBottom: '1em',
           }}
         ></input>
+        <div>
+          {locationResult.map((location) => (
+              <div key={location.label}>
+                  <li onClick={() => selectLocation(location)}>{location.label}</li>
+        </div>
+          ))}
+          {/* {selectedLocationResult ? <div id="selectedlocation"><h5>Location&ensp;|</h5><p>&ensp;
+          {selectedLocation}</p><TiDeleteOutline onClick={removeLocation}/></div> : ''} */}
+      </div>
         <div id="map" className={styles.map}></div>
       </div>
 
@@ -113,3 +131,7 @@ initializeMap();
 };
 
 export default PrimaryInfoForm;
+function selectLocation(label: any): void {
+  throw new Error('Function not implemented.');
+}
+

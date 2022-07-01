@@ -41,8 +41,8 @@ const OrganizePage: NextPage = () => {
   const [sportCategory, setSportCategory] = useState<TSportCategories>();
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
-  const [location, setLocation] = useState<TCity>('berlin');
-  const [coordinates, SetCoordinates] = useState<TCoordinates>({latitude: cityLatLong[location].latitude, longitude: cityLatLong[location].longitude})
+  const [location, setLocation] = useState<TCity>();
+  const [coordinates, SetCoordinates] = useState<TCoordinates>({latitude: cityLatLong.berlin.latitude, longitude: cityLatLong.berlin.longitude})
   const [indoor, setIndoor] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
