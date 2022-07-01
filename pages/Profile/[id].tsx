@@ -119,6 +119,13 @@ const ProfileDetailPage: NextPage = () => {
               ) : (
                 isMatchUpsError && <p>error</p>
               )}
+              <div>
+                {isMatchUpsSuccess &&
+                  matchUpsData.items.map((item) => {
+                    console.log(item);
+                    return <p>nnn</p>;
+                  })}
+              </div>
               <Button
                 variant='secondary'
                 callback={() => {}}
