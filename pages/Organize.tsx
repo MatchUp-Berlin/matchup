@@ -22,6 +22,7 @@ import { useTheme } from '../contexts/Theme';
 
 import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 import { TCoordinates } from '../utils/types/cityLatLong';
+import { cityLatLong } from '../utils/types/cityLatLong';
 
 /* LOCATION */
 import PrimaryInfoForm from '../components/forms/PrimaryInfo.Form';
@@ -41,7 +42,7 @@ const OrganizePage: NextPage = () => {
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [location, setLocation] = useState<TCity>('berlin');
-  const [coordinates, SetCoordinates] = useState<TCoordinates>({latitude: 0, longitude: 0})
+  const [coordinates, SetCoordinates] = useState<TCoordinates>({latitude: cityLatLong[location].latitude, longitude: cityLatLong[location].longitude})
   const [indoor, setIndoor] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);

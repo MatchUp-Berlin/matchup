@@ -72,5 +72,39 @@
       "dependsOn": []
     }
   },
-  "geo": {}
+  "geo": {
+    "placeindex92e6cd50": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex",
+      "dataProvider": "HERE",
+      "dataSourceIntendedUse": "SingleUse",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "matchup",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "mapf19b652b": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorEsriLightGrayCanvas",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "matchup",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    }
+  }
 }

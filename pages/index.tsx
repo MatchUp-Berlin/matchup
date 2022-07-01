@@ -7,7 +7,9 @@ import SportFilter from '../components/misc/SportFilter';
 import styles from './styles/Explore.module.scss';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import StaticMap from '../components/maps/Static.Map';
-import { createMap } from "maplibre-gl-js-amplify"
+import { createMap } from "maplibre-gl-js-amplify";
+import "maplibre-gl/dist/maplibre-gl.css";
+import "maplibre-gl-js-amplify/dist/public/amplify-map.css";
 import { drawPoints } from "maplibre-gl-js-amplify";
 import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
@@ -39,15 +41,24 @@ const Home: NextPage = () => {
     setCityCoordinates(cityLatLong[city])
   );
 
+  function mapToggle() {
+    setShowMap(!showMap)
+    initializeMap();
+  }
+
   async function initializeMap() {
-    const map = await createMap({
+    if (!showMap) {
+    let map = await createMap({
         container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
-        center: [52.531677, 13.381777], // [Longitude, Latitude]
-        zoom: 11,
+        center: [cityCoordinates.longitude, cityCoordinates.latitude], // [Longitude, Latitude]
+        zoom: 12.5,
     })
+  } else {
+    let map = null;
+  }
 }
 
-initializeMap();
+// initializeMap();
 
 
   /* DATA FETCHING */
@@ -75,11 +86,11 @@ initializeMap();
       <SportFilter categories={categories} setCategories={setCategories} /* refetch={refetch} */ />
 
       {/* ------MAP BUTTON------ */}
-      <MapButton map={showMap} callback={() => setShowMap(!showMap)}></MapButton>
+      <MapButton map={showMap} callback={() => mapToggle()}></MapButton>
 
       {/* ------MATCHUP LIST OR MAP------ */}
       {showMap ? (
-        <div id="map"></div>
+        <div id="map" className="fullheight-map"></div>
       ) : isError ? (
         <div className={styles.errorWrapper} style={{ color: colors.text[60] }}>
           Oops, something went wrong!

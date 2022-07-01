@@ -27,19 +27,11 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
   const { colors, darkMode } = useTheme();
 
   async function initializeMap() {
-    if (props.coordinates) {
       const map = await createMap({
         container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
-        center: [props.coordinates.latitude, props.coordinates.longitude], // [Longitude, Latitude]
-        zoom: 11,
+        center: [props.coordinates.longitude, props.coordinates.latitude], // [Longitude, Latitude]
+        zoom: 12,
     })
-    } else {
-    const map = await createMap({
-        container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
-        center: [52.531677, 13.381777], // [Longitude, Latitude]
-        zoom: 11,
-    })
-  }
 }
 
 initializeMap();
@@ -109,7 +101,7 @@ initializeMap();
             marginBottom: '1em',
           }}
         ></input>
-        <div id="map"></div>
+        <div id="map" className={styles.map}></div>
       </div>
 
       <div className={styles.indoor} style={{ color: colors.text[60] }}>

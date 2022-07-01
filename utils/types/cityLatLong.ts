@@ -6,16 +6,16 @@ export interface TCoordinates {
 
 export const cityLatLong = {
     berlin: {
-        latitude: 52.531677,
+        latitude: 52.51,
         longitude: 13.381777
     },
     hamburg: {
-        latitude: 10.4,
-        longitude: 101.1
+        latitude: 53.5511,
+        longitude: 9.9937
     },
     munich: {
-        latitude: 90.4,
-        longitude: 101.1
+        latitude: 48.1351,
+        longitude: 11.5820
     },
     cologne: {
         latitude: 79.4,
