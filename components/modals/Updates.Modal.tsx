@@ -34,8 +34,8 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
           />
         </div>
         <div className={styles.scrollable}>
-          {props.updates.map((update) => {
-            return <UpdatesMessageCard update={update} organizer={props.organizer} />;
+          {props.updates.map((update, index) => {
+            return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;
           })}
         </div>
         <div className={styles.sendGroup}>

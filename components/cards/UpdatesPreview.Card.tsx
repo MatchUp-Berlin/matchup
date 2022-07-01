@@ -3,7 +3,6 @@ import { Update } from '../../utils/types/Update.Type';
 import React from 'react';
 import SmallButton from '../misc/SmallButton';
 import styles from './styles/UpdatesPreview.Card.module.scss';
-import { Update } from '../../utils/types/Update.Type';
 import { User } from '../../utils/types/User.Type';
 import moment from 'moment';
 
@@ -35,10 +34,10 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         </div>
       ) : (
         <div className={styles.updates}>
-          {props.updates.map((update) => {
+          {props.updates.map((update, index) => {
             return (
               <>
-                <div key={update.id} className={styles.update}>
+                <div key={index} className={styles.update}>
                   <div className={styles.left}>
                     <p className={styles.message + ' small'} style={{ color: colors.text[80] }}>
                       <b
