@@ -29,6 +29,7 @@ const ParticipantsModal: React.FunctionComponent<IParticipantsModalProps> = (pro
           backgroundColor: colors.background[100],
           boxShadow: shadows.large,
           bottom: animating ? 0 : '-100%',
+          borderColor: colors.background[60],
         }}
       >
         <SmallButton
