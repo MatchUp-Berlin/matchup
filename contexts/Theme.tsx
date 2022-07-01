@@ -21,6 +21,11 @@ interface IColors {
     '80': string;
     '60': string;
   };
+  overlay: {
+    '100': string;
+    '80': string;
+    '60': string;
+  };
 }
 
 interface IShadows {
@@ -83,6 +88,17 @@ export const ThemeProvider: FC<any> = ({ children }: any) => {
             '100': '#FFFFFF',
             '80': '#FFFFFF',
             '60': '#FFFFFF',
+          },
+      overlay: darkMode
+        ? {
+            '100': '#2525256f',
+            '80': '#2525253d',
+            '60': '#25252523',
+          }
+        : {
+            '100': '#ffffff5e',
+            '80': '#ffffff3c',
+            '60': '#ffffff23',
           },
     },
     shadows: {
