@@ -1,3 +1,15 @@
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  background-color: #ffffff8f;
+  backdrop-filter: blur(2px);
+  background-blend-mode: multiply;
+}
 
 .page {
   min-height: 100vh;
@@ -13,8 +25,6 @@
       border-bottom-width: 1px;
       border-bottom-style: solid;
     }
-
-    
 
     .bigPills {
       margin: 2em 0;
@@ -37,9 +47,9 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-      svg {
-        position: relative;
-        bottom: -2px;
-      }
+    svg {
+      position: relative;
+      bottom: -2px;
+    }
   }
 }

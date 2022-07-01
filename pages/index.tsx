@@ -16,12 +16,20 @@ import MapButton from '../components/misc/MapButton';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import moment from 'moment';
 
+import { getOrganizerMatchUps } from '../utils/Query/getOrganizerMatchUps.util';
+
 const Home: NextPage = () => {
   const { colors, shadows } = useTheme();
   const [showMap, setShowMap] = useState<boolean>(false);
 
+  getOrganizerMatchUps('5131b0a9-0d19-4897-89d5-f42f03e9df4c')
+    .then((res) => console.log('organizer', res))
+    .catch((err) => console.log(err));
+
   /* FILTER STATE */
-  const [categories, setCategories] = useState<TSportCategories[]>(['football']);
+  const [categories, setCategories] = useState<TSportCategories[]>([
+    'football',
+  ]);
   const [city, setCity] = useState<TCity>('berlin');
 
   const start = new Date();
@@ -35,17 +43,24 @@ const Home: NextPage = () => {
   });
 
   /* DATA FETCHING */
-  const { isError, isLoading, isRefetching, isSuccess, refetch, data } = useQuery(
-    ['matchups', categories],
-    () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
-  );
+  const { isError, isLoading, isRefetching, isSuccess, refetch, data } =
+    useQuery(['matchups', categories], () =>
+      getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
+    );
 
   return (
     <>
-      <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
+      <div
+        style={{ backgroundColor: colors.background[100] }}
+        className={styles.page}
+      >
         {/* ------FILTERING------ */}
         <div className={styles.searchBar}>
-          <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
+          <Filter
+            city={city}
+            setCity={setCity}
+            setTimeFrame={setTimeFrame}
+          ></Filter>
           <div
             onClick={() => refetch()}
             className={styles.button}
@@ -63,16 +78,25 @@ const Home: NextPage = () => {
             <LoadingSpinner />
           </div>
         )}
-        <SportFilter categories={categories} setCategories={setCategories} /* refetch={refetch} */ />
+        <SportFilter
+          categories={categories}
+          setCategories={setCategories} /* refetch={refetch} */
+        />
 
         {/* ------MAP BUTTON------ */}
-        <MapButton map={showMap} callback={() => setShowMap(!showMap)}></MapButton>
+        <MapButton
+          map={showMap}
+          callback={() => setShowMap(!showMap)}
+        ></MapButton>
 
         {/* ------MATCHUP LIST OR MAP------ */}
         {showMap ? (
           '<StaticMap longitude={13} latitude={53} zoom={14}></StaticMap>'
         ) : isError ? (
-          <div className={styles.errorWrapper} style={{ color: colors.text[60] }}>
+          <div
+            className={styles.errorWrapper}
+            style={{ color: colors.text[60] }}
+          >
             Oops, something went wrong!
           </div>
         ) : isLoading ? (
@@ -86,7 +110,7 @@ const Home: NextPage = () => {
                 <MatchUpCard
                   id={matchup.id as string}
                   key={matchup.id}
-                  variant="large"
+                  variant='large'
                   timestamp={matchup.date}
                   title={matchup.title}
                   slots={matchup.attendanceMax}
@@ -103,7 +127,10 @@ const Home: NextPage = () => {
             })}
           </div>
         ) : (
-          <div className={styles.emptyWrapper} style={{ color: colors.text[60] }}>
+          <div
+            className={styles.emptyWrapper}
+            style={{ color: colors.text[60] }}
+          >
             Nothing to show!
           </div>
         )}
