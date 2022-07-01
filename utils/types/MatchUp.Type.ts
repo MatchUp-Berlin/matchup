@@ -2,6 +2,7 @@ import { SignUp, SignUpsReturn } from './SignUp.Type';
 import { Update } from './Update.Type';
 import { WatchList } from './WatchList.Type';
 import { User } from './User.Type';
+import { TAddress } from './Address.Type';
 
 export type TSportCategories =
   | 'basketball'
@@ -30,7 +31,7 @@ export interface MatchUp {
   id?: string;
   title: string;
   location: string;
-  address: Object;
+  address: TAddress;
   signups: SignUpsReturn;
   organizerId: string;
   organizer?: User;
