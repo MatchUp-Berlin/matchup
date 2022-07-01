@@ -2,60 +2,46 @@ import { Geo } from 'aws-amplify';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity } from '../../utils/types/MatchUp.Type';
-import { TCoordinates } from '../../utils/types/cityLatLong';
-import StaticMap from '../maps/Static.Map';
+import { TAddress } from '../../utils/types/Address.Type';
 import Switch from '../misc/Switch';
 import styles from './styles/PrimaryInfo.Form.module.scss';
-import { createMap } from "maplibre-gl-js-amplify";
-import "maplibre-gl/dist/maplibre-gl.css";
-import { callbackify } from 'util';
+import { initializeMap } from '../../utils/Maps/initializeMap.util';
 
 export interface IPrimaryInfoFormProps {
   title: string;
   date: string;
   location: TCity;
-  coordinates: TCoordinates;
+  address: TAddress;
   indoor: boolean;
 
   setTitle: Dispatch<SetStateAction<string>>;
   setDate: Dispatch<SetStateAction<string>>;
   setLocation: Dispatch<SetStateAction<TCity>>;
-  setCoordinates: Dispatch<SetStateAction<TCoordinates>>;
+  setAddress: Dispatch<SetStateAction<TAddress>>;
   setIndoor: Dispatch<SetStateAction<boolean>>;
 }
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
   const { colors, darkMode } = useTheme();
-  const [LocationSearchResult, setLocationSearchResult] = useState(false);
   const [locationResult, setLocationResult] = useState([]);
 
-
-  async function initializeMap() {
-      const map = await createMap({
-        container: "map", // An HTML Element or HTML element ID to render the map in https://maplibre.org/maplibre-gl-js-docs/api/map/
-        center: [props.coordinates.longitude, props.coordinates.latitude], // [Longitude, Latitude]
-        zoom: 12,
-    })
-}
-
 useEffect(() => {
-  initializeMap();
+  initializeMap(props.address);
 }, []);
 
 function selectLocation(location) {
-  props.setCoordinates({
-    longitude: location.geometry.point[0],
-    latitude: location.geometry.point[1]
-  })
-  console.log(location)
-  props.setLocation(location.region.toLowerCase())
+  setLocationResult([]);
+  props.setAddress(location)
+  initializeMap(props.address);
 }
 
   async function searchLocation(event: any) {
-    if (event.target.value.length === 0) return;
+    if (event.target.value.length === 0) {
+      setLocationResult([]);
+      return;
+    }
     const searchOptions = { maxResults: 5, language: 'en', countries: ["DEU"]};
     const results = await Geo.searchByText(event.target.value, searchOptions);
-    console.log(results);
     if (results.length > 0) setLocationResult(results);
   }
 
@@ -116,8 +102,6 @@ function selectLocation(location) {
                   <li onClick={() => selectLocation(location)}>{location.label}</li>
         </div>
           ))}
-          {/* {selectedLocationResult ? <div id="selectedlocation"><h5>Location&ensp;|</h5><p>&ensp;
-          {selectedLocation}</p><TiDeleteOutline onClick={removeLocation}/></div> : ''} */}
       </div>
         <div id="map" className={styles.map}></div>
       </div>
