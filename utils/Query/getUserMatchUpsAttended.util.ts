@@ -6,7 +6,7 @@ import { getMatchUpById } from './getMatchUpById.util';
 
 export async function getUserMatchUpsAttended(
   userId: string
-): Promise<MatchUp> {
+): Promise<MatchUp[]> {
   try {
     const signUps = await API.graphql({
       query: listSignUps,
