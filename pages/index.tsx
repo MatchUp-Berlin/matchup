@@ -1,14 +1,19 @@
 import type { NextPage } from 'next';
 import { useTheme } from '../contexts/Theme';
 import Navigation from '../components/misc/Navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Filter from '../components/misc/Filter';
 import SportFilter from '../components/misc/SportFilter';
 import styles from './styles/Explore.module.scss';
 import MatchUpCard from '../components/cards/MatchUp.Card';
-import StaticMap from '../components/maps/Static.Map';
+import { createMap } from 'maplibre-gl-js-amplify';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import 'maplibre-gl-js-amplify/dist/public/amplify-map.css';
+import { drawPoints } from 'maplibre-gl-js-amplify';
 import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
+import { cityLatLong, TAddress } from '../utils/types/Address.Type';
+import { initializeMapExplorer } from '../utils/Maps/initializeMapExplorer.util';
 
 import LoadingSpinner from '../components/misc/LoadingSpinner';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
@@ -27,8 +32,9 @@ const Home: NextPage = () => {
     .catch((err) => console.log(err));
 
   /* FILTER STATE */
-  const [categories, setCategories] = useState<TSportCategories[]>(['football']);
+  const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
+  const [address, setAddress] = useState<TAddress>(cityLatLong[city]);
 
   const start = new Date();
   start.setUTCHours(0, 0, 0, 0);
@@ -41,10 +47,14 @@ const Home: NextPage = () => {
   });
 
   /* DATA FETCHING */
-  const { isError, isLoading, isRefetching, isSuccess, refetch, data } = useQuery(
-    ['matchups', categories],
-    () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
+  const { isError, isLoading, isRefetching, isSuccess, refetch, data } = useQuery(['matchups', categories], () =>
+    getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
   );
+
+  function mapToggle() {
+    setShowMap(!showMap);
+    initializeMapExplorer(data.items, city);
+  }
 
   return (
     <>
