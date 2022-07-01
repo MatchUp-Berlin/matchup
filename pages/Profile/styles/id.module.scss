@@ -1,6 +1,14 @@
 .contentWrapper {
   padding: 1em;
-  margin-bottom: 5em;
+  margin-bottom: 4.7em;
+}
+
+.avatarWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0 2em;
 }
 
 .singleStat {
@@ -12,4 +20,22 @@
   svg {
     margin-right: 0.4em;
   }
+}
+
+.organizedEventsSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3em;
+  gap: 0.8em;
+}
+
+.showMoreBtn {
+  margin-top: 0.3em;
+  margin-bottom: 0.2em;
+}
+
+.spinner {
+  margin-top: 0.5em;
 }
