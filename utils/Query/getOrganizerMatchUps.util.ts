@@ -15,14 +15,10 @@ export async function getOrganizerMatchUps(
 
     const matchUpsData = await API.graphql({
       query: listMatchUps,
-<<<<<<< HEAD
       variables: {
         filter: filter,
         offset: showCards,
       },
-=======
-      variables: { filter: filter },
->>>>>>> main
     });
 
     const retrievedData = await matchUpsData.data.listMatchUps;
