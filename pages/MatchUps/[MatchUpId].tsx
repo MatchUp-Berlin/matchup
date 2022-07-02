@@ -19,15 +19,12 @@ import MainInfo from '../../components/misc/MainInfo';
 import getDefaultImage from '../../utils/getDefaultImage';
 import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 import ConfirmJoinModal from '../../components/modals/ConfirmJoin.Modal';
-import { ReactComponentElement, ReactElement, ReactHTMLElement, ReactNode, useEffect, useState } from 'react';
-import { useAuthenticator } from '@aws-amplify/ui-react';
+import { ReactNode, useEffect, useState } from 'react';
 import ParticipantsModal from '../../components/modals/Participants.Modal';
 import UpdatesModal from '../../components/modals/Updates.Modal';
-import { Update } from '../../utils/types/Update.Type';
-import { removeWatchList } from '../../utils/Mutation/removeWatchList.util';
-import { createWatchList } from '../../src/graphql/mutations';
 import { createNewWatchList } from '../../utils/Mutation/createWatchList.util';
-import { edit, editPath, share, watchList } from '../../components/icons';
+import { edit, share, watchList } from '../../components/icons';
+import { useAuth } from '../../contexts/Auth';
 
 const ms = 24 * 60 * 60 * 1000;
 
@@ -45,40 +42,38 @@ const MatchUpDetail: NextPage = () => {
   const mutation = useMutation(['watchlist', MatchUpId], createNewWatchList);
 
   /* -----USER ROLE----- */
-  const { user } = useAuthenticator((context) => [context.authStatus, context.user]);
+  const { currentUser } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
 
   useEffect(() => {
-    if (data && user) {
-      setIsSignedUp(data.signups.items.some((participant) => participant.userId === user.username));
-      setIsOrganizer(user.username === data.organizerId);
+    if (data && currentUser) {
+      setIsSignedUp(data.signups.items.some((participant) => participant.userId === currentUser));
+      setIsOrganizer(currentUser === data.organizerId);
     }
-  }, [data, user]);
+  }, [data, currentUser]);
 
   /* -----EVENT STATE----- */
   const [isWithin24h, setIsWithin24h] = useState<boolean>(false);
   const [hasStarted, setHasStarted] = useState<boolean>(false);
 
   useEffect(() => {
-    if (data && user) {
+    if (data && currentUser) {
       setHasStarted(Date.parse(data?.date) < Date.parse(new Date().toISOString()));
       setIsWithin24h(Date.parse(data?.date) - ms < Date.parse(new Date().toISOString()));
     }
-  }, [data, user]);
+  }, [data, currentUser]);
 
   /* -------RENDER CORRECT HEADER BUTTONS------- */
   const [headerButtons, setHeaderButtons] = useState<ReactNode[]>([]);
   useEffect(() => {
-    if (data && user) {
+    if (data && currentUser) {
       if (isOrganizer)
         setHeaderButtons([
           <HeaderButton
             key={1}
             viewBox={share.viewBox}
-            callback={() =>
-              mutation.mutate({ userId: user.username as string, matchUpId: data.id as string })
-            }
+            callback={() => mutation.mutate({ userId: currentUser as string, matchUpId: data.id as string })}
             icon={share.path}
           />,
           <HeaderButton
@@ -96,7 +91,7 @@ const MatchUpDetail: NextPage = () => {
           <HeaderButton key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
         ]);
     }
-  }, [isSignedUp, isOrganizer, data, user]);
+  }, [isSignedUp, isOrganizer, data, currentUser]);
 
   /* -------MODAL STATE------- */
   const [showSignUpModal, setshowSignUpModal] = useState<boolean>(false);

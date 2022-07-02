@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { useAuthenticator } from '@aws-amplify/ui-react';
 import Router, { useRouter } from 'next/router';
 import Header from '../components/misc/Header';
 import { useState } from 'react';
@@ -31,9 +30,10 @@ import OrganizeConfirmationForm from '../components/forms/OrganizeConfirmation.F
 import { useMutation, useQuery } from 'react-query';
 import { createNewMatchUp } from '../utils/Mutation/createMatchUp.util';
 import { Storage } from 'aws-amplify';
+import { useAuth } from '../contexts/Auth';
 
 const OrganizePage: NextPage = () => {
-  const { user } = useAuthenticator((context) => [context.user]);
+  const { currentUser } = useAuth();
   const { colors } = useTheme();
   const router = useRouter();
 
@@ -320,7 +320,7 @@ const OrganizePage: NextPage = () => {
                     totalCost,
                     description,
                     image,
-                    organizerId: user.username as string,
+                    organizerId: currentUser as string,
                   })
                 }
                 text="Save"
