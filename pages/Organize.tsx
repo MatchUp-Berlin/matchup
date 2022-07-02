@@ -41,8 +41,6 @@ const OrganizePage: NextPage = () => {
   const { colors } = useTheme();
   const router = useRouter();
 
-  console.log('USER', user);
-
   /* Keeping track of all of the answers */
   const [sportCategory, setSportCategory] = useState<TSportCategories>();
   const [title, setTitle] = useState<string>('');

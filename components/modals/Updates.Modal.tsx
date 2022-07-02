@@ -60,6 +60,7 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
               backgroundColor: colors.background[80],
               boxShadow: darkMode ? shadows.medium : shadows.small,
               color: colors.text[100],
+              outlineColor: colors.primary[100],
             }}
           />
           <div

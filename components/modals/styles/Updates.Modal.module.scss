@@ -13,12 +13,12 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-  
+
   border: 1px;
   border-style: solid;
 
   transition: 0.5s;
-  
+
   .scrollable {
     height: 90%;
     display: flex;
@@ -54,7 +54,9 @@
 }
 
 .input:focus {
-  outline: none;
+  outline-width: 2px;
+  outline-offset: -2px;
+  outline-style: solid;
 }
 
 .button {

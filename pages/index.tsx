@@ -29,6 +29,7 @@ const Home: NextPage = () => {
   const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
   const [address, setAddress] = useState<TAddress>(cityLatLong[city]);
+  const [currentMap, setCurrentMap] = useState();
 
   const start = new Date();
   start.setUTCHours(0, 0, 0, 0);
@@ -46,10 +47,17 @@ const Home: NextPage = () => {
       getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
     );
 
-  function mapToggle() {
-    setShowMap(!showMap);
-    initializeMapExplorer(address, city);
-  }
+  async function mapToggle() {
+      setShowMap(!showMap);
+      const matchUps = data?.items;
+      if (!showMap) {
+       const map = await initializeMapExplorer(matchUps, city)
+       setCurrentMap(map)
+      } else {
+        if(!currentMap) return;
+        currentMap.remove();
+      }
+    }
 
   return (
     <>
@@ -94,6 +102,7 @@ const Home: NextPage = () => {
         <MapButton map={showMap} callback={() => mapToggle()}></MapButton>
 
         {/* ------MATCHUP LIST OR MAP------ */}
+
         {showMap ? (
           <div id='map' className='fullheight-map'></div>
         ) : isError ? (
