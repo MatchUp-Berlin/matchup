@@ -42,16 +42,18 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (
         }}
         className={styles.modalContainer}
       >
-        <h4 style={{ color: colors.text[100] }}>Rate this MatchUp</h4>
+        <h4 style={{ color: colors.text[80] }}>Rate this MatchUp</h4>
         {/* <Avatar size={'large'} image={props.matchUp.image} /> */}
-        <Image
-          src={props.matchUp.image}
-          alt='image not found'
-          width={180}
-          height={180}
-          layout='intrinsic'
-          style={{ borderRadius: '50%' }}
-        />
+        <div className={styles.imageWrapper}>
+          <Image
+            src={props.matchUp.image}
+            alt='image not found'
+            width={180}
+            height={180}
+            layout='intrinsic'
+            style={{ borderRadius: '50%', boxShadow: shadows.medium }}
+          />
+        </div>
         <h2 style={{ color: colors.text[100] }}>{props.matchUp.title}</h2>
         <div className={styles.ratingBallsWrapper}>
           <div
@@ -90,7 +92,15 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (
           <p style={{ color: colors.text[80] }}>
             Give the organizer some feedback
           </p>
-          <textarea className={styles.feedbackTextarea}></textarea>
+          <textarea
+            className={styles.feedbackTextarea}
+            style={{
+              borderColor: colors.text[60],
+              // border: 'none',
+              boxShadow: shadows.medium,
+              color: colors.text[80],
+            }}
+          ></textarea>
         </div>
         <Button
           text={'Send'}
