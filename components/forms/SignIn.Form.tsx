@@ -27,7 +27,7 @@ const SignInForm: React.FunctionComponent<ISignInFormProps> = (props) => {
         value={props.inputState.loginEmail}
         onChange={(e) => props.setLoginEmail(e.target.value as string)}
         placeholder="Your email address"
-        style={{ boxShadow: shadows.small }}
+        style={{ boxShadow: shadows.small, outlineColor: colors.primary[100] }}
       ></input>
       <input
         className={styles.input}
@@ -35,15 +35,10 @@ const SignInForm: React.FunctionComponent<ISignInFormProps> = (props) => {
         value={props.inputState.loginPassword}
         onChange={(e) => props.setLoginPassword(e.target.value as string)}
         placeholder="Password"
-        style={{ boxShadow: shadows.small }}
+        style={{ boxShadow: shadows.small, outlineColor: colors.primary[100] }}
       ></input>
       {props.error && <p style={{ color: colors.primary[100] }}>{props.error}</p>}
-      <Button
-        disabled={props.isLoading}
-        variant="primary"
-        text="Sign In"
-        callback={props.handleLogin}
-      ></Button>
+      <Button disabled={props.isLoading} variant="primary" text="Sign In" callback={props.handleLogin}></Button>
     </div>
   );
 };
