@@ -1,38 +1,48 @@
 import { Geo } from 'aws-amplify';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity } from '../../utils/types/MatchUp.Type';
-import StaticMap from '../maps/Static.Map';
+import { TAddress } from '../../utils/types/Address.Type';
 import Switch from '../misc/Switch';
 import styles from './styles/PrimaryInfo.Form.module.scss';
+import { initializeMap } from '../../utils/Maps/initializeMap.util';
 
 export interface IPrimaryInfoFormProps {
   title: string;
   date: string;
   location: TCity;
+  address: TAddress;
   indoor: boolean;
 
   setTitle: Dispatch<SetStateAction<string>>;
   setDate: Dispatch<SetStateAction<string>>;
   setLocation: Dispatch<SetStateAction<TCity>>;
+  setAddress: Dispatch<SetStateAction<TAddress>>;
   setIndoor: Dispatch<SetStateAction<boolean>>;
 }
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
   const { colors, darkMode } = useTheme();
+  const [locationResult, setLocationResult] = useState([]);
+
+useEffect(() => {
+  initializeMap(props.address);
+}, [props.address]);
+
+function selectLocation(location) {
+  setLocationResult([]);
+  props.setAddress(location)
+  initializeMap(props.address);
+}
 
   async function searchLocation(event: any) {
-    const searchOptions = { maxResults: 10, language: 'en' };
-    const results = await Geo.searchByText(event, searchOptions);
-    console.log(results);
-    if (results.length > 0) {
-      // setLocationSearchResult(true);
-      props.setLocation(results);
+    if (event.target.value.length === 0) {
+      setLocationResult([]);
+      return;
     }
-    if (results.length <= 0) {
-      props.setLocation([]);
-      // setLocationSearchResult(false);
-    }
+    const searchOptions = { maxResults: 5, language: 'en', countries: ["DEU"]};
+    const results = await Geo.searchByText(event.target.value, searchOptions);
+    if (results.length > 0) setLocationResult(results);
   }
 
   return (
@@ -75,8 +85,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
           Location
         </label>
         <input
-          value={props.location}
-          onChange={(e) => props.setLocation(e.target.value as TCity)}
+          onKeyUp={e => searchLocation(e)}
           placeholder="Where do you want to meet?"
           className={styles.input}
           style={{
@@ -85,7 +94,21 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
             marginBottom: '1em',
           }}
         ></input>
-        <StaticMap latitude={15} longitude={50} zoom={15} />
+        <div>
+          {locationResult.map((location) => (
+              <div key={location.label}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                color: colors.text[60],
+              }}
+              >
+                  <li
+                  onClick={() => selectLocation(location)}>{location.label}
+                  </li>
+        </div>
+          ))}
+      </div>
+        <div id="map" className={styles.map}></div>
       </div>
 
       <div className={styles.indoor} style={{ color: colors.text[60] }}>
@@ -97,3 +120,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
 };
 
 export default PrimaryInfoForm;
+function selectLocation(label: any): void {
+  throw new Error('Function not implemented.');
+}
+

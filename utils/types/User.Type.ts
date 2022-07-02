@@ -11,6 +11,7 @@ export interface User {
   signups: SignUpsReturn;
   profileImage: string;
   about: string;
+  createdAt: string;
   updates: Update[];
   watchList: WatchList[];
 }

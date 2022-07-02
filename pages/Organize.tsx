@@ -21,6 +21,8 @@ import frisbee from '../public/frisbee.jpg';
 import { useTheme } from '../contexts/Theme';
 
 import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
+import { TAddress } from '../utils/types/Address.Type';
+import { cityLatLong } from '../utils/types/Address.Type';
 
 /* LOCATION */
 import PrimaryInfoForm from '../components/forms/PrimaryInfo.Form';
@@ -40,6 +42,7 @@ const OrganizePage: NextPage = () => {
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [location, setLocation] = useState<TCity>('berlin');
+  const [address, SetAddress] = useState<TAddress>(cityLatLong.berlin)
   const [indoor, setIndoor] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);
   const [attendanceMax, setAttendanceMax] = useState<number>(8);
@@ -194,10 +197,12 @@ const OrganizePage: NextPage = () => {
             title={title}
             date={date}
             location={location}
+            address={address}
             indoor={indoor}
             setTitle={setTitle}
             setDate={setDate}
             setLocation={setLocation}
+            setAddress={SetAddress}
             setIndoor={setIndoor}
           />
 
@@ -287,6 +292,7 @@ const OrganizePage: NextPage = () => {
             sportCategory={sportCategory as TSportCategories}
             timestamp={date}
             location={location}
+            address={address}
             totalCost={totalCost}
             skillLevel={skillLevel}
             attendanceMax={attendanceMax}
@@ -305,6 +311,7 @@ const OrganizePage: NextPage = () => {
                     title,
                     date: new Date(date).toISOString(),
                     location,
+                    address,
                     indoor,
                     attendanceMin,
                     attendanceMax,

@@ -10,7 +10,10 @@
 
   border: none;
   color: white;
-  background-color: #303030;
+
+  p { 
+    font-weight: 500;
+  }
 
   display: flex;
   flex-direction: row;

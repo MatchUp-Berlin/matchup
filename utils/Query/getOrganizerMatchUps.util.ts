@@ -3,7 +3,8 @@ import { listMatchUps } from '../../src/graphql/queries';
 import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
 
 export async function getOrganizerMatchUps(
-  id: string
+  id: string,
+  showCards: number
 ): Promise<getMatchUpsReturn> {
   try {
     const filter = {
@@ -14,7 +15,10 @@ export async function getOrganizerMatchUps(
 
     const matchUpsData = await API.graphql({
       query: listMatchUps,
-      variables: { filter: filter },
+      variables: {
+        filter: filter,
+        offset: showCards,
+      },
     });
 
     const retrievedData = await matchUpsData.data.listMatchUps;

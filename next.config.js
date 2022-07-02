@@ -8,7 +8,7 @@ module.exports = {
   images: {
     domains: [
       'images.unsplash.com',
-      'matchup-storage-b0c9ab6f155447-staging.s3.us-east-1.amazonaws.com',
+      'matchup-storage-b0c9ab6f112810-dev.s3.us-east-1.amazonaws.com',
     ],
   },
 };

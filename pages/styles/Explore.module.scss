@@ -13,8 +13,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50px;
-      height: 50px;
+
+      min-width: 50px;
+      max-width: 50px;
+      min-height: 50px;
+      max-height: 50px;
+      
       padding: 1em;
       border-radius: 100%;
 
@@ -79,7 +83,6 @@
   justify-content: center;
   align-items: center;
   z-index: 5;
-  background-color: #ffffff30;
   backdrop-filter: blur(2px);
   background-blend-mode: multiply;
 

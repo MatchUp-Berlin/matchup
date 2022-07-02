@@ -1,18 +1,19 @@
-.overlay {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 5;
-  background-color: #ffffff8f;
-  backdrop-filter: blur(2px);
-  background-blend-mode: multiply;
-}
 
 .page {
   min-height: 100vh;
+  
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    backdrop-filter: blur(2px);
+    background-blend-mode: multiply;
+    transition: 0.5s;
+  }
 
   .contentWrapper {
     padding: 1em;
@@ -52,4 +53,22 @@
       bottom: -2px;
     }
   }
+}
+
+.errorWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
+}
+
+.loadingWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
 }

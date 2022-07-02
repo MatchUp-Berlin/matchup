@@ -15,7 +15,7 @@ import SignInForm from '../components/forms/SignIn.Form';
 const SignInPage: NextPage = () => {
   const { colors, shadows } = useTheme();
   const router = useRouter();
-  const { user } = useAuthenticator((context) => [context.authStatus, context.user]);
+  const { user, route } = useAuthenticator((context) => [context.user]);
 
   /* ERROR STATES */
   const [loginError, setLoginError] = useState<string>('');
@@ -102,6 +102,14 @@ const SignInPage: NextPage = () => {
       setResetError('There has been an error resending the code.');
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      if (route === 'authenticated') {
+        typeof window !== 'undefined' && router.push('/');
+      }
+    }
+  }, [user, route]);
 
   return (
     <>

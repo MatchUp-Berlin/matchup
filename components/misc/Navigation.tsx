@@ -1,16 +1,25 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { userInfo } from 'os';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Navigation.module.scss';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 export interface INavigationProps {}
 
 const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
   const router = useRouter();
   const { colors, darkMode } = useTheme();
+  const user = useAuthenticator((context: any) => [context.user]);
 
   return (
-    <div className={styles.wrapper} style={{ backgroundColor: colors.background[100], borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',}}>
+    <div
+      className={styles.wrapper}
+      style={{
+        backgroundColor: colors.background[100],
+        borderTopColor: darkMode ? colors.background[60] : '#DDDDDD',
+      }}
+    >
       {/* ------ ORGANIZE ------ */}
       <Link href="/Organize">
         <div className={styles.link}>
@@ -114,16 +123,16 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
       </Link>
 
       {/* ------ YOUR MATCHUPS ------ */}
-      <Link href="/YourMatchUps">
+      <Link href="/MyMatchUps">
         <div className={styles.link}>
           <svg
             width="20"
             height="20"
             viewBox="0 0 20 20"
             fill={
-              router.pathname == '/YourMatchUps' && darkMode
+              router.pathname == '/MyMatchUps' && darkMode
                 ? colors.primary[100]
-                : router.pathname == '/YourMatchUps' && !darkMode
+                : router.pathname == '/MyMatchUps' && !darkMode
                 ? colors.primary[100]
                 : colors.text[60]
             }
@@ -135,9 +144,9 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
             className="small"
             style={{
               color:
-                router.pathname == '/YourMatchUps' && darkMode
+                router.pathname == '/MyMatchUps' && darkMode
                   ? colors.primary[100]
-                  : router.pathname == '/YourMatchUps' && !darkMode
+                  : router.pathname == '/MyMatchUps' && !darkMode
                   ? colors.primary[100]
                   : colors.text[60],
             }}
@@ -148,7 +157,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
       </Link>
 
       {/* ------ PROFILE ------ */}
-      <Link href="Profile/[id]">
+      <Link href={user.user ? `Profile/${user.user.username}`: "/SignIn"}>
         <div className={styles.link}>
           <svg
             width="20"
