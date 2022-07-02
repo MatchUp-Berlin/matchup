@@ -47,31 +47,33 @@ const Home: NextPage = () => {
       getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
     );
 
+  console.log('data', data);
+
   //used to rerender map on category change
   useEffect(() => {
     const matchUps = data?.items;
     async function getMap(matchUps, city) {
-      const map = await initializeMapExplorer(matchUps, city)
-      setCurrentMap(map)
+      const map = await initializeMapExplorer(matchUps, city);
+      setCurrentMap(map);
     }
     if (showMap) {
       currentMap.remove();
       getMap(matchUps, city);
     }
-  }, [data])
+  }, [data]);
 
   async function mapToggle() {
-      setShowMap(!showMap);
-      const matchUps = data?.items;
-      if (!showMap) {
-        console.log(city)
-       const map = await initializeMapExplorer(matchUps, city)
-       setCurrentMap(map)
-      } else {
-        if(!currentMap) return;
-        currentMap.remove();
-      }
+    setShowMap(!showMap);
+    const matchUps = data?.items;
+    if (!showMap) {
+      console.log(city);
+      const map = await initializeMapExplorer(matchUps, city);
+      setCurrentMap(map);
+    } else {
+      if (!currentMap) return;
+      currentMap.remove();
     }
+  }
 
   return (
     <>
@@ -140,7 +142,7 @@ const Home: NextPage = () => {
                 timestamp={matchup.date}
                 title={matchup.title}
                 slots={matchup.attendanceMax}
-                participating={/* matchup.users.length */ 3} // FIX THIS ONE
+                participating={matchup.signups.items?.length || 0}
                 location={matchup.location}
                 sport={matchup.sportCategory}
                 skill={matchup.skillLevel}

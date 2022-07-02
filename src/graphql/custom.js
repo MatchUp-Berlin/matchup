@@ -225,3 +225,63 @@ export const getMatchUp = /* GraphQL */ `
     }
   }
 `;
+
+export const listMatchUps = /* GraphQL */ `
+  query ListMatchUps(
+    $filter: ModelMatchUpFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMatchUps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        signups {
+          items {
+            id
+            userId
+            matchUpId
+            attended
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        location
+        address
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
