@@ -22,11 +22,11 @@ import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import moment from 'moment';
 
 import { getUserMatchUpsAttended } from '../utils/Query/getUserMatchUpsAttended.util';
-// import { getUserMatchUpsSignedUp } from '../util/Query/getUserMatchUpsSignedUp';
-// import { getNumAttendedMatchUps } from '../util/Query/getNumAttendedMatchUps';
+import { getUserMatchUpsSignedUp } from '../util/Query/getUserMatchUpsSignedUp';
+import { getNumAttendedMatchUps } from '../util/Query/getNumAttendedMatchUps';
 import { getNumSignedUpMatchUps } from '../utils/Query/getNumSignedUpMatchUps.util';
 
-import ConfirmAttendanceModal from '../components/modals/ConfirmAttendance.Modal';
+import ParticipantsModal from '../components/modals/Participants.Modal';
 
 const Home: NextPage = () => {
   const { colors } = useTheme();
@@ -68,7 +68,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <ConfirmAttendanceModal></ConfirmAttendanceModal>
       <div
         style={{ backgroundColor: colors.background[100] }}
         className={styles.page}

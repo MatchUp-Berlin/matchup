@@ -63,8 +63,7 @@ const MatchUpDetail: NextPage = () => {
   ]);
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
-
-  console.log('USER MU DETAILS', user);
+  const [isPast, setIsPast] = useState<boolean>(false);
 
   useEffect(() => {
     if (data && user) {
@@ -74,6 +73,7 @@ const MatchUpDetail: NextPage = () => {
         )
       );
       setIsOrganizer(user.username === data.organizerId);
+      setIsPast(Date.parse(data.date) < Date.now());
     }
   }, [data, user]);
 
