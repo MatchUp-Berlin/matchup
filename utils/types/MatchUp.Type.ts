@@ -20,7 +20,6 @@ export type TCity =
   | 'münchen'
   | 'köln'
   | 'frankfurt am Main'
-  | 'essen'
   | 'stuttgart'
   | 'dortmund'
   | 'düsseldorf'

@@ -68,7 +68,6 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         <option value="münchen">münchen</option>
         <option value="köln">köln</option>
         <option value="frankfurtamMain">frankfurt am Main</option>
-        <option value="essen">essen</option>
         <option value="stuttgart">stuttgart</option>
         <option value="dortmund">dortmund</option>
         <option value="düsseldorf">düsseldorf</option>
