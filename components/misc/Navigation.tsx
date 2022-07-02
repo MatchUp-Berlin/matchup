@@ -156,7 +156,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
       </Link>
 
       {/* ------ PROFILE ------ */}
-      <Link href={currentUser ? `Profile/${currentUser}` : '/SignIn'}>
+      <Link href={currentUser ? `/Profile/${currentUser}` : '/SignIn'}>
         <div className={styles.link}>
           <svg
             width="20"
