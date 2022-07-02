@@ -29,7 +29,7 @@ const Home: NextPage = () => {
   const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
   const [address, setAddress] = useState<TAddress>(cityLatLong[city]);
-  const [currentMap, setCurrentMap] = useState();
+  const [currentMap, setCurrentMap] = useState({});
 
   const start = new Date();
   start.setUTCHours(0, 0, 0, 0);
@@ -44,21 +44,25 @@ const Home: NextPage = () => {
   /* DATA FETCHING */
   const { isError, isLoading, isRefetching, isSuccess, refetch, data } =
     useQuery(['matchups', categories], () =>
-      getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
+      getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to),
     );
 
   //used to rerender map on category change
   useEffect(() => {
+    fetchMap()
+  }, [isRefetching])
+
+  async function fetchMap() {
     const matchUps = data?.items;
     async function getMap(matchUps, city) {
       const map = await initializeMapExplorer(matchUps, city)
       setCurrentMap(map)
     }
     if (showMap) {
-      currentMap.remove();
+      if (currentMap) currentMap.remove();
       getMap(matchUps, city);
     }
-  }, [data])
+  }
 
   async function mapToggle() {
       setShowMap(!showMap);
