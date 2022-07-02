@@ -17,14 +17,7 @@ const RatingBall: React.FunctionComponent<IRatingBallProps> = ({
 }) => {
   return (
     <div className={styles.ratingBall}>
-      <Image
-        src={getSportIcon(ballCategory)}
-        alt='image not found'
-        width={30}
-        height={30}
-        layout='intrinsic'
-        style={{ borderRadius: '50%' }}
-      />
+      <Image src={getSportIcon(ballCategory)} alt={ballCategory} width={50} height={50} layout="intrinsic" />
     </div>
   );
 };
