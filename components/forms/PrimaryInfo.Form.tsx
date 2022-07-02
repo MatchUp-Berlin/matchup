@@ -6,7 +6,7 @@ import { TAddress } from '../../utils/types/Address.Type';
 import Switch from '../misc/Switch';
 import styles from './styles/PrimaryInfo.Form.module.scss';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
-import { Divider } from '../misc';
+import { pin } from '../icons';
 
 export interface IPrimaryInfoFormProps {
   title: string;
@@ -101,7 +101,10 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
             style={{ backgroundColor: colors.background[80], boxShadow: shadows.medium }}
           >
             {locationResult.map((location) => (
-              <div key={location.label}>
+              <div className={styles.suggestion} key={location.label}>
+                <svg viewBox={pin.viewBox} width="16" height="20" fill={colors.text[60]}>
+                  {pin.path}
+                </svg>
                 <li style={{ color: colors.text[100] }} onClick={() => selectLocation(location)}>
                   {location.label}
                 </li>
