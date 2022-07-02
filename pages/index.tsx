@@ -58,7 +58,6 @@ const Home: NextPage = () => {
       const map = await initializeMapExplorer(matchUps, city)
       setCurrentMap(map)
     }
-    console.log(showMap);
     if (showMap) {
       if (currentMap) currentMap.remove();
       getMap(matchUps, city);
@@ -69,7 +68,6 @@ const Home: NextPage = () => {
       setShowMap(!showMap);
       const matchUps = data?.items;
       if (!showMap) {
-        console.log(city)
        const map = await initializeMapExplorer(matchUps, city)
        setCurrentMap(map)
       } else {
