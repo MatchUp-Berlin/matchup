@@ -4,6 +4,7 @@ import { MatchUp } from '../../utils/types/MatchUp.Type';
 import styles from './styles/RateMatchUp.Modal.module.scss';
 import { useTheme } from '../../contexts/Theme';
 import { Avatar } from '../misc';
+import RatingBall from '../misc/RatingBall';
 
 export interface IRateMatchUpModalProps {
   matchUp: MatchUp;
@@ -33,6 +34,13 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (
           style={{ borderRadius: '50%' }}
         />
         <h2 style={{ color: colors.text[100] }}>{props.matchUp.title}</h2>
+        <div className={styles.ratingBallsWrapper}>
+          <RatingBall ballCategory={props.matchUp.sportCategory} />
+          <RatingBall ballCategory={props.matchUp.sportCategory} />
+          <RatingBall ballCategory={props.matchUp.sportCategory} />
+          <RatingBall ballCategory={props.matchUp.sportCategory} />
+          <RatingBall ballCategory={props.matchUp.sportCategory} />
+        </div>
       </div>
     </div>
   );
