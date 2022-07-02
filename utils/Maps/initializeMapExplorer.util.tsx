@@ -35,4 +35,5 @@ export async function initializeMapExplorer(matchUps: MatchUp[], city: TCity) {
         }
     );
 });
+return map;
 }

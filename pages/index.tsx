@@ -31,6 +31,7 @@ const Home: NextPage = () => {
   const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
   const [address, setAddress] = useState<TAddress>(cityLatLong[city]);
+  const [currentMap, setCurrentMap] = useState();
 
   const start = new Date();
   start.setUTCHours(0, 0, 0, 0);
@@ -48,11 +49,28 @@ const Home: NextPage = () => {
     () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
   );
 
-  function mapToggle() {
-    setShowMap(!showMap)
-    const matchUps = data?.items;
-    initializeMapExplorer(matchUps, city)
-  }
+  // useEffect(() => {
+  //   async function setupMap() {
+  //     const matchUps = data?.items;
+  //     console.log(data.items)
+  //     const map = await initializeMapExplorer(matchUps, city)
+  //     return map;
+  //   }
+  //   const map = setupMap()
+  //   setCurrentMap(map)
+  // }, [])
+
+  async function mapToggle() {
+      setShowMap(!showMap);
+      const matchUps = data?.items;
+      if (!showMap) {
+       const map = await initializeMapExplorer(matchUps, city)
+       setCurrentMap(map)
+      } else {
+        console.log(currentMap)
+        currentMap.remove();
+      }
+    }
 
   return (
     <>
@@ -87,8 +105,9 @@ const Home: NextPage = () => {
         <MapButton map={showMap} callback={() => mapToggle()}></MapButton>
 
         {/* ------MATCHUP LIST OR MAP------ */}
+
         {showMap ? (
-          <div id="map" className="fullheight-map"></div>
+          <div id='map' className='fullheight-map'></div>
         ) : isError ? (
           <div className={styles.errorWrapper} style={{ color: colors.text[60] }}>
             Oops, something went wrong!
