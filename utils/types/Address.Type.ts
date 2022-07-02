@@ -48,7 +48,7 @@ export const cityLatLong = {
         subRegion: "Hamburg",
         timeZone: {name: 'Europe/Berlin', offset: 7200},
     },
-    munich: {
+    münchen: {
         addressNumber: undefined,
         country: "DEU",
         geometry: {point: [11.57, 48.13]},
@@ -62,7 +62,7 @@ export const cityLatLong = {
         subRegion: "München",
         timeZone: {name: 'Europe/Berlin', offset: 7200},
     },
-    cologne: {
+    köln: {
         addressNumber: undefined,
         country: "DEU",
         geometry: {point: [6.95, 50.94]},
@@ -146,7 +146,7 @@ export const cityLatLong = {
         subRegion: "Bremen",
         timeZone: {name: 'Europe/Berlin', offset: 7200},
     },
-    hanover: {
+    hannover: {
         addressNumber: undefined,
         country: "DEU",
         geometry: {point: [9.73, 52.37]},

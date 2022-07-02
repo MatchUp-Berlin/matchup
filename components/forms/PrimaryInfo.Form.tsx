@@ -34,6 +34,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
     console.log(location)
     setLocationResult([]);
     props.setAddress(location);
+    props.setLocation(location.municipality.toLowerCase())
     initializeMap(props.address);
   }
 
