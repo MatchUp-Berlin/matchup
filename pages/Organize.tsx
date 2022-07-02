@@ -34,7 +34,6 @@ import { Storage } from 'aws-amplify';
 
 const OrganizePage: NextPage = () => {
   const { user } = useAuthenticator((context) => [context.user]);
-  console.log(user)
   const { colors } = useTheme();
   const router = useRouter();
 
@@ -42,7 +41,7 @@ const OrganizePage: NextPage = () => {
   const [sportCategory, setSportCategory] = useState<TSportCategories>();
   const [title, setTitle] = useState<string>('');
   const [date, setDate] = useState<string>('');
-  const [location, setLocation] = useState<TCity>();
+  const [location, setLocation] = useState<TCity>('berlin');
   const [address, SetAddress] = useState<TAddress>(cityLatLong.berlin)
   const [indoor, setIndoor] = useState<boolean>(false);
   const [attendanceMin, setAttendanceMin] = useState<number>(4);

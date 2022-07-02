@@ -49,8 +49,9 @@ const Home: NextPage = () => {
   );
 
   function mapToggle() {
-    setShowMap(!showMap);
-    initializeMapExplorer(data.items, city);
+    setShowMap(!showMap)
+    console.log(data.items)
+    initializeMapExplorer(address, city)
   }
 
   return (

@@ -27,7 +27,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
 
 useEffect(() => {
   initializeMap(props.address);
-}, []);
+}, [props.address]);
 
 function selectLocation(location) {
   setLocationResult([]);
@@ -85,8 +85,6 @@ function selectLocation(location) {
           Location
         </label>
         <input
-          value={props.location}
-          onChange={(e) => props.setLocation(e.target.value as TCity)}
           onKeyUp={e => searchLocation(e)}
           placeholder="Where do you want to meet?"
           className={styles.input}
@@ -98,8 +96,15 @@ function selectLocation(location) {
         ></input>
         <div>
           {locationResult.map((location) => (
-              <div key={location.label}>
-                  <li onClick={() => selectLocation(location)}>{location.label}</li>
+              <div key={location.label}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                color: colors.text[60],
+              }}
+              >
+                  <li
+                  onClick={() => selectLocation(location)}>{location.label}
+                  </li>
         </div>
           ))}
       </div>
