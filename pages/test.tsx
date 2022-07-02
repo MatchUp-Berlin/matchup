@@ -7,7 +7,9 @@ import UpdatesMessageCard from '../components/cards/UpdatesMessage.Card';
 import MatchUpDetail from './MatchUps/[MatchUpId]';
 import { mockUpdate } from './../mockData/mockUpdate';
 import { mockUpdates } from './../mockData/mockUpdates';
+import matchUps from './../mockData/machMatchUps';
 import UpdatesModal from '../components/modals/Updates.Modal';
+import RateMatchUp from '../components/modals/RateMatchUp.Modal';
 
 const Home: NextPage = () => {
   return (
@@ -16,8 +18,9 @@ const Home: NextPage = () => {
       {/* <ParticipantCard user={usersArray[0]} /> */}
       {/* <OrganizerCard user={usersArray[3]} /> */}
       {/* <UpdatesMessageCard update={mockUpdate} organizer={usersArray[2]} /> */}
-      <UpdatesModal updates={mockUpdates} organizer={usersArray[2]} />
+      {/* <UpdatesModal updates={mockUpdates} organizer={usersArray[2]} /> */}
       {/* <MatchUpDetail /> */}
+      <RateMatchUp matchUp={matchUps[2]} />
     </>
   );
 };
