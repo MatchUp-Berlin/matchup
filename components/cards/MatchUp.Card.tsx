@@ -11,14 +11,7 @@ import { TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
 import getSportIcon from '../../utils/getSportIcon';
 import getDefaultImage from '../../utils/getDefaultImage';
 import Link from 'next/link';
-<<<<<<< HEAD
-import { Update } from '../../utils/types/Update.Type';
-import { User } from '../../utils/types/User.Type';
-import { WatchList } from '../../utils/types/WatchList.Type';
-import { SignUpsReturn } from '../../utils/types/SignUp.Type';
-=======
 import ImageFallback from '../misc/ImageFallback';
->>>>>>> main
 
 //TODO: Adjust to actual types!!
 
@@ -73,22 +66,13 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
         }}
       >
         <div className={styles.imageWrapper}>
-<<<<<<< HEAD
-          <Image
-            src={props.image || getDefaultImage(props.sportCategory)}
-            alt={props.title}
-            layout='fill'
-            objectFit='cover'
-          ></Image>
-=======
           <ImageFallback
             src={props.imageUrl as string}
             fallbackSrc={getDefaultImage(props.sport).src}
             alt={props.title}
-            layout="fill"
-            objectFit="cover"
+            layout='fill'
+            objectFit='cover'
           ></ImageFallback>
->>>>>>> main
         </div>
 
         <div className={styles.infoWrapper}>

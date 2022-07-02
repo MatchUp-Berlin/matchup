@@ -35,14 +35,9 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({ size, image }) => {
     >
       <ImageFallback
         src={image}
-<<<<<<< HEAD
+        fallbackSrc={defaultAvatar.src}
         layout='responsive'
         objectFit='cover'
-=======
-        fallbackSrc={defaultAvatar.src}
-        layout="responsive"
-        objectFit="cover"
->>>>>>> main
         width={avatarSize}
         height={avatarSize}
         alt='personally I would have replaced missing images with some Max-s mothers picture, but you now...pc people and stuff'
