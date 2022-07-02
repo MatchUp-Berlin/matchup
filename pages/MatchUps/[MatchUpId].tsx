@@ -25,6 +25,7 @@ import UpdatesModal from '../../components/modals/Updates.Modal';
 import { createNewWatchList } from '../../utils/Mutation/createWatchList.util';
 import { edit, share, watchList } from '../../components/icons';
 import { useAuth } from '../../contexts/Auth';
+import RateMatchUpModal from '../../components/modals/RateMatchUp.Modal';
 
 const ms = 24 * 60 * 60 * 1000;
 
@@ -47,7 +48,6 @@ const MatchUpDetail: NextPage = () => {
   const { currentUser } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
-  const [isPast, setIsPast] = useState<boolean>(false);
 
   useEffect(() => {
     if (data && currentUser) {
@@ -58,11 +58,11 @@ const MatchUpDetail: NextPage = () => {
 
   /* -----EVENT STATE----- */
   const [isWithin24h, setIsWithin24h] = useState<boolean>(false);
-  const [hasStarted, setHasStarted] = useState<boolean>(false);
+  const [hasFinished, setHasFinished] = useState<boolean>(false);
 
   useEffect(() => {
     if (data && currentUser) {
-      setHasStarted(Date.parse(data?.date) < Date.parse(new Date().toISOString()));
+      setHasFinished(Date.parse(data?.date) < Date.parse(new Date().toISOString()));
       setIsWithin24h(Date.parse(data?.date) - ms < Date.parse(new Date().toISOString()));
     }
   }, [data, currentUser]);
@@ -101,9 +101,10 @@ const MatchUpDetail: NextPage = () => {
   }, [isSignedUp, isOrganizer, data, currentUser]);
 
   /* -------MODAL STATE------- */
-  const [showSignUpModal, setshowSignUpModal] = useState<boolean>(false);
+  const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false);
   const [showParticipantsModal, setShowParticipantsModal] = useState<boolean>(false);
   const [showUpdatesModal, setShowUpdatesModal] = useState<boolean>(false);
+  const [showRateEventModal, setShowRateEventModal] = useState<boolean>(false);
 
   return (
     <>
@@ -116,7 +117,7 @@ const MatchUpDetail: NextPage = () => {
               matchUp={data}
               isSignedUp={isSignedUp}
               isWithin24Hours={isWithin24h}
-              setShowModal={setshowSignUpModal}
+              setShowModal={setShowSignUpModal}
             ></ConfirmJoinModal>
           </>
         )}
@@ -142,9 +143,17 @@ const MatchUpDetail: NextPage = () => {
           </>
         )}
 
+        {showRateEventModal && data && (
+          <>
+            <div className={styles.overlay} style={{ backgroundColor: colors.overlay[60] }}></div>
+            <RateMatchUpModal close={() => setShowRateEventModal(false)} matchUp={data} />
+          </>
+        )}
+
         {/*  ------------HEADER------------  */}
         <Header
-          imageUrl={data ? data.image || getDefaultImage(data.sportCategory).src : placeholder.src} // replace!!
+          imageUrl={data && data.image}
+          sportCategory={data?.sportCategory}
           leftButton={
             <HeaderButton
               viewBox="0 0 10 10"
@@ -279,11 +288,18 @@ const MatchUpDetail: NextPage = () => {
             </div>
           }
           rightButton={
-            !hasStarted && (
+            !hasFinished ? (
               <Button
                 variant="primary"
                 text={isSignedUp ? 'Cancel' : 'Join'}
-                callback={() => setshowSignUpModal(true)}
+                callback={() => setShowSignUpModal(true)}
+              ></Button>
+            ) : (
+              <Button
+                variant="primary"
+                text={isSignedUp ? 'Rate' : 'Finished'}
+                disabled={!isSignedUp}
+                callback={() => setShowRateEventModal(true)}
               ></Button>
             )
           }

@@ -6,10 +6,8 @@ import Filter from '../components/misc/Filter';
 import SportFilter from '../components/misc/SportFilter';
 import styles from './styles/Explore.module.scss';
 import MatchUpCard from '../components/cards/MatchUp.Card';
-import { createMap } from 'maplibre-gl-js-amplify';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'maplibre-gl-js-amplify/dist/public/amplify-map.css';
-import { drawPoints } from 'maplibre-gl-js-amplify';
 import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
 import { cityLatLong, TAddress } from '../utils/types/Address.Type';
@@ -20,9 +18,10 @@ import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
 import MapButton from '../components/misc/MapButton';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import moment from 'moment';
+import { emptyDark, emptyLight } from '../components/icons';
 
 const Home: NextPage = () => {
-  const { colors } = useTheme();
+  const { colors, darkMode } = useTheme();
   const [showMap, setShowMap] = useState<boolean>(false);
 
   /* FILTER STATE */
@@ -55,8 +54,8 @@ const Home: NextPage = () => {
   async function fetchMap() {
     const matchUps = data?.items;
     async function getMap(matchUps, city) {
-      const map = await initializeMapExplorer(matchUps, city)
-      setCurrentMap(map)
+      const map = await initializeMapExplorer(matchUps, city);
+      setCurrentMap(map);
     }
     if (showMap) {
       if (currentMap) currentMap.remove();
@@ -143,7 +142,7 @@ const Home: NextPage = () => {
                 timestamp={matchup.date}
                 title={matchup.title}
                 slots={matchup.attendanceMax}
-                participating={/* matchup.users.length */3} // FIX THIS ONE
+                participating={matchup.signups.items?.length || 0}
                 location={matchup.location}
                 sport={matchup.sportCategory}
                 skill={matchup.skillLevel}
@@ -169,6 +168,7 @@ const Home: NextPage = () => {
       </div>
     </>
   );
+
 };
 
 export default Home;

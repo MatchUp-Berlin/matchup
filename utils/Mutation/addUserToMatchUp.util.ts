@@ -25,6 +25,7 @@ export async function addUserToMatchUp(
       // authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
     const newSignedUpUser = newSignUp.data.createSignUp;
+    console.log('NEW SIGNED UP USER', newSignedUpUser);
     return newSignedUpUser;
   } catch (error) {
     throw error;

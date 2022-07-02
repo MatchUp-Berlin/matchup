@@ -1,5 +1,6 @@
 import { API, Storage } from 'aws-amplify';
-import { listMatchUps } from '../../src/graphql/queries';
+import { listMatchUps } from '../../src/graphql/custom';
+
 // import { MatchUp } from '../../src/models';
 import {
   MatchUp,

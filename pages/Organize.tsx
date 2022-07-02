@@ -104,6 +104,7 @@ const OrganizePage: NextPage = () => {
                 }
               />
             }
+            
           ></Header>
           <div className={styles.sportCategoriesList}>
             <SportCard
