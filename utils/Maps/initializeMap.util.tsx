@@ -9,25 +9,27 @@ export async function initializeMap(address) {
       center: [address.geometry.point[0], address.geometry.point[1]], // [Longitude, Latitude]
         zoom: 12.5,
     })
-    map.on("load", function () {
-    drawPoints("mySourceName", // Arbitrary source name
-        [
+    if (address.addressNumber !== undefined && address.street !== undefined) {
+        map.on("load", function () {
+        drawPoints("mySourceName", // Arbitrary source name
+            [
+                {
+                coordinates: [address.geometry.point[0], address.geometry.point[1]], // [Longitude, Latitude]
+                    title: "MatchUp Location",
+                    address: address.label,
+                },
+            ],
+            map,
             {
-              coordinates: [address.geometry.point[0], address.geometry.point[1]], // [Longitude, Latitude]
-                title: "MatchUp Location",
-                address: address.label,
-            },
-        ],
-        map,
-        {
-            showCluster: true,
-            unclusteredOptions: {
-                showMarkerPopup: true,
-            },
-            clusterOptions: {
-                showCount: true,
-            },
-        }
-    );
-});
+                showCluster: true,
+                unclusteredOptions: {
+                    showMarkerPopup: true,
+                },
+                clusterOptions: {
+                    showCount: true,
+                },
+            }
+        );
+    });
+    }
 }

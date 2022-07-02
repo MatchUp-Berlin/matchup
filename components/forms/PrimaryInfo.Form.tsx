@@ -27,10 +27,11 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
 
 useEffect(() => {
   initializeMap(props.address);
-}, []);
+}, [props.address]);
 
 function selectLocation(location) {
   setLocationResult([]);
+  console.log(location);
   props.setAddress(location)
   initializeMap(props.address);
 }
@@ -85,8 +86,6 @@ function selectLocation(location) {
           Location
         </label>
         <input
-          value={props.location}
-          onChange={(e) => props.setLocation(e.target.value as TCity)}
           onKeyUp={e => searchLocation(e)}
           placeholder="Where do you want to meet?"
           className={styles.input}
