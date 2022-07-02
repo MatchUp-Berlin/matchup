@@ -67,8 +67,8 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
       >
         <div className={styles.imageWrapper}>
           <ImageFallback
-            src={props.imageUrl as string}
-            fallbackSrc={getDefaultImage(props.sport).src}
+            src={props.image as string}
+            fallbackSrc={getDefaultImage(props.sportCategory).src}
             alt={props.title}
             layout='fill'
             objectFit='cover'
