@@ -152,7 +152,8 @@ const MatchUpDetail: NextPage = () => {
 
         {/*  ------------HEADER------------  */}
         <Header
-          imageUrl={data ? data.image || getDefaultImage(data.sportCategory).src : placeholder.src} // replace!!
+          imageUrl={data && data.image}
+          sportCategory={data?.sportCategory}
           leftButton={
             <HeaderButton
               viewBox="0 0 10 10"
