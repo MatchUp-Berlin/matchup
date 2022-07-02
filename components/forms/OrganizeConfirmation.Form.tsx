@@ -52,15 +52,6 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         }}
       ></div>
 
-      {/*  ------PARTICIPATING PREVIEW------  */}
-      <ParticipantsPreviewCard users={[]}></ParticipantsPreviewCard>
-      <div
-        className={styles.divider}
-        style={{
-          borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-        }}
-      ></div>
-
       {/*  ------DESCRIPTION PREVIEW------  */}
       <div className={styles.description}>
         <p style={{ color: colors.text[80] }} className="highlight-1">
@@ -78,8 +69,6 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
           borderColor: darkMode ? colors.background[60] : '#DDDDDD',
         }}
       ></div>
-
-      <UpdatesPreviewCard updates={[]} organizerId={''}></UpdatesPreviewCard>
 
       <div
         className={styles.divider}

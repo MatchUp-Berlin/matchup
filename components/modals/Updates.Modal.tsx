@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Update } from '../../utils/types/Update.Type';
+import { Update, UpdatesReturn } from '../../utils/types/Update.Type';
 import { User } from '../../utils/types/User.Type';
 import styles from './styles/Updates.Modal.module.scss';
 import { useTheme } from '../../contexts/Theme';
@@ -7,7 +7,7 @@ import UpdatesMessageCard from '../cards/UpdatesMessage.Card';
 import SmallButton from '../misc/SmallButton';
 
 export interface IUpdatesModalProps {
-  updates: Update[];
+  updates: UpdatesReturn;
   organizer: User;
   close: () => void;
 }
@@ -47,7 +47,7 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
           />
         </div>
         <div className={styles.scrollable}>
-          {props.updates.map((update, index) => {
+          {props.updates.items.map((update, index) => {
             return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;
           })}
         </div>
