@@ -58,6 +58,7 @@ const Home: NextPage = () => {
       const map = await initializeMapExplorer(matchUps, city)
       setCurrentMap(map)
     }
+    console.log(showMap);
     if (showMap) {
       if (currentMap) currentMap.remove();
       getMap(matchUps, city);
@@ -123,13 +124,13 @@ const Home: NextPage = () => {
 
         {showMap ? (
           <div id='map' className='fullheight-map'></div>
-        ) : isError ? (
-          <div
-            className={styles.errorWrapper}
-            style={{ color: colors.text[60] }}
-          >
-            Oops, something went wrong!
-          </div>
+        ): isError ? (
+          <><div
+              className={styles.errorWrapper}
+              style={{ color: colors.text[60] }}
+            >
+              Oops, something went wrong!
+            </div><div id="map" className={styles.nodisplaymap}></div></>
         ) : isLoading ? (
           <div className={styles.loadingWrapper}>
             <LoadingSpinner />
@@ -137,14 +138,14 @@ const Home: NextPage = () => {
         ) : isSuccess && data?.items?.length > 0 ? (
           <div className={styles.cardsWrapper}>
             {data?.items.map((matchup: MatchUp) => (
-              <MatchUpCard
+              <><MatchUpCard
                 id={matchup.id as string}
                 key={matchup.id}
                 variant='large'
                 timestamp={matchup.date}
                 title={matchup.title}
                 slots={matchup.attendanceMax}
-                participating={/* matchup.users.length */ 3} // FIX THIS ONE
+                participating={/* matchup.users.length */3} // FIX THIS ONE
                 location={matchup.location}
                 sport={matchup.sportCategory}
                 skill={matchup.skillLevel}
@@ -153,15 +154,16 @@ const Home: NextPage = () => {
                 price={matchup.totalCost}
                 rented={matchup.reservedCourt}
               ></MatchUpCard>
+              <div id="map" className={styles.nodisplaymap}></div></>
             ))}
           </div>
         ) : (
-          <div
+          <><div
             className={styles.emptyWrapper}
             style={{ color: colors.text[60] }}
           >
             Nothing to show!
-          </div>
+          </div><div id="map" className={styles.nodisplaymap}></div></>
         )}
 
         {/* ------MENU------ */}
