@@ -320,7 +320,7 @@ const OrganizePage: NextPage = () => {
                     totalCost,
                     description,
                     image,
-                    organizerId: 'banana' as string,
+                    organizerId: user.username as string,
                   })
                 }
                 text="Save"
