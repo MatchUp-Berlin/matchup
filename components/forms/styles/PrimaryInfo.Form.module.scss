@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 15px;
   padding: 1em;
+  position: relative;
 
   .indoor {
     padding: 0 0.5em;
@@ -16,6 +17,13 @@
 
   .inputGroup {
     width: 100%;
+    position: relative;
+
+    .label {
+      margin-left: 1em;
+      font-size: large;
+      line-height: 2em;
+    }
 
     .input {
       height: 50px;
@@ -28,4 +36,40 @@
       text-transform: capitalize;
     }
   }
+}
+
+/* MAP STYLING */
+.locationSuggestions {
+  margin-top: -0.5em;
+  position: absolute;
+  z-index: 5;
+  padding: 1em;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 20px;
+
+  .suggestion {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    height: 2.5em;
+
+    li {
+      line-height: 1em;
+      width: 90%;
+      list-style-type: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.map {
+  overflow: hidden;
+  border-radius: 20px;
+  height: 30vh;
+  width: 100%;
 }

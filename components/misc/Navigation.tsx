@@ -2,12 +2,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Navigation.module.scss';
+import { useAuth } from '../../contexts/Auth';
 
 export interface INavigationProps {}
 
 const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
   const router = useRouter();
   const { colors, darkMode } = useTheme();
+  const { currentUser } = useAuth();
 
   return (
     <div
@@ -154,7 +156,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
       </Link>
 
       {/* ------ PROFILE ------ */}
-      <Link href="Profile/[id]">
+      <Link href={currentUser ? `Profile/${currentUser}` : '/SignIn'}>
         <div className={styles.link}>
           <svg
             width="20"

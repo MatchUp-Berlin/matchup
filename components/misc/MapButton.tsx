@@ -8,10 +8,14 @@ export interface IMapButtonProps {
 }
 
 const MapButton: React.FunctionComponent<IMapButtonProps> = (props) => {
-  const { shadows } = useTheme();
+  const { shadows, colors } = useTheme();
   return (
-    <button className={styles.mapButton} style={{ boxShadow: shadows.medium }} onClick={props.callback}>
-      <p className="fat">{props.map ? 'List' : 'Map'}</p>
+    <button
+      className={styles.mapButton}
+      style={{ boxShadow: shadows.medium, backgroundColor: colors.primary[100] }}
+      onClick={props.callback}
+    >
+      <p className="">{props.map ? 'List' : 'Map'}</p>
       {props.map ? (
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="white">
           <rect width="10" height="2" rx="1" />

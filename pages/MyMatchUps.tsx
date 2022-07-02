@@ -3,7 +3,7 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import Navigation from '../components/misc/Navigation';
 import { useTheme } from '../contexts/Theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles/MyMatchUps.module.scss';
 import { useQuery } from 'react-query';
@@ -16,22 +16,29 @@ import { TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 const YourMatchUpsPage: NextPage = () => {
   const { colors } = useTheme();
   const router = useRouter();
-  const { route, user } = useAuthenticator((context) => [context.route, context.user]);
+  const { route, user } = useAuthenticator((context) => [context.user]);
 
   const [showOrganizing, setShowOrganizing] = useState<boolean>(false);
 
   // fetch user profile
-  const userQuery = useQuery(['user', user?.username], () => getUserById(user.username as string));
+  const userQuery = useQuery(['user', user?.username], () => getUserById(user.username as string), {
+    enabled: !!user,
+  });
 
   // fetch organized events by this user
-  const organizedQuery = useQuery(['organized', user?.username], () =>
-    getOrganizerMatchUps(user.username as string)
+  const organizedQuery = useQuery(
+    ['organized', user?.username],
+    () => getOrganizerMatchUps(user.username as string, 3),
+    { enabled: !!user }
   );
 
-  if (route !== 'authenticated' || !user) {
-    typeof window !== 'undefined' && router.push('/SignIn');
-    return <></>;
-  }
+  useEffect(() => {
+    if (user) {
+      if (route !== 'authenticated') {
+        typeof window !== 'undefined' && router.push('/SignIn');
+      }
+    }
+  }, [organizedQuery.data, user, route]);
 
   return (
     <>

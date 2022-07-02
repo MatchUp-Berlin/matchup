@@ -8,9 +8,10 @@ import avatar from '../../public/default-avatar.png';
 
 export interface IParticipantsPreviewCardProps {
   users: Pick<User, 'profileImage' | 'id'>[];
+  callback: () => void;
 }
 
-const ParticipantsPreviewCard: React.FunctionComponent<IParticipantsPreviewCardProps> = ({ users }) => {
+const ParticipantsPreviewCard: React.FunctionComponent<IParticipantsPreviewCardProps> = ({ users, callback }) => {
   const { colors } = useTheme();
   return (
     <div className={styles.wrapper}>
@@ -34,7 +35,7 @@ const ParticipantsPreviewCard: React.FunctionComponent<IParticipantsPreviewCardP
             .map((user) => <Avatar key={user.id} size={'small'} image={user.profileImage || avatar} />)
         )}
       </div>
-      <SmallButton callback={() => console.log('clicked')} />
+      <SmallButton callback={callback} highlight />
     </div>
   );
 };

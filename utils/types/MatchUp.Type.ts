@@ -2,6 +2,7 @@ import { SignUp, SignUpsReturn } from './SignUp.Type';
 import { Update } from './Update.Type';
 import { WatchList } from './WatchList.Type';
 import { User } from './User.Type';
+import { TAddress } from './Address.Type';
 
 export type TSportCategories =
   | 'basketball'
@@ -27,10 +28,10 @@ export type TCity =
   | 'hanover';
 
 export interface MatchUp {
-  id?: string;
+  id: string;
   title: string;
   location: string;
-  coordinates: number[];
+  address: TAddress;
   signups: SignUpsReturn;
   organizerId: string;
   organizer?: User;
@@ -56,11 +57,10 @@ export interface CreateMatchUpInput {
   sportCategory: TSportCategories;
   organizerId: string;
   date: string;
-
-  coordinates?: number[];
+  address?: Object;
   skillLevel?: TSkillLevels;
   totalCost?: number;
-  reservedCourt?: boolean ;
+  reservedCourt?: boolean;
   attendanceMin?: number;
   attendanceMax?: number;
   description?: string;

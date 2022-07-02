@@ -6,6 +6,7 @@ export interface ISmallButtonProps {
   icon?: any; // has to be an SVG path
   viewBox?: string;
   callback?: () => any;
+  highlight?: boolean;
 }
 
 const SmallButton: React.FunctionComponent<ISmallButtonProps> = (props) => {
@@ -15,11 +16,17 @@ const SmallButton: React.FunctionComponent<ISmallButtonProps> = (props) => {
       onClick={props.callback}
       className={styles.btn}
       style={{
-        backgroundColor: colors.background[80],
-        boxShadow: darkMode ? shadows.medium : shadows.small,
+        backgroundColor: props.highlight ? colors.background[100] : colors.background[80],
+        boxShadow: shadows.small,
+        borderColor: props.highlight ? colors.primary[100] : '',
+        borderWidth: props.highlight ? '2px' : '0',
       }}
     >
-      <svg className={styles.icon} viewBox={props.viewBox ? props.viewBox : '0 0 6 10'} fill={colors.primary[100]}>
+      <svg
+        className={styles.icon}
+        viewBox={props.viewBox ? props.viewBox : '0 0 6 10'}
+        fill={props.highlight ? colors.primary[100] : colors.text[60]}
+      >
         {props.icon ? (
           props.icon
         ) : (

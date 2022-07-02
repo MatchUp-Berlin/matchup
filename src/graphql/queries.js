@@ -18,7 +18,7 @@ export const getMatchUp = /* GraphQL */ `
         nextToken
       }
       location
-      coordinates
+      address
       organizerId
       organizer {
         id
@@ -91,7 +91,7 @@ export const listMatchUps = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -236,7 +236,7 @@ export const getSignUp = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -300,7 +300,7 @@ export const listSignUps = /* GraphQL */ `
           id
           title
           location
-          coordinates
+          address
           organizerId
           sportCategory
           skillLevel
@@ -357,7 +357,7 @@ export const getUpdate = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -421,7 +421,7 @@ export const listUpdates = /* GraphQL */ `
           id
           title
           location
-          coordinates
+          address
           organizerId
           sportCategory
           skillLevel
@@ -478,7 +478,7 @@ export const getWatchList = /* GraphQL */ `
           nextToken
         }
         location
-        coordinates
+        address
         organizerId
         organizer {
           id
@@ -541,7 +541,7 @@ export const listWatchLists = /* GraphQL */ `
           id
           title
           location
-          coordinates
+          address
           organizerId
           sportCategory
           skillLevel

@@ -23,7 +23,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({ user 
     >
       <div className={styles.info}>
         <p className="highlight-1" style={{ color: colors.text[100] }}>{`${givenName} ${familyName}`}</p>
-        <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p>
+        {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
         <p style={{ color: colors.text[60] }}>Speaks: </p>
       </div>
       

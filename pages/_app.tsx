@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { useState } from 'react';
 import awsExports from '../src/aws-exports';
 import { ThemeProvider } from '../contexts/Theme';
+import { AuthProvider } from '../contexts/Auth';
 Amplify.configure(awsExports);
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -32,9 +33,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Authenticator.Provider>
-          <ThemeProvider>
-            <Component {...pageProps} />
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider>
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </AuthProvider>
         </Authenticator.Provider>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
