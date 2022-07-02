@@ -13,7 +13,7 @@ export interface IFilterProps {
 const Filter: React.FunctionComponent<IFilterProps> = (props) => {
   const { colors, darkMode, shadows } = useTheme();
 
-  
+
   function handleTimeFrameChange(e: any) {
     switch (e.target.value) {
       case 'this-week': {
@@ -65,15 +65,14 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
       >
         <option value="berlin">berlin</option>
         <option value="hamburg">hamburg</option>
-        <option value="munich">munich</option>
-        <option value="cologne">cologne</option>
-        <option value="frankfurt-am-Main">frankfurt am Main</option>
-        <option value="essen">essen</option>
+        <option value="münchen">münchen</option>
+        <option value="köln">köln</option>
+        <option value="frankfurtamMain">frankfurt am Main</option>
         <option value="stuttgart">stuttgart</option>
         <option value="dortmund">dortmund</option>
         <option value="düsseldorf">düsseldorf</option>
         <option value="bremen">bremen</option>
-        <option value="hanover">hanover</option>
+        <option value="hannover">hannover</option>
       </select>
       <select
         style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
@@ -91,7 +90,7 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
 
 export default Filter;
 
-/* 
+/*
 
 USAGE:
 

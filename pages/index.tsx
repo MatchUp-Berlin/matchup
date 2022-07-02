@@ -56,7 +56,7 @@ const Home: NextPage = () => {
     }
     if (showMap) {
       currentMap.remove();
-      getMap(matchUps, city)
+      getMap(matchUps, city);
     }
   }, [data])
 
