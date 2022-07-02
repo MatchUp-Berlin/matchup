@@ -1,5 +1,8 @@
 import React from 'react';
 import { useTheme } from '../../contexts/Theme';
+import getDefaultImage from '../../utils/getDefaultImage';
+import { TSportCategories } from '../../utils/types/MatchUp.Type';
+import ImageFallback from './ImageFallback';
 import styles from './styles/Header.module.scss';
 
 export interface IHeaderProps {
@@ -7,6 +10,7 @@ export interface IHeaderProps {
   title?: string;
   leftButton?: React.ReactNode;
   rightButtons?: React.ReactNode[];
+  sportCategory?: TSportCategories;
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
@@ -15,10 +19,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   /* ---- NO IMAGE VERSION ---- */
   if (!props.imageUrl)
     return (
-      <div
-        className={styles.wrapper}
-        style={darkMode ? {} : { backgroundImage: colors.gradient.primary }}
-      >
+      <div className={styles.wrapper} style={darkMode ? {} : { backgroundImage: colors.gradient.primary }}>
         <div className={styles.buttons}>
           <div className={styles.leftButton}>{props.leftButton}</div>
           <div className={styles.rightButtons}>{props.rightButtons}</div>
@@ -31,14 +32,16 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
       <div
         className={styles.wrapper}
         style={{
-          backgroundImage: `url(${props.imageUrl})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPositionY: '50%',
           height: '25vh',
-          
         }}
       >
+        <ImageFallback
+          src={props.imageUrl}
+          fallbackSrc={getDefaultImage(props.sportCategory as TSportCategories).src}
+          alt={props.title}
+          layout="fill"
+          objectFit="cover"
+        ></ImageFallback>
         <div className={styles.buttons}>
           <div className={styles.leftButton}>{props.leftButton}</div>
           <div className={styles.rightButtons}>{props.rightButtons}</div>
