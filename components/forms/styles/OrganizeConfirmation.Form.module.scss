@@ -26,9 +26,10 @@
     }
   }
 
-
   .map {
-    height: 20vh;
-    width: auto;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 30vh;
+    width: 100%;
   }
 }

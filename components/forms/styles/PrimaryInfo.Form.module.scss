@@ -1,10 +1,12 @@
 .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   gap: 15px;
   padding: 1em;
+  padding-bottom: 2em;
+  min-height: 90vh;
   position: relative;
 
   .indoor {
