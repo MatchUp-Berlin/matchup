@@ -47,10 +47,24 @@ const Home: NextPage = () => {
       getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
     );
 
+  //used to rerender map on category change
+  useEffect(() => {
+    const matchUps = data?.items;
+    async function getMap(matchUps, city) {
+      const map = await initializeMapExplorer(matchUps, city)
+      setCurrentMap(map)
+    }
+    if (showMap) {
+      currentMap.remove();
+      getMap(matchUps, city)
+    }
+  }, [data])
+
   async function mapToggle() {
       setShowMap(!showMap);
       const matchUps = data?.items;
       if (!showMap) {
+        console.log(city)
        const map = await initializeMapExplorer(matchUps, city)
        setCurrentMap(map)
       } else {

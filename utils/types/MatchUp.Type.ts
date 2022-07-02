@@ -17,15 +17,15 @@ export type TSkillLevels = 'beginner' | 'intermediate' | 'advanced';
 export type TCity =
   | 'berlin'
   | 'hamburg'
-  | 'munich'
-  | 'cologne'
-  | 'frankfurt-am-Main'
+  | 'münchen'
+  | 'köln'
+  | 'frankfurt am Main'
   | 'essen'
   | 'stuttgart'
   | 'dortmund'
   | 'düsseldorf'
   | 'bremen'
-  | 'hanover';
+  | 'hannover';
 
 export interface MatchUp {
   id: string;

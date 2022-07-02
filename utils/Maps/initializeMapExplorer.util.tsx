@@ -6,7 +6,6 @@ import { MatchUp, TCity } from "../types/MatchUp.Type";
 
 export async function initializeMapExplorer(matchUps: MatchUp[], city: TCity) {
     const center = cityLatLong[city]
-
     const markers = matchUps.map((matchUp) => (
         {
             coordinates: [matchUp?.address?.geometry?.point[0], matchUp?.address?.geometry?.point[1]],
