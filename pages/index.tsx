@@ -67,7 +67,7 @@ const Home: NextPage = () => {
        const map = await initializeMapExplorer(matchUps, city)
        setCurrentMap(map)
       } else {
-        console.log(currentMap)
+        if(!currentMap) return;
         currentMap.remove();
       }
     }
