@@ -48,34 +48,62 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             src={props.imageUrl as string}
             fallbackSrc={getDefaultImage(props.sport).src}
             alt={props.title}
-            layout="fill"
-            objectFit="cover"
+            layout='fill'
+            objectFit='cover'
           ></ImageFallback>
         </div>
 
         <div className={styles.infoWrapper}>
           <div
             className={styles.info}
-            style={props.variant == 'small' ? { justifyContent: 'space-around', height: '100%' } : {}}
+            style={
+              props.variant == 'small'
+                ? { justifyContent: 'space-around', height: '100%' }
+                : {}
+            }
           >
             <div className={styles.title} style={{ color: colors.text[100] }}>
-              <Image width={'20px'} height={'20px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
-              <p className="highlight-2">{props.title}</p>
+              <Image
+                width={'20px'}
+                height={'20px'}
+                src={getSportIcon(props.sport)}
+                alt={props.sport}
+              ></Image>
+              <p className='highlight-2'>{props.title}</p>
             </div>
             <div className={styles.details}>
               <div className={styles.detail}>
-                <Image width={'10px'} height={'10px'} src={clock} alt="taking place on"></Image>
-                <p style={{ color: colors.text[60] }}>{moment(props.timestamp).format('H:m dddd')}</p>
+                <Image
+                  width={'10px'}
+                  height={'10px'}
+                  src={clock}
+                  alt='taking place on'
+                ></Image>
+                <p style={{ color: colors.text[60] }}>
+                  {moment(props.timestamp).format('dddd MMM Do  hh:mma ')}
+                </p>
               </div>
               <div className={styles.detail}>
-                <Image width={'10px'} height={'10px'} src={pin} alt="taking place at"></Image>
+                <Image
+                  width={'10px'}
+                  height={'10px'}
+                  src={pin}
+                  alt='taking place at'
+                ></Image>
                 <p style={{ color: colors.text[60] }}>{props.location}</p>
               </div>
 
               {props.variant == 'large' && (
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={euro} alt="costs"></Image>
-                  <p style={{ color: colors.text[60] }}>{props.price > 0 ? props.price + '.00' : 'Free'}</p>
+                  <Image
+                    width={'10px'}
+                    height={'10px'}
+                    src={euro}
+                    alt='costs'
+                  ></Image>
+                  <p style={{ color: colors.text[60] }}>
+                    {props.price > 0 ? props.price + '.00' : 'Free'}
+                  </p>
                 </div>
               )}
             </div>
@@ -85,26 +113,39 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             <div className={styles.pills}>
               <div
                 className={styles.pill}
-                style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+                style={{
+                  backgroundColor: colors.background[100],
+                  boxShadow: shadows.small,
+                }}
               >
                 <p style={{ color: colors.text[100] }}>{props.skill}</p>
               </div>
               {props.rented && (
                 <div
                   className={styles.pill}
-                  style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+                  style={{
+                    backgroundColor: colors.background[100],
+                    boxShadow: shadows.small,
+                  }}
                 >
                   <p style={{ color: colors.text[100] }}>Rented</p>
                 </div>
               )}
-              {props.variant == 'large' && props.slots && props.slots - props.participating && (
-                <div
-                  className={styles.pill}
-                  style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
-                >
-                  <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
-                </div>
-              )}
+              {props.variant == 'large' &&
+                props.slots &&
+                props.slots - props.participating && (
+                  <div
+                    className={styles.pill}
+                    style={{
+                      backgroundColor: colors.background[100],
+                      boxShadow: shadows.small,
+                    }}
+                  >
+                    <p style={{ color: colors.primary[100] }}>
+                      {props.slots - props.participating} Spots left
+                    </p>
+                  </div>
+                )}
             </div>
           )}
         </div>

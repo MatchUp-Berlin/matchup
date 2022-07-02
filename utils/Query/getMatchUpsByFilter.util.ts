@@ -1,5 +1,6 @@
 import { API, Storage } from 'aws-amplify';
 import { listMatchUps } from '../../src/graphql/queries';
+import { MatchUp } from '../../src/models';
 import {
   getMatchUpsReturn,
   getMatchUpsByFilterFilter,
@@ -44,14 +45,23 @@ export async function getMatchUpsByFilter(
 
     const imageData = await Promise.all(
       retrievedMatchUpData.items.map(async (matchUp) => {
-      const headerImage = await Storage.get(matchUp.id);
-      matchUp.image = headerImage;
-      return matchUp;
+        const headerImage = await Storage.get(matchUp.id);
+        matchUp.image = headerImage;
+        return matchUp;
       })
-    )
+    );
     retrievedMatchUpData.items.forEach((element) => {
       element.address = JSON.parse(element.address);
-  });
+    });
+
+    retrievedMatchUpData.items = retrievedMatchUpData.items
+      .sort((a: any, b: any) => Date.parse(a.date) - Date.parse(b.date))
+      .filter(
+        (matchup: MatchUp) =>
+          Date.parse(matchup.date || '') > Date.parse(new Date())
+      );
+
+    console.log(retrievedMatchUpData);
 
     return retrievedMatchUpData;
   } catch (err) {
