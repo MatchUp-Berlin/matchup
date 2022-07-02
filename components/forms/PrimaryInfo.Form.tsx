@@ -31,7 +31,6 @@ useEffect(() => {
 
 function selectLocation(location) {
   setLocationResult([]);
-  console.log(location);
   props.setAddress(location)
   initializeMap(props.address);
 }
@@ -97,8 +96,15 @@ function selectLocation(location) {
         ></input>
         <div>
           {locationResult.map((location) => (
-              <div key={location.label}>
-                  <li onClick={() => selectLocation(location)}>{location.label}</li>
+              <div key={location.label}
+              style={{
+                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                color: colors.text[60],
+              }}
+              >
+                  <li
+                  onClick={() => selectLocation(location)}>{location.label}
+                  </li>
         </div>
           ))}
       </div>
