@@ -28,6 +28,10 @@
         transform: scale(1.1);
       }
     }
+
+    .nodisplaymap {
+      display: none;
+    }
   }
 
   .errorWrapper {

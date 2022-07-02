@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   const [categories, setCategories] = useState<TSportCategories[]>([]);
   const [city, setCity] = useState<TCity>('berlin');
   const [address, setAddress] = useState<TAddress>(cityLatLong[city]);
-  const [currentMap, setCurrentMap] = useState();
+  const [currentMap, setCurrentMap] = useState({});
 
   const start = new Date();
   start.setUTCHours(0, 0, 0, 0);
@@ -43,33 +43,37 @@ const Home: NextPage = () => {
   /* DATA FETCHING */
   const { isError, isLoading, isRefetching, isSuccess, refetch, data } =
     useQuery(['matchups', categories], () =>
-      getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
+      getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to),
     );
 
   //used to rerender map on category change
   useEffect(() => {
+    fetchMap()
+  }, [isRefetching])
+
+  async function fetchMap() {
     const matchUps = data?.items;
     async function getMap(matchUps, city) {
       const map = await initializeMapExplorer(matchUps, city);
       setCurrentMap(map);
     }
     if (showMap) {
-      currentMap.remove();
+      if (currentMap) currentMap.remove();
       getMap(matchUps, city);
     }
-  }, [data]);
+  }
 
   async function mapToggle() {
-    setShowMap(!showMap);
-    const matchUps = data?.items;
-    if (!showMap) {
-      const map = await initializeMapExplorer(matchUps, city);
-      setCurrentMap(map);
-    } else {
-      if (!currentMap) return;
-      currentMap.remove();
+      setShowMap(!showMap);
+      const matchUps = data?.items;
+      if (!showMap) {
+       const map = await initializeMapExplorer(matchUps, city)
+       setCurrentMap(map)
+      } else {
+        if(!currentMap) return;
+        currentMap.remove();
+      }
     }
-  }
 
   return (
     <>
@@ -117,19 +121,13 @@ const Home: NextPage = () => {
 
         {showMap ? (
           <div id='map' className='fullheight-map'></div>
-        ) : isError ? (
-          <div className={styles.empty}>
-            <svg
-              width='80'
-              fill={colors.overlay[60]}
-              viewBox={emptyLight.viewBox}
+        ): isError ? (
+          <><div
+              className={styles.errorWrapper}
+              style={{ color: colors.text[60] }}
             >
-              {darkMode ? emptyDark.path : emptyLight.path}
-            </svg>
-            <p style={{ color: colors.text[60] }}>
-              Oops. Something went wrong.
-            </p>
-          </div>
+              Oops, something went wrong!
+            </div><div id="map" className={styles.nodisplaymap}></div></>
         ) : isLoading ? (
           <div className={styles.loadingWrapper}>
             <LoadingSpinner />
@@ -137,7 +135,7 @@ const Home: NextPage = () => {
         ) : isSuccess && data?.items?.length > 0 ? (
           <div className={styles.cardsWrapper}>
             {data?.items.map((matchup: MatchUp) => (
-              <MatchUpCard
+              <><MatchUpCard
                 id={matchup.id as string}
                 key={matchup.id}
                 variant='large'
@@ -153,19 +151,16 @@ const Home: NextPage = () => {
                 price={matchup.totalCost}
                 rented={matchup.reservedCourt}
               ></MatchUpCard>
+              <div id="map" className={styles.nodisplaymap}></div></>
             ))}
           </div>
         ) : (
-          <div className={styles.empty}>
-            <svg
-              width='80'
-              fill={colors.overlay[60]}
-              viewBox={emptyLight.viewBox}
-            >
-              {darkMode ? emptyDark.path : emptyLight.path}
-            </svg>
-            <p style={{ color: colors.text[60] }}>No events found</p>
-          </div>
+          <><div
+            className={styles.emptyWrapper}
+            style={{ color: colors.text[60] }}
+          >
+            Nothing to show!
+          </div><div id="map" className={styles.nodisplaymap}></div></>
         )}
 
         {/* ------MENU------ */}
@@ -173,6 +168,7 @@ const Home: NextPage = () => {
       </div>
     </>
   );
+
 };
 
 export default Home;
