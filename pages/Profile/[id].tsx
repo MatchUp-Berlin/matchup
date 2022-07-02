@@ -24,6 +24,7 @@ const ProfileDetailPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [organizedEventsLimit, setOrganizedEventsLimit] = useState<number>(4);
+  const [attendedEventsLimit, setAttendedEventsLimit] = useState<number>(4);
 
   // getting user info
   const { isLoading, isSuccess, isError, data } = useQuery(['user', id], () => {
@@ -58,17 +59,18 @@ const ProfileDetailPage: NextPage = () => {
 
   // getting attended events
   const {
-    isLoading: isAttendedMatchUpsLoadig,
+    isLoading: isAttendedMatchUpsLoading,
     isSuccess: isAttendedMatchUpsSuccess,
     isError: isAttendedMatchUpsError,
     data: attendedMatchUpsData,
     refetch: attendedMatchUpsRefetch,
     isRefetching: isAttendedMatchUpsRefetching,
   } = useQuery(['attendedMatchUpsCount', id], () => {
-    getUserMatchUpsAttended(id as string);
+    getUserMatchUpsAttended(id as string, attendedEventsLimit);
   });
 
   // getting organized events
+  // they have the best variable names 'cause they were written first
   const {
     isLoading: isMatchUpsLoading,
     isSuccess: isMatchUpsSuccess,
@@ -159,7 +161,7 @@ const ProfileDetailPage: NextPage = () => {
             <div className='participatedGames'>
               {/*/////// ATTENDED EVENTS LIST /////////*/}
               <h4 style={{ marginBottom: 'none', color: colors.text['100'] }}>
-                Participated to {data.signups.items.length} MatchUps
+                Participated to {attendedCountData} MatchUps
               </h4>
 
               <div
@@ -167,12 +169,12 @@ const ProfileDetailPage: NextPage = () => {
                 className={styles.organizedEventsSection}
               >
                 <div className={styles.spinner}>
-                  {isMatchUpsLoading && <LoadingSpinner />}
+                  {isAttendedMatchUpsLoading && <LoadingSpinner />}
                 </div>
 
-                {/* {isMatchUpsSuccess &&
-                  data.signups.items &&
-                  data.signups.items.map((signup) => {
+                {isAttendedMatchUpsSuccess &&
+                  attendedMatchUpsData.items &&
+                  attendedMatchUpsData.items.map((signup) => {
                     console.log(signup);
                     return (
                       <MatchUpCard
@@ -199,32 +201,32 @@ const ProfileDetailPage: NextPage = () => {
                         indoor={signup.matchUp.indoor}
                       />
                     );
-                  })} */}
-                {isMatchUpsRefetching && <LoadingSpinner />}
+                  })}
+                {isAttendedMatchUpsRefetching && <LoadingSpinner />}
                 <div className={styles.showMoreBtn}>
                   <Button
                     variant='secondary'
                     callback={
-                      organizedEventsLimit < 5
+                      attendedEventsLimit < 5
                         ? () =>
-                            setOrganizedEventsLimit(
-                              (prevOrganizedEventsLimit) =>
-                                prevOrganizedEventsLimit + 3
+                            setAttendedEventsLimit(
+                              (prevAttendedEventsLimit) =>
+                                prevAttendedEventsLimit + 3
                             )
                         : () =>
-                            setOrganizedEventsLimit(
-                              (prevOrganizedEventsLimit) =>
-                                prevOrganizedEventsLimit - 3
+                            setAttendedEventsLimit(
+                              (prevAttendedEventsLimit) =>
+                                prevAttendedEventsLimit - 3
                             )
                     }
-                    text={organizedEventsLimit < 5 ? 'Show More' : 'Show Less'}
+                    text={attendedEventsLimit < 5 ? 'Show More' : 'Show Less'}
                   />
                 </div>
               </div>
 
               {/*/////// ORGANIZED EVENTS LIST /////////*/}
               <h4 style={{ marginBottom: 'none', color: colors.text['100'] }}>
-                Organized {matchUpsData?.items.length} Matchups
+                Organized {organizedCountData} Matchups
               </h4>
               <div
                 // style={{ marginBottom: '5em' }}
