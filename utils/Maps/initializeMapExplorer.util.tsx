@@ -2,11 +2,18 @@ import { createMap } from "maplibre-gl-js-amplify";
 import { drawPoints } from "maplibre-gl-js-amplify";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { TAddress, cityLatLong } from '../types/Address.Type'
+import { MatchUp, TCity } from "../types/MatchUp.Type";
 
-export async function initializeMapExplorer(address, city) {
+export async function initializeMapExplorer(matchUps: MatchUp[], city: TCity) {
     const center = cityLatLong[city]
 
-    console.log(address);
+    const markers = matchUps.map((matchUp) => (
+        {
+            coordinates: [matchUp?.address?.geometry?.point[0], matchUp?.address?.geometry?.point[1]],
+            title:  matchUp.title,
+            address: matchUp?.address?.label
+        }
+    ))
 
     const map = await createMap({
         container: "map",
@@ -15,13 +22,7 @@ export async function initializeMapExplorer(address, city) {
     })
     map.on("load", function () {
     drawPoints("mySourceName", // Arbitrary source name
-        [
-            {
-              coordinates: [address.geometry.point[0], address.geometry.point[1]], // [Longitude, Latitude]
-                title: "MatchUp Location",
-                address: address.label,
-            },
-        ],
+        markers,
         map,
         {
             showCluster: true,
@@ -34,4 +35,5 @@ export async function initializeMapExplorer(address, city) {
         }
     );
 });
+return map;
 }
