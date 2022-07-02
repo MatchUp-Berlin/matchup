@@ -22,8 +22,8 @@ import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import moment from 'moment';
 
 import { getUserMatchUpsAttended } from '../utils/Query/getUserMatchUpsAttended.util';
-import { getUserMatchUpsSignedUp } from '../util/Query/getUserMatchUpsSignedUp';
-import { getNumAttendedMatchUps } from '../util/Query/getNumAttendedMatchUps';
+// import { getUserMatchUpsSignedUp } from '../util/Query/getUserMatchUpsSignedUp';
+// import { getNumAttendedMatchUps } from '../util/Query/getNumAttendedMatchUps';
 import { getNumSignedUpMatchUps } from '../utils/Query/getNumSignedUpMatchUps.util';
 
 const Home: NextPage = () => {
