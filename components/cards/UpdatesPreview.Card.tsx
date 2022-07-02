@@ -24,7 +24,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         <SmallButton callback={props.callback} highlight />
       </div>
 
-      {props.updates.length === 0 ? (
+      {props.updates.items.length === 0 ? (
         <div className={styles.empty}>
           <div className={styles.emptyMessage}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill={colors.text[60]}>
