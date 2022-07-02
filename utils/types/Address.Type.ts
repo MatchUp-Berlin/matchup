@@ -37,7 +37,7 @@ export const cityLatLong = {
     hamburg: {
         addressNumber: undefined,
         country: "DEU",
-        geometry: {point: [13.37691, 52.51604]},
+        geometry: {point: [9.9937, 53.5511]},
         interpolated: false,
         label: "Hamburg, Deutschland",
         municipality: "Hamburg",
