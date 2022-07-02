@@ -6,6 +6,7 @@ import { TAddress } from '../../utils/types/Address.Type';
 import Switch from '../misc/Switch';
 import styles from './styles/PrimaryInfo.Form.module.scss';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
+import { pin } from '../icons';
 
 export interface IPrimaryInfoFormProps {
   title: string;
@@ -22,25 +23,25 @@ export interface IPrimaryInfoFormProps {
 }
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
-  const { colors, darkMode } = useTheme();
+  const { colors, darkMode, shadows } = useTheme();
   const [locationResult, setLocationResult] = useState([]);
 
-useEffect(() => {
-  initializeMap(props.address);
-}, [props.address]);
+  useEffect(() => {
+    initializeMap(props.address);
+  }, [props.address]);
 
-function selectLocation(location) {
-  setLocationResult([]);
-  props.setAddress(location)
-  initializeMap(props.address);
-}
+  function selectLocation(location) {
+    setLocationResult([]);
+    props.setAddress(location);
+    initializeMap(props.address);
+  }
 
   async function searchLocation(event: any) {
     if (event.target.value.length === 0) {
       setLocationResult([]);
       return;
     }
-    const searchOptions = { maxResults: 5, language: 'en', countries: ["DEU"]};
+    const searchOptions = { maxResults: 5, language: 'en', countries: ['DEU'] };
     const results = await Geo.searchByText(event.target.value, searchOptions);
     if (results.length > 0) setLocationResult(results);
   }
@@ -85,7 +86,7 @@ function selectLocation(location) {
           Location
         </label>
         <input
-          onKeyUp={e => searchLocation(e)}
+          onKeyUp={(e) => searchLocation(e)}
           placeholder="Where do you want to meet?"
           className={styles.input}
           style={{
@@ -94,22 +95,25 @@ function selectLocation(location) {
             marginBottom: '1em',
           }}
         ></input>
-        <div>
-          {locationResult.map((location) => (
-              <div key={location.label}
-              style={{
-                borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                color: colors.text[60],
-              }}
-              >
-                  <li
-                  onClick={() => selectLocation(location)}>{location.label}
-                  </li>
-        </div>
-          ))}
+        {locationResult.length > 0 && (
+          <div
+            className={styles.locationSuggestions}
+            style={{ backgroundColor: colors.background[80], boxShadow: shadows.medium }}
+          >
+            {locationResult.map((location) => (
+              <div className={styles.suggestion} key={location.label}>
+                <svg viewBox={pin.viewBox} width="16" height="20" fill={colors.text[60]}>
+                  {pin.path}
+                </svg>
+                <li style={{ color: colors.text[100] }} onClick={() => selectLocation(location)}>
+                  {location.label}
+                </li>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-        <div id="map" className={styles.map}></div>
-      </div>
+      <div id="map" className={styles.map}></div>
 
       <div className={styles.indoor} style={{ color: colors.text[60] }}>
         <p>Is this taking place indoor?</p>
@@ -123,4 +127,3 @@ export default PrimaryInfoForm;
 function selectLocation(label: any): void {
   throw new Error('Function not implemented.');
 }
-
