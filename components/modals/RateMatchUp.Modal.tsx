@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { MatchUp } from '../../utils/types/MatchUp.Type';
 import styles from './styles/RateMatchUp.Modal.module.scss';
 import { useTheme } from '../../contexts/Theme';
@@ -8,10 +9,9 @@ export interface IRateMatchUpModalProps {
   matchUp: MatchUp;
 }
 
-const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = ({
-  title,
-  image,
-}) => {
+const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (
+  props
+) => {
   const { colors, shadows } = useTheme();
   return (
     <div className={styles.modalWrapper}>
@@ -23,8 +23,16 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = ({
         className={styles.modalContainer}
       >
         <h3 style={{ color: colors.text[100] }}>Rate this MatchUp</h3>
-        <Avatar size={'large'} image={image} />
-        <h2 style={{ color: colors.text[100] }}>{title}</h2>
+        {/* <Avatar size={'large'} image={props.matchUp.image} /> */}
+        <Image
+          src={props.matchUp.image}
+          alt='image not found'
+          width={180}
+          height={180}
+          layout='intrinsic'
+          style={{ borderRadius: '50%' }}
+        />
+        <h2 style={{ color: colors.text[100] }}>{props.matchUp.title}</h2>
       </div>
     </div>
   );
