@@ -55,7 +55,10 @@ export async function getMatchUpsByFilter(
     });
 
     retrievedMatchUpData.items = retrievedMatchUpData.items
-      .sort((a: any, b: any) => Date.parse(a.date) - Date.parse(b.date))
+      .sort(
+        (a: MatchUp, b: MatchUp) =>
+          Date.parse(a.date || '') - Date.parse(b.date || '')
+      )
       .filter(
         (matchup: MatchUp) =>
           Date.parse(matchup.date || '') > Date.parse(new Date())
