@@ -16,6 +16,10 @@ export async function getMatchUpById(id: string): Promise<MatchUp> {
 
       retrievedMatchUpData.image = await Storage.get(retrievedMatchUpData.id);
 
+      retrievedMatchUpData.items.forEach((element) => {
+        element.address = JSON.parse(element.address);
+    });
+
       return retrievedMatchUpData;
   } catch (error) {
     throw error;
