@@ -49,17 +49,6 @@ const Home: NextPage = () => {
     () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
   );
 
-  // useEffect(() => {
-  //   async function setupMap() {
-  //     const matchUps = data?.items;
-  //     console.log(data.items)
-  //     const map = await initializeMapExplorer(matchUps, city)
-  //     return map;
-  //   }
-  //   const map = setupMap()
-  //   setCurrentMap(map)
-  // }, [])
-
   async function mapToggle() {
       setShowMap(!showMap);
       const matchUps = data?.items;
