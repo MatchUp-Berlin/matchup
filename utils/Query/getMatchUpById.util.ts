@@ -1,5 +1,5 @@
 import { API, Storage } from 'aws-amplify';
-import { getMatchUp } from '../../src/graphql/queries';
+import { getMatchUp } from '../../src/graphql/custom';
 import { MatchUp } from '../types/MatchUp.Type';
 
 //EXAMPLE ARGUMENT
