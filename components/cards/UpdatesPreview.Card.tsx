@@ -1,5 +1,6 @@
 import { useTheme } from '../../contexts/Theme';
 import { Update } from '../../utils/types/Update.Type';
+import { UpdatesReturn } from '../../utils/types/Update.Type';
 import React from 'react';
 import SmallButton from '../misc/SmallButton';
 import styles from './styles/UpdatesPreview.Card.module.scss';
@@ -7,14 +8,13 @@ import { User } from '../../utils/types/User.Type';
 import moment from 'moment';
 
 export interface IUpdatesPreviewCardProps {
-  updates: Update[];
+  updates: UpdatesReturn;
   organizer: User;
   callback: () => void;
 }
 
 const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (props) => {
   const { colors } = useTheme();
-
   return (
     <>
       <div className={styles.header}>
@@ -35,7 +35,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         </div>
       ) : (
         <div className={styles.updates}>
-          {props.updates.map((update, index) => {
+          {props.updates.items.map((update: Update, index: number) => {
             return (
               <>
                 <div key={index} className={styles.update}>
