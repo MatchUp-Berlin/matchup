@@ -26,6 +26,8 @@ import { getUserMatchUpsAttended } from '../utils/Query/getUserMatchUpsAttended.
 // import { getNumAttendedMatchUps } from '../util/Query/getNumAttendedMatchUps';
 import { getNumSignedUpMatchUps } from '../utils/Query/getNumSignedUpMatchUps.util';
 
+import ConfirmAttendanceModal from '../components/modals/ConfirmAttendance.Modal';
+
 const Home: NextPage = () => {
   const { colors } = useTheme();
   const [showMap, setShowMap] = useState<boolean>(false);
@@ -61,12 +63,12 @@ const Home: NextPage = () => {
 
   function mapToggle() {
     setShowMap(!showMap);
-    console.log(data.items);
     initializeMapExplorer(address, city);
   }
 
   return (
     <>
+      <ConfirmAttendanceModal></ConfirmAttendanceModal>
       <div
         style={{ backgroundColor: colors.background[100] }}
         className={styles.page}
