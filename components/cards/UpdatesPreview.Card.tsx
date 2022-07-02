@@ -1,27 +1,30 @@
 import { useTheme } from '../../contexts/Theme';
 import { Update } from '../../utils/types/Update.Type';
+import { UpdatesReturn } from '../../utils/types/Update.Type';
 import React from 'react';
 import SmallButton from '../misc/SmallButton';
 import styles from './styles/UpdatesPreview.Card.module.scss';
+import { User } from '../../utils/types/User.Type';
+import moment from 'moment';
 
 export interface IUpdatesPreviewCardProps {
-  updates: Update[];
-  organizerId: string;
+  updates: UpdatesReturn;
+  organizer: User;
+  callback: () => void;
 }
 
 const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (props) => {
   const { colors } = useTheme();
-
   return (
     <>
       <div className={styles.header}>
         <p className={'highlight-1'} style={{ color: colors.text[80] }}>
           Latest Updates
         </p>
-        <SmallButton callback={() => console.log('pressed')} />
+        <SmallButton callback={props.callback} highlight />
       </div>
 
-      {props.updates.length === 0 ? (
+      {props.updates.items.length === 0 ? (
         <div className={styles.empty}>
           <div className={styles.emptyMessage}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill={colors.text[60]}>
@@ -32,15 +35,15 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         </div>
       ) : (
         <div className={styles.updates}>
-          {props.updates.map((update) => {
+          {props.updates.items.map((update: Update, index: number) => {
             return (
               <>
-                <div key={update.id} className={styles.update}>
+                <div key={index} className={styles.update}>
                   <div className={styles.left}>
                     <p className={styles.message + ' small'} style={{ color: colors.text[80] }}>
                       <b
                         style={{
-                          color: props.organizerId === update.userId ? colors.primary[100] : colors.text[80],
+                          color: props.organizer.id === update.userId ? colors.primary[100] : colors.text[80],
                         }}
                       >
                         {update.user.givenName}:{' '}
@@ -49,7 +52,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
                     </p>
                   </div>
                   <p className={styles.time} style={{ color: colors.secondary }}>
-                    {update.timestamp}
+                    {moment(update.createdAt).format('MMM D, H:mm')}
                   </p>
                 </div>
               </>

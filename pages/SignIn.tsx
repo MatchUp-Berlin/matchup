@@ -11,11 +11,12 @@ import Image from 'next/image';
 import VerificationForm from '../components/forms/Verification.Form';
 import SignUpForm from '../components/forms/SignUp.Form';
 import SignInForm from '../components/forms/SignIn.Form';
+import { useAuth } from '../contexts/Auth';
 
 const SignInPage: NextPage = () => {
   const { colors, shadows } = useTheme();
   const router = useRouter();
-  const { user } = useAuthenticator((context) => [context.authStatus, context.user]);
+  const authUtils = useAuth();
 
   /* ERROR STATES */
   const [loginError, setLoginError] = useState<string>('');
@@ -45,9 +46,10 @@ const SignInPage: NextPage = () => {
   async function handleLogin() {
     setLoginLoading(true);
     try {
-      await Auth.signIn(loginEmail, loginPassword);
+      const user = await authUtils?.login(loginEmail, loginPassword);
+      console.log('handleLogin', user);
       setLoginLoading(false);
-      router.push('/');
+      user && router.push('/');
     } catch (err) {
       console.log(err);
       if (err == 'UserNotConfirmedException: User is not confirmed.') setCurrentForm('verification');
@@ -59,15 +61,12 @@ const SignInPage: NextPage = () => {
     setRegistrationLoading(true);
     if (registrationPassword === registrationConfirmPassword) {
       try {
-        await Auth.signUp({
-          username: registrationEmail,
-          password: registrationPassword,
-          attributes: {
-            email: registrationEmail,
-            given_name: registrationFirstName,
-            family_name: registrationLastName,
-          },
-        });
+        await authUtils?.signup(
+          registrationEmail,
+          registrationPassword,
+          registrationFirstName,
+          registrationLastName
+        );
         setRegistrationLoading(false);
         router.reload();
       } catch (err) {
@@ -84,7 +83,7 @@ const SignInPage: NextPage = () => {
   async function handleVerification() {
     setVerificationLoading(true);
     try {
-      await Auth.confirmSignUp(loginEmail as string, verificationCode);
+      await authUtils?.verifyEmail(loginEmail, verificationCode);
       setVerificationLoading(false);
       router.push('/');
     } catch (err) {
@@ -96,12 +95,18 @@ const SignInPage: NextPage = () => {
 
   async function resendVerificationCode() {
     try {
-      await Auth.resendSignUp(loginEmail);
+      await authUtils?.resendEmailVerififaction(loginEmail);
     } catch (err) {
       console.log(err);
       setResetError('There has been an error resending the code.');
     }
   }
+
+  useEffect(() => {
+    if (authUtils?.currentUser) {
+      typeof window !== 'undefined' && router.push('/');
+    }
+  }, [authUtils]);
 
   return (
     <>

@@ -7,7 +7,7 @@ export interface TCoordinates {
 export interface TAddress {
     addressNumber?: number
     country?: string;
-    geometry?: object;
+    geometry?: {point: [number, number]};
     interpolated?: boolean;
     label?: string;
     municipality?: string;

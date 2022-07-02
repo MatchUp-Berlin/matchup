@@ -21,12 +21,13 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({ user 
         boxShadow: shadows.medium,
       }}
     >
-      <div className="infoContainer">
+      <div className={styles.info}>
         <p className="highlight-1" style={{ color: colors.text[100] }}>{`${givenName} ${familyName}`}</p>
-        <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p>
+        {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
         <p style={{ color: colors.text[60] }}>Speaks: </p>
       </div>
-      <div className="avatarContainer">
+      
+      <div className={styles.avatar}>
         <Avatar size={'medium'} image={profileImage || avatar} />
       </div>
     </article>

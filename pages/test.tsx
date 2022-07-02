@@ -6,15 +6,18 @@ import { usersArray } from './../mockData/mockUsersArray';
 import UpdatesMessageCard from '../components/cards/UpdatesMessage.Card';
 import MatchUpDetail from './MatchUps/[MatchUpId]';
 import { mockUpdate } from './../mockData/mockUpdate';
+import { mockUpdates } from './../mockData/mockUpdates';
+import UpdatesModal from '../components/modals/Updates.Modal';
 
 const Home: NextPage = () => {
   return (
     <>
-      {/* <UpdatesPreviewCard updates={updates} organizerId={organizerId} /> */}
+      {/* <UpdatesPreviewCard updates={mockUpdates} organizer={usersArray[2]} /> */}
       {/* <ParticipantCard user={usersArray[0]} /> */}
       {/* <OrganizerCard user={usersArray[3]} /> */}
-      {/* <UpdatesMessageCard update={mockUpdate} /> */}
-      <MatchUpDetail />
+      {/* <UpdatesMessageCard update={mockUpdate} organizer={usersArray[2]} /> */}
+      <UpdatesModal updates={mockUpdates} organizer={usersArray[2]} />
+      {/* <MatchUpDetail /> */}
     </>
   );
 };

@@ -49,6 +49,9 @@ export async function getMatchUpsByFilter(
       return matchUp;
       })
     )
+    retrievedMatchUpData.items.forEach((element) => {
+      element.address = JSON.parse(element.address);
+  });
 
     return retrievedMatchUpData;
   } catch (err) {
