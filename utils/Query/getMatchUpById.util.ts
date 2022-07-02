@@ -7,25 +7,26 @@ import { MatchUp } from '../types/MatchUp.Type';
 
 export async function getMatchUpById(id: string): Promise<MatchUp> {
   try {
-      const matchUpData = await API.graphql({
+    const matchUpData = await API.graphql({
       query: getMatchUp,
       variables: { id: id },
       // authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
-      const retrievedMatchUpData = matchUpData.data.getMatchUp;
 
-      retrievedMatchUpData.image = await Storage.get(retrievedMatchUpData.id);
+    const retrievedMatchUpData = matchUpData.data.getMatchUp;
 
-      retrievedMatchUpData.items.forEach((element) => {
-        element.address = JSON.parse(element.address);
-    });
+    /* Fill with Image data */
+    retrievedMatchUpData.image = await Storage.get(retrievedMatchUpData.id);
 
-      return retrievedMatchUpData;
+    /* Fill with Address data */
+    retrievedMatchUpData.address = JSON.parse(retrievedMatchUpData.address);
+
+    return retrievedMatchUpData;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }
-
 /*
 EXAMPLE RESPONSE
 
