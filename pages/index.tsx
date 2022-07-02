@@ -47,7 +47,6 @@ const Home: NextPage = () => {
       getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
     );
 
-<<<<<<< HEAD
   async function mapToggle() {
       setShowMap(!showMap);
       const matchUps = data?.items;
@@ -59,12 +58,6 @@ const Home: NextPage = () => {
         currentMap.remove();
       }
     }
-=======
-  function mapToggle() {
-    setShowMap(!showMap);
-    initializeMapExplorer(address, city);
-  }
->>>>>>> main
 
   return (
     <>
