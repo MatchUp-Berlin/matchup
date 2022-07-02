@@ -12,33 +12,33 @@ import { getOrganizerMatchUps } from '../utils/Query/getOrganizerMatchUps.util';
 import LoadingSpinner from '../components/misc/Divider';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import { TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
+import { useAuth } from '../contexts/Auth';
+import { empty, emptyDark, emptyLight, emptyWhite } from '../components/icons';
 
 const YourMatchUpsPage: NextPage = () => {
-  const { colors } = useTheme();
+  const { colors, darkMode } = useTheme();
   const router = useRouter();
-  const { route, user } = useAuthenticator((context) => [context.user]);
+  const { currentUser } = useAuth();
 
   const [showOrganizing, setShowOrganizing] = useState<boolean>(false);
 
   // fetch user profile
-  const userQuery = useQuery(['user', user?.username], () => getUserById(user.username as string), {
-    enabled: !!user,
+  const userQuery = useQuery(['user', currentUser], () => getUserById(currentUser as string), {
+    enabled: !!currentUser,
   });
 
   // fetch organized events by this user
   const organizedQuery = useQuery(
-    ['organized', user?.username],
-    () => getOrganizerMatchUps(user.username as string, 3),
-    { enabled: !!user }
+    ['organized', currentUser],
+    () => getOrganizerMatchUps(currentUser as string, 3),
+    { enabled: !!currentUser }
   );
 
   useEffect(() => {
-    if (user) {
-      if (route !== 'authenticated') {
-        typeof window !== 'undefined' && router.push('/SignIn');
-      }
+    if (!currentUser) {
+      typeof window !== 'undefined' && router.push('/SignIn');
     }
-  }, [organizedQuery.data, user, route]);
+  }, [currentUser]);
 
   return (
     <>
@@ -73,9 +73,19 @@ const YourMatchUpsPage: NextPage = () => {
             {organizedQuery.isLoading ? (
               <LoadingSpinner />
             ) : organizedQuery.isError ? (
-              <>Oops, something wrong happened</>
+              <div className={styles.empty}>
+                <svg width="80" fill={colors.overlay[60]} viewBox={emptyLight.viewBox}>
+                  {darkMode ? emptyDark.path : emptyLight.path}
+                </svg>
+                <p style={{ color: colors.text[60] }}>Oops. Something went wrong.</p>
+              </div>
             ) : organizedQuery.isSuccess && organizedQuery.data.items.length == 0 ? (
-              <>Nothing here yet...</>
+              <div className={styles.empty}>
+                <svg width="80" fill={colors.overlay[60]} viewBox={emptyLight.viewBox}>
+                  {darkMode ? emptyDark.path : emptyLight.path}
+                </svg>
+                <p style={{ color: colors.text[60] }}>Nothing to show yet</p>
+              </div>
             ) : (
               organizedQuery.data && (
                 <>
@@ -86,6 +96,7 @@ const YourMatchUpsPage: NextPage = () => {
                       .map((signup) => (
                         <MatchUpCard
                           key={signup?.id}
+                          id={signup.id}
                           variant="large"
                           timestamp={signup?.date as string}
                           title={signup?.title as string}
@@ -108,6 +119,7 @@ const YourMatchUpsPage: NextPage = () => {
                       .map((signup) => (
                         <MatchUpCard
                           key={signup?.id}
+                          id={signup.id}
                           variant="large"
                           timestamp={signup?.date as string}
                           title={signup?.title as string}
@@ -133,9 +145,19 @@ const YourMatchUpsPage: NextPage = () => {
             {userQuery.isLoading ? (
               <LoadingSpinner />
             ) : userQuery.isError ? (
-              <>Oops, something wrong happened</>
-            ) : userQuery.isSuccess && !userQuery.data ? (
-              <>Nothing here yet...</>
+              <div className={styles.empty}>
+                <svg width="80" fill={colors.overlay[60]} viewBox={emptyLight.viewBox}>
+                  {darkMode ? emptyDark.path : emptyLight.path}
+                </svg>
+                <p style={{ color: colors.text[60] }}>Oops. Something went wrong.</p>
+              </div>
+            ) : userQuery.isSuccess && userQuery.data.signups.items.length == 0 ? (
+              <div className={styles.empty}>
+                <svg width="80" fill={colors.overlay[60]} viewBox={emptyLight.viewBox}>
+                  {darkMode ? emptyDark.path : emptyLight.path}
+                </svg>
+                <p style={{ color: colors.text[60] }}>Nothing to show yet</p>
+              </div>
             ) : (
               userQuery.data && (
                 <>
@@ -145,6 +167,7 @@ const YourMatchUpsPage: NextPage = () => {
                       .filter((signup) => new Date(signup.matchUp?.date as string) > new Date())
                       .map((signup) => (
                         <MatchUpCard
+                          id={signup.id as string}
                           key={signup?.matchUp?.id}
                           variant="large"
                           timestamp={signup?.matchUp?.date as string}
@@ -167,6 +190,7 @@ const YourMatchUpsPage: NextPage = () => {
                       .filter((signup) => new Date(signup.matchUp?.date as string) > new Date())
                       .map((signup) => (
                         <MatchUpCard
+                          id={signup.id as string}
                           key={signup?.matchUp?.id}
                           variant="large"
                           timestamp={signup?.matchUp?.date as string}
