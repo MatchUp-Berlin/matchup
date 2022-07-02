@@ -34,7 +34,10 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (
     setClicked(clickStates);
   };
   return (
-    <div className={styles.modalWrapper}>
+    <div
+      className={styles.modalWrapper}
+      style={{ backgroundColor: colors.background[100] }}
+    >
       <div
         style={{
           backgroundColor: colors.background[100],
@@ -51,38 +54,51 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (
             width={180}
             height={180}
             layout='intrinsic'
-            style={{ borderRadius: '50%', boxShadow: shadows.medium }}
+            style={{
+              borderRadius: '50%',
+              boxShadow: shadows.medium,
+            }}
           />
         </div>
         <h2 style={{ color: colors.text[100] }}>{props.matchUp.title}</h2>
         <div className={styles.ratingBallsWrapper}>
           <div
             onClick={(e) => handleBallsClick(e, 0)}
-            className={styles.singleBall}
+            className={
+              clicked[0] ? styles.singleBallClicked : styles.singleBall
+            }
           >
             <RatingBall ballCategory={props.matchUp.sportCategory} />
           </div>
           <div
             onClick={(e) => handleBallsClick(e, 1)}
-            className={styles.singleBall}
+            className={
+              clicked[1] ? styles.singleBallClicked : styles.singleBall
+            }
           >
             <RatingBall ballCategory={props.matchUp.sportCategory} />
           </div>
           <div
             onClick={(e) => handleBallsClick(e, 2)}
-            className={styles.singleBall}
+            className={
+              clicked[2] ? styles.singleBallClicked : styles.singleBall
+            }
           >
             <RatingBall ballCategory={props.matchUp.sportCategory} />
           </div>
           <div
             onClick={(e) => handleBallsClick(e, 3)}
-            className={styles.singleBall}
+            className={
+              clicked[3] ? styles.singleBallClicked : styles.singleBall
+            }
           >
             <RatingBall ballCategory={props.matchUp.sportCategory} />
           </div>
           <div
             onClick={(e) => handleBallsClick(e, 4)}
-            className={styles.singleBall}
+            className={
+              clicked[4] ? styles.singleBallClicked : styles.singleBall
+            }
           >
             <RatingBall ballCategory={props.matchUp.sportCategory} />
           </div>
@@ -95,10 +111,11 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (
           <textarea
             className={styles.feedbackTextarea}
             style={{
-              borderColor: colors.text[60],
+              // borderColor: colors.text[60],
               // border: 'none',
               boxShadow: shadows.medium,
               color: colors.text[80],
+              outlineColor: colors.primary[100],
             }}
           ></textarea>
         </div>

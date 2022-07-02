@@ -37,8 +37,9 @@
 }
 
 .imageWrapper {
-  // height: 200px;
   background-color: transparent;
+  padding: 0.8em;
+  margin: -0.8em;
 }
 
 .ratingBallsWrapper {
@@ -47,12 +48,17 @@
   justify-content: flex-start;
 
   .singleBall {
-    // opacity: 0.5;
+    opacity: 0.7;
     margin-right: 0.2em;
   }
 
   .singleBall:hover ~ .singleBall {
-    opacity: 0.7;
+    opacity: 0.4;
+  }
+
+  .singleBallClicked {
+    opacity: 1;
+    margin-right: 0.2em;
   }
 }
 
@@ -62,5 +68,10 @@
     height: 5em;
     width: 100%;
     border-radius: 10px;
+    &:focus {
+      outline-width: 2px;
+      outline-offset: -2px;
+      outline-style: solid;
+    }
   }
 }
