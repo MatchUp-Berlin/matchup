@@ -45,9 +45,14 @@ export const createMatchUpMutation = /* GraphQL */ `
           userID
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
+          user {
+            id
+            givenName
+            familyName
+            email
+            profileImage
+            about
+          }
         }
         nextToken
         startedAt
@@ -132,6 +137,91 @@ export const createMatchUpUserMutation = /* GraphQL */ `
       _lastChangedAt
       matchUpUserMatchUpUsersId
       matchUpUserUserMatchUpsId
+    }
+  }
+`;
+
+export const getMatchUp = /* GraphQL */ `
+  query GetMatchUp($id: ID!) {
+    getMatchUp(id: $id) {
+      id
+      title
+      signups {
+        items {
+          id
+          userId
+          matchUpId
+          attended
+          createdAt
+          updatedAt
+          user {
+            id
+            givenName
+            familyName
+            email
+            profileImage
+            about
+          }
+        }
+        nextToken
+      }
+      location
+      address
+      organizerId
+      organizer {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      sportCategory
+      skillLevel
+      totalCost
+      reservedCourt
+      attendanceMin
+      attendanceMax
+      cancelled
+      indoor
+      description
+      image
+      date
+      currency
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      watchList {
+        items {
+          id
+          userId
+          matchUpId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
     }
   }
 `;
