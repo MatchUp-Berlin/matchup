@@ -50,6 +50,7 @@ const Home: NextPage = () => {
 
   function mapToggle() {
     setShowMap(!showMap)
+    console.log(data.items)
     initializeMapExplorer(address, city)
   }
 
