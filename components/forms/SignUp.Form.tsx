@@ -34,7 +34,7 @@ const SignUpForm: React.FunctionComponent<ISignUpFormProps> = (props) => {
           value={props.inputState.registrationFirstName}
           onChange={(e) => props.setRegistrationFirstName(e.target.value as string)}
           placeholder="Your first name"
-          style={{ boxShadow: shadows.small }}
+          style={{ boxShadow: shadows.small, outlineColor: colors.primary[100] }}
         ></input>
         <input
           className={styles.input}
@@ -42,7 +42,7 @@ const SignUpForm: React.FunctionComponent<ISignUpFormProps> = (props) => {
           value={props.inputState.registrationLastName}
           onChange={(e) => props.setRegistrationLastName(e.target.value as string)}
           placeholder="Your last name"
-          style={{ boxShadow: shadows.small }}
+          style={{ boxShadow: shadows.small, outlineColor: colors.primary[100] }}
         ></input>
         <input
           className={styles.input}
@@ -50,7 +50,7 @@ const SignUpForm: React.FunctionComponent<ISignUpFormProps> = (props) => {
           value={props.inputState.registrationEmail}
           onChange={(e) => props.setRegistrationEmail(e.target.value as string)}
           placeholder="Your email address"
-          style={{ boxShadow: shadows.small }}
+          style={{ boxShadow: shadows.small, outlineColor: colors.primary[100] }}
         ></input>
         <input
           className={styles.input}
@@ -58,7 +58,7 @@ const SignUpForm: React.FunctionComponent<ISignUpFormProps> = (props) => {
           value={props.inputState.registrationPassword}
           onChange={(e) => props.setRegistrationPassword(e.target.value as string)}
           placeholder="Password"
-          style={{ boxShadow: shadows.small }}
+          style={{ boxShadow: shadows.small, outlineColor: colors.primary[100] }}
         ></input>
         <input
           className={styles.input}
@@ -66,10 +66,15 @@ const SignUpForm: React.FunctionComponent<ISignUpFormProps> = (props) => {
           value={props.inputState.registrationConfirmPassword}
           onChange={(e) => props.setRegistrationConfirmPassword(e.target.value as string)}
           placeholder="Confirm password"
-          style={{ boxShadow: shadows.small }}
+          style={{ boxShadow: shadows.small, outlineColor: colors.primary[100] }}
         ></input>
         {props.error && <p style={{ color: colors.primary[100] }}>{props.error}</p>}
-        <Button disabled={props.isLoading} variant="primary" text="Sign Up" callback={props.handleRegistration}></Button>
+        <Button
+          disabled={props.isLoading}
+          variant="primary"
+          text="Sign Up"
+          callback={props.handleRegistration}
+        ></Button>
       </div>
     </>
   );

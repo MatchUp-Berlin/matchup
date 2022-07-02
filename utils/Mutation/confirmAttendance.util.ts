@@ -9,10 +9,11 @@ export async function confirmAttendance(SignUpData: SignUp): Promise<SignUp> {
 
     // Find the Signup
 
-    const signUpId = await (
-      await getMatchUpById(SignUpData.matchUpId)
-    ).signups.items.filter((signup) => signup.userId === SignUpData.userId)[0]
-      .id;
+    const matchUp = await getMatchUpById(SignUpData.matchUpId);
+
+    const signUpId = matchUp.signups.items.filter(
+      (signup) => signup.userId === SignUpData.userId
+    )[0].id;
 
     const update = {
       id: signUpId,

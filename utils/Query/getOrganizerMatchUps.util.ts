@@ -1,6 +1,6 @@
 import { API, Storage } from 'aws-amplify';
 import { listMatchUps } from '../../src/graphql/queries';
-import { getMatchUpsReturn } from '../types/MatchUp.Type';
+import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
 
 export async function getOrganizerMatchUps(id: string, showCards: number): Promise<getMatchUpsReturn> {
   try {
@@ -12,13 +12,16 @@ export async function getOrganizerMatchUps(id: string, showCards: number): Promi
 
     const matchUpsData = await API.graphql({
       query: listMatchUps,
-      variables: { filter: filter },
+      variables: {
+        filter: filter,
+        offset: showCards,
+      },
     });
 
     const retrievedData = await matchUpsData.data.listMatchUps;
 
     const imageData = await Promise.all(
-      retrievedData.items.map(async (matchUp) => {
+      retrievedData.items.map(async (matchUp: MatchUp) => {
         const headerImage = await Storage.get(matchUp.id);
         matchUp.image = headerImage;
         return matchUp;
