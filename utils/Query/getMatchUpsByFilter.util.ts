@@ -1,7 +1,8 @@
 import { API, Storage } from 'aws-amplify';
 import { listMatchUps } from '../../src/graphql/queries';
-import { MatchUp } from '../../src/models';
+// import { MatchUp } from '../../src/models';
 import {
+  MatchUp,
   getMatchUpsReturn,
   getMatchUpsByFilterFilter,
 } from '../types/MatchUp.Type';
@@ -44,14 +45,14 @@ export async function getMatchUpsByFilter(
     const retrievedMatchUpData = await matchUpData.data.listMatchUps;
 
     const imageData = await Promise.all(
-      retrievedMatchUpData.items.map(async (matchUp) => {
+      retrievedMatchUpData.items.map(async (matchUp: MatchUp) => {
         const headerImage = await Storage.get(matchUp.id);
         matchUp.image = headerImage;
         return matchUp;
       })
     );
-    retrievedMatchUpData.items.forEach((element) => {
-      element.address = JSON.parse(element.address);
+    retrievedMatchUpData.items.forEach((element: MatchUp) => {
+      element.address = JSON.parse(element.address as string);
     });
 
     retrievedMatchUpData.items = retrievedMatchUpData.items
@@ -61,10 +62,9 @@ export async function getMatchUpsByFilter(
       )
       .filter(
         (matchup: MatchUp) =>
-          Date.parse(matchup.date || '') > Date.parse(new Date())
+          Date.parse(matchup.date || '') >
+          Date.parse(new Date() as unknown as string)
       );
-
-    console.log(retrievedMatchUpData);
 
     return retrievedMatchUpData;
   } catch (err) {
