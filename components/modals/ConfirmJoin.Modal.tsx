@@ -3,11 +3,12 @@ import { useTheme } from '../../contexts/Theme';
 import { MatchUp } from '../../utils/types/MatchUp.Type';
 import styles from './styles/ConfirmJoin.Modal.module.scss';
 import Button from '../misc/Button';
-import { useAuthenticator } from '@aws-amplify/ui-react';
+
 import { addUserToMatchUp } from '../../utils/Mutation/addUserToMatchUp.util';
 import { removeUserFromMatchUp } from '../../utils/Mutation/removeUserFromMatchUp.util';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import SmallButton from '../misc/SmallButton';
+import { useAuth } from '../../contexts/Auth';
 
 export interface IConfirmJoinModalProps {
   matchUp: MatchUp;
@@ -19,11 +20,11 @@ export interface IConfirmJoinModalProps {
 const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (props) => {
   const { colors, shadows } = useTheme();
   const queryClient = useQueryClient();
-  const { user } = useAuthenticator((context) => [context.user]);
+  const { currentUser } = useAuth();
 
   const handleCommit = () => {
     addUserToMatchUp({
-      userId: user.username || '',
+      userId: currentUser || '',
       matchUpId: props.matchUp.id || '',
     })
       .then((res) => {
@@ -34,7 +35,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (props
   };
 
   const handleCancel = () => {
-    removeUserFromMatchUp(user.username || '', props.matchUp.id || '')
+    removeUserFromMatchUp(currentUser || '', props.matchUp.id || '')
       .then((res: any) => {
         queryClient.invalidateQueries(['matchup', props.matchUp.id]);
         props.setShowModal(false);
