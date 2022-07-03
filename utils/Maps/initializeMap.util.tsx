@@ -6,7 +6,7 @@ import { TAddress } from '../types/Address.Type';
 export async function initializeMap(address) {
   const map = await createMap({
     container: 'map',
-    center: [address.geometry.point[0], address.geometry.point[1]], // [Longitude, Latitude]
+    center: [address?.geometry?.point[0], address?.geometry?.point[1]], // [Longitude, Latitude]
     zoom: 12.5,
   });
   if (address.addressNumber !== undefined && address.street !== undefined) {
@@ -15,7 +15,7 @@ export async function initializeMap(address) {
         'mySourceName', // Arbitrary source name
         [
           {
-            coordinates: [address.geometry.point[0], address.geometry.point[1]], // [Longitude, Latitude]
+            coordinates: [address?.geometry?.point[0], address?.geometry?.point[1]], // [Longitude, Latitude]
             title: 'MatchUp Location',
             address: address.label,
           },
@@ -33,4 +33,5 @@ export async function initializeMap(address) {
       );
     });
   }
+  return map;
 }

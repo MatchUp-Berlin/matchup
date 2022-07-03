@@ -16,7 +16,7 @@ export async function initializeMapExplorer(matchUps: MatchUp[], city: TCity) {
 
     const map = await createMap({
         container: "map",
-        center: [center.geometry.point[0], center.geometry.point[1]], // [Longitude, Latitude]
+        center: [center?.geometry?.point[0], center?.geometry?.point[1]], // [Longitude, Latitude]
         zoom: 12.5,
     })
     map.on("load", function () {
