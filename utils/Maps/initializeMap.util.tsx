@@ -13,11 +13,7 @@ function getPin() {
 export async function initializeMap(address: TAddress) {
   const map = await createMap({
     container: 'map',
-<<<<<<< HEAD
-    center: [address?.geometry?.point[0], address?.geometry?.point[1]], // [Longitude, Latitude]
-=======
     center: address.geometry?.point as [number, number],
->>>>>>> main
     zoom: 12.5,
   });
 
@@ -28,13 +24,8 @@ export async function initializeMap(address: TAddress) {
         'mySourceName', // Arbitrary source name
         [
           {
-<<<<<<< HEAD
-            coordinates: [address?.geometry?.point[0], address?.geometry?.point[1]], // [Longitude, Latitude]
-            title: 'MatchUp Location',
-=======
             coordinates: address.geometry?.point as [number, number],
             title: 'MatchUp',
->>>>>>> main
             address: address.label,
           },
         ],
