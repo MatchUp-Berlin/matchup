@@ -8,11 +8,11 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { useState } from 'react';
-
+console.log(process.env.awsexportdata)
 if (!process.env.awsexportdata) {
 import('../src/aws-exports').then((exports) => Amplify.configure(exports.default));
 } else {
-  Amplify.configure(process.env.awsexports);
+  Amplify.configure(process.env.awsexportdata);
 }
 import { ThemeProvider } from '../contexts/Theme';
 import { AuthProvider } from '../contexts/Auth';
