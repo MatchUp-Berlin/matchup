@@ -19,7 +19,7 @@
     "maplibre-gl": "^1.15.3",
     "maplibre-gl-js-amplify": "^1.6.0",
     "moment": "^2.29.3",
-    "next": "12.1.6",
+    "next": "^12.2.1-canary.2",
     "node-fetch": "^3.2.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
