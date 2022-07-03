@@ -5,6 +5,7 @@ import Header from '../../components/misc/Header';
 import HeaderButton from '../../components/misc/HeaderButton';
 import { useTheme } from '../../contexts/Theme';
 import { getMatchUpById } from '../../utils/Query/getMatchUpById.util';
+import { initializeMap } from '../../utils/Maps/initializeMap.util';
 
 import styles from './styles/MatchUpId.module.scss';
 import placeholder from '../../public/placeholder-header.jpeg';
@@ -64,6 +65,12 @@ const MatchUpDetail: NextPage = () => {
     if (data && currentUser) {
       setHasFinished(Date.parse(data?.date) < Date.parse(new Date().toISOString()));
       setIsWithin24h(Date.parse(data?.date) - ms < Date.parse(new Date().toISOString()));
+    }
+  }, [data, currentUser]);
+
+  useEffect(() => {
+    if  (data && currentUser) {
+      initializeMap(data?.address);
     }
   }, [data, currentUser]);
 
@@ -257,12 +264,11 @@ const MatchUpDetail: NextPage = () => {
                   borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                 }}
               ></div>
-
-              <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
+              <div id="map" className={styles.map}></div>
             </div>
           )
         )}
-
+        <div id="map" className={styles.nodisplaymap}></div>
         <Footer
           leftSide={
             <div className={styles.footerInfo}>
