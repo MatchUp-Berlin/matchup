@@ -45,30 +45,5 @@ export async function initializeMapExplorer(matchUps: MatchUp[], city: TCity) {
     )
   );
 
-<<<<<<< HEAD
-    const map = await createMap({
-        container: "map",
-        center: [center?.geometry?.point[0], center?.geometry?.point[1]], // [Longitude, Latitude]
-        zoom: 12.5,
-    })
-    map.on("load", function () {
-    drawPoints("mySourceName", // Arbitrary source name
-        markers,
-        map,
-        {
-            showCluster: true,
-            unclusteredOptions: {
-                showMarkerPopup: true,
-            },
-            clusterOptions: {
-                showCount: true,
-            },
-        }
-    );
-});
-return map;
-}
-=======
   return map;
 }
->>>>>>> main
