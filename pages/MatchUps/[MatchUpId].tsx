@@ -40,7 +40,7 @@ const MatchUpDetail: NextPage = () => {
     isLoading,
     isSuccess,
     isError,
-    data: matchUp,
+    data,
   } = useQuery(['matchup', MatchUpId], () => getMatchUpById(MatchUpId as string), { enabled: !!MatchUpId });
 
   /* -----WATCHLIST----- */
