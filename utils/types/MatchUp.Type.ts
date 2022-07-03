@@ -19,7 +19,7 @@ export type TCity =
   | 'hamburg'
   | 'münchen'
   | 'köln'
-  | 'frankfurt am Main'
+  | 'frankfurtamMain'
   | 'stuttgart'
   | 'dortmund'
   | 'düsseldorf'

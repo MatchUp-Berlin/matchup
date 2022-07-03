@@ -5,7 +5,11 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
+<<<<<<< HEAD
 module.exports = withPWA({
+=======
+module.exports = {
+>>>>>>> main
   typescript: { ignoreBuildErrors: true },
   nextConfig,
   images: {

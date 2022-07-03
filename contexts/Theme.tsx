@@ -51,7 +51,8 @@ export function useTheme() {
 
 /* ----- PROVIDER ----- */
 export const ThemeProvider: FC<any> = ({ children }: any) => {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(true
+  );
 
   const value: IThemeProvider = {
     darkMode,
