@@ -1,12 +1,18 @@
-import { Geo } from 'aws-amplify';
+/* REACT, NEXT */
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+
+/* STYLING */
 import { useTheme } from '../../contexts/Theme';
+import styles from './styles/PrimaryInfo.Form.module.scss';
+import Switch from '../misc/Switch';
+import { pin } from '../icons';
+
+/* UTILS */
+import { Geo } from 'aws-amplify';
 import { TCity } from '../../utils/types/MatchUp.Type';
 import { TAddress } from '../../utils/types/Address.Type';
-import Switch from '../misc/Switch';
-import styles from './styles/PrimaryInfo.Form.module.scss';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
-import { pin } from '../icons';
+import { Place } from 'aws-sdk/clients/location';
 
 export interface IPrimaryInfoFormProps {
   title: string;
@@ -24,17 +30,18 @@ export interface IPrimaryInfoFormProps {
 
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
   const { colors, darkMode, shadows } = useTheme();
-  const [locationResult, setLocationResult] = useState([]);
+  const [locationResult, setLocationResult] = useState<any[]>([]);
 
+
+  /* --------------- HANDLING LOCATION */
   useEffect(() => {
     initializeMap(props.address);
   }, [props.address]);
 
-  function selectLocation(location) {
-    console.log(location)
+  function selectLocation(loc: TAddress) {
     setLocationResult([]);
-    props.setAddress(location);
-    props.setLocation(location.municipality.toLowerCase())
+    props.setAddress(loc);
+    loc.municipality && props.setLocation(loc.municipality.toLowerCase() as TCity)
     initializeMap(props.address);
   }
 
@@ -126,6 +133,3 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
 };
 
 export default PrimaryInfoForm;
-function selectLocation(label: any): void {
-  throw new Error('Function not implemented.');
-}

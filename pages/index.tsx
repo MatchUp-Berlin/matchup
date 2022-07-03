@@ -25,7 +25,7 @@ import { cityLatLong, TAddress } from '../utils/types/Address.Type';
 import { initializeMapExplorer } from '../utils/Maps/initializeMapExplorer.util';
 import { MatchUp, TCity, TSportCategories } from '../utils/types/MatchUp.Type';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
-import { arrow, } from '../components/icons';
+import { arrow } from '../components/icons';
 import Empty from '../components/misc/Empty';
 
 const Home: NextPage = () => {
