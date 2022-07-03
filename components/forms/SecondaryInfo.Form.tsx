@@ -8,7 +8,7 @@ export interface ISecondaryInfoFormProps {
   attendanceMin: number;
   attendanceMax: number;
   description: string;
-  image: File;
+  image: File | undefined;
   skillLevel: TSkillLevels;
   reservedCourt: boolean;
   totalCost: number;
@@ -16,7 +16,7 @@ export interface ISecondaryInfoFormProps {
   setAttendanceMin: Dispatch<SetStateAction<number>>;
   setAttendanceMax: Dispatch<SetStateAction<number>>;
   setDescription: Dispatch<SetStateAction<string>>;
-  setImage: Dispatch<SetStateAction<File>>;
+  setImage: Dispatch<SetStateAction<File | undefined>>;
   setSkillLevel: Dispatch<SetStateAction<TSkillLevels>>;
   setReservedCourt: Dispatch<SetStateAction<boolean>>;
   setTotalCost: Dispatch<SetStateAction<number>>;

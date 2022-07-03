@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity, TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
-import { SkillsCard, SlotsCard, ParticipantsPreviewCard } from '../cards';
-import UpdatesPreviewCard from '../cards/UpdatesPreview.Card';
+import { SkillsCard, SlotsCard } from '../cards';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
 import MainInfo from '../misc/MainInfo';
 import styles from './styles/OrganizeConfirmation.Form.module.scss';
