@@ -74,8 +74,11 @@
 }
 
 .map {
-  height: 20vh;
-  width: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 30vh;
+  width: 100%;
+  z-index: 0;
 }
 
 .nodisplaymap {
