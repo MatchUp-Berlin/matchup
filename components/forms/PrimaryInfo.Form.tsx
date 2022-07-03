@@ -12,7 +12,6 @@ import { Geo } from 'aws-amplify';
 import { TCity } from '../../utils/types/MatchUp.Type';
 import { TAddress } from '../../utils/types/Address.Type';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
-import { Place } from 'aws-sdk/clients/location';
 
 export interface IPrimaryInfoFormProps {
   title: string;
@@ -32,8 +31,6 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
   const { colors, darkMode, shadows } = useTheme();
   const [locationResult, setLocationResult] = useState<any[]>([]);
 
-
-  /* --------------- HANDLING LOCATION */
   useEffect(() => {
     initializeMap(props.address);
   }, [props.address]);
