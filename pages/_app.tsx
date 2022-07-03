@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </AuthProvider>
         </Authenticator.Provider>
       </Hydrate>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

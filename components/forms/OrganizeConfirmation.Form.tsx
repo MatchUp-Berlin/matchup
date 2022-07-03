@@ -69,13 +69,6 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         }}
       ></div>
 
-      <div
-        className={styles.divider}
-        style={{
-          borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-        }}
-      ></div>
-
       <div id="map" className={styles.map}></div>
     </div>
   );
