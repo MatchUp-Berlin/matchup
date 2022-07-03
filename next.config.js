@@ -1,9 +1,11 @@
+const withPWA = require('next-pwa');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 };
 
-module.exports = {
+module.exports = withPWA({
   typescript: { ignoreBuildErrors: true },
   nextConfig,
   images: {
@@ -12,4 +14,4 @@ module.exports = {
       'matchup-storage-b0c9ab6f112810-dev.s3.us-east-1.amazonaws.com',
     ],
   },
-};
+});
