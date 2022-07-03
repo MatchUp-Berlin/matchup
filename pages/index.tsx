@@ -89,6 +89,7 @@ const Home: NextPage = () => {
     fetchMap();
   }, [isRefetching]);
 
+
   return (
     <>
       <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
@@ -122,7 +123,7 @@ const Home: NextPage = () => {
 
         {/* ------MATCHUP LIST OR MAP------ */}
         {showMap ? (
-          <div id="map" className="fullheight-map"></div>
+          <div id="map" className={'fullheight-map ' + styles.map}></div>
         ) : isError ? (
           <>
             <Empty text="Looks like something went wrong." />
