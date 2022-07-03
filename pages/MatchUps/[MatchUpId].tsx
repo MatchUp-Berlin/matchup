@@ -282,15 +282,11 @@ const MatchUpDetail: NextPage = () => {
                   borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                 }}
               ></div>
-<<<<<<< HEAD
-              <div id="map" className={styles.map}></div>
-=======
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${matchUp.address.geometry?.point[1]}%2C${matchUp.address.geometry?.point[0]}`}
               >
                 <div id="map" className={styles.map}></div>
               </a>
->>>>>>> main
             </div>
           )
         )}
