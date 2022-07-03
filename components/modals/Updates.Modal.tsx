@@ -5,6 +5,7 @@ import styles from './styles/Updates.Modal.module.scss';
 import { useTheme } from '../../contexts/Theme';
 import UpdatesMessageCard from '../cards/UpdatesMessage.Card';
 import SmallButton from '../misc/SmallButton';
+import Empty from '../misc/Empty';
 
 export interface IUpdatesModalProps {
   updates: UpdatesReturn;
@@ -46,6 +47,7 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
             }
           />
         </div>
+        {props.updates.items.length === 0 && <Empty text="No updates yet."></Empty>}
         <div className={styles.scrollable}>
           {props.updates.items.map((update, index) => {
             return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;

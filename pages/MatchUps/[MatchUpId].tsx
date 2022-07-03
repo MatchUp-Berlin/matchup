@@ -69,7 +69,7 @@ const MatchUpDetail: NextPage = () => {
   }, [data, currentUser]);
 
   useEffect(() => {
-    if  (data && currentUser) {
+    if (data && currentUser) {
       initializeMap(data?.address);
     }
   }, [data, currentUser]);
@@ -81,12 +81,14 @@ const MatchUpDetail: NextPage = () => {
       if (isOrganizer)
         setHeaderButtons([
           <HeaderButton
+            stayLight
             key={1}
             viewBox={share.viewBox}
             callback={() => mutation.mutate({ userId: currentUser as string, matchUpId: data.id as string })}
             icon={share.path}
           />,
           <HeaderButton
+            stayLight
             key={2}
             viewBox={edit.viewBox}
             callback={() =>
@@ -101,8 +103,14 @@ const MatchUpDetail: NextPage = () => {
         ]);
       else
         setHeaderButtons([
-          <HeaderButton key={1} viewBox={watchList.viewBox} callback={() => {}} icon={watchList.path} />,
-          <HeaderButton key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
+          <HeaderButton
+            stayLight
+            key={1}
+            viewBox={watchList.viewBox}
+            callback={() => {}}
+            icon={watchList.path}
+          />,
+          <HeaderButton stayLight key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
         ]);
     }
   }, [isSignedUp, isOrganizer, data, currentUser]);
@@ -163,6 +171,7 @@ const MatchUpDetail: NextPage = () => {
           sportCategory={data?.sportCategory}
           leftButton={
             <HeaderButton
+              stayLight
               viewBox="0 0 10 10"
               callback={() => router.back()}
               icon={
