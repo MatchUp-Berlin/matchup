@@ -5,27 +5,74 @@ export const getUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      signups {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
+          matchUp {
+            id
+            title
+            location
+            address
+            sportCategory
+            skillLevel
+            totalCost
+            reservedCourt
+            attendanceMin
+            attendanceMax
+            cancelled
+            indoor
+            image
+            date
+            currency
+          }
         }
         nextToken
-        startedAt
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      watchList {
+        items {
+          id
+          userId
+          matchUpId
+          matchUp {
+            id
+            title
+            location
+            address
+            sportCategory
+            skillLevel
+            totalCost
+            reservedCourt
+            attendanceMin
+            attendanceMax
+            cancelled
+            indoor
+            image
+            date
+            currency
+          }
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

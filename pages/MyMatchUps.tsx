@@ -15,34 +15,22 @@ import { TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 import { useAuth } from '../contexts/Auth';
 import { emptyDark, emptyLight } from '../components/icons';
 import Empty from '../components/misc/Empty';
-import { getUserMatchUpsAttended } from '../utils/Query/getUserMatchUpsAttended.util';
-import { getUserMatchUpsSignedUp } from '../utils/Query/getUserMatchUpsSignedUp.util';
 
 const YourMatchUpsPage: NextPage = () => {
   const { colors, darkMode } = useTheme();
   const router = useRouter();
-  const { currentUser } = useAuth();
+  const { currentUserId, currentUser } = useAuth();
   const [showOrganizing, setShowOrganizing] = useState<boolean>(false);
 
-  const signedUpQuery = useQuery(
-    ['signedup', currentUser],
-    () => getUserMatchUpsSignedUp(currentUser as string),
-    {
-      enabled: !!currentUser,
-    }
-  );
-
   const organizedQuery = useQuery(
-    ['organized', currentUser],
-    () => getOrganizerMatchUps(currentUser as string, 3),
-    { enabled: !!currentUser }
+    ['organized', currentUserId],
+    () => getOrganizerMatchUps(currentUserId as string, 3),
+    { enabled: !!currentUserId }
   );
 
   useEffect(() => {
-    if (!currentUser) {
-      typeof window !== 'undefined' && router.push('/SignIn');
-    }
-  }, [currentUser]);
+    if (!currentUserId) router.push('/SignIn');
+  }, [currentUserId]);
 
   return (
     <>
@@ -110,47 +98,31 @@ const YourMatchUpsPage: NextPage = () => {
         ) : (
           <>
             {/* ------PARTICIPATING------ */}
-            {signedUpQuery.isLoading ? (
-              <LoadingSpinner />
-            ) : signedUpQuery.isError ? (
-              <div className={styles.empty}>
-                <svg width="80" fill={colors.overlay[60]} viewBox={emptyLight.viewBox}>
-                  {darkMode ? emptyDark.path : emptyLight.path}
-                </svg>
-                <p style={{ color: colors.text[60] }}>Oops. Something went wrong.</p>
-              </div>
-            ) : signedUpQuery.isSuccess && signedUpQuery.data.length == 0 ? (
-              <div className={styles.empty}>
-                <svg width="80" fill={colors.overlay[60]} viewBox={emptyLight.viewBox}>
-                  {darkMode ? emptyDark.path : emptyLight.path}
-                </svg>
-                <p style={{ color: colors.text[60] }}>Nothing to show yet</p>
-              </div>
+            {currentUser && currentUser.signups.items.length == 0 ? (
+              <Empty text="You haven't participated in a MatchUp yet." />
             ) : (
-              signedUpQuery.data && (
-                <>
-                  <div className={styles.cardsWrapper}>
-                    {signedUpQuery.data.map((matchup) => (
-                      <MatchUpCard
-                        id={matchup.id as string}
-                        key={matchup?.id}
-                        variant="large"
-                        timestamp={matchup?.date as string}
-                        title={matchup?.title as string}
-                        slots={matchup?.attendanceMax as number}
-                        participating={/* matchup.matchUp.users.length */ 3} // FIX THIS ONE
-                        location={matchup?.location as string}
-                        sport={matchup?.sportCategory as TSportCategories}
-                        skill={matchup?.skillLevel as TSkillLevels}
-                        imageUrl={matchup?.image as string}
-                        paid={(matchup?.totalCost > 0) as boolean}
-                        price={matchup?.totalCost as number}
-                        rented={matchup?.reservedCourt as boolean}
-                      ></MatchUpCard>
-                    ))}
-                  </div>
-                </>
-              )
+              <div className={styles.cardsWrapper}>
+                {currentUser &&
+                  currentUser.signups.items.length != 0 &&
+                  currentUser.signups.items.map((signup) => (
+                    <MatchUpCard
+                      key={signup?.matchUp?.id}
+                      id={signup?.matchUp?.id as string}
+                      variant="large"
+                      timestamp={signup?.matchUp?.date as string}
+                      title={signup?.matchUp?.title as string}
+                      slots={signup?.matchUp?.attendanceMax as number}
+                      participating={signup?.matchUp?.signups?.items?.length || 0} // FIX THIS ONE
+                      location={signup?.matchUp?.location as string}
+                      sport={signup?.matchUp?.sportCategory as TSportCategories}
+                      skill={signup?.matchUp?.skillLevel as TSkillLevels}
+                      imageUrl={signup?.matchUp?.image as string}
+                      paid={(signup?.matchUp?.totalCost > 0) as boolean}
+                      price={signup?.matchUp?.totalCost as number}
+                      rented={signup?.matchUp?.reservedCourt as boolean}
+                    ></MatchUpCard>
+                  ))}
+              </div>
             )}
           </>
         )}

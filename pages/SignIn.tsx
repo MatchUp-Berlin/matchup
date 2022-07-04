@@ -103,7 +103,7 @@ const SignInPage: NextPage = () => {
   }
 
   useEffect(() => {
-    if (authUtils?.currentUser) {
+    if (authUtils?.currentUserId) {
       typeof window !== 'undefined' && router.push('/');
     }
   }, [authUtils]);
