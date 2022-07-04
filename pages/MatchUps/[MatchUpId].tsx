@@ -156,6 +156,8 @@ const MatchUpDetail: NextPage = () => {
   const [showUpdatesModal, setShowUpdatesModal] = useState<boolean>(false);
   const [showRateEventModal, setShowRateEventModal] = useState<boolean>(false);
 
+  console.log('matchUp', matchUp);
+
   return (
     <>
       <div
@@ -187,7 +189,9 @@ const MatchUpDetail: NextPage = () => {
             <ParticipantsModal
               close={() => setShowParticipantsModal(false)}
               participants={
-                matchUp.signups.items.map((signup) => signup.user) as User[]
+                matchUp.signups.items.map((signup) => {
+                  return { ...signup.user, signup: signup };
+                }) as User[]
               }
             />
           </>
@@ -293,7 +297,9 @@ const MatchUpDetail: NextPage = () => {
               <ParticipantsPreviewCard
                 callback={() => setShowParticipantsModal(true)}
                 users={
-                  matchUp.signups.items.map((signup) => signup.user) as User[]
+                  matchUp.signups.items.map((signup) => {
+                    return { ...signup.user, attended: signup.attended };
+                  }) as User[]
                 }
                 hasFinished={true}
                 isOrganizer={true}

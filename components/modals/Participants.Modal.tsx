@@ -16,6 +16,8 @@ const ParticipantsModal: React.FunctionComponent<IParticipantsModalProps> = (
   const { colors, shadows } = useTheme();
   const [animating, setAnimating] = useState(false);
 
+  console.log('participants', props.participants);
+
   useEffect(() => {
     (async () => {
       await new Promise((resolve) => setTimeout(resolve, 1));

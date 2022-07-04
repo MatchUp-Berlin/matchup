@@ -7,7 +7,7 @@ import styles from './styles/ParticipantsPreview.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
 
 export interface IParticipantsPreviewCardProps {
-  users: Pick<User, 'profileImage' | 'id'>[];
+  users: Pick<User, 'profileImage' | 'id' | 'attended'>[];
   callback: () => void;
   hasFinished: boolean;
   isOrganizer: boolean;
@@ -16,6 +16,7 @@ export interface IParticipantsPreviewCardProps {
 const ParticipantsPreviewCard: React.FunctionComponent<
   IParticipantsPreviewCardProps
 > = ({ users, callback, hasFinished, isOrganizer }) => {
+  console.log(users, 'USERS');
   const { colors } = useTheme();
   return (
     <div>
@@ -44,7 +45,7 @@ const ParticipantsPreviewCard: React.FunctionComponent<
                   key={user.id}
                   size={'small'}
                   image={user.profileImage || avatar}
-                  confirmedAttendance={true}
+                  attended={user.attended || false}
                   highlight={true}
                 />
               ))

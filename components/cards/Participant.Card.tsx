@@ -4,7 +4,7 @@ import { Avatar } from '../misc';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Participant.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
-import { useAuth } from '../../contexts/Auth';
+import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
 
 export interface IParticipantCardProps {
   user: User;
@@ -13,9 +13,12 @@ export interface IParticipantCardProps {
 const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   user,
 }) => {
-  const { profileImage, givenName, familyName, signups } = user;
+  const { profileImage, givenName, familyName, attended, signup } = user;
   const { colors, shadows } = useTheme();
-  const currentUser = useAuth();
+
+  const toggleAttended = () => {
+    signup && toggleAttendance(signup).then((res) => console.log(res));
+  };
 
   return (
     <article
@@ -34,9 +37,9 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
         <p style={{ color: colors.text[60] }}>Speaks: </p>
       </div>
 
-      <div className={styles.avatar}>
+      <div className={styles.avatar} onClick={() => toggleAttended()}>
         <Avatar
-          confirmedAttendance={true}
+          attended={attended || false}
           highlight={true}
           size={'medium'}
           image={profileImage || avatar}
