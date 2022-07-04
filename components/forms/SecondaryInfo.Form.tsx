@@ -8,7 +8,7 @@ export interface ISecondaryInfoFormProps {
   attendanceMin: number;
   attendanceMax: number;
   description: string;
-  image: File;
+  image: File | undefined;
   skillLevel: TSkillLevels;
   reservedCourt: boolean;
   totalCost: number;
@@ -16,7 +16,7 @@ export interface ISecondaryInfoFormProps {
   setAttendanceMin: Dispatch<SetStateAction<number>>;
   setAttendanceMax: Dispatch<SetStateAction<number>>;
   setDescription: Dispatch<SetStateAction<string>>;
-  setImage: Dispatch<SetStateAction<File>>;
+  setImage: Dispatch<SetStateAction<File | undefined>>;
   setSkillLevel: Dispatch<SetStateAction<TSkillLevels>>;
   setReservedCourt: Dispatch<SetStateAction<boolean>>;
   setTotalCost: Dispatch<SetStateAction<number>>;
@@ -115,6 +115,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             style={{
               borderColor: darkMode ? colors.background[60] : '#DDDDDD',
               color: colors.text[60],
+              outlineColor: colors.primary[80],
             }}
           >
             <option value="beginner">Beginner</option>
@@ -138,6 +139,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             style={{
               borderColor: darkMode ? colors.background[60] : '#DDDDDD',
               color: colors.text[60],
+              outlineColor: colors.primary[80],
             }}
             type="currency"
             step="any"
@@ -159,6 +161,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
         style={{
           borderColor: darkMode ? colors.background[60] : '#DDDDDD',
           backgroundColor: colors.background[80],
+          outlineColor: colors.primary[80],
         }}
       />
       {/* image */}
@@ -166,16 +169,13 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
         Upload Image
       </h4>
 
-      <div
-        className={styles.uploadImageWrapper}
-        style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
-      >
+      <div className={styles.uploadImageWrapper} style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}>
         <div
           className={styles.inputImageBtn}
           style={
             props.image
               ? {
-                  backgroundImage: `url(${(URL.createObjectURL(props.image))})`,
+                  backgroundImage: `url(${URL.createObjectURL(props.image)})`,
                   backgroundSize: 'cover',
                   backgroundPositionY: '50%',
                   backgroundPositionX: '50%',

@@ -14,7 +14,7 @@ const SlotsCard: React.FunctionComponent<ISlotsCardProps> = (props) => {
       <p className={styles.title} style={{ color: colors.text[60] }}>
         Coming
       </p>
-      <div className={styles.pill} style={{ outlineColor: colors.primary[100], color: colors.primary[100] }}>
+      <div className={styles.pill} style={{ borderColor: colors.primary[100], color: colors.primary[100] }}>
         <p className="fat">
           {props.attending} / {props.slots}
         </p>

@@ -6,6 +6,7 @@ export interface IHeaderButtonProps {
   icon: any; // has to be an SVG path
   viewBox: string;
   callback: () => any;
+  stayLight?: boolean;
 }
 
 const HeaderButton: React.FunctionComponent<IHeaderButtonProps> = (props) => {
@@ -14,7 +15,7 @@ const HeaderButton: React.FunctionComponent<IHeaderButtonProps> = (props) => {
     <div
       onClick={props.callback}
       className={styles.btn}
-      style={{ backgroundColor: colors.background[60], boxShadow: shadows.small }}
+      style={{ backgroundColor: props.stayLight ? "white" : colors.background[60], boxShadow: shadows.small }}
     >
       <svg className={styles.icon} viewBox={props.viewBox} fill={colors.text[60]}>
         {props.icon}

@@ -9,6 +9,11 @@
   flex-direction: column;
   gap: 1em;
 
+  .logoWrapper {
+    position: absolute;
+    top: 5em;
+  }
+
   h1 {
     margin-bottom: 1em;
   }

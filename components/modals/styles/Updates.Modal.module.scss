@@ -44,19 +44,20 @@
   min-height: 50px;
   flex-grow: 1;
   margin-right: 0.8em;
-  border-style: none;
+  border-style: solid;
+  border-width: 1px;
   border-radius: 25px;
   padding: 0 1em;
   word-break: break-word;
-}
-.input::placeholder {
-  color: #a2a2a2;
-}
-
-.input:focus {
-  outline-width: 2px;
-  outline-offset: -2px;
-  outline-style: solid;
+  background-color: transparent;
+  &::placeholder {
+    color: #a2a2a2;
+  }
+  &:focus {
+    outline-width: 2px;
+    outline-offset: -2px;
+    outline-style: solid;
+  }
 }
 
 .button {

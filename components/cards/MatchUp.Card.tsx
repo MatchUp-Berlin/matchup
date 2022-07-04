@@ -33,6 +33,7 @@ export interface IMatchUpCardProps {
 
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
+  const isFinished = new Date(props.timestamp) < new Date();
   return (
     <Link href={`/MatchUps/${props.id}`}>
       <div
@@ -41,6 +42,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           backgroundColor: colors.background[80],
           boxShadow: shadows.medium,
           height: props.variant == 'large' ? '150px' : '100px',
+          opacity: isFinished ? 0.5 : 1,
         }}
       >
         <div className={styles.imageWrapper}>
@@ -65,7 +67,9 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             <div className={styles.details}>
               <div className={styles.detail}>
                 <Image width={'10px'} height={'10px'} src={clock} alt="taking place on"></Image>
-                <p style={{ color: colors.text[60] }}>{moment(props.timestamp).format('H:m dddd')}</p>
+                <p style={{ color: colors.text[60] }}>
+                  {moment(props.timestamp).format('dddd MMM Do  hh:mma ')}
+                </p>
               </div>
               <div className={styles.detail}>
                 <Image width={'10px'} height={'10px'} src={pin} alt="taking place at"></Image>
@@ -85,14 +89,20 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             <div className={styles.pills}>
               <div
                 className={styles.pill}
-                style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+                style={{
+                  backgroundColor: colors.background[100],
+                  boxShadow: shadows.small,
+                }}
               >
                 <p style={{ color: colors.text[100] }}>{props.skill}</p>
               </div>
               {props.rented && (
                 <div
                   className={styles.pill}
-                  style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+                  style={{
+                    backgroundColor: colors.background[100],
+                    boxShadow: shadows.small,
+                  }}
                 >
                   <p style={{ color: colors.text[100] }}>Rented</p>
                 </div>
@@ -100,7 +110,10 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
               {props.variant == 'large' && props.slots && props.slots - props.participating && (
                 <div
                   className={styles.pill}
-                  style={{ backgroundColor: colors.background[100], boxShadow: shadows.small }}
+                  style={{
+                    backgroundColor: colors.background[100],
+                    boxShadow: shadows.small,
+                  }}
                 >
                   <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
                 </div>

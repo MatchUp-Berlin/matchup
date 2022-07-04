@@ -1,14 +1,17 @@
 .wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   gap: 15px;
   padding: 1em;
+  padding-bottom: 2em;
+  min-height: 90vh;
   position: relative;
 
   .indoor {
     padding: 0 0.5em;
+    margin-bottom: 5em;
     width: 100%;
     display: flex;
     align-items: center;
@@ -34,6 +37,12 @@
       padding: 0 1em;
       background-color: transparent;
       text-transform: capitalize;
+
+      &:focus {
+        outline-width: 2px;
+        outline-offset: -2px;
+        outline-style: solid;
+      }
     }
   }
 }
@@ -72,4 +81,5 @@
   border-radius: 20px;
   height: 30vh;
   width: 100%;
+  z-index: 0;
 }

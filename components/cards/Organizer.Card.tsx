@@ -11,7 +11,6 @@ export interface IOrganizerCardProps {
 
 const OrganizerCard: React.FunctionComponent<IOrganizerCardProps> = (props) => {
   const { colors } = useTheme();
-  console.log(props);
 
   return (
     <>
