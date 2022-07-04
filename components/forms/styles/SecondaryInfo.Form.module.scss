@@ -55,15 +55,20 @@
     justify-content: center;
     align-items: center;
     gap: 1em;
+
+    .incrementBtn {
+      border: none;
+      width: 2em;
+      height: 2em;
+      border-radius: 50%;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
   }
 
-  .incrementBtn {
-    border: none;
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
-    background-color: transparent;
-  }
 
   .rentedCourt {
     width: 100%;

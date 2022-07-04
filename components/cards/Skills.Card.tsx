@@ -13,7 +13,7 @@ const SkillsCard: React.FunctionComponent<ISkillsCardProps> = (props) => {
       <p className={styles.title} style={{ color: colors.text[60] }}>
         SKILL LEVEL
       </p>
-      <div className={styles.pill} style={{ backgroundColor: colors.primary[100] }}>
+      <div className={styles.pill} style={{ borderColor: colors.primary[100], backgroundColor: colors.primary[100] }}>
         <p className="fat">{props.skillLevel}</p>
       </div>
     </div>

@@ -14,7 +14,7 @@ import SignInForm from '../components/forms/SignIn.Form';
 import { useAuth } from '../contexts/Auth';
 
 const SignInPage: NextPage = () => {
-  const { colors, shadows } = useTheme();
+  const { colors } = useTheme();
   const router = useRouter();
   const authUtils = useAuth();
 
