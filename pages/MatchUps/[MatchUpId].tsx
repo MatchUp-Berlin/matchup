@@ -260,18 +260,22 @@ const MatchUpDetail: NextPage = () => {
                 }}
               ></div>
 
-              <UpdatesPreviewCard
-                updates={matchUp.updates}
-                organizer={matchUp.organizer as User}
-                callback={() => setShowUpdatesModal(true)}
-              ></UpdatesPreviewCard>
+              {isSignedUp && (
+                <UpdatesPreviewCard
+                  updates={matchUp.updates}
+                  organizer={matchUp.organizer as User}
+                  callback={() => setShowUpdatesModal(true)}
+                ></UpdatesPreviewCard>
+              )}
+              {isSignedUp && (
+                <div
+                  className={styles.divider}
+                  style={{
+                    borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                  }}
+                ></div>
+              )}
 
-              <div
-                className={styles.divider}
-                style={{
-                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                }}
-              ></div>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${matchUp.address.geometry?.point[1]}%2C${matchUp.address.geometry?.point[0]}`}
               >

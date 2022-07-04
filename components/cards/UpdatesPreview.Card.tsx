@@ -53,7 +53,7 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
                             color: props.organizer.id === update.userId ? colors.primary[100] : colors.text[80],
                           }}
                         >
-                          {update.user.givenName + ': '}
+                          {update.user?.givenName + ': '}
                         </b>
                         {update.content}
                       </p>
