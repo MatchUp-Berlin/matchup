@@ -5,15 +5,13 @@ import { SignUp } from '../types/SignUp.Type';
 import { getMatchUpById } from './getMatchUpById.util';
 
 export async function getUserMatchUpsAttended(
-  userId: string,
-  maxCards: number
+  userId: string
 ): Promise<MatchUp[]> {
   try {
     const signUps = await API.graphql({
       query: listSignUps,
       variables: {
         filter: { and: { userId: { eq: userId } }, attended: { eq: true } },
-        limit: maxCards,
       },
     });
 

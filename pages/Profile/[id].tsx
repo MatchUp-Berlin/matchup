@@ -23,8 +23,8 @@ const ProfileDetailPage: NextPage = () => {
   const { colors, darkMode } = useTheme();
   const router = useRouter();
   const { id } = router.query;
-  const [organizedEventsLimit, setOrganizedEventsLimit] = useState<number>(4);
-  const [attendedEventsLimit, setAttendedEventsLimit] = useState<number>(4);
+  // const [organizedEventsLimit, setOrganizedEventsLimit] = useState<number>(3);
+  const [organizedEventsToken, setOrganizedEventsToken] = useState<any>();
 
   // getting user info
   const { isLoading, isSuccess, isError, data } = useQuery(
@@ -35,11 +35,11 @@ const ProfileDetailPage: NextPage = () => {
     { enabled: !!id }
   );
 
-  useEffect(() => {
-    matchUpsRefetch();
-    console.log('trying to refetch');
-    console.log(organizedEventsLimit);
-  }, [organizedEventsLimit]);
+  // useEffect(() => {
+  //   matchUpsRefetch();
+  //   console.log('trying to refetch');
+  //   console.log(organizedEventsLimit);
+  // }, [organizedEventsLimit]);
 
   // getting attended matchups count
   const {
@@ -73,22 +73,17 @@ const ProfileDetailPage: NextPage = () => {
 
   // getting attended events
   const {
-    isLoading: isAttendedMatchUpsLoading,
+    isLoading: isAttendedMatchUpsLoadig,
     isSuccess: isAttendedMatchUpsSuccess,
     isError: isAttendedMatchUpsError,
     data: attendedMatchUpsData,
     refetch: attendedMatchUpsRefetch,
     isRefetching: isAttendedMatchUpsRefetching,
-  } = useQuery(
-    ['attendedMatchUpsCount', id],
-    () => {
-      getUserMatchUpsAttended(id as string, attendedEventsLimit);
-    },
-    { enabled: !!id }
-  );
+  } = useQuery(['attendedMatchUpsCount', id], () => {
+    getUserMatchUpsAttended(id as string);
+  });
 
   // getting organized events
-  // they have the best variable names 'cause they were written first
   const {
     isLoading: isMatchUpsLoading,
     isSuccess: isMatchUpsSuccess,
@@ -98,9 +93,22 @@ const ProfileDetailPage: NextPage = () => {
     isRefetching: isMatchUpsRefetching,
   } = useQuery(
     ['matchUps', id],
-    () => getOrganizerMatchUps(id as string, organizedEventsLimit),
-    { enabled: !!id }
+    () => getOrganizerMatchUps(id as string, organizedEventsToken),
+    {
+      enabled: !!id,
+      onSuccess: (matchUpsData) =>
+        setOrganizedEventsToken(matchUpsData.nextToken),
+    }
   );
+
+  async function showMoreOrganized() {
+    const matchUps = await getOrganizerMatchUps(
+      id as string,
+      organizedEventsToken
+    );
+    const tokenId = matchUps.nextToken;
+    setOrganizedEventsToken(tokenId);
+  }
 
   return (
     <>
@@ -189,12 +197,12 @@ const ProfileDetailPage: NextPage = () => {
                 className={styles.organizedEventsSection}
               >
                 <div className={styles.spinner}>
-                  {isAttendedMatchUpsLoading && <LoadingSpinner />}
+                  {isMatchUpsLoading && <LoadingSpinner />}
                 </div>
 
-                {isAttendedMatchUpsSuccess &&
-                  attendedMatchUpsData.items &&
-                  attendedMatchUpsData.items.map((signup) => {
+                {/* {isMatchUpsSuccess &&
+                  data.signups.items &&
+                  data.signups.items.map((signup) => {
                     console.log(signup);
                     return (
                       <MatchUpCard
@@ -221,32 +229,20 @@ const ProfileDetailPage: NextPage = () => {
                         indoor={signup.indoor}
                       />
                     );
-                  })}
-                {isAttendedMatchUpsRefetching && <LoadingSpinner />}
+                  })} */}
+                {isMatchUpsRefetching && <LoadingSpinner />}
                 <div className={styles.showMoreBtn}>
                   <Button
                     variant='secondary'
-                    callback={
-                      attendedEventsLimit < 5
-                        ? () =>
-                            setAttendedEventsLimit(
-                              (prevAttendedEventsLimit) =>
-                                prevAttendedEventsLimit + 3
-                            )
-                        : () =>
-                            setAttendedEventsLimit(
-                              (prevAttendedEventsLimit) =>
-                                prevAttendedEventsLimit - 3
-                            )
-                    }
-                    text={attendedEventsLimit < 5 ? 'Show More' : 'Show Less'}
+                    callback={() => console.log(organizedEventsToken)}
+                    text={'something'}
                   />
                 </div>
               </div>
 
               {/*/////// ORGANIZED EVENTS LIST /////////*/}
               <h4 style={{ marginBottom: 'none', color: colors.text['100'] }}>
-                Organized {organizedCountData} Matchups
+                Organized {matchUpsData?.items.length} Matchups
               </h4>
               <div
                 // style={{ marginBottom: '5em' }}
@@ -289,20 +285,8 @@ const ProfileDetailPage: NextPage = () => {
                 <div className={styles.showMoreBtn}>
                   <Button
                     variant='secondary'
-                    callback={
-                      organizedEventsLimit < 5
-                        ? () =>
-                            setOrganizedEventsLimit(
-                              (prevOrganizedEventsLimit) =>
-                                prevOrganizedEventsLimit + 3
-                            )
-                        : () =>
-                            setOrganizedEventsLimit(
-                              (prevOrganizedEventsLimit) =>
-                                prevOrganizedEventsLimit - 3
-                            )
-                    }
-                    text={organizedEventsLimit < 5 ? 'Show More' : 'Show Less'}
+                    callback={() => matchUpsRefetch()}
+                    text={'Show More'}
                   />
                 </div>
               </div>

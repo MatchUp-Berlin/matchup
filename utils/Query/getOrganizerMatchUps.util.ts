@@ -4,7 +4,8 @@ import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
 
 export async function getOrganizerMatchUps(
   id: string,
-  maxCards: number
+  // maxCards: number
+  next: string
 ): Promise<getMatchUpsReturn> {
   try {
     const filter = {
@@ -17,9 +18,12 @@ export async function getOrganizerMatchUps(
       query: listMatchUps,
       variables: {
         filter: filter,
-        limit: maxCards,
+        limit: 3,
+        nextToken: next,
       },
     });
+
+    console.log('from utils     ', next, matchUpsData);
 
     const retrievedData = await matchUpsData.data.listMatchUps;
 
