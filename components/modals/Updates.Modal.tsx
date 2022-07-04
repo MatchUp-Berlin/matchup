@@ -62,7 +62,7 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
             style={{
               boxShadow: shadows.small,
               color: colors.text[100],
-              borderColor: darkMode ? colors.text[60] :  "#DDDDDD",
+              borderColor: darkMode ? colors.text[60] :  "#DDDDDD", outlineColor: colors.primary[80]
             }}
           />
           <div

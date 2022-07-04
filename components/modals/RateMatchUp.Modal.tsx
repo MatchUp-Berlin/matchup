@@ -105,6 +105,7 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (props
           boxShadow: shadows.medium,
           color: colors.text[80],
           borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+          outlineColor: colors.primary[80],
         }}
       ></input>
       <Button
@@ -119,7 +120,7 @@ const RateMatchUpModal: React.FunctionComponent<IRateMatchUpModalProps> = (props
 
 export default RateMatchUpModal;
 
-/* 
+/*
 
 USAGE:
 

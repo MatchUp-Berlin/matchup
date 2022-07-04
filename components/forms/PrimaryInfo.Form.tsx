@@ -38,7 +38,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
   function selectLocation(loc: TAddress) {
     setLocationResult([]);
     props.setAddress(loc);
-    loc.municipality && props.setLocation(loc.municipality.toLowerCase() as TCity)
+    loc.municipality && props.setLocation(loc.municipality.toLowerCase() as TCity);
     initializeMap(props.address);
   }
 
@@ -66,6 +66,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
           style={{
             borderColor: darkMode ? colors.background[60] : '#DDDDDD',
             color: colors.text[60],
+            outlineColor: colors.primary[80],
           }}
         ></input>
       </div>
@@ -83,6 +84,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
           style={{
             borderColor: darkMode ? colors.background[60] : '#DDDDDD',
             color: colors.text[60],
+            outlineColor: colors.primary[80],
           }}
         ></input>
       </div>
@@ -99,6 +101,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
             borderColor: darkMode ? colors.background[60] : '#DDDDDD',
             color: colors.text[60],
             marginBottom: '1em',
+            outlineColor: colors.primary[80],
           }}
         ></input>
         {locationResult.length > 0 && (
