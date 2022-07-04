@@ -19,6 +19,11 @@
     -webkit-appearance: none;
     appearance: none;
     background-image: none;
+    &:focus {
+      outline-width: 2px;
+      outline-offset: -2px;
+      outline-style: solid;
+    }
   }
 
   .location {

@@ -5,27 +5,74 @@ export const getUser = /* GraphQL */ `
       givenName
       familyName
       email
-      MatchUps {
+      signups {
         items {
           id
-          matchUpID
-          userID
+          userId
+          matchUpId
+          attended
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
+          matchUp {
+            id
+            title
+            location
+            address
+            sportCategory
+            skillLevel
+            totalCost
+            reservedCourt
+            attendanceMin
+            attendanceMax
+            cancelled
+            indoor
+            image
+            date
+            currency
+          }
         }
         nextToken
-        startedAt
       }
       profileImage
       about
+      updates {
+        items {
+          id
+          userId
+          matchUpId
+          content
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      watchList {
+        items {
+          id
+          userId
+          matchUpId
+          matchUp {
+            id
+            title
+            location
+            address
+            sportCategory
+            skillLevel
+            totalCost
+            reservedCourt
+            attendanceMin
+            attendanceMax
+            cancelled
+            indoor
+            image
+            date
+            currency
+          }
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -222,6 +269,66 @@ export const getMatchUp = /* GraphQL */ `
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const listMatchUps = /* GraphQL */ `
+  query ListMatchUps(
+    $filter: ModelMatchUpFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMatchUps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        signups {
+          items {
+            id
+            userId
+            matchUpId
+            attended
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        location
+        address
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;

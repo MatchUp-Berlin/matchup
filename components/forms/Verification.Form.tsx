@@ -24,15 +24,10 @@ const VerificationForm: React.FunctionComponent<IVerificationFormProps> = (props
           onChange={(e) => props.setVerificationCode(e.target.value as string)}
           value={props.verificationCode}
           placeholder="Type in your verification code"
-          style={{ boxShadow: shadows.small }}
+          style={{ boxShadow: shadows.small, outlineColor: colors.primary[80] }}
         ></input>
         {props.error && <p style={{ color: colors.primary[100] }}>{props.error}</p>}
-        <Button
-          disabled={props.isLoading}
-          variant="primary"
-          text="Verify"
-          callback={props.handleVerification}
-        ></Button>
+        <Button disabled={props.isLoading} variant="primary" text="Verify" callback={props.handleVerification}></Button>
       </div>
       <p className={styles.bottomText + ' small'} onClick={props.resendCode}>
         Resend code{' '}

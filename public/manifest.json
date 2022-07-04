@@ -1,16 +1,16 @@
 {
-    "name": "Next.JS Progressive Web App",
-    "short_name": "Next PWA",
-    "theme_color": "#ffffff",
-    "background_color": "#004740",
+    "name": "MatchUp",
+    "short_name": "MatchUp",
+    "theme_color": "#252525",
+    "background_color": "#252525",
     "display": "fullscreen",
     "orientation": "portrait",
     "scope": "/",
     "start_url": "/",
     "icons": [
         {
-            "src": "/football-icon.png",
-            "sizes": "320x320",
+            "src": "/logopwa.png",
+            "sizes": "500x500",
             "type": "image/png"
           }
     ],

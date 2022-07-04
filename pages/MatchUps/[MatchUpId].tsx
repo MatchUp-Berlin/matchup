@@ -5,6 +5,7 @@ import Header from '../../components/misc/Header';
 import HeaderButton from '../../components/misc/HeaderButton';
 import { useTheme } from '../../contexts/Theme';
 import { getMatchUpById } from '../../utils/Query/getMatchUpById.util';
+import { initializeMap } from '../../utils/Maps/initializeMap.util';
 
 import styles from './styles/MatchUpId.module.scss';
 import placeholder from '../../public/placeholder-header.jpeg';
@@ -25,6 +26,7 @@ import UpdatesModal from '../../components/modals/Updates.Modal';
 import { createNewWatchList } from '../../utils/Mutation/createWatchList.util';
 import { edit, share, watchList } from '../../components/icons';
 import { useAuth } from '../../contexts/Auth';
+import RateMatchUpModal from '../../components/modals/RateMatchUp.Modal';
 
 const ms = 24 * 60 * 60 * 1000;
 
@@ -34,59 +36,75 @@ const MatchUpDetail: NextPage = () => {
   const { MatchUpId } = router.query;
 
   /* -----FETCHING----- */
-  const { isLoading, isSuccess, isError, data } = useQuery(
-    ['matchup', MatchUpId],
-    () => getMatchUpById(MatchUpId as string),
-    { enabled: !!MatchUpId }
-  );
+  const {
+    isLoading,
+    isSuccess,
+    isError,
+    data: matchUp,
+  } = useQuery(['matchup', MatchUpId], () => getMatchUpById(MatchUpId as string), { enabled: !!MatchUpId });
 
   /* -----WATCHLIST----- */
   const mutation = useMutation(['watchlist', MatchUpId], createNewWatchList);
 
   /* -----USER ROLE----- */
-  const { currentUser } = useAuth();
+  const { currentUserId } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
-  const [isPast, setIsPast] = useState<boolean>(false);
 
   useEffect(() => {
-    if (data && currentUser) {
-      setIsSignedUp(data.signups.items.some((participant) => participant.userId === currentUser));
-      setIsOrganizer(currentUser === data.organizerId);
+    if (matchUp && currentUserId) {
+      setIsSignedUp(matchUp.signups.items.some((participant) => participant.userId === currentUserId));
+      setIsOrganizer(currentUserId === matchUp.organizerId);
     }
-  }, [data, currentUser]);
+  }, [matchUp, currentUserId]);
 
   /* -----EVENT STATE----- */
   const [isWithin24h, setIsWithin24h] = useState<boolean>(false);
-  const [hasStarted, setHasStarted] = useState<boolean>(false);
+  const [hasFinished, setHasFinished] = useState<boolean>(false);
 
   useEffect(() => {
-    if (data && currentUser) {
-      setHasStarted(Date.parse(data?.date) < Date.parse(new Date().toISOString()));
-      setIsWithin24h(Date.parse(data?.date) - ms < Date.parse(new Date().toISOString()));
+    if (matchUp && currentUserId) {
+      setHasFinished(Date.parse(matchUp?.date) < Date.parse(new Date().toISOString()));
+      setIsWithin24h(Date.parse(matchUp?.date) - ms < Date.parse(new Date().toISOString()));
     }
-  }, [data, currentUser]);
+  }, [matchUp, currentUserId]);
+
+  useEffect(() => {
+    if (matchUp && currentUserId) {
+      initializeMap(matchUp?.address);
+    }
+  }, [matchUp, currentUserId]);
+
+  useEffect(() => {
+    if  (matchUp && currentUserId) {
+      initializeMap(matchUp?.address);
+    }
+  }, [matchUp, currentUserId]);
 
   /* -------RENDER CORRECT HEADER BUTTONS------- */
   const [headerButtons, setHeaderButtons] = useState<ReactNode[]>([]);
   useEffect(() => {
-    if (data && currentUser) {
+    if (matchUp && currentUserId) {
       if (isOrganizer)
         setHeaderButtons([
           <HeaderButton
+            stayLight
             key={1}
             viewBox={share.viewBox}
-            callback={() => mutation.mutate({ userId: currentUser as string, matchUpId: data.id as string })}
+            callback={() =>
+              mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })
+            }
             icon={share.path}
           />,
           <HeaderButton
+            stayLight
             key={2}
             viewBox={edit.viewBox}
             callback={() =>
               navigator.share({
                 url: window.location.href,
-                title: data.title,
-                text: data.description,
+                title: matchUp.title,
+                text: matchUp.description,
               })
             }
             icon={edit.path}
@@ -94,59 +112,75 @@ const MatchUpDetail: NextPage = () => {
         ]);
       else
         setHeaderButtons([
-          <HeaderButton key={1} viewBox={watchList.viewBox} callback={() => {}} icon={watchList.path} />,
-          <HeaderButton key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
+          <HeaderButton
+            stayLight
+            key={1}
+            viewBox={watchList.viewBox}
+            callback={() => {}}
+            icon={watchList.path}
+          />,
+          <HeaderButton stayLight key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
         ]);
     }
-  }, [isSignedUp, isOrganizer, data, currentUser]);
+  }, [isSignedUp, isOrganizer, matchUp, currentUserId]);
 
   /* -------MODAL STATE------- */
-  const [showSignUpModal, setshowSignUpModal] = useState<boolean>(false);
+  const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false);
   const [showParticipantsModal, setShowParticipantsModal] = useState<boolean>(false);
   const [showUpdatesModal, setShowUpdatesModal] = useState<boolean>(false);
+  const [showRateEventModal, setShowRateEventModal] = useState<boolean>(false);
 
   return (
     <>
       <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
         {/*  ------------MODALS------------  */}
-        {showSignUpModal && data && (
+        {showSignUpModal && matchUp && (
           <>
             <div className={styles.overlay} style={{ backgroundColor: colors.overlay[100] }}></div>
             <ConfirmJoinModal
-              matchUp={data}
+              matchUp={matchUp}
               isSignedUp={isSignedUp}
               isWithin24Hours={isWithin24h}
-              setShowModal={setshowSignUpModal}
+              setShowModal={setShowSignUpModal}
             ></ConfirmJoinModal>
           </>
         )}
 
-        {showParticipantsModal && data && (
+        {showParticipantsModal && matchUp && (
           <>
             <div className={styles.overlay} style={{ backgroundColor: colors.overlay[60] }}></div>
             <ParticipantsModal
               close={() => setShowParticipantsModal(false)}
-              participants={data.signups.items.map((signup) => signup.user) as User[]}
+              participants={matchUp.signups.items.map((signup) => signup.user) as User[]}
             />
           </>
         )}
 
-        {showUpdatesModal && data && (
+        {showUpdatesModal && matchUp && (
           <>
             <div className={styles.overlay} style={{ backgroundColor: colors.overlay[60] }}></div>
             <UpdatesModal
               close={() => setShowUpdatesModal(false)}
-              updates={data.updates}
-              organizer={data.organizer as User}
+              updates={matchUp.updates}
+              organizer={matchUp.organizer as User}
             />
+          </>
+        )}
+
+        {showRateEventModal && matchUp && (
+          <>
+            <div className={styles.overlay} style={{ backgroundColor: colors.overlay[60] }}></div>
+            <RateMatchUpModal close={() => setShowRateEventModal(false)} matchUp={matchUp} />
           </>
         )}
 
         {/*  ------------HEADER------------  */}
         <Header
-          imageUrl={data ? data.image || getDefaultImage(data.sportCategory).src : placeholder.src} // replace!!
+          imageUrl={matchUp && matchUp.image}
+          sportCategory={matchUp?.sportCategory}
           leftButton={
             <HeaderButton
+              stayLight
               viewBox="0 0 10 10"
               callback={() => router.back()}
               icon={
@@ -170,21 +204,21 @@ const MatchUpDetail: NextPage = () => {
           </div>
         ) : (
           isSuccess &&
-          data && (
+          matchUp && (
             <div className={styles.contentWrapper}>
               <MainInfo
-                title={data.title}
-                sport={data.sportCategory as TSportCategories}
-                timestamp={data.date}
-                city={data.location as TCity}
-                costs={data.totalCost}
-                indoor={data.indoor}
+                title={matchUp.title}
+                sport={matchUp.sportCategory as TSportCategories}
+                timestamp={matchUp.date}
+                city={matchUp.location as TCity}
+                costs={matchUp.totalCost}
+                indoor={matchUp.indoor}
               />
 
               {/*  ------------BIG PILLS------------  */}
               <div className={styles.bigPills}>
-                <SkillsCard skillLevel={data.skillLevel}></SkillsCard>
-                <SlotsCard slots={data.attendanceMax} attending={data.signups.items.length}></SlotsCard>
+                <SkillsCard skillLevel={matchUp.skillLevel}></SkillsCard>
+                <SlotsCard slots={matchUp.attendanceMax} attending={matchUp.signups.items.length}></SlotsCard>
               </div>
 
               <div
@@ -195,7 +229,7 @@ const MatchUpDetail: NextPage = () => {
               ></div>
 
               {/*  ------------ORGANIZER------------  */}
-              <OrganizerCard organizer={data.organizer as User}></OrganizerCard>
+              <OrganizerCard organizer={matchUp.organizer as User}></OrganizerCard>
 
               <div
                 className={styles.divider}
@@ -207,7 +241,7 @@ const MatchUpDetail: NextPage = () => {
               {/*  ------------PARTICIPATING PREVIEW------------  */}
               <ParticipantsPreviewCard
                 callback={() => setShowParticipantsModal(true)}
-                users={data.signups.items.map((signup) => signup.user) as User[]}
+                users={matchUp.signups.items.map((signup) => signup.user) as User[]}
               ></ParticipantsPreviewCard>
               <div
                 className={styles.divider}
@@ -222,8 +256,8 @@ const MatchUpDetail: NextPage = () => {
                   Description
                 </p>
                 <p style={{ color: colors.text[60] }}>
-                  {data.description}
-                  {data.description.length > 100 && (
+                  {matchUp.description}
+                  {matchUp.description.length > 100 && (
                     <span style={{ color: colors.primary[100] }}> Read more</span>
                   )}
                 </p>
@@ -237,8 +271,8 @@ const MatchUpDetail: NextPage = () => {
               ></div>
 
               <UpdatesPreviewCard
-                updates={data.updates}
-                organizer={data.organizer as User}
+                updates={matchUp.updates}
+                organizer={matchUp.organizer as User}
                 callback={() => setShowUpdatesModal(true)}
               ></UpdatesPreviewCard>
 
@@ -248,20 +282,24 @@ const MatchUpDetail: NextPage = () => {
                   borderColor: darkMode ? colors.background[60] : '#DDDDDD',
                 }}
               ></div>
-
-              <StaticMap longitude={13} latitude={52} zoom={12}></StaticMap>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${matchUp.address.geometry?.point[1]}%2C${matchUp.address.geometry?.point[0]}`}
+              >
+                <div id="map" className={styles.map}></div>
+              </a>
             </div>
           )
         )}
-
+        <div id="map" className={styles.nodisplaymap}></div>
         <Footer
           leftSide={
             <div className={styles.footerInfo}>
               <p className="fat" style={{ color: colors.text[100] }}>
-                {data?.signups.items.length} / {data?.attendanceMax} players joined
+                {matchUp?.signups.items.length} / {matchUp?.attendanceMax} players joined
               </p>
               <p className="small" style={{ color: colors.text[100] }}>
-                {data?.totalCost > 0 ? data?.totalCost + '.00 ' + data?.currency : 'Free'} + 5€ deposit{' '}
+                {matchUp?.totalCost > 0 ? matchUp?.totalCost + '.00 ' + matchUp?.currency : 'Free'} + 5€
+                deposit{' '}
                 {
                   <span>
                     <svg
@@ -279,11 +317,18 @@ const MatchUpDetail: NextPage = () => {
             </div>
           }
           rightButton={
-            !hasStarted && (
+            !hasFinished ? (
               <Button
                 variant="primary"
                 text={isSignedUp ? 'Cancel' : 'Join'}
-                callback={() => setshowSignUpModal(true)}
+                callback={() => setShowSignUpModal(true)}
+              ></Button>
+            ) : (
+              <Button
+                variant="primary"
+                text={isSignedUp ? 'Rate' : 'Finished'}
+                disabled={!isSignedUp}
+                callback={() => setShowRateEventModal(true)}
               ></Button>
             )
           }

@@ -46,6 +46,12 @@
       -webkit-appearance: none;
       appearance: none;
       background-image: none;
+
+      &:focus {
+        outline-width: 2px;
+        outline-offset: -2px;
+        outline-style: solid;
+      }
     }
   }
 
@@ -55,14 +61,17 @@
     justify-content: center;
     align-items: center;
     gap: 1em;
-  }
 
-  .incrementBtn {
-    border: none;
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
-    background-color: transparent;
+    .incrementBtn {
+      border: none;
+      width: 2em;
+      height: 2em;
+      border-radius: 50%;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .rentedCourt {
@@ -86,6 +95,12 @@
       border-width: 1px;
       background-color: transparent;
       text-align: center;
+
+      &:focus {
+        outline-width: 2px;
+        outline-offset: -2px;
+        outline-style: solid;
+      }
     }
   }
 
@@ -93,6 +108,12 @@
     height: 10em;
     width: 90vw;
     border-radius: 10px;
+
+    &:focus {
+      outline-width: 2px;
+      outline-offset: -2px;
+      outline-style: solid;
+    }
   }
 
   .uploadImageWrapper {

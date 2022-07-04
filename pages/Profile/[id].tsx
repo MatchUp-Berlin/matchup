@@ -80,7 +80,8 @@ const ProfileDetailPage: NextPage = () => {
     refetch: attendedMatchUpsRefetch,
     isRefetching: isAttendedMatchUpsRefetching,
   } = useQuery(['attendedMatchUpsCount', id], () => {
-    getUserMatchUpsAttended(id as string);
+    // console.log('attended count      ', getUserMatchUpsAttended(id as string));
+    return getUserMatchUpsAttended(id as string);
   });
 
   // getting organized events
@@ -242,7 +243,7 @@ const ProfileDetailPage: NextPage = () => {
 
               {/*/////// ORGANIZED EVENTS LIST /////////*/}
               <h4 style={{ marginBottom: 'none', color: colors.text['100'] }}>
-                Organized {matchUpsData?.items.length} Matchups
+                Organized {organizedCountData || 0} Matchups
               </h4>
               <div
                 // style={{ marginBottom: '5em' }}

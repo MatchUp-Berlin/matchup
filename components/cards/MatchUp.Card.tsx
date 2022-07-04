@@ -55,14 +55,16 @@ export interface IMatchUpCardProps {
 
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
+  const isFinished = new Date(props.timestamp) < new Date();
   return (
     <Link href={`/MatchUps/${props.id}`}>
       <div
         className={styles.wrapper}
         style={{
           backgroundColor: colors.background[80],
-          boxShadow: shadows.medium,
+          boxShadow: shadows.small,
           height: props.variant == 'large' ? '150px' : '100px',
+          opacity: isFinished ? 0.5 : 1,
         }}
       >
         <div className={styles.imageWrapper}>
@@ -102,7 +104,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   alt='taking place on'
                 ></Image>
                 <p style={{ color: colors.text[60] }}>
-                  {moment(props.date).format('H:m dddd')}
+                  {moment(props.timestamp).format('dddd MMM Do  hh:mma ')}
                 </p>
               </div>
               <div className={styles.detail}>
@@ -154,8 +156,8 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                 </div>
               )}
               {props.variant == 'large' &&
-                props.attendanceMin &&
-                props.attendanceMin - props.signups.items.length && (
+                props.slots &&
+                props.slots - props.participating && (
                   <div
                     className={styles.pill}
                     style={{
@@ -164,8 +166,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                     }}
                   >
                     <p style={{ color: colors.primary[100] }}>
-                      {props.attendanceMin - props.signups.items.length} Spots
-                      left
+                      {props.slots - props.participating} Spots left
                     </p>
                   </div>
                 )}

@@ -1,23 +1,9 @@
 .wrapper {
-  padding: 1em;
+  padding: 3em 1em 5em;
   min-height: 100vh;
 
-  .tabs {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1em;
-    margin-bottom: 2em;
-
-    p {
-      font-weight: 300;
-      font-size: 1.5em;
-      transition: 0.3s;
-    }
-  }
-
   .cardsWrapper {
-    margin-top: 1em;
+    margin-top: 2em;
     margin-bottom: 8em;
     display: flex;
     flex-direction: column;

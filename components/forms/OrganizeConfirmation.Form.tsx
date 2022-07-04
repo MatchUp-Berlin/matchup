@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity, TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
-import { SkillsCard, SlotsCard, ParticipantsPreviewCard } from '../cards';
-import UpdatesPreviewCard from '../cards/UpdatesPreview.Card';
+import { SkillsCard, SlotsCard } from '../cards';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
 import MainInfo from '../misc/MainInfo';
 import styles from './styles/OrganizeConfirmation.Form.module.scss';
@@ -52,15 +51,6 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         }}
       ></div>
 
-      {/*  ------PARTICIPATING PREVIEW------  */}
-      <ParticipantsPreviewCard users={[]}></ParticipantsPreviewCard>
-      <div
-        className={styles.divider}
-        style={{
-          borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-        }}
-      ></div>
-
       {/*  ------DESCRIPTION PREVIEW------  */}
       <div className={styles.description}>
         <p style={{ color: colors.text[80] }} className="highlight-1">
@@ -71,15 +61,6 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
           {props.description.length > 100 && <span style={{ color: colors.primary[100] }}> Read more</span>}
         </p>
       </div>
-
-      <div
-        className={styles.divider}
-        style={{
-          borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-        }}
-      ></div>
-
-      <UpdatesPreviewCard updates={[]} organizerId={''}></UpdatesPreviewCard>
 
       <div
         className={styles.divider}

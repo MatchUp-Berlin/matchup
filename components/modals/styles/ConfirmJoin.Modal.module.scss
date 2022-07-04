@@ -18,6 +18,14 @@
     gap: 1em;
     position: relative;
 
+    .modalText {
+      text-align: center;
+    }
+
+    .modalInfo {
+      margin-bottom: 20px;
+    }
+
     .closeButton {
       width: 100%;
       position: absolute;
@@ -26,7 +34,7 @@
     }
 
     .modalCommitText {
-      text-align: center;
+      text-align: justify;
     }
 
     .modalPolicyLink {
