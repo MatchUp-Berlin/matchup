@@ -40,7 +40,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
         className={styles.wrapper}
         style={{
           backgroundColor: colors.background[80],
-          boxShadow: shadows.medium,
+          boxShadow: shadows.small,
           height: props.variant == 'large' ? '150px' : '100px',
           opacity: isFinished ? 0.5 : 1,
         }}
