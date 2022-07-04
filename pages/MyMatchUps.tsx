@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/router';
 import Navigation from '../components/misc/Navigation';
 import { useTheme } from '../contexts/Theme';
@@ -7,13 +6,11 @@ import { useEffect, useState } from 'react';
 
 import styles from './styles/MyMatchUps.module.scss';
 import { useQuery } from 'react-query';
-import { getUserById } from '../utils/Query/getUserById.util';
 import { getOrganizerMatchUps } from '../utils/Query/getOrganizerMatchUps.util';
 import LoadingSpinner from '../components/misc/Divider';
 import MatchUpCard from '../components/cards/MatchUp.Card';
 import { TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 import { useAuth } from '../contexts/Auth';
-import { emptyDark, emptyLight } from '../components/icons';
 import Empty from '../components/misc/Empty';
 
 const YourMatchUpsPage: NextPage = () => {
