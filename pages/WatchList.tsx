@@ -33,7 +33,7 @@ const WatchListPage: NextPage = () => {
                 <MatchUpCard
                   key={watchlist?.matchUp?.id}
                   id={watchlist?.matchUp?.id as string}
-                  variant="large"
+                  variant="medium"
                   timestamp={watchlist?.matchUp?.date as string}
                   title={watchlist?.matchUp?.title as string}
                   slots={watchlist?.matchUp?.attendanceMax as number}
