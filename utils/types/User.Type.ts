@@ -13,7 +13,7 @@ export interface User {
   about: string;
   createdAt: string;
   updates: Update[];
-  watchList: WatchList[];
+  watchList: {items: WatchList[]};
 }
 
 export interface UsersReturn {

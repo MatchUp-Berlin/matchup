@@ -35,7 +35,7 @@ import { createNewMatchUp } from '../utils/Mutation/createMatchUp.util';
 import { close } from '../components/icons';
 
 const OrganizePage: NextPage = () => {
-  const { currentUser } = useAuth();
+  const { currentUserId } = useAuth();
   const { colors } = useTheme();
   const router = useRouter();
 
@@ -283,7 +283,7 @@ const OrganizePage: NextPage = () => {
                     totalCost,
                     description,
                     image,
-                    organizerId: currentUser as string,
+                    organizerId: currentUserId as string,
                   })
                 }
                 text="Save"

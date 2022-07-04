@@ -1,9 +1,13 @@
 import { CognitoUser } from '@aws-amplify/auth';
 import { Auth, Hub } from 'aws-amplify';
 import React, { useContext, useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { getUserById } from '../utils/Query/getUserById.util';
+import { User } from '../utils/types/User.Type';
 
 interface IAuth {
-  currentUser: string | null;
+  currentUserId: string | null;
+  currentUser: User | null;
   signup: (email: string, password: string, firstName: string, lastName: string) => Promise<CognitoUser>;
   login: (email: string, password: string) => Promise<CognitoUser>;
   logout: () => Promise<void>;
@@ -22,7 +26,17 @@ export function useAuth() {
 
 /* ----- PROVIDER ----- */
 export function AuthProvider({ children }: React.PropsWithChildren) {
-  const [currentUser, setCurrentUser] = useState<string | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  const { refetch: userRefetch } = useQuery(
+    ['user', currentUserId],
+    () => getUserById(currentUserId as string),
+    {
+      enabled: !!currentUserId,
+      onSuccess: (data) => setCurrentUser(data),
+    }
+  );
 
   async function signup(
     email: string,
@@ -60,22 +74,27 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   }
 
   useEffect(() => {
-
     /* On First Load */
     Auth.currentAuthenticatedUser()
-      .then((user) => user && setCurrentUser(user.username))
-      .catch((err) => setCurrentUser(null));
-    
+      .then((user) => user && setCurrentUserId(user.username))
+      .catch((err) => setCurrentUserId(null));
+
     /* On auth events */
     Hub.listen('auth', ({ payload }) => {
       console.log(payload);
       Auth.currentAuthenticatedUser()
-        .then((user) => user && setCurrentUser(user.username))
-        .catch((err) => setCurrentUser(null));
+        .then((user) => user && setCurrentUserId(user.username))
+        .catch((err) => setCurrentUserId(null));
     });
   }, []);
 
+  // Get all user data for currently logged in user
+  useEffect(() => {
+    userRefetch();
+  }, [currentUserId]);
+
   const value: IAuth = {
+    currentUserId,
     currentUser,
     signup,
     login,

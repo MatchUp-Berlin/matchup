@@ -47,44 +47,44 @@ const MatchUpDetail: NextPage = () => {
   const mutation = useMutation(['watchlist', MatchUpId], createNewWatchList);
 
   /* -----USER ROLE----- */
-  const { currentUser } = useAuth();
+  const { currentUserId } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
 
   useEffect(() => {
-    if (matchUp && currentUser) {
-      setIsSignedUp(matchUp.signups.items.some((participant) => participant.userId === currentUser));
-      setIsOrganizer(currentUser === matchUp.organizerId);
+    if (matchUp && currentUserId) {
+      setIsSignedUp(matchUp.signups.items.some((participant) => participant.userId === currentUserId));
+      setIsOrganizer(currentUserId === matchUp.organizerId);
     }
-  }, [matchUp, currentUser]);
+  }, [matchUp, currentUserId]);
 
   /* -----EVENT STATE----- */
   const [isWithin24h, setIsWithin24h] = useState<boolean>(false);
   const [hasFinished, setHasFinished] = useState<boolean>(false);
 
   useEffect(() => {
-    if (matchUp && currentUser) {
+    if (matchUp && currentUserId) {
       setHasFinished(Date.parse(matchUp?.date) < Date.parse(new Date().toISOString()));
       setIsWithin24h(Date.parse(matchUp?.date) - ms < Date.parse(new Date().toISOString()));
     }
-  }, [matchUp, currentUser]);
+  }, [matchUp, currentUserId]);
 
   useEffect(() => {
-    if (matchUp && currentUser) {
+    if (matchUp && currentUserId) {
       initializeMap(matchUp?.address);
     }
-  }, [matchUp, currentUser]);
+  }, [matchUp, currentUserId]);
 
   useEffect(() => {
-    if  (matchUp && currentUser) {
+    if  (matchUp && currentUserId) {
       initializeMap(matchUp?.address);
     }
-  }, [matchUp, currentUser]);
+  }, [matchUp, currentUserId]);
 
   /* -------RENDER CORRECT HEADER BUTTONS------- */
   const [headerButtons, setHeaderButtons] = useState<ReactNode[]>([]);
   useEffect(() => {
-    if (matchUp && currentUser) {
+    if (matchUp && currentUserId) {
       if (isOrganizer)
         setHeaderButtons([
           <HeaderButton
@@ -92,7 +92,7 @@ const MatchUpDetail: NextPage = () => {
             key={1}
             viewBox={share.viewBox}
             callback={() =>
-              mutation.mutate({ userId: currentUser as string, matchUpId: matchUp.id as string })
+              mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })
             }
             icon={share.path}
           />,
@@ -122,7 +122,7 @@ const MatchUpDetail: NextPage = () => {
           <HeaderButton stayLight key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
         ]);
     }
-  }, [isSignedUp, isOrganizer, matchUp, currentUser]);
+  }, [isSignedUp, isOrganizer, matchUp, currentUserId]);
 
   /* -------MODAL STATE------- */
   const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false);

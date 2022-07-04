@@ -22,11 +22,11 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
 ) => {
   const { colors, shadows } = useTheme();
   const queryClient = useQueryClient();
-  const { currentUser } = useAuth();
+  const { currentUserId } = useAuth();
 
   const handleCommit = () => {
     addUserToMatchUp({
-      userId: currentUser || '',
+      userId: currentUserId || '',
       matchUpId: props.matchUp.id || '',
     })
       .then((res) => {
@@ -37,7 +37,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
   };
 
   const handleCancel = () => {
-    removeUserFromMatchUp(currentUser || '', props.matchUp.id || '')
+    removeUserFromMatchUp(currentUserId || '', props.matchUp.id || '')
       .then((res: any) => {
         queryClient.invalidateQueries(['matchup', props.matchUp.id]);
         props.setShowModal(false);

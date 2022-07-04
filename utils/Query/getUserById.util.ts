@@ -1,9 +1,7 @@
-import { API } from 'aws-amplify';
-import { getUser } from '../../src/graphql/queries';
+import { WatchList } from './../types/WatchList.Type';
+import { API, Storage } from 'aws-amplify';
+import { getUser } from '../../src/graphql/custom';
 import { User } from '../types/User.Type';
-
-//EXAMPLE ARGUMENT
-// "ceb7d85e-021e-4657-90a0-e3e2f98bcc7c"
 
 export async function getUserById(id: string): Promise<User> {
   try {
@@ -13,30 +11,35 @@ export async function getUserById(id: string): Promise<User> {
       // authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
     const retrievedUserData = userData.data.getUser;
+
+    // Fill pictures for signup items
+    if (retrievedUserData && retrievedUserData.signups.items.length > 0) {
+      await Promise.all(
+        retrievedUserData.signups.items.map(async (signup: WatchList) => {
+          signup.matchUp.image = await Storage.get(signup.matchUpId);
+          return;
+        })
+      );
+      retrievedUserData.signups.items.forEach((signup: WatchList) => {
+        signup.matchUp.address = JSON.parse(signup.matchUp.address as string);
+      });
+    }
+
+    // Fill pictures for watchlist items
+    if (retrievedUserData && retrievedUserData.watchList.items.length > 0) {
+      await Promise.all(
+        retrievedUserData.watchList.items.map(async (watchList: WatchList) => {
+          watchList.matchUp.image = await Storage.get(watchList.matchUpId);
+          return WatchList;
+        })
+      );
+      retrievedUserData.watchList.items.forEach((watchList: WatchList) => {
+        watchList.matchUp.address = JSON.parse(watchList.matchUp.address as string);
+      });
+    }
+
     return retrievedUserData;
   } catch (error) {
     throw error;
   }
 }
-
-/*
-EXAMPLE RESPONSE
-
-{
-about: "a mean sportin machine"
-createdAt: "2022-06-25T11:18:09.968Z"
-email: "bob@gmail.com"
-familyName: "sveltee"
-givenName: "bob"
-id: "ceb7d85e-021e-4657-90a0-e3e2f98bcc7c"
-signups: {items: Array(0), nextToken: null, startedAt: null}
-watchList: {},
-updates: {},
-profileImage: null
-updatedAt: "2022-06-25T11:18:09.968Z"
-_deleted: null
-_lastChangedAt: 1656155889990
-_version: 1
-}
-
-*/
