@@ -39,7 +39,7 @@ const MatchUpDetail: NextPage = () => {
     isError,
     data: matchUp,
   } = useQuery(['matchup', MatchUpId], () => getMatchUpById(MatchUpId as string), { enabled: !!MatchUpId });
-  
+
   /* -----USER ROLE----- */
   const { currentUserId } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
@@ -89,23 +89,16 @@ const MatchUpDetail: NextPage = () => {
             key={1}
             viewBox={share.viewBox}
             callback={() =>
-              mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })
-            }
-            icon={share.path}
-          />,
-          <HeaderButton
-            stayLight
-            key={2}
-            viewBox={edit.viewBox}
-            callback={() =>
+              navigator.share &&
               navigator.share({
                 url: window.location.href,
                 title: matchUp.title,
                 text: matchUp.description,
               })
             }
-            icon={edit.path}
+            icon={share.path}
           />,
+          <HeaderButton stayLight key={2} viewBox={edit.viewBox} callback={() => {}} icon={edit.path} />,
         ]);
       else
         setHeaderButtons([
@@ -113,7 +106,9 @@ const MatchUpDetail: NextPage = () => {
             stayLight
             key={1}
             viewBox={watchList.viewBox}
-            callback={() => {}}
+            callback={() =>
+              mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })
+            }
             icon={watchList.path}
           />,
           <HeaderButton stayLight key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,

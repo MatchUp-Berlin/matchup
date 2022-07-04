@@ -45,9 +45,10 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
       queryClient.invalidateQueries(['user', currentUserId]);
     },
   });
-  
+
   const isFinished = new Date(props.timestamp) < new Date();
   const isInWatchlist = currentUser?.watchList.items.some((match) => match.matchUpId === props.id);
+  const remainingSlots = props.slots - props.participating;
 
   if (props.variant === 'large')
     return (
@@ -136,7 +137,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   <p style={{ color: colors.text[100] }}>Rented</p>
                 </div>
               )}
-              {props.slots && props.slots - props.participating && (
+              {props.slots && remainingSlots && (
                 <div
                   className={styles.pill}
                   style={{
@@ -144,7 +145,9 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                     boxShadow: shadows.small,
                   }}
                 >
-                  <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
+                  <p style={{ color: colors.primary[100] }}>
+                    {remainingSlots} Spot{remainingSlots > 1 ? 's' : ''} left
+                  </p>
                 </div>
               )}
             </div>
