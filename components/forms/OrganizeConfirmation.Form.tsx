@@ -36,6 +36,7 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
         city={props.location}
         costs={props.totalCost}
         indoor={props.indoor}
+        address={props.address}
       />
 
       {/*  ------BIG PILLS------  */}
