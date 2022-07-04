@@ -13,7 +13,6 @@ export interface IFilterProps {
 const Filter: React.FunctionComponent<IFilterProps> = (props) => {
   const { colors, darkMode, shadows } = useTheme();
 
-
   function handleTimeFrameChange(e: any) {
     switch (e.target.value) {
       case 'this-week': {
@@ -57,7 +56,11 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
   return (
     <div className={styles.wrapper} style={{ boxShadow: shadows.small }}>
       <select
-        style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
+        style={{
+          borderColor: darkMode ? colors.background[80] : '#DDDDDD',
+          color: '#757575',
+          outlineColor: colors.primary[100],
+        }}
         value={props.city}
         onChange={(e) => props.setCity(e.target.value as TCity)}
         placeholder="Search for a city"
@@ -75,7 +78,11 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         <option value="hannover">hannover</option>
       </select>
       <select
-        style={{ borderColor: darkMode ? colors.background[80] : '#DDDDDD', color: '#757575' }}
+        style={{
+          borderColor: darkMode ? colors.background[80] : '#DDDDDD',
+          color: '#757575',
+          outlineColor: colors.primary[100],
+        }}
         placeholder="Select time"
         className={styles.input + ' ' + styles.date}
         onChange={handleTimeFrameChange}
