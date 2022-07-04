@@ -2,10 +2,7 @@ import { API, Storage } from 'aws-amplify';
 import { listMatchUps } from '../../src/graphql/queries';
 import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
 
-export async function getOrganizerMatchUps(
-  id: string,
-  showCards: number
-): Promise<getMatchUpsReturn> {
+export async function getOrganizerMatchUps(id: string, showCards: number): Promise<getMatchUpsReturn> {
   try {
     const filter = {
       organizerId: {

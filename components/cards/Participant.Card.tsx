@@ -8,6 +8,7 @@ import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
 import { getSignUpById } from '../../utils/Query/getSignUpById.util';
 import { useQuery, useQueryClient } from 'react-query';
 import { SignUp } from '../../utils/types/SignUp.Type';
+import Link from 'next/link';
 
 export interface IParticipantCardProps {
   user: User;
@@ -37,33 +38,35 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   };
 
   return (
-    <article
-      className={styles.participantCardWrapper}
-      style={{
-        backgroundColor: colors.background[80],
-        boxShadow: shadows.medium,
-      }}
-    >
-      <div className={styles.info}>
-        <p
-          className='highlight-1'
-          style={{ color: colors.text[100] }}
-        >{`${givenName} ${familyName}`}</p>
-        {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
-        <p style={{ color: colors.text[60] }}>
-          {data?.attended ? 'Attendance confirmed' : 'Signed up'}
-        </p>
-      </div>
+    <Link href={`/Profile/${user.id}`}>
+      <div
+        className={styles.participantCardWrapper}
+        style={{
+          backgroundColor: colors.background[80],
+          boxShadow: shadows.medium,
+        }}
+      >
+        <div className={styles.info}>
+          <p
+            className='highlight-1'
+            style={{ color: colors.text[100] }}
+          >{`${givenName} ${familyName}`}</p>
+          {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
+          <p style={{ color: colors.text[60] }}>
+            {data?.attended ? 'Attendance confirmed' : 'Signed up'}
+          </p>
+        </div>
 
-      <div className={styles.avatar} onClick={() => toggleAttended()}>
-        <Avatar
-          attended={data?.attended || false}
-          highlightable={true}
-          size={'medium'}
-          image={profileImage || avatar}
-        />
+        <div className={styles.avatar} onClick={() => toggleAttended()}>
+          <Avatar
+            attended={data?.attended || false}
+            highlightable={true}
+            size={'medium'}
+            image={profileImage || avatar}
+          />
+        </div>
       </div>
-    </article>
+    </Link>
   );
 };
 

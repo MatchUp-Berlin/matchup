@@ -73,7 +73,7 @@ const YourMatchUpsPage: NextPage = () => {
                       <MatchUpCard
                         key={signup?.id}
                         id={signup.id}
-                        variant="large"
+                        variant="medium"
                         timestamp={signup?.date as string}
                         title={signup?.title as string}
                         slots={signup?.attendanceMax as number}
@@ -105,7 +105,7 @@ const YourMatchUpsPage: NextPage = () => {
                     <MatchUpCard
                       key={signup?.matchUp?.id}
                       id={signup?.matchUp?.id as string}
-                      variant="large"
+                      variant="medium"
                       timestamp={signup?.matchUp?.date as string}
                       title={signup?.matchUp?.title as string}
                       slots={signup?.matchUp?.attendanceMax as number}

@@ -8,7 +8,6 @@ import { getMatchUpById } from '../../utils/Query/getMatchUpById.util';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
 
 import styles from './styles/MatchUpId.module.scss';
-import placeholder from '../../public/placeholder-header.jpeg';
 import { User } from '../../utils/types/User.Type';
 import {
   ParticipantsPreviewCard,
@@ -17,11 +16,9 @@ import {
 } from '../../components/cards';
 import OrganizerCard from '../../components/cards/Organizer.Card';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
-import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
 import MainInfo from '../../components/misc/MainInfo';
-import getDefaultImage from '../../utils/getDefaultImage';
 import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 import ConfirmJoinModal from '../../components/modals/ConfirmJoin.Modal';
 import { ReactNode, useEffect, useState } from 'react';
@@ -51,13 +48,16 @@ const MatchUpDetail: NextPage = () => {
     { enabled: !!MatchUpId }
   );
 
-  /* -----WATCHLIST----- */
-  const mutation = useMutation(['watchlist', MatchUpId], createNewWatchList);
-
   /* -----USER ROLE----- */
   const { currentUserId } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
+
+  /* -----WATCHLIST----- */
+  const mutation = useMutation(
+    ['watchlist', currentUserId],
+    createNewWatchList
+  );
 
   useEffect(() => {
     if (matchUp && currentUserId) {
@@ -108,9 +108,11 @@ const MatchUpDetail: NextPage = () => {
             key={1}
             viewBox={share.viewBox}
             callback={() =>
-              mutation.mutate({
-                userId: currentUserId as string,
-                matchUpId: matchUp.id as string,
+              navigator.share &&
+              navigator.share({
+                url: window.location.href,
+                title: matchUp.title,
+                text: matchUp.description,
               })
             }
             icon={share.path}
@@ -119,13 +121,7 @@ const MatchUpDetail: NextPage = () => {
             stayLight
             key={2}
             viewBox={edit.viewBox}
-            callback={() =>
-              navigator.share({
-                url: window.location.href,
-                title: matchUp.title,
-                text: matchUp.description,
-              })
-            }
+            callback={() => {}}
             icon={edit.path}
           />,
         ]);
@@ -135,7 +131,12 @@ const MatchUpDetail: NextPage = () => {
             stayLight
             key={1}
             viewBox={watchList.viewBox}
-            callback={() => {}}
+            callback={() =>
+              mutation.mutate({
+                userId: currentUserId as string,
+                matchUpId: matchUp.id as string,
+              })
+            }
             icon={watchList.path}
           />,
           <HeaderButton
@@ -206,7 +207,9 @@ const MatchUpDetail: NextPage = () => {
             <UpdatesModal
               close={() => setShowUpdatesModal(false)}
               updates={matchUp.updates}
+              matchUpId={matchUp.id}
               organizer={matchUp.organizer as User}
+              isSignedUp={isSignedUp}
             />
           </>
         )}
@@ -334,18 +337,22 @@ const MatchUpDetail: NextPage = () => {
                 }}
               ></div>
 
-              <UpdatesPreviewCard
-                updates={matchUp.updates}
-                organizer={matchUp.organizer as User}
-                callback={() => setShowUpdatesModal(true)}
-              ></UpdatesPreviewCard>
+              {isSignedUp && (
+                <UpdatesPreviewCard
+                  updates={matchUp.updates}
+                  organizer={matchUp.organizer as User}
+                  callback={() => setShowUpdatesModal(true)}
+                ></UpdatesPreviewCard>
+              )}
+              {isSignedUp && (
+                <div
+                  className={styles.divider}
+                  style={{
+                    borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                  }}
+                ></div>
+              )}
 
-              <div
-                className={styles.divider}
-                style={{
-                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                }}
-              ></div>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${matchUp.address.geometry?.point[1]}%2C${matchUp.address.geometry?.point[0]}`}
               >

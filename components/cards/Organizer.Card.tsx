@@ -4,6 +4,7 @@ import { Avatar } from '../misc';
 import { useTheme } from '../../contexts/Theme';
 import avatar from '../../public/default-avatar.png';
 import styles from './styles/Organizer.Card.module.scss';
+import Link from 'next/link';
 
 export interface IOrganizerCardProps {
   organizer: User;
@@ -13,7 +14,7 @@ const OrganizerCard: React.FunctionComponent<IOrganizerCardProps> = (props) => {
   const { colors } = useTheme();
 
   return (
-    <>
+    <Link href={`/Profile/${props.organizer.id}`}>
       <div className={styles.organizerCardWrapper}>
         <div>
           <p
@@ -36,7 +37,7 @@ const OrganizerCard: React.FunctionComponent<IOrganizerCardProps> = (props) => {
           />
         </div>
       </div>
-    </>
+    </Link>
   );
 };
 
