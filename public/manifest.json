@@ -9,9 +9,9 @@
     "start_url": "/",
     "icons": [
         {
-            "src": "/football-icon.png",
+            "src": "/logopwa.svg",
             "sizes": "320x320",
-            "type": "image/png"
+            "type": "image/svg"
           }
     ],
     "splash_pages": null
