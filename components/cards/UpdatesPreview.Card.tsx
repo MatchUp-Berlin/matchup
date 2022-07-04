@@ -35,29 +35,36 @@ const UpdatesPreviewCard: React.FunctionComponent<IUpdatesPreviewCardProps> = (p
         </div>
       ) : (
         <div className={styles.updates}>
-          {props.updates.items.map((update: Update, index: number) => {
-            return (
-              <>
-                <div key={index} className={styles.update}>
-                  <div className={styles.left}>
-                    <p className={styles.message + ' small'} style={{ color: colors.text[80] }}>
-                      <b
-                        style={{
-                          color: props.organizer.id === update.userId ? colors.primary[100] : colors.text[80],
-                        }}
-                      >
-                        {update.user.givenName}:{' '}
-                      </b>
-                      {update.content}
+          {props.updates.items
+            .sort((a, b): number => {
+              return (
+                Math.round(new Date(a.createdAt).getTime() / 1000) - Math.round(new Date(b.createdAt).getTime() / 1000)
+              );
+            })
+            .slice(props.updates.items.length - 5, props.updates.items.length)
+            .map((update, index) => {
+              return (
+                <>
+                  <div key={index} className={styles.update}>
+                    <div className={styles.left}>
+                      <p className={styles.message + ' small'} style={{ color: colors.text[80] }}>
+                        <b
+                          style={{
+                            color: props.organizer.id === update.userId ? colors.primary[100] : colors.text[80],
+                          }}
+                        >
+                          {update.user.givenName + ': '}
+                        </b>
+                        {update.content}
+                      </p>
+                    </div>
+                    <p className={styles.time} style={{ color: colors.secondary }}>
+                      {moment(update.createdAt).format('MMM D, H:mm')}
                     </p>
                   </div>
-                  <p className={styles.time} style={{ color: colors.secondary }}>
-                    {moment(update.createdAt).format('MMM D, H:mm')}
-                  </p>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
         </div>
       )}
     </>

@@ -1,5 +1,5 @@
 /* REACT, NEXT */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // import Router, { useRouter } from 'next/router';
 
 /* COMPONENTS */
@@ -34,19 +34,26 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
   const [message, setMessage] = useState<string>('');
   const { currentUserId } = useAuth();
   const queryClient = useQueryClient();
+  const divRef = useRef<HTMLDivElement>(null);
 
   const mutation = useMutation(createNewUpdate, {
     onSuccess: () => queryClient.invalidateQueries(['matchup', props.matchUpId]),
   });
 
+  useEffect(() => {
+    divRef.current?.scrollIntoView({ behavior: 'smooth' });
+  });
+
   function handleSubmit() {
     currentUserId &&
       props.isSignedUp &&
+      message &&
       mutation.mutate({
         content: message,
         userId: currentUserId,
         matchUpId: props.matchUpId,
       });
+    setMessage('');
   }
 
   useEffect(() => {
@@ -84,11 +91,12 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
           {props.updates.items.map((update, index) => {
             return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;
           })}
+          <div ref={divRef}></div>
         </div>
         <div className={styles.sendGroup}>
           <input
             value={message}
-            onChange={(event) => setMessage(event.target.value)}
+            onChange={(event) => props.isSignedUp && setMessage(event.target.value)}
             type="text"
             placeholder="Type your message here..."
             className={styles.input}

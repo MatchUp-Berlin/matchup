@@ -27,7 +27,7 @@ const UpdatesMessageCard: React.FunctionComponent<IUpdatesMessageCardProps> = (p
         }}
       >
         <p className={'fat'} style={{ color: userId === id ? colors.primary[100] : colors.text[80] }}>
-          {givenName} {familyName}
+          {givenName + familyName + (id === userId && ' (Organizer)')}
         </p>
         <p style={{ color: colors.text[80] }}>{content}</p>
         <p className={styles.time + ' small'} style={{ color: colors.text[60] }}>

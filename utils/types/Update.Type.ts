@@ -5,7 +5,7 @@ export interface Update {
   id?: string;
   userId: string;
   matchUpId: string;
-  user?: User;
+  user: User;
   matchUp?: MatchUp;
   content: string;
   createdAt: string;
