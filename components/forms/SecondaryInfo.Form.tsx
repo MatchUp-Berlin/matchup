@@ -115,7 +115,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             style={{
               borderColor: darkMode ? colors.background[60] : '#DDDDDD',
               color: colors.text[60],
-              outlineColor: colors.primary[100],
+              outlineColor: colors.primary[80],
             }}
           >
             <option value="beginner">Beginner</option>
@@ -139,7 +139,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             style={{
               borderColor: darkMode ? colors.background[60] : '#DDDDDD',
               color: colors.text[60],
-              outlineColor: colors.primary[100],
+              outlineColor: colors.primary[80],
             }}
             type="currency"
             step="any"
@@ -161,7 +161,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
         style={{
           borderColor: darkMode ? colors.background[60] : '#DDDDDD',
           backgroundColor: colors.background[80],
-          outlineColor: colors.primary[100],
+          outlineColor: colors.primary[80],
         }}
       />
       {/* image */}

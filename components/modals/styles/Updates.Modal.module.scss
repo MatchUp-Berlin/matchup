@@ -50,14 +50,14 @@
   padding: 0 1em;
   word-break: break-word;
   background-color: transparent;
-}
-.input::placeholder {
-  color: #a2a2a2;
-}
-
-.input:focus {
-  border-width: 2px;
-  border-style: solid;
+  &::placeholder {
+    color: #a2a2a2;
+  }
+  &:focus {
+    outline-width: 2px;
+    outline-offset: -2px;
+    outline-style: solid;
+  }
 }
 
 .button {

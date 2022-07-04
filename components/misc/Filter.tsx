@@ -59,7 +59,7 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         style={{
           borderColor: darkMode ? colors.background[80] : '#DDDDDD',
           color: '#757575',
-          outlineColor: colors.primary[100],
+          outlineColor: colors.primary[80],
         }}
         value={props.city}
         onChange={(e) => props.setCity(e.target.value as TCity)}
@@ -81,7 +81,7 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         style={{
           borderColor: darkMode ? colors.background[80] : '#DDDDDD',
           color: '#757575',
-          outlineColor: colors.primary[100],
+          outlineColor: colors.primary[80],
         }}
         placeholder="Select time"
         className={styles.input + ' ' + styles.date}

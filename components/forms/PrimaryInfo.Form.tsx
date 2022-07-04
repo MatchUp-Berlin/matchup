@@ -66,7 +66,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
           style={{
             borderColor: darkMode ? colors.background[60] : '#DDDDDD',
             color: colors.text[60],
-            outlineColor: colors.primary[100],
+            outlineColor: colors.primary[80],
           }}
         ></input>
       </div>
@@ -84,7 +84,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
           style={{
             borderColor: darkMode ? colors.background[60] : '#DDDDDD',
             color: colors.text[60],
-            outlineColor: colors.primary[100],
+            outlineColor: colors.primary[80],
           }}
         ></input>
       </div>
@@ -101,7 +101,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
             borderColor: darkMode ? colors.background[60] : '#DDDDDD',
             color: colors.text[60],
             marginBottom: '1em',
-            outlineColor: colors.primary[100],
+            outlineColor: colors.primary[80],
           }}
         ></input>
         {locationResult.length > 0 && (
