@@ -9,8 +9,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { useState } from 'react';
 
-import awsExports from '../src/exportdata'
-Amplify.configure(awsExports)
+import awsExports from '../src/exportdata';
+Amplify.configure(awsExports);
 
 import { ThemeProvider } from '../contexts/Theme';
 import { AuthProvider } from '../contexts/Auth';
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </AuthProvider>
         </Authenticator.Provider>
       </Hydrate>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

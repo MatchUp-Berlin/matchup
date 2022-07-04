@@ -255,30 +255,30 @@ const ProfileDetailPage: NextPage = () => {
 
                 {isMatchUpsSuccess &&
                   matchUpsData.items.map((match) => {
-                    console.log(match);
+                    // console.log(match)
                     return (
                       <MatchUpCard
                         variant={'small'}
                         id={match.id as string}
-                        title={match.title}
-                        location={match.location}
-                        coordinates={match.coordinates}
-                        signups={match.signups}
-                        organizerId={match.organizerId}
-                        sportCategory={match.sportCategory}
-                        skillLevel={match.skillLevel}
-                        totalCost={match.totalCost}
-                        reservedCourt={match.reservedCourt}
-                        attendanceMin={match.attendanceMin}
-                        attendanceMax={match.attendanceMax}
-                        cancelled={match.cancelled}
-                        description={match.description}
-                        image={match.image}
-                        date={match.date}
-                        currency={match.currency}
-                        updates={match.updates}
-                        watchList={match.watchList}
-                        indoor={match.indoor}
+                        title={match.matchUp.title}
+                        location={match.matchUp.location}
+                        coordinates={match.matchUp.coordinates}
+                        signups={match.matchUp.signups}
+                        organizerId={match.matchUp.organizerId}
+                        sportCategory={match.matchUp.sportCategory}
+                        skillLevel={match.matchUp.skillLevel}
+                        totalCost={match.matchUp.totalCost}
+                        reservedCourt={match.matchUp.reservedCourt}
+                        attendanceMin={match.matchUp.attendanceMin}
+                        attendanceMax={match.matchUp.attendanceMax}
+                        cancelled={match.matchUp.cancelled}
+                        description={match.matchUp.description}
+                        image={match.matchUp.image}
+                        date={match.matchUp.date}
+                        currency={match.matchUp.currency}
+                        updates={match.matchUp.updates}
+                        watchList={match.matchUp.watchList}
+                        indoor={match.matchUp.indoor}
                       />
                     );
                   })}

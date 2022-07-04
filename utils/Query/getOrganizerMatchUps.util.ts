@@ -20,6 +20,8 @@ export async function getOrganizerMatchUps(
 
     const retrievedData = await matchUpsData.data.byUserOrganized;
 
+    console.log('retrieved data      ', matchUpsData);
+
     const imageData = await Promise.all(
       retrievedData.items.map(async (data: Organized) => {
         const headerImage = await Storage.get(data.matchUp.id);
