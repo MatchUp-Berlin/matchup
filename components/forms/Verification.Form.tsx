@@ -14,7 +14,7 @@ export interface IVerificationFormProps {
 }
 
 const VerificationForm: React.FunctionComponent<IVerificationFormProps> = (props) => {
-  const { colors, shadows } = useTheme();
+  const { colors } = useTheme();
   return (
     <>
       <div className={styles.wrapper}>
@@ -24,7 +24,7 @@ const VerificationForm: React.FunctionComponent<IVerificationFormProps> = (props
           onChange={(e) => props.setVerificationCode(e.target.value as string)}
           value={props.verificationCode}
           placeholder="Type in your verification code"
-          style={{ boxShadow: shadows.small, outlineColor: colors.primary[80] }}
+          style={{ outlineColor: colors.primary[80] }}
         ></input>
         {props.error && <p style={{ color: colors.primary[100] }}>{props.error}</p>}
         <Button disabled={props.isLoading} variant="primary" text="Verify" callback={props.handleVerification}></Button>

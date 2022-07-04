@@ -8,16 +8,13 @@ import { getMatchUpById } from '../../utils/Query/getMatchUpById.util';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
 
 import styles from './styles/MatchUpId.module.scss';
-import placeholder from '../../public/placeholder-header.jpeg';
 import { User } from '../../utils/types/User.Type';
 import { ParticipantsPreviewCard, SkillsCard, SlotsCard } from '../../components/cards';
 import OrganizerCard from '../../components/cards/Organizer.Card';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
-import StaticMap from '../../components/maps/Static.Map';
 import { Button, Footer } from '../../components/misc';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
 import MainInfo from '../../components/misc/MainInfo';
-import getDefaultImage from '../../utils/getDefaultImage';
 import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 import ConfirmJoinModal from '../../components/modals/ConfirmJoin.Modal';
 import { ReactNode, useEffect, useState } from 'react';
@@ -43,13 +40,13 @@ const MatchUpDetail: NextPage = () => {
     data: matchUp,
   } = useQuery(['matchup', MatchUpId], () => getMatchUpById(MatchUpId as string), { enabled: !!MatchUpId });
 
-  /* -----WATCHLIST----- */
-  const mutation = useMutation(['watchlist', MatchUpId], createNewWatchList);
-
   /* -----USER ROLE----- */
   const { currentUserId } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
+
+  /* -----WATCHLIST----- */
+  const mutation = useMutation(['watchlist', currentUserId], createNewWatchList);
 
   useEffect(() => {
     if (matchUp && currentUserId) {
@@ -91,26 +88,27 @@ const MatchUpDetail: NextPage = () => {
             stayLight
             key={1}
             viewBox={share.viewBox}
-            callback={() => mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })}
-            icon={share.path}
-          />,
-          <HeaderButton
-            stayLight
-            key={2}
-            viewBox={edit.viewBox}
             callback={() =>
+              navigator.share &&
               navigator.share({
                 url: window.location.href,
                 title: matchUp.title,
                 text: matchUp.description,
               })
             }
-            icon={edit.path}
+            icon={share.path}
           />,
+          <HeaderButton stayLight key={2} viewBox={edit.viewBox} callback={() => {}} icon={edit.path} />,
         ]);
       else
         setHeaderButtons([
-          <HeaderButton stayLight key={1} viewBox={watchList.viewBox} callback={() => {}} icon={watchList.path} />,
+          <HeaderButton
+            stayLight
+            key={1}
+            viewBox={watchList.viewBox}
+            callback={() => mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })}
+            icon={watchList.path}
+          />,
           <HeaderButton stayLight key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
         ]);
     }
