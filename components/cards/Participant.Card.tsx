@@ -11,14 +11,17 @@ import { SignUp } from '../../utils/types/SignUp.Type';
 
 export interface IParticipantCardProps {
   user: User;
+  hasFinished: boolean;
+  isOrganizer: boolean;
 }
 
 const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   user,
+  hasFinished,
+  isOrganizer,
 }) => {
   const { profileImage, givenName, familyName, signup } = user;
   const { colors, shadows } = useTheme();
-  const queryClient = useQueryClient();
 
   const [attendanceToggled, setAttendanceToggled] = useState<boolean>(false);
 
@@ -26,11 +29,11 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
     getSignUpById(signup?.id || '')
   );
 
-  console.log('data', data);
-
   const toggleAttended = async () => {
-    await toggleAttendance(signup?.id || '');
-    setAttendanceToggled((prev) => !prev);
+    if (hasFinished && isOrganizer) {
+      await toggleAttendance(signup?.id || '');
+      setAttendanceToggled((prev) => !prev);
+    }
   };
 
   return (
@@ -47,7 +50,9 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
           style={{ color: colors.text[100] }}
         >{`${givenName} ${familyName}`}</p>
         {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
-        <p style={{ color: colors.text[60] }}>Speaks: </p>
+        <p style={{ color: colors.text[60] }}>
+          {data?.attended ? 'Attendance confirmed' : 'Signed up'}
+        </p>
       </div>
 
       <div className={styles.avatar} onClick={() => toggleAttended()}>

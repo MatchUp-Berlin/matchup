@@ -156,8 +156,6 @@ const MatchUpDetail: NextPage = () => {
   const [showUpdatesModal, setShowUpdatesModal] = useState<boolean>(false);
   const [showRateEventModal, setShowRateEventModal] = useState<boolean>(false);
 
-  console.log('matchUp', matchUp);
-
   return (
     <>
       <div
@@ -187,6 +185,8 @@ const MatchUpDetail: NextPage = () => {
               style={{ backgroundColor: colors.overlay[60] }}
             ></div>
             <ParticipantsModal
+              hasFinished={hasFinished}
+              isOrganizer={isOrganizer}
               close={() => setShowParticipantsModal(false)}
               participants={
                 matchUp.signups.items.map((signup) => {
@@ -301,8 +301,8 @@ const MatchUpDetail: NextPage = () => {
                     return { ...signup.user, attended: signup.attended };
                   }) as User[]
                 }
-                hasFinished={true}
-                isOrganizer={true}
+                hasFinished={hasFinished}
+                isOrganizer={isOrganizer}
               ></ParticipantsPreviewCard>
               <div
                 className={styles.divider}

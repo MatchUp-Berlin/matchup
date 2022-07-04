@@ -7,7 +7,7 @@ import defaultAvatar from '../../public/default-avatar.png';
 export interface IAvatarProps {
   size: string;
   image: any;
-  attended: boolean;
+  attended?: boolean;
   highlightable?: boolean;
 }
 
@@ -19,8 +19,6 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({
 }) => {
   const { colors, shadows } = useTheme();
   let avatarSize: string = '';
-
-  console.log('AVATATR', attended);
 
   const border =
     highlightable && attended ? `3px solid ${colors.primary[100]}` : 'None';

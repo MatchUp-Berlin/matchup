@@ -9,7 +9,7 @@ export async function getSignUpById(id: string): Promise<SignUp> {
       variables: { id: id },
       // authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
-    console.log('GETSIGNUP', signUpData.data.getSignUp);
+
     return signUpData.data.getSignUp;
   } catch (error) {
     throw error;
