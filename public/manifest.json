@@ -9,9 +9,9 @@
     "start_url": "/",
     "icons": [
         {
-            "src": "/logopwa.svg",
-            "sizes": "498x498",
-            "type": "image/svg"
+            "src": "/logopwa.png",
+            "sizes": "500x500",
+            "type": "image/png"
           }
     ],
     "splash_pages": null
