@@ -45,7 +45,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
       queryClient.invalidateQueries(['user', currentUserId]);
     },
   });
-  
+
   const isFinished = new Date(props.timestamp) < new Date();
   const isInWatchlist = currentUser?.watchList.items.some((match) => match.matchUpId === props.id);
 
@@ -123,7 +123,14 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   boxShadow: shadows.small,
                 }}
               >
-                <p style={{ color: colors.text[100] }}>{props.skill}</p>
+                <p
+                  style={{
+                    color: colors.text[100],
+                    fontSize: props.variant === 'large' ? 'x-small' : 'xx-small',
+                  }}
+                >
+                  {props.skill}
+                </p>
               </div>
               {props.rented && (
                 <div
