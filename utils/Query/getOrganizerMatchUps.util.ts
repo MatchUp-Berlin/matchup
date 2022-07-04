@@ -1,5 +1,5 @@
 import { API, Storage } from 'aws-amplify';
-import { listMatchUps } from '../../src/graphql/queries';
+import { byUserOrganized } from '../../src/graphql/queries';
 import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
 
 export async function getOrganizerMatchUps(
@@ -7,22 +7,16 @@ export async function getOrganizerMatchUps(
   token: string,
 ): Promise<getMatchUpsReturn> {
   try {
-    const filter = {
-      organizerId: {
-        eq: id,
-      },
-    };
 
     const matchUpsData = await API.graphql({
-      query: listMatchUps,
+      query: byUserOrganized,
       variables: {
-        filter: filter,
         limit: 3,
         nextToken: token,
       },
     });
 
-    const retrievedData = await matchUpsData.data.listMatchUps;
+    const retrievedData = await matchUpsData.data.byUserOrganized;
 
     const imageData = await Promise.all(
       retrievedData.items.map(async (matchUp: MatchUp) => {

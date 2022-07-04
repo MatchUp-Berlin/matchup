@@ -1,6 +1,8 @@
 import { API } from 'aws-amplify';
 import { createMatchUp } from '../../src/graphql/mutations';
 import { CreateMatchUpInput, MatchUp } from '../types/MatchUp.Type';
+import { Organized } from '../types/Organized.Type';
+import { createNewOrganized } from './createOrganized.util'
 import { addUserToMatchUp } from './addUserToMatchUp.util';
 
 export async function createNewMatchUp(matchUpData: CreateMatchUpInput): Promise<MatchUp> {
@@ -18,6 +20,7 @@ export async function createNewMatchUp(matchUpData: CreateMatchUpInput): Promise
       attended: false,
     };
     addUserToMatchUp(matchUpUserData);
+    createNewOrganized({userId: matchUpUserData.userId, matchUpId: matchUpUserData.matchUpId});
 
     return newMatchUpData;
   } catch (error) {

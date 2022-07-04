@@ -737,3 +737,117 @@ export const listOrganizeds = /* GraphQL */ `
     }
   }
 `;
+export const byUserOrganized = /* GraphQL */ `
+  query ByUserOrganized(
+    $userId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrganizedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byUserOrganized(
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          address
+          organizerId
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          indoor
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const byMatchUpOrganized = /* GraphQL */ `
+  query ByMatchUpOrganized(
+    $matchUpId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrganizedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byMatchUpOrganized(
+      matchUpId: $matchUpId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          address
+          organizerId
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          indoor
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
