@@ -217,6 +217,8 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
             <input
               className={styles.imageInput}
               type="file"
+              multiple={false}
+              accept={'image/*'}
               onChange={(e) => {
                 e.target.files && props.setImage(e.target.files[0]);
               }}
