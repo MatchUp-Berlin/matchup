@@ -55,9 +55,7 @@ const Home: NextPage = () => {
     isSuccess,
     refetch,
     data: matchUps,
-  } = useQuery(['matchUps', categories], () =>
-    getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
-  );
+  } = useQuery(['matchUps', categories], () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to));
 
   /* --------------- MAP */
   const [showMap, setShowMap] = useState<boolean>(false);
