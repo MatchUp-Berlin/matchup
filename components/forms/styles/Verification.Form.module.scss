@@ -22,4 +22,9 @@
     color: #959595;
     opacity: 0.5; /* Firefox */
   }
+  &:focus {
+    outline-width: 2px;
+    outline-offset: -2px;
+    outline-style: solid;
+  }
 }
