@@ -57,3 +57,9 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+public/sw.js
+.gitignore
+public/sw.js.map
+.gitignore
+public/workbox-74d02f44.js
+public/workbox-74d02f44.js.map
