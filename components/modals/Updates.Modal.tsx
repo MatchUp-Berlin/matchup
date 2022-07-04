@@ -1,22 +1,53 @@
+/* REACT, NEXT */
 import React, { useEffect, useState } from 'react';
-import { Update, UpdatesReturn } from '../../utils/types/Update.Type';
-import { User } from '../../utils/types/User.Type';
-import styles from './styles/Updates.Modal.module.scss';
-import { useTheme } from '../../contexts/Theme';
+// import Router, { useRouter } from 'next/router';
+
+/* COMPONENTS */
 import UpdatesMessageCard from '../cards/UpdatesMessage.Card';
 import SmallButton from '../misc/SmallButton';
 import Empty from '../misc/Empty';
+
+/* STYLES */
+import styles from './styles/Updates.Modal.module.scss';
+import { useTheme } from '../../contexts/Theme';
+
+/* UTILS */
+
+import { Update, UpdatesReturn } from '../../utils/types/Update.Type';
+import { User } from '../../utils/types/User.Type';
 import { arrow } from '../icons';
+import { createNewUpdate } from '../../utils/Mutation/createUpdate.util';
+import { useMutation, useQueryClient } from 'react-query';
+import { useAuth } from '../../contexts/Auth';
 
 export interface IUpdatesModalProps {
   updates: UpdatesReturn;
   organizer: User;
   close: () => void;
+  isSignedUp: boolean;
+  matchUpId: string;
 }
 
 const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
   const { colors, shadows, darkMode } = useTheme();
   const [animating, setAnimating] = useState(false);
+  const [message, setMessage] = useState<string>('');
+  const { currentUserId } = useAuth();
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(createNewUpdate, {
+    onSuccess: () => queryClient.invalidateQueries(['matchup', props.matchUpId]),
+  });
+
+  function handleSubmit() {
+    currentUserId &&
+      props.isSignedUp &&
+      mutation.mutate({
+        content: message,
+        userId: currentUserId,
+        matchUpId: props.matchUpId,
+      });
+  }
 
   useEffect(() => {
     (async () => {
@@ -56,17 +87,20 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
         </div>
         <div className={styles.sendGroup}>
           <input
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
             type="text"
             placeholder="Type your message here..."
             className={styles.input}
             style={{
               boxShadow: shadows.small,
               color: colors.text[100],
-              borderColor: darkMode ? colors.text[60] :  "#DDDDDD", outlineColor: colors.primary[80]
+              borderColor: darkMode ? colors.text[60] : '#DDDDDD',
+              outlineColor: colors.primary[80],
             }}
           />
           <div
-            onClick={() => console.log('clicked')}
+            onClick={handleSubmit}
             className={styles.button}
             style={{
               backgroundColor: colors.primary[100],

@@ -76,7 +76,7 @@ const MatchUpDetail: NextPage = () => {
   }, [matchUp, currentUserId]);
 
   useEffect(() => {
-    if  (matchUp && currentUserId) {
+    if (matchUp && currentUserId) {
       initializeMap(matchUp?.address);
     }
   }, [matchUp, currentUserId]);
@@ -91,9 +91,7 @@ const MatchUpDetail: NextPage = () => {
             stayLight
             key={1}
             viewBox={share.viewBox}
-            callback={() =>
-              mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })
-            }
+            callback={() => mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })}
             icon={share.path}
           />,
           <HeaderButton
@@ -112,13 +110,7 @@ const MatchUpDetail: NextPage = () => {
         ]);
       else
         setHeaderButtons([
-          <HeaderButton
-            stayLight
-            key={1}
-            viewBox={watchList.viewBox}
-            callback={() => {}}
-            icon={watchList.path}
-          />,
+          <HeaderButton stayLight key={1} viewBox={watchList.viewBox} callback={() => {}} icon={watchList.path} />,
           <HeaderButton stayLight key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
         ]);
     }
@@ -162,7 +154,9 @@ const MatchUpDetail: NextPage = () => {
             <UpdatesModal
               close={() => setShowUpdatesModal(false)}
               updates={matchUp.updates}
+              matchUpId={matchUp.id}
               organizer={matchUp.organizer as User}
+              isSignedUp={isSignedUp}
             />
           </>
         )}
@@ -257,9 +251,7 @@ const MatchUpDetail: NextPage = () => {
                 </p>
                 <p style={{ color: colors.text[60] }}>
                   {matchUp.description}
-                  {matchUp.description.length > 100 && (
-                    <span style={{ color: colors.primary[100] }}> Read more</span>
-                  )}
+                  {matchUp.description.length > 100 && <span style={{ color: colors.primary[100] }}> Read more</span>}
                 </p>
               </div>
 
@@ -298,8 +290,7 @@ const MatchUpDetail: NextPage = () => {
                 {matchUp?.signups.items.length} / {matchUp?.attendanceMax} players joined
               </p>
               <p className="small" style={{ color: colors.text[100] }}>
-                {matchUp?.totalCost > 0 ? matchUp?.totalCost + '.00 ' + matchUp?.currency : 'Free'} + 5€
-                deposit{' '}
+                {matchUp?.totalCost > 0 ? matchUp?.totalCost + '.00 ' + matchUp?.currency : 'Free'} + 5€ deposit{' '}
                 {
                   <span>
                     <svg

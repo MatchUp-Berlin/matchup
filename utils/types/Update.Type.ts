@@ -16,3 +16,9 @@ export interface UpdatesReturn {
   nextToken: string | null;
   startedAt: string | null;
 }
+
+export interface CreateUpdateInput {
+  userId: string;
+  matchUpId: string;
+  content: string;
+}
