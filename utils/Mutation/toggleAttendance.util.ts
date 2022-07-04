@@ -19,8 +19,6 @@ export async function toggleAttendance(signUpId: String): Promise<SignUp> {
       variables: { input: { id: newSignUp.id, attended: attended } },
     });
 
-    console.log('TGLFN', toggledSignUp.data.updateSignUp);
-
     return toggledSignUp.data.updateSignUp;
   } catch (error) {
     throw error;

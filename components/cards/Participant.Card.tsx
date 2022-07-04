@@ -5,6 +5,7 @@ import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Participant.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
 import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
+import { getSignUpById } from '../../utils/Query/getSignUpById.util';
 import { useQuery, useQueryClient } from 'react-query';
 import { SignUp } from '../../utils/types/SignUp.Type';
 
@@ -21,20 +22,16 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
 
   const [attendanceToggled, setAttendanceToggled] = useState<boolean>(false);
 
-  const { isLoading, data } = useQuery(['signup', attendanceToggled], () => {
-    // get SignUp
-  });
-
-  const toggleAttended = async () => {
-    await toggleAttendance(signup?.id || '').then((res) => {
-      queryClient.invalidateQueries(['matchup', signup?.matchUpId]);
-      setAttendanceToggled((prev) => !prev);
-    });
-  };
-
-  console.log('signup', signup);
+  const { isLoading, data } = useQuery(['signup', attendanceToggled], () =>
+    getSignUpById(signup?.id || '')
+  );
 
   console.log('data', data);
+
+  const toggleAttended = async () => {
+    await toggleAttendance(signup?.id || '');
+    setAttendanceToggled((prev) => !prev);
+  };
 
   return (
     <article
