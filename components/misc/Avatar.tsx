@@ -3,26 +3,27 @@ import { useTheme } from '../../contexts/Theme';
 import ImageFallback from './ImageFallback';
 import getDefaultImage from '../../utils/getDefaultImage';
 import defaultAvatar from '../../public/default-avatar.png';
-import { confirmAttendance } from '../../utils/Mutation/toggleAttendance.util';
 
 export interface IAvatarProps {
   size: string;
   image: any;
-  highlight: boolean;
   attended: boolean;
+  highlightable?: boolean;
 }
 
 const Avatar: React.FunctionComponent<IAvatarProps> = ({
   size,
   image,
   attended,
-  highlight,
+  highlightable,
 }) => {
   const { colors, shadows } = useTheme();
   let avatarSize: string = '';
 
+  console.log('AVATATR', attended);
+
   const border =
-    highlight && attended ? `3px solid ${colors.primary[100]}` : 'None';
+    highlightable && attended ? `3px solid ${colors.primary[100]}` : 'None';
 
   if (size === 'small') {
     avatarSize = '50px';

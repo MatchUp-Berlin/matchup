@@ -46,7 +46,7 @@ const ParticipantsPreviewCard: React.FunctionComponent<
                   size={'small'}
                   image={user.profileImage || avatar}
                   attended={user.attended || false}
-                  highlight={true}
+                  highlightable={true}
                 />
               ))
           )}
