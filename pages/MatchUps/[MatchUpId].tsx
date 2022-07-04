@@ -75,6 +75,12 @@ const MatchUpDetail: NextPage = () => {
     }
   }, [matchUp, currentUser]);
 
+  useEffect(() => {
+    if  (matchUp && currentUser) {
+      initializeMap(matchUp?.address);
+    }
+  }, [matchUp, currentUser]);
+
   /* -------RENDER CORRECT HEADER BUTTONS------- */
   const [headerButtons, setHeaderButtons] = useState<ReactNode[]>([]);
   useEffect(() => {

@@ -8,10 +8,13 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { useState } from 'react';
-import awsExports from '../src/aws-exports';
+
+import awsExports from '../src/exportdata'
+Amplify.configure(awsExports)
+
 import { ThemeProvider } from '../contexts/Theme';
 import { AuthProvider } from '../contexts/Auth';
-Amplify.configure(awsExports);
+import { ConsoleLogger } from '@aws-amplify/core';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -40,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </AuthProvider>
         </Authenticator.Provider>
       </Hydrate>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
