@@ -11,6 +11,7 @@ export async function getOrganizerMatchUps(
     const matchUpsData = await API.graphql({
       query: byUserOrganized,
       variables: {
+        userId: id,
         limit: 3,
         nextToken: token,
       },
