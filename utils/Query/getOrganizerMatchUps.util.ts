@@ -20,7 +20,7 @@ export async function getOrganizerMatchUps(id: string, showCards: number): Promi
 
     const retrievedData = await matchUpsData.data.listMatchUps;
 
-    const imageData = await Promise.all(
+    await Promise.all(
       retrievedData.items.map(async (matchUp: MatchUp) => {
         const headerImage = await Storage.get(matchUp.id);
         matchUp.image = headerImage;

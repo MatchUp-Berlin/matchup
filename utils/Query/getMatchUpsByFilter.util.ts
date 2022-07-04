@@ -46,7 +46,7 @@ export async function getMatchUpsByFilter(
     const retrievedMatchUpData = await matchUpData.data.listMatchUps;
 
 
-    const imageData = await Promise.all(
+    await Promise.all(
       retrievedMatchUpData.items.map(async (matchUp: MatchUp) => {
         const headerImage = await Storage.get(matchUp.id);
         matchUp.image = headerImage;

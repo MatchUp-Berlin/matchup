@@ -1,0 +1,29 @@
+.wrapper {
+  padding: 3em 1em 5em;
+  min-height: 100vh;
+
+  .cardsWrapper {
+    margin-top: 2em;
+    margin-bottom: 8em;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: scroll;
+    padding-bottom: 1em;
+
+    /* Shadows not being cut off */
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+    height: 80vh;
+  }
+}
