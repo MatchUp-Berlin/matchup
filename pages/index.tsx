@@ -89,7 +89,6 @@ const Home: NextPage = () => {
     fetchMap();
   }, [isRefetching]);
 
-
   return (
     <>
       <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
@@ -101,26 +100,25 @@ const Home: NextPage = () => {
             className={styles.button}
             style={{
               backgroundColor: colors.primary[100],
-              color: colors.background[100],
             }}
           >
-            <svg viewBox={arrow.viewBox} fill="white">
+            <svg
+              viewBox={arrow.viewBox}
+              width="50px"
+              height="50px"
+              fill="white"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
               {arrow.path}
             </svg>
           </div>
         </div>
 
-        {isRefetching && (
-          <div className={styles.refetchWrapper}>
-            <LoadingSpinner />
-          </div>
-        )}
-
         <SportFilter categories={categories} setCategories={setCategories} />
 
         {/* ------MAP BUTTON------ */}
         <MapButton map={showMap} callback={() => mapToggle()}></MapButton>
-
         {/* ------MATCHUP LIST OR MAP------ */}
         {showMap ? (
           <div id="map" className={'fullheight-map ' + styles.map}></div>
@@ -140,6 +138,11 @@ const Home: NextPage = () => {
           </>
         ) : (
           <div className={styles.cardsWrapper}>
+            {isRefetching && (
+              <div className={styles.refetchWrapper}>
+                <LoadingSpinner />
+              </div>
+            )}
             {matchUps?.items.map((matchup: MatchUp) => (
               <>
                 <MatchUpCard

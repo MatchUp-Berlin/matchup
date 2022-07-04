@@ -11,6 +11,7 @@
 
   .indoor {
     padding: 0 0.5em;
+    margin-bottom: 5em;
     width: 100%;
     display: flex;
     align-items: center;
@@ -74,4 +75,5 @@
   border-radius: 20px;
   height: 30vh;
   width: 100%;
+  z-index: 0;
 }
