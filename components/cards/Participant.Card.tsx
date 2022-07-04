@@ -5,7 +5,8 @@ import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Participant.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
 import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
-import { useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
+import { SignUp } from '../../utils/types/SignUp.Type';
 
 export interface IParticipantCardProps {
   user: User;
@@ -18,11 +19,22 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   const { colors, shadows } = useTheme();
   const queryClient = useQueryClient();
 
+  const [attendanceToggled, setAttendanceToggled] = useState<boolean>(false);
+
+  const { isLoading, data } = useQuery(['signup', attendanceToggled], () => {
+    // get SignUp
+  });
+
   const toggleAttended = async () => {
     await toggleAttendance(signup?.id || '').then((res) => {
       queryClient.invalidateQueries(['matchup', signup?.matchUpId]);
+      setAttendanceToggled((prev) => !prev);
     });
   };
+
+  console.log('signup', signup);
+
+  console.log('data', data);
 
   return (
     <article
@@ -43,7 +55,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
 
       <div className={styles.avatar} onClick={() => toggleAttended()}>
         <Avatar
-          attended={signup?.attended || false}
+          attended={data?.attended || false}
           highlightable={true}
           size={'medium'}
           image={profileImage || avatar}
