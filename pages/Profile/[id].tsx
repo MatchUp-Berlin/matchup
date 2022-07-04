@@ -12,6 +12,8 @@ import { getMatchUp } from '../../src/graphql/queries';
 import { API } from 'aws-amplify';
 import MatchUpCard from '../../components/cards/MatchUp.Card';
 import { getOrganizerMatchUps } from '../../utils/Query/getOrganizerMatchUps.util';
+import { useState } from 'react';
+import { match } from 'assert';
 
 const ProfileDetailPage: NextPage = () => {
   const { colors, darkMode } = useTheme();
@@ -22,12 +24,27 @@ const ProfileDetailPage: NextPage = () => {
     return getUserById(id as string);
   });
 
+  const [token, setToken] = useState<string>();
+
   const {
     isLoading: isMatchUpsLoading,
     isSuccess: isMatchUpsSuccess,
     isError: isMatchUpsError,
     data: matchUpsData,
-  } = useQuery(['matchUps', id], () => getOrganizerMatchUps(id as string));
+  } = useQuery(['matchUps', id], () => getOrganizerMatchUps(id as string, token as string),
+  {
+    onSuccess: (data) => {setToken(data.nextToken as string)}
+  }
+  );
+
+  console.log(matchUpsData)
+
+  async function getMore() {
+    const matchUps = await getOrganizerMatchUps(id as string, token);
+    console.log('MATCHUPDATA', matchUps)
+    const tokenId = matchUps.nextToken;
+    setToken(tokenId)
+  }
 
   // const {
   //   isLoading: isMatchUpsLoading,
@@ -127,6 +144,7 @@ const ProfileDetailPage: NextPage = () => {
           </section>
         )
       )}
+      <button onClick={() => getMore()}>Banana</button>
       <Navigation />
     </>
 
