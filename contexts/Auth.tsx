@@ -8,7 +8,12 @@ import { User } from '../utils/types/User.Type';
 interface IAuth {
   currentUserId: string | null;
   currentUser: User | null;
-  signup: (email: string, password: string, firstName: string, lastName: string) => Promise<CognitoUser>;
+  signup: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => Promise<CognitoUser>;
   login: (email: string, password: string) => Promise<CognitoUser>;
   logout: () => Promise<void>;
   // resetPassword: (email: string) => Promise<void>;

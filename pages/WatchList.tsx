@@ -20,11 +20,14 @@ const WatchListPage: NextPage = () => {
 
   return (
     <>
-      <div className={styles.wrapper} style={{ backgroundColor: colors.background[100] }}>
+      <div
+        className={styles.wrapper}
+        style={{ backgroundColor: colors.background[100] }}
+      >
         <h1 style={{ color: colors.text[100] }}>Your Watchlist</h1>
 
         {currentUser && currentUser.watchList.items.length == 0 ? (
-          <Empty text="You have not added any events to your watchlist yet." />
+          <Empty text='You have not added any events to your watchlist yet.' />
         ) : (
           <div className={styles.cardsWrapper}>
             {currentUser &&
@@ -33,14 +36,18 @@ const WatchListPage: NextPage = () => {
                 <MatchUpCard
                   key={watchlist?.matchUp?.id}
                   id={watchlist?.matchUp?.id as string}
-                  variant="medium"
+                  variant='medium'
                   date={watchlist?.matchUp?.date as string}
                   indoor={watchlist.matchUp?.indoor as boolean}
                   title={watchlist?.matchUp?.title as string}
                   attendanceMax={watchlist?.matchUp?.attendanceMax as number}
-                  participating={watchlist?.matchUp?.signups?.items?.length || 0}
+                  participating={
+                    watchlist?.matchUp?.signups?.items?.length || 0
+                  }
                   location={watchlist?.matchUp?.location as string}
-                  sportCategory={watchlist?.matchUp?.sportCategory as TSportCategories}
+                  sportCategory={
+                    watchlist?.matchUp?.sportCategory as TSportCategories
+                  }
                   skillLevel={watchlist?.matchUp?.skillLevel as TSkillLevels}
                   image={watchlist?.matchUp?.image as string}
                   totalCost={watchlist?.matchUp?.totalCost as number}
