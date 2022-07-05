@@ -20,6 +20,7 @@ export interface ISignUpFormProps {
   setRegistrationPassword: Dispatch<SetStateAction<string>>;
   setRegistrationConfirmPassword: Dispatch<SetStateAction<string>>;
   error: string;
+  setError: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
 }
 
@@ -32,45 +33,60 @@ const SignUpForm: React.FunctionComponent<ISignUpFormProps> = (props) => {
           className={styles.input}
           type="text"
           value={props.inputState.registrationFirstName}
-          onChange={(e) => props.setRegistrationFirstName(e.target.value as string)}
+          onChange={(e) => {
+            props.setError('');
+            props.setRegistrationFirstName(e.target.value as string);
+          }}
           placeholder="Your first name"
-          style={{ boxShadow: shadows.small, outlineColor: colors.primary[80] }}
+          style={{ outlineColor: colors.primary[80] }}
         ></input>
         <input
           className={styles.input}
           type="text"
           value={props.inputState.registrationLastName}
-          onChange={(e) => props.setRegistrationLastName(e.target.value as string)}
+          onChange={(e) => {
+            props.setError('');
+            props.setRegistrationLastName(e.target.value as string);
+          }}
           placeholder="Your last name"
-          style={{ boxShadow: shadows.small, outlineColor: colors.primary[80] }}
+          style={{ outlineColor: colors.primary[80] }}
         ></input>
         <input
           className={styles.input}
           type="email"
           value={props.inputState.registrationEmail}
-          onChange={(e) => props.setRegistrationEmail(e.target.value as string)}
+          onChange={(e) => {
+            props.setError('');
+            props.setRegistrationEmail(e.target.value as string);
+          }}
           placeholder="Your email address"
-          style={{ boxShadow: shadows.small, outlineColor: colors.primary[80] }}
+          style={{ outlineColor: colors.primary[80] }}
         ></input>
         <input
           className={styles.input}
           type="password"
           value={props.inputState.registrationPassword}
-          onChange={(e) => props.setRegistrationPassword(e.target.value as string)}
+          onChange={(e) => {
+            props.setError('');
+            props.setRegistrationPassword(e.target.value as string);
+          }}
           placeholder="Password"
-          style={{ boxShadow: shadows.small, outlineColor: colors.primary[80] }}
+          style={{ outlineColor: colors.primary[80] }}
         ></input>
         <input
           className={styles.input}
           type="password"
           value={props.inputState.registrationConfirmPassword}
-          onChange={(e) => props.setRegistrationConfirmPassword(e.target.value as string)}
+          onChange={(e) => {
+            props.setError('');
+            props.setRegistrationConfirmPassword(e.target.value as string);
+          }}
           placeholder="Confirm password"
-          style={{ boxShadow: shadows.small, outlineColor: colors.primary[80] }}
+          style={{ outlineColor: colors.primary[80] }}
         ></input>
         {props.error && <p style={{ color: colors.primary[100] }}>{props.error}</p>}
         <Button
-          disabled={props.isLoading}
+          disabled={props.isLoading || props.error != ''}
           variant="primary"
           text="Sign Up"
           callback={props.handleRegistration}

@@ -78,10 +78,7 @@ export const getUser = /* GraphQL */ `
 `;
 
 export const createMatchUpMutation = /* GraphQL */ `
-  mutation CreateMatchUp(
-    $input: CreateMatchUpInput!
-    $condition: ModelMatchUpConditionInput
-  ) {
+  mutation CreateMatchUp($input: CreateMatchUpInput!, $condition: ModelMatchUpConditionInput) {
     createMatchUp(input: $input, condition: $condition) {
       id
       title
@@ -127,10 +124,7 @@ export const createMatchUpMutation = /* GraphQL */ `
 `;
 
 export const createMatchUpUserMutation = /* GraphQL */ `
-  mutation CreateMatchUpUser(
-    $input: CreateMatchUpUserInput!
-    $condition: ModelMatchUpUserConditionInput
-  ) {
+  mutation CreateMatchUpUser($input: CreateMatchUpUserInput!, $condition: ModelMatchUpUserConditionInput) {
     createMatchUpUser(input: $input, condition: $condition) {
       id
       MatchUpUsers {
@@ -250,6 +244,12 @@ export const getMatchUp = /* GraphQL */ `
         items {
           id
           userId
+          user {
+            id
+            givenName
+            familyName
+            profileImage
+          }
           matchUpId
           content
           createdAt
@@ -274,11 +274,7 @@ export const getMatchUp = /* GraphQL */ `
 `;
 
 export const listMatchUps = /* GraphQL */ `
-  query ListMatchUps(
-    $filter: ModelMatchUpFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListMatchUps($filter: ModelMatchUpFilterInput, $limit: Int, $nextToken: String) {
     listMatchUps(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id

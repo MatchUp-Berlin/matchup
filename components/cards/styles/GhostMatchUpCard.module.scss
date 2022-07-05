@@ -1,0 +1,34 @@
+// LARGE
+
+.cardWrapperLarge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 330px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+}
+.imageWrapperLarge {
+  height: 330px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  flex: 2;
+}
+
+//MEDIUM AND SMALL
+
+.cardWrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+//BOTH CATEGORIES
+
+.imageWrapper .imageWrapperLarge .ghostText .ghostPill {
+  background-color: #fccfd4;
+}

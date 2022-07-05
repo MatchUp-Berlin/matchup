@@ -55,9 +55,7 @@ const Home: NextPage = () => {
     isSuccess,
     refetch,
     data: matchUps,
-  } = useQuery(['matchUps', categories], () =>
-    getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
-  );
+  } = useQuery(['matchUps', categories], () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to));
 
   /* --------------- MAP */
   const [showMap, setShowMap] = useState<boolean>(false);
@@ -91,10 +89,17 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
+      <div
+        style={{ backgroundColor: colors.background[100] }}
+        className={styles.page}
+      >
         {/* ------FILTERING------ */}
         <div className={styles.searchBar}>
-          <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
+          <Filter
+            city={city}
+            setCity={setCity}
+            setTimeFrame={setTimeFrame}
+          ></Filter>
           <div
             onClick={() => refetch()}
             className={styles.button}
@@ -104,11 +109,11 @@ const Home: NextPage = () => {
           >
             <svg
               viewBox={arrow.viewBox}
-              width="50px"
-              height="50px"
-              fill="white"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
+              width='50px'
+              height='50px'
+              fill='white'
+              xmlns='http://www.w3.org/2000/svg'
+              xmlnsXlink='http://www.w3.org/1999/xlink'
             >
               {arrow.path}
             </svg>
@@ -121,11 +126,11 @@ const Home: NextPage = () => {
         <MapButton map={showMap} callback={() => mapToggle()}></MapButton>
         {/* ------MATCHUP LIST OR MAP------ */}
         {showMap ? (
-          <div id="map" className={'fullheight-map ' + styles.map}></div>
+          <div id='map' className={'fullheight-map ' + styles.map}></div>
         ) : isError ? (
           <>
-            <Empty text="Looks like something went wrong." />
-            <div id="map" className={styles.nodisplaymap}></div>
+            <Empty text='Looks like something went wrong.' />
+            <div id='map' className={styles.nodisplaymap}></div>
           </>
         ) : isLoading ? (
           <div className={styles.loadingWrapper}>
@@ -133,8 +138,8 @@ const Home: NextPage = () => {
           </div>
         ) : isSuccess && matchUps?.items?.length === 0 ? (
           <>
-            <Empty text="No events found." />
-            <div id="map" className={styles.nodisplaymap}></div>
+            <Empty text='No events found.' />
+            <div id='map' className={styles.nodisplaymap}></div>
           </>
         ) : (
           <div className={styles.cardsWrapper}>
@@ -148,7 +153,7 @@ const Home: NextPage = () => {
                 <MatchUpCard
                   id={matchup.id as string}
                   key={matchup.id}
-                  variant="large"
+                  variant='large'
                   timestamp={matchup.date}
                   title={matchup.title}
                   slots={matchup.attendanceMax}
@@ -161,7 +166,7 @@ const Home: NextPage = () => {
                   price={matchup.totalCost}
                   rented={matchup.reservedCourt}
                 ></MatchUpCard>
-                <div id="map" className={styles.nodisplaymap}></div>
+                <div id='map' className={styles.nodisplaymap}></div>
               </>
             ))}
           </div>
