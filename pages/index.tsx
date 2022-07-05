@@ -23,12 +23,7 @@ import 'maplibre-gl-js-amplify/dist/public/amplify-map.css';
 import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
 import { initializeMapExplorer } from '../utils/Maps/initializeMapExplorer.util';
-import {
-  MatchUp,
-  TCity,
-  TSkillLevels,
-  TSportCategories,
-} from '../utils/types/MatchUp.Type';
+import { MatchUp, TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import { arrow } from '../components/icons';
 import Empty from '../components/misc/Empty';
@@ -137,10 +132,13 @@ const Home: NextPage = () => {
           </>
         ) : isLoading ? (
           <div className={styles.cardsWrapper}>
-            {isLoading &&
-              [1, 1, 1, 1, 1, 7, 1, 6, 6, 6, 1, 1].map((item) => (
+            {isLoading && (
+              <>
                 <GhostMatchUpCard size={'large'} />
-              ))}
+                <GhostMatchUpCard size={'large'} />
+                <GhostMatchUpCard size={'large'} />
+              </>
+            )}
           </div>
         ) : isSuccess && matchUps?.items?.length === 0 ? (
           <>
