@@ -49,6 +49,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
     }
   }
 
+  /* Image Upload */
   function addImage(image: File) {
     setImageError('');
     //3MB
