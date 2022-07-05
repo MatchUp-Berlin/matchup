@@ -1,5 +1,6 @@
 // React and Next
 import type { NextPage } from 'next';
+import Head from 'next/head';
 
 import { useEffect, useState } from 'react';
 
@@ -27,8 +28,6 @@ import { MatchUp, TCity, TSkillLevels, TSportCategories } from '../utils/types/M
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import { arrow } from '../components/icons';
 import Empty from '../components/misc/Empty';
-import { Head } from 'next/document';
-
 
 const Home: NextPage = () => {
   const { colors } = useTheme();
@@ -92,14 +91,11 @@ const Home: NextPage = () => {
 
   return (
     <>
-    <Head>
-      <title>MatchUp</title>
-      <meta name="description" content="Find a local sport match that fits your skill level." />
-    </Head>
-      <div
-        style={{ backgroundColor: colors.background[100] }}
-        className={styles.page}
-      >
+      <Head>
+        <title>MatchUp</title>
+        <meta name="description" content="Find a local sport match that fits your skill level." />
+      </Head>
+      <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
         {/* ------FILTERING------ */}
         <div className={styles.searchBar}>
           <Filter city={city} setCity={setCity} setTimeFrame={setTimeFrame}></Filter>
