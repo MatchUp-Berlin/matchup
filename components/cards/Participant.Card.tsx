@@ -28,17 +28,14 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   );
 
   const toggleAttended = async () => {
-    setAttendanceToggled((prev) => !prev);
+    // setAttendanceToggled((prev) => !prev);
 
     const signupData = await getSignUpByUserIdMatchUpId(id, signup?.matchUpId);
-    if (attendanceConfirmable) toggleAttendance(signupData?.id);
-    // if (attendanceConfirmable) {
-    //   console.log('TGL ATD', data);
-    //   await toggleAttendance(data?.id || '').then((res) =>
-    //     console.log(res, 'TGL ATD RETURN')
-    //   );
-    //   setAttendanceToggled((prev) => !prev);
-    // }
+    if (attendanceConfirmable) {
+      toggleAttendance(signupData?.id).then((res) =>
+        setAttendanceToggled((prev: boolean) => !prev)
+      );
+    }
   };
 
   return !attendanceConfirmable ? (
