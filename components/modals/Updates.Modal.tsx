@@ -88,10 +88,16 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
         </div>
         {props.updates.items.length === 0 && <Empty text="No updates yet."></Empty>}
         <div className={styles.scrollable}>
-          {props.updates.items.map((update, index) => {
-            return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;
-          })}
           <div ref={divRef}></div>
+          {props.updates.items
+            .sort((a, b): number => {
+              return (
+                Math.round(new Date(b.createdAt).getTime() / 1000) - Math.round(new Date(a.createdAt).getTime() / 1000)
+              );
+            })
+            .map((update, index) => {
+              return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;
+            })}
         </div>
         <div className={styles.sendGroup}>
           <input

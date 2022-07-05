@@ -30,7 +30,7 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({
     avatarSize = '75px';
   }
   if (size === 'large') {
-    avatarSize = '150px';
+    avatarSize = '200px';
   }
 
   return (
