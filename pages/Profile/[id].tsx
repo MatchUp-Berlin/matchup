@@ -29,7 +29,7 @@ const ProfileDetailPage: NextPage = () => {
   const isCurrentUser = currentUserId === id;
 
   // if it's not the current user, fetch other user
-  const userQuery = useQuery(['user', id], () => getUserById(currentUserId as string), {
+  const userQuery = useQuery(['user', id], () => getUserById(id as string), {
     enabled: !isCurrentUser,
   });
 
