@@ -21,6 +21,8 @@ type MatchUp @model @auth(rules: [{ allow: public }]) {
   updates: [Update] @hasMany(indexName: "byMatchUpUpdates", fields: ["id"])
   watchList: [WatchList]
     @hasMany(indexName: "byMatchUpWatchList", fields: ["id"])
+  organized: [Organized]
+    @hasMany(indexName: "byMatchUpOrganized", fields: ["id"])
 }
 
 type User @model @auth(rules: [{ allow: public }]) {
@@ -29,6 +31,7 @@ type User @model @auth(rules: [{ allow: public }]) {
   familyName: String!
   email: String!
   signups: [SignUp] @hasMany(indexName: "byUserSignUps", fields: ["id"])
+  organized: [Organized] @hasMany(indexName: "byUserOrganized", fields: ["id"])
   profileImage: String
   about: String
   updates: [Update] @hasMany(indexName: "byUserUpdates", fields: ["id"])
@@ -37,26 +40,35 @@ type User @model @auth(rules: [{ allow: public }]) {
 
 type SignUp @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  userId: ID @index(name: "byUserSignUps")
-  matchUpId: ID @index(name: "byMatchUpSignUps")
+  userId: ID! @index(name: "byUserSignUps")
+  matchUpId: ID! @index(name: "byMatchUpSignUps")
   user: User @belongsTo(fields: ["userId"])
   matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
-  attended: Boolean
+  attended: Boolean!
 }
 
 type Update @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  userId: ID @index(name: "byUserUpdates")
-  matchUpId: ID @index(name: "byMatchUpUpdates")
+  userId: ID! @index(name: "byUserUpdates")
+  matchUpId: ID! @index(name: "byMatchUpUpdates")
   user: User @belongsTo(fields: ["userId"])
   matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
-  content: String
+  content: String!
 }
 
 type WatchList @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  userId: ID @index(name: "byUserWatchList")
-  matchUpId: ID @index(name: "byMatchUpWatchList")
+  userId: ID! @index(name: "byUserWatchList")
+  matchUpId: ID! @index(name: "byMatchUpWatchList")
+  user: User @belongsTo(fields: ["userId"])
+  matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
+}
+
+type Organized @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  userId: ID! @index(name: "byUserOrganized", queryField: "byUserOrganized")
+  matchUpId: ID!
+    @index(name: "byMatchUpOrganized", queryField: "byMatchUpOrganized")
   user: User @belongsTo(fields: ["userId"])
   matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
 }
