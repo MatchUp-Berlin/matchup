@@ -12,6 +12,7 @@ import { Geo } from 'aws-amplify';
 import { TCity } from '../../utils/types/MatchUp.Type';
 import { TAddress } from '../../utils/types/Address.Type';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
+import { Value } from 'sass';
 
 export interface IPrimaryInfoFormProps {
   title: string;
@@ -30,6 +31,8 @@ export interface IPrimaryInfoFormProps {
 const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) => {
   const { colors, darkMode, shadows } = useTheme();
   const [locationResult, setLocationResult] = useState<any[]>([]);
+  const [mapSearchInput, setMapSearchInput] = useState<string | undefined>('');
+  const [locationSelected, setLocationSelected] = useState<boolean>(false);
 
   useEffect(() => {
     initializeMap(props.address, false);
@@ -40,6 +43,8 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
     props.setAddress(loc);
     loc.municipality && props.setLocation(loc.municipality.toLowerCase() as TCity);
     initializeMap(props.address, true);
+    const newSearchInput = loc.label ? loc.label : loc.municipality;
+    setMapSearchInput(newSearchInput)
   }
 
   async function searchLocation(event: any) {
@@ -94,7 +99,8 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
           Location
         </label>
         <input
-          // value={locationResult ? locationResult: event.target.value}
+          value={mapSearchInput}
+          onChange={e => setMapSearchInput(e.target.value)}
           onKeyUp={(e) => searchLocation(e)}
           placeholder="Where do you want to meet?"
           className={styles.input}
