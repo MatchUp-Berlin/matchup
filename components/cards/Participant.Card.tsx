@@ -6,7 +6,7 @@ import styles from './styles/Participant.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
 import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
 import { getSignUpByUserIdMatchUpId } from '../../utils/Query/getSignUpByUserIdMatchUpId.util';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import Link from 'next/link';
 
 export interface IParticipantCardProps {
@@ -23,20 +23,25 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
 
   const [attendanceToggled, setAttendanceToggled] = useState<boolean>(false);
 
-  const { data } = useQuery(['signup', attendanceToggled], () =>
-    getSignUpByUserIdMatchUpId(id, signup?.matchUpId)
-  );
+  // const { data } = useQuery(['signup', attendanceToggled], () =>
+  //   getSignUpByUserIdMatchUpId(id, signup?.matchUpId)
+  // );
+
+  const queryClient = useQueryClient();
 
   const toggleAttended = async () => {
-    // setAttendanceToggled((prev) => !prev);
-
     const signupData = await getSignUpByUserIdMatchUpId(id, signup?.matchUpId);
+    console.log('signupData', signupData);
     if (attendanceConfirmable) {
-      toggleAttendance(signupData?.id).then((res) =>
-        setAttendanceToggled((prev: boolean) => !prev)
+      await toggleAttendance(signupData?.id).then((res) =>
+        queryClient.invalidateQueries(['matchup', signupData.matchUpId])
       );
     }
+    const signupData2 = await getSignUpByUserIdMatchUpId(id, signup?.matchUpId);
+    console.log('signupData2', signupData2);
   };
+
+  console.log('signup', signup);
 
   return !attendanceConfirmable ? (
     // For Participants Modal
@@ -55,7 +60,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
           >{`${givenName} ${familyName}`}</p>
           {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
           <p style={{ color: colors.text[60] }}>
-            {data?.attended ? 'Attendance confirmed' : 'Signed up'}
+            {signup?.attended ? 'Attendance confirmed' : 'Signed up'}
           </p>
         </div>
 
@@ -72,7 +77,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
       style={{
         backgroundColor: colors.background[80],
         boxShadow: shadows.medium,
-        border: data?.attended ? `3px solid ${colors.primary[100]}` : 'None',
+        border: signup?.attended ? `3px solid ${colors.primary[100]}` : 'None',
       }}
     >
       <div className={styles.info}>
@@ -82,17 +87,12 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
         >{`${givenName} ${familyName}`}</p>
         {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
         <p style={{ color: colors.text[60] }}>
-          {data?.attended ? 'Attendance confirmed' : 'Signed up'}
+          {signup?.attended ? 'Attendance confirmed' : 'Signed up'}
         </p>
       </div>
 
       <div className={styles.avatar} onClick={() => toggleAttended()}>
-        <Avatar
-          attended={data?.attended || false}
-          highlightable={true}
-          size={'medium'}
-          image={profileImage || avatar}
-        />
+        <Avatar size={'medium'} image={profileImage || avatar} />
       </div>
     </div>
   );
