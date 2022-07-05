@@ -6,10 +6,12 @@
   align-items: center;
 }
 
-.pageWrapper {
-  min-width: 100vw;
-  min-height: 100%;
+.logoutButton {
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }
+
 
 .contentWrapper {
   padding: 1em;
