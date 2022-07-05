@@ -11,7 +11,7 @@ module.exports = withPWA({
   images: {
     domains: [
       'images.unsplash.com',
-      'matchup-storage-b0c9ab6f112810-dev.s3.us-east-1.amazonaws.com',
+      `${process.env.aws_user_files_s3_bucket}.s3.eu-central-1.amazonaws.com`,
       'vitals.vercel-insights.com',
     ],
   },
