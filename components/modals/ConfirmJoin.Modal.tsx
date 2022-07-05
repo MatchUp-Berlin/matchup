@@ -128,27 +128,27 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
             </>
           )}
         </div>
-
         <a
           style={{ color: colors.primary[100] }}
           className={styles.modalPolicyLink}
         >
           Read more about our local charities and commitment policy
         </a>
-        <Button
-          variant='primary'
-          callback={
+
+        <a
+          style={{ backgroundColor: colors.primary[100]}}
+          className={styles.modelConfirm}
+          href={props.isSignedUp ? '': "https://buy.stripe.com/test_cN29BV4Dv7R03T2cMM"}
+          onClick={
             props.isSignedUp ? () => handleCancel() : () => handleCommit()
           }
-          text={
-            !props.isSignedUp
-              ? 'Commit'
-              : props.isWithin24Hours
-              ? 'Donate 5€'
-              : 'Cancel'
-          }
-          disabled={false}
-        ></Button>
+        >{
+          !props.isSignedUp
+            ? 'Commit'
+            : props.isWithin24Hours
+            ? 'Donate 5€'
+            : 'Cancel'
+        }</a>
       </div>
     </div>
   );
