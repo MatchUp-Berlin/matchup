@@ -92,7 +92,7 @@ const Home: NextPage = () => {
     <>
     <Head>
       <title>MatchUp</title>
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta name="description" content="Find a local sport match that fits your skill level." />
     </Head>
       <div
         style={{ backgroundColor: colors.background[100] }}
