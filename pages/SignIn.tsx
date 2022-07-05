@@ -48,7 +48,6 @@ const SignInPage: NextPage = () => {
     setLoginLoading(true);
     try {
       const user = await authUtils?.login(loginEmail, loginPassword);
-      console.log('handleLogin', user);
       setLoginLoading(false);
       user && router.push('/');
     } catch (err) {
