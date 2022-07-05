@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 330px;
+  height: 300px;
   border-radius: 10px;
   width: 100%;
   max-width: 500px;
@@ -25,7 +25,7 @@
 }
 
 .imageWrapperLarge {
-  height: 330px;
+  height: 300px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   width: 100%;
@@ -95,7 +95,6 @@
 //BOTH CATEGORIES
 
 .ghostTitle {
-  background-color: #fcdbdf;
   height: 1.7em;
   margin: 0.5em 1em;
   border-radius: 10px;
@@ -104,7 +103,9 @@
 .imageWrapper,
 .imageWrapperLarge,
 .ghostText,
-.ghostPill {
+.ghostPill,
+.ghostTitle {
+  background-color: #fcdbdf;
   background-color: #fcdbdf;
 }
 
