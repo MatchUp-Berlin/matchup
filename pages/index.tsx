@@ -1,7 +1,6 @@
 // React and Next
 import type { NextPage } from 'next';
 import Head from 'next/head';
-
 import { useEffect, useState } from 'react';
 
 // Components
@@ -31,6 +30,7 @@ import Empty from '../components/misc/Empty';
 import { createNewWatchList } from '../utils/Mutation/createWatchList.util';
 import { useAuth } from '../contexts/Auth';
 import { WatchList } from '../utils/types/WatchList.Type';
+import GhostMatchUpCard from '../components/cards/GhostMatchUpCard';
 
 const Home: NextPage = () => {
   const { colors } = useTheme();
@@ -145,8 +145,14 @@ const Home: NextPage = () => {
             <div id="map" className={styles.nodisplaymap}></div>
           </>
         ) : isLoading ? (
-          <div className={styles.loadingWrapper}>
-            <LoadingSpinner />
+          <div className={styles.cardsWrapper}>
+            {isLoading && (
+              <>
+                <GhostMatchUpCard size={'large'} />
+                <GhostMatchUpCard size={'large'} />
+                <GhostMatchUpCard size={'large'} />
+              </>
+            )}
           </div>
         ) : isSuccess && matchUps?.items?.length === 0 ? (
           <>

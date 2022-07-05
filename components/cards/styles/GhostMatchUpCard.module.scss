@@ -1,0 +1,143 @@
+// LARGE
+
+.cardWrapperLarge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 300px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  animation: myAnim 4s ease-in 0s infinite alternate forwards;
+}
+
+@keyframes myAnim {
+  0%,
+  50%,
+  100% {
+    opacity: 0.7;
+  }
+
+  25%,
+  75% {
+    opacity: 0.4;
+  }
+}
+
+.imageWrapperLarge {
+  height: 300px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  flex: 2;
+}
+
+.infoWrapperLarge {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+}
+.textWrapperLarge {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1em;
+}
+
+.pillsWrapperLarge {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: 45%;
+  margin-right: 1em;
+}
+
+//MEDIUM AND SMALL
+
+.cardWrapper {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  animation: myAnim 4s ease-in 0s infinite alternate forwards;
+}
+
+@keyframes myAnim {
+  0%,
+  50%,
+  100% {
+    opacity: 0.7;
+  }
+
+  25%,
+  75% {
+    opacity: 0.4;
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  flex: 1;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.infoWrapper {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0.5em 0em;
+}
+
+//BOTH CATEGORIES
+
+.ghostTitle {
+  height: 1.7em;
+  margin: 0.5em 1em;
+  border-radius: 10px;
+}
+
+.imageWrapper,
+.imageWrapperLarge,
+.ghostText,
+.ghostPill,
+.ghostTitle {
+  background-color: #fcdbdf;
+  background-color: #fcdbdf;
+}
+
+.pillsWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.ghostText {
+  // width: 12em;
+  height: 1.1em;
+  margin: 0.2em;
+  border-radius: 10px;
+}
+
+.textTitle {
+  height: 1.5em;
+}
+
+.textOne {
+  width: 12em;
+}
+.textTwo {
+  width: 8em;
+}
+.textThree {
+  width: 3em;
+}
+
+.ghostPill {
+  height: 1.3em;
+  width: 4em;
+  border-radius: 25px;
+  margin: 0.1em;
+}

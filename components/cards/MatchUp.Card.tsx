@@ -178,15 +178,19 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             placeholder="blur"
             blurDataURL={getDefaultImage(props.sportCategory, true).src}
             alt={props.title}
-            layout="fill"
-            objectFit="cover"
+            layout='fill'
+            objectFit='cover'
           ></ImageFallback>
         </div>
 
         <div className={styles.infoWrapper}>
           <div
             className={styles.info}
-            style={props.variant == 'small' ? { justifyContent: 'space-around', height: '100%' } : {}}
+            style={
+              props.variant == 'small'
+                ? { justifyContent: 'space-around', height: '100%' }
+                : {}
+            }
           >
             <div className={styles.title} style={{ color: colors.text[100] }}>
               <Image
@@ -195,7 +199,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                 src={getSportIcon(props.sportCategory)}
                 alt={props.sportCategory}
               ></Image>
-              <p className="highlight-2">{props.title}</p>
+              <p className='highlight-2'>{props.title}</p>
             </div>
             <div className={styles.details}>
               <div className={styles.detail}>
@@ -254,7 +258,9 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                     boxShadow: shadows.small,
                   }}
                 >
-                  <p style={{ color: colors.primary[100] }}>{remainingSlots} Spots left</p>
+                  <p style={{ color: colors.primary[100] }}>
+                    {remainingSlots} Spots left
+                  </p>
                 </div>
               )}
             </div>
