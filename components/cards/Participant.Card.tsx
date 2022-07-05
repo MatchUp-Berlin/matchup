@@ -5,7 +5,7 @@ import { useTheme } from '../../contexts/Theme';
 import styles from './styles/Participant.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
 import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
-import { getSignUpById } from '../../utils/Query/getSignUpById.util';
+import { getSignUpByUserIdMatchUpId } from '../../utils/Query/getSignUpByUserIdMatchUpId.util';
 import { useQuery } from 'react-query';
 import Link from 'next/link';
 
@@ -18,16 +18,14 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   user,
   attendanceConfirmable,
 }) => {
-  const { profileImage, givenName, familyName, signup } = user;
+  const { profileImage, givenName, familyName, signup, id } = user;
   const { colors, shadows } = useTheme();
 
   const [attendanceToggled, setAttendanceToggled] = useState<boolean>(false);
 
   const { data } = useQuery(['signup', attendanceToggled], () =>
-    getSignUpById(signup?.id || '')
+    getSignUpByUserIdMatchUpId(id, signup?.matchUpId)
   );
-
-  // getSignUpByUserId
 
   console.log('data', data);
 
@@ -72,7 +70,9 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
       style={{
         backgroundColor: colors.background[80],
         boxShadow: shadows.medium,
-        border: data?.attended ? `3px solid ${colors.primary[100]}` : 'None',
+        border: data?.items[0].attended
+          ? `3px solid ${colors.primary[100]}`
+          : 'None',
       }}
     >
       <div className={styles.info}>
@@ -82,7 +82,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
         >{`${givenName} ${familyName}`}</p>
         {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
         <p style={{ color: colors.text[60] }}>
-          {data?.attended ? 'Attendance confirmed' : 'Signed up'}
+          {data?.items[0].attended ? 'Attendance confirmed' : 'Signed up'}
         </p>
       </div>
 
