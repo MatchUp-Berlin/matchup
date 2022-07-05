@@ -2,11 +2,10 @@ import { API, Storage } from 'aws-amplify';
 import { byUserOrganized } from '../../src/graphql/queries';
 import { OrganizedReturn, Organized } from '../types/Organized.Type';
 
-<<<<<<< HEAD
-export async function getOrganizerMatchUps(id: string, showCards: number): Promise<getMatchUpsReturn> {
-=======
-export async function getOrganizerMatchUps(id: string, token?: string): Promise<OrganizedReturn> {
->>>>>>> main
+export async function getOrganizerMatchUps(
+  id: string,
+  token?: string
+): Promise<OrganizedReturn> {
   try {
     const matchUpsData = await API.graphql({
       query: byUserOrganized,
