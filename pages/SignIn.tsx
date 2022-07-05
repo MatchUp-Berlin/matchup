@@ -202,6 +202,7 @@ const SignInPage: NextPage = () => {
               setLoginPassword={setLoginPassword}
               handleLogin={handleLogin}
               error={loginError}
+              setError={setLoginError}
               isLoading={loginLoading}
             />
             <p className={styles.bottomText + ' small'}>
