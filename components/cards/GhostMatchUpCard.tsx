@@ -21,12 +21,12 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
           props.size === 'small'
             ? {
                 boxShadow: shadows.medium,
-                backgroundColor: colors.background['80'],
+                backgroundColor: colors.background[80],
                 height: '100px',
               }
             : {
                 boxShadow: shadows.medium,
-                backgroundColor: colors.background['80'],
+                backgroundColor: colors.background[80],
               }
         }
       >
@@ -57,9 +57,7 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
             }
           >
             {props.size !== 'large' && (
-              <div className={styles.ghostText + ' ' + styles.textTitle}>
-                woooo
-              </div>
+              <div className={styles.ghostText + ' ' + styles.textTitle}></div>
             )}
             <div className={styles.ghostText + ' ' + styles.textOne}></div>
             <div className={styles.ghostText + ' ' + styles.textTwo}></div>
