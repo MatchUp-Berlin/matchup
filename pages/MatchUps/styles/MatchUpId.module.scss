@@ -74,6 +74,7 @@
 }
 
 .map {
+  pointer-events: none;
   overflow: hidden;
   border-radius: 10px;
   height: 30vh;

@@ -87,13 +87,13 @@ const MatchUpDetail: NextPage = () => {
 
   useEffect(() => {
     if (matchUp && currentUserId) {
-      initializeMap(matchUp?.address);
+      initializeMap(matchUp?.address, true);
     }
   }, [matchUp, currentUserId]);
 
   useEffect(() => {
     if (matchUp && currentUserId) {
-      initializeMap(matchUp?.address);
+      initializeMap(matchUp?.address, true);
     }
   }, [matchUp, currentUserId]);
 
