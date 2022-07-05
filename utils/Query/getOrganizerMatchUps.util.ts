@@ -1,30 +1,25 @@
 import { API, Storage } from 'aws-amplify';
-import { listMatchUps } from '../../src/graphql/queries';
-import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
+import { byUserOrganized } from '../../src/graphql/queries';
+import { OrganizedReturn, Organized } from '../types/Organized.Type';
 
-export async function getOrganizerMatchUps(id: string, showCards: number): Promise<getMatchUpsReturn> {
+export async function getOrganizerMatchUps(id: string, token?: string): Promise<OrganizedReturn> {
   try {
-    const filter = {
-      organizerId: {
-        eq: id,
-      },
-    };
-
     const matchUpsData = await API.graphql({
-      query: listMatchUps,
+      query: byUserOrganized,
       variables: {
-        filter: filter,
-        offset: showCards,
+        userId: id,
+        limit: 3,
+        nextToken: token,
       },
     });
 
-    const retrievedData = await matchUpsData.data.listMatchUps;
+    const retrievedData = await matchUpsData.data.byUserOrganized;
 
     await Promise.all(
-      retrievedData.items.map(async (matchUp: MatchUp) => {
-        const headerImage = await Storage.get(matchUp.id);
-        matchUp.image = headerImage;
-        return matchUp;
+      retrievedData.items.map(async (data: Organized) => {
+        const headerImage = await Storage.get(data.matchUp.id);
+        data.matchUp.image = headerImage;
+        return data;
       })
     );
 
