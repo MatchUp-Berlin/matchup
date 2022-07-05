@@ -11,8 +11,8 @@ const Home: NextPage = () => {
     <>
       {/* <VerificationForm /> */}
       <GhostMatchUpCard size={'large'} />
-      {/* <GhostMatchUpCard size={'medium'} />
-      <GhostMatchUpCard size={'small'} /> */}
+      <GhostMatchUpCard size={'medium'} />
+      <GhostMatchUpCard size={'small'} />
     </>
   );
 };

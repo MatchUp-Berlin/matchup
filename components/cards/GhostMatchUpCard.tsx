@@ -12,6 +12,7 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
   const { shadows, colors } = useTheme();
   return (
     <section>
+      {/* CARD WRAPPER */}
       <div
         className={
           props.size === 'large' ? styles.cardWrapperLarge : styles.cardWrapper
@@ -21,6 +22,7 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
           backgroundColor: colors.background['80'],
         }}
       >
+        {/* IMAGE WRAPPER */}
         <div
           className={
             props.size === 'large'
@@ -28,7 +30,9 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
               : styles.imageWrapper
           }
         ></div>
-        <div className={styles.ghostTitle}></div>
+        {/* TITLE */}
+        {props.size === 'large' && <div className={styles.ghostTitle}></div>}
+        {/* INFO */}
         <div
           className={
             props.size === 'large'
@@ -36,6 +40,7 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
               : styles.infoWrapper
           }
         >
+          {/* text */}
           <div
             className={
               props.size === 'large'
@@ -43,12 +48,18 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
                 : styles.textWrapper
             }
           >
+            {props.size !== 'large' && (
+              <div className={styles.ghostText + ' ' + styles.textTitle}>
+                woooo
+              </div>
+            )}
             <div className={styles.ghostText + ' ' + styles.textOne}></div>
             <div className={styles.ghostText + ' ' + styles.textTwo}></div>
             {props.size !== 'small' && (
               <div className={styles.ghostText + ' ' + styles.textThree}></div>
             )}
           </div>
+          {/* pills */}
           {props.size !== 'small' && (
             <div
               className={
