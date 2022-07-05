@@ -17,8 +17,6 @@ export async function initializeMap(address: TAddress, addressSelected: boolean)
     zoom: 12.5,
   });
 
-  console.log('SELECTED', addressSelected)
-
   if (addressSelected) {
     const pin = getPin();
     map.on('load', function () {
