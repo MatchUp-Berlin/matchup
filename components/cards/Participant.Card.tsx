@@ -27,13 +27,18 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
     getSignUpByUserIdMatchUpId(id, signup?.matchUpId)
   );
 
-  console.log('data', data);
-
   const toggleAttended = async () => {
-    if (attendanceConfirmable) {
-      await toggleAttendance(signup?.id || '');
-      setAttendanceToggled((prev) => !prev);
-    }
+    setAttendanceToggled((prev) => !prev);
+
+    const signupData = await getSignUpByUserIdMatchUpId(id, signup?.matchUpId);
+    if (attendanceConfirmable) toggleAttendance(signupData?.id);
+    // if (attendanceConfirmable) {
+    //   console.log('TGL ATD', data);
+    //   await toggleAttendance(data?.id || '').then((res) =>
+    //     console.log(res, 'TGL ATD RETURN')
+    //   );
+    //   setAttendanceToggled((prev) => !prev);
+    // }
   };
 
   return !attendanceConfirmable ? (
@@ -70,9 +75,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
       style={{
         backgroundColor: colors.background[80],
         boxShadow: shadows.medium,
-        border: data?.items[0].attended
-          ? `3px solid ${colors.primary[100]}`
-          : 'None',
+        border: data?.attended ? `3px solid ${colors.primary[100]}` : 'None',
       }}
     >
       <div className={styles.info}>
@@ -82,7 +85,7 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
         >{`${givenName} ${familyName}`}</p>
         {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
         <p style={{ color: colors.text[60] }}>
-          {data?.items[0].attended ? 'Attendance confirmed' : 'Signed up'}
+          {data?.attended ? 'Attendance confirmed' : 'Signed up'}
         </p>
       </div>
 

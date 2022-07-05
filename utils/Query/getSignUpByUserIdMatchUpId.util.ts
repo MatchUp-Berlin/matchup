@@ -11,14 +11,15 @@ export async function getSignUpByUserIdMatchUpId(
       query: listSignUps,
       variables: {
         filter: {
-          and: { userId: { eq: userId } },
-          matchUpId: { eq: matchUpId },
+          and: { userId: { eq: userId }, matchUpId: { eq: matchUpId } },
         },
         // authMode: 'AMAZON_COGNITO_USER_POOLS'
       },
     });
 
-    return signUpData.data.listSignUps;
+    return signUpData.data.listSignUps.items[0];
+
+    // return signUpData.data.listSignUps.items[0];
   } catch (error) {
     throw error;
   }
