@@ -57,6 +57,7 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+sw.js.map
 public/sw.js
 public/sw.js.map
 public/workbox-74d02f44.js
