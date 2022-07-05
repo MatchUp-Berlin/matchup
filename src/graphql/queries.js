@@ -49,6 +49,7 @@ export const getMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -123,6 +124,7 @@ export const listMatchUps = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -287,6 +289,7 @@ export const getSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -344,6 +347,7 @@ export const listSignUps = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image
@@ -414,6 +418,7 @@ export const getUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -471,6 +476,7 @@ export const listUpdates = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image
@@ -541,6 +547,7 @@ export const getWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -597,6 +604,7 @@ export const listWatchLists = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image
@@ -666,6 +674,7 @@ export const getOrganized = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -722,6 +731,7 @@ export const listOrganizeds = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image
@@ -779,6 +789,7 @@ export const byUserOrganized = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image
@@ -836,6 +847,7 @@ export const byMatchUpOrganized = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image

@@ -13,6 +13,7 @@ type MatchUp @model @auth(rules: [{ allow: public }]) {
   attendanceMin: Int
   attendanceMax: Int
   cancelled: Boolean
+  completed: Boolean @default(value: "false")
   indoor: Boolean
   description: String
   image: String
