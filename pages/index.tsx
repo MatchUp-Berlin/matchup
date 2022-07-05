@@ -33,6 +33,7 @@ import {
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import { arrow } from '../components/icons';
 import Empty from '../components/misc/Empty';
+import GhostMatchUpCard from '../components/cards/GhostMatchUpCard';
 
 const Home: NextPage = () => {
   const { colors } = useTheme();
@@ -148,8 +149,11 @@ const Home: NextPage = () => {
             <div id='map' className={styles.nodisplaymap}></div>
           </>
         ) : isLoading ? (
-          <div className={styles.loadingWrapper}>
-            <LoadingSpinner />
+          <div className={styles.cardsWrapper}>
+            {isLoading &&
+              [1, 1, 1, 1, 1, 7, 1, 6, 6, 6, 1, 1].map((item) => (
+                <GhostMatchUpCard size={'large'} />
+              ))}
           </div>
         ) : isSuccess && matchUps?.items?.length === 0 ? (
           <>
@@ -163,27 +167,32 @@ const Home: NextPage = () => {
                 <LoadingSpinner />
               </div>
             )}
-            {matchUps?.items.map((matchup: MatchUp) => (
-              <>
-                <MatchUpCard
-                  key={matchup.id}
-                  id={matchup.id as string}
-                  variant='large'
-                  date={matchup.date as string}
-                  indoor={matchup?.indoor as boolean}
-                  title={matchup.title as string}
-                  attendanceMax={matchup.attendanceMax as number}
-                  participating={matchup.signups?.items?.length || 0}
-                  location={matchup.location as string}
-                  sportCategory={matchup.sportCategory as TSportCategories}
-                  skillLevel={matchup.skillLevel as TSkillLevels}
-                  image={matchup.image as string}
-                  totalCost={matchup.totalCost as number}
-                  reservedCourt={matchup.reservedCourt as boolean}
-                ></MatchUpCard>
-                <div id='map' className={styles.nodisplaymap}></div>
-              </>
-            ))}
+            {isSuccess &&
+              matchUps?.items.map((matchup: MatchUp) => (
+                <>
+                  <MatchUpCard
+                    key={matchup.id}
+                    id={matchup.id as string}
+                    variant='large'
+                    date={matchup.date as string}
+                    indoor={matchup?.indoor as boolean}
+                    title={matchup.title as string}
+                    attendanceMax={matchup.attendanceMax as number}
+                    participating={matchup.signups?.items?.length || 0}
+                    location={matchup.location as string}
+                    sportCategory={matchup.sportCategory as TSportCategories}
+                    skillLevel={matchup.skillLevel as TSkillLevels}
+                    image={matchup.image as string}
+                    totalCost={matchup.totalCost as number}
+                    reservedCourt={matchup.reservedCourt as boolean}
+                  ></MatchUpCard>
+                  <div id='map' className={styles.nodisplaymap}></div>
+                </>
+              ))}
+            {/* {isLoading &&
+              [1, 1, 1, 1, 1, 7, 1, 6, 6, 6, 1, 1].map((item) => (
+                <GhostMatchUpCard size={'large'} />
+              ))} */}
           </div>
         )}
         <Navigation />
