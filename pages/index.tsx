@@ -21,16 +21,20 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import 'maplibre-gl-js-amplify/dist/public/amplify-map.css';
 
 // Utils
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
 import { initializeMapExplorer } from '../utils/Maps/initializeMapExplorer.util';
 import { MatchUp, TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import { arrow } from '../components/icons';
 import Empty from '../components/misc/Empty';
+import { createNewWatchList } from '../utils/Mutation/createWatchList.util';
+import { useAuth } from '../contexts/Auth';
+import { WatchList } from '../utils/types/WatchList.Type';
 
 const Home: NextPage = () => {
   const { colors } = useTheme();
+  const { currentUserId, currentUser } = useAuth();
 
   /* --------------- FILTER STATE */
   const [categories, setCategories] = useState<TSportCategories[]>([]);
@@ -58,6 +62,14 @@ const Home: NextPage = () => {
   } = useQuery(['matchUps', categories], () =>
     getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
   );
+
+  /* --------------- ADDING TO WATCHLIST */
+  const queryClient = useQueryClient();
+  const mutation = useMutation(['watchlist', currentUserId], createNewWatchList, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['user', currentUserId]);
+    },
+  });
 
   /* --------------- MAP */
   const [showMap, setShowMap] = useState<boolean>(false);
@@ -163,6 +175,9 @@ const Home: NextPage = () => {
                   image={matchup.image as string}
                   totalCost={matchup.totalCost as number}
                   reservedCourt={matchup.reservedCourt as boolean}
+                  addToWatchlist={mutation}
+                  currentUserId={currentUserId as string}
+                  watchList={currentUser?.watchList.items as WatchList[]}
                 ></MatchUpCard>
                 <div id="map" className={styles.nodisplaymap}></div>
               </>
