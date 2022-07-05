@@ -34,8 +34,12 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
   const [locationSelected, setLocationSelected] = useState<boolean>(false);
 
   useEffect(() => {
+    if (mapSearchInput.length > 0) {
+      initializeMap(props.address, true);
+    } else {
     initializeMap(props.address, false);
-  }, []);
+    }
+  }, [props.address]);
 
   function selectLocation(loc: TAddress) {
     setLocationResult([]);

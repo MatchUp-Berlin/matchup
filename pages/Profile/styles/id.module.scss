@@ -1,3 +1,16 @@
+.loadingWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageWrapper {
+  min-width: 100vw;
+  min-height: 100%;
+}
+
 .contentWrapper {
   padding: 1em;
   padding-bottom: 5em;
@@ -45,15 +58,6 @@
 
   p {
     width: 100%;
-  }
-
-  .loadingWrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5em;
   }
 
   .refetchWrapper {

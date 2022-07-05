@@ -14,6 +14,7 @@ export interface ISignInFormProps {
   setLoginEmail: Dispatch<SetStateAction<string>>;
   setLoginPassword: Dispatch<SetStateAction<string>>;
   error: string;
+  setError: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
 }
 
@@ -25,7 +26,10 @@ const SignInForm: React.FunctionComponent<ISignInFormProps> = (props) => {
         className={styles.input}
         type="email"
         value={props.inputState.loginEmail}
-        onChange={(e) => props.setLoginEmail(e.target.value as string)}
+        onChange={(e) => {
+          props.setLoginEmail(e.target.value as string);
+          props.setError('');
+        }}
         placeholder="Your email address"
         style={{ outlineColor: colors.primary[80] }}
       ></input>
@@ -33,7 +37,10 @@ const SignInForm: React.FunctionComponent<ISignInFormProps> = (props) => {
         className={styles.input}
         type="password"
         value={props.inputState.loginPassword}
-        onChange={(e) => props.setLoginPassword(e.target.value as string)}
+        onChange={(e) => {
+          props.setLoginPassword(e.target.value as string);
+          props.setError('');
+        }}
         placeholder="Password"
         style={{ outlineColor: colors.primary[80] }}
       ></input>
