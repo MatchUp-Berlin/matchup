@@ -81,6 +81,8 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             <ImageFallback
               src={props.image as string}
               fallbackSrc={getDefaultImage(props.sportCategory).src}
+              placeholder="blur"
+              blurDataURL={getDefaultImage(props.sportCategory, true).src}
               alt={props.title}
               layout="fill"
               objectFit="cover"
@@ -180,6 +182,8 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           <ImageFallback
             src={props.image as string}
             fallbackSrc={getDefaultImage(props.sportCategory).src}
+            placeholder="blur"
+              blurDataURL={getDefaultImage(props.sportCategory, true).src}
             alt={props.title}
             layout="fill"
             objectFit="cover"

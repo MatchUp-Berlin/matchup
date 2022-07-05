@@ -24,7 +24,7 @@ const SportCard: React.FunctionComponent<ISportCardProps> = (props) => {
       }}
     >
       <div className={styles.imageWrapper}>
-        <Image className={styles.cover} alt={props.subTitle} layout={'responsive'} src={props.image}></Image>
+        <Image priority={true} className={styles.cover} alt={props.subTitle} layout={'responsive'} src={props.image}></Image>
       </div>
       <div className={styles.text}>
         <p className="highlight-1" style={{ color: colors.text[100] }}>
