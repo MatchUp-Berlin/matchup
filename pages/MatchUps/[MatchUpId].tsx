@@ -24,6 +24,7 @@ import ConfirmJoinModal from '../../components/modals/ConfirmJoin.Modal';
 import { ReactNode, useEffect, useState } from 'react';
 import ParticipantsModal from '../../components/modals/Participants.Modal';
 import UpdatesModal from '../../components/modals/Updates.Modal';
+import ConfirmAttendanceModal from '../../components/modals/ConfirmAttendance.Modal';
 import { createNewWatchList } from '../../utils/Mutation/createWatchList.util';
 import { edit, share, watchList } from '../../components/icons';
 import { useAuth } from '../../contexts/Auth';
@@ -156,6 +157,8 @@ const MatchUpDetail: NextPage = () => {
     useState<boolean>(false);
   const [showUpdatesModal, setShowUpdatesModal] = useState<boolean>(false);
   const [showRateEventModal, setShowRateEventModal] = useState<boolean>(false);
+  const [showConfirmAttendanceModal, setShowConfirmAttendanceModal] =
+    useState<boolean>(false);
 
   console.log('MATCHUP', matchUp);
 
@@ -225,6 +228,24 @@ const MatchUpDetail: NextPage = () => {
             <RateMatchUpModal
               close={() => setShowRateEventModal(false)}
               matchUp={matchUp}
+            />
+          </>
+        )}
+
+        {showConfirmAttendanceModal && matchUp && (
+          <>
+            <div
+              className={styles.overlay}
+              style={{ backgroundColor: colors.overlay[60] }}
+            ></div>
+            <ConfirmAttendanceModal
+              isOrganizer={isOrganizer}
+              close={() => setShowConfirmAttendanceModal(false)}
+              participants={
+                matchUp.signups.items.map((signup) => {
+                  return { ...signup.user, signup: signup };
+                }) as User[]
+              }
             />
           </>
         )}
@@ -399,12 +420,19 @@ const MatchUpDetail: NextPage = () => {
                 text={isSignedUp ? 'Cancel' : 'Join'}
                 callback={() => setShowSignUpModal(true)}
               ></Button>
-            ) : (
+            ) : !isOrganizer ? (
               <Button
                 variant='primary'
                 text={isSignedUp ? 'Rate' : 'Finished'}
                 disabled={!isSignedUp}
                 callback={() => setShowRateEventModal(true)}
+              ></Button>
+            ) : (
+              <Button
+                variant='primary'
+                text={'Confirm Attendance'}
+                disabled={matchUp?.completed}
+                callback={() => setShowConfirmAttendanceModal(true)}
               ></Button>
             )
           }

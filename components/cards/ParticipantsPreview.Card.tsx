@@ -50,11 +50,6 @@ const ParticipantsPreviewCard: React.FunctionComponent<
         </div>
         <SmallButton callback={callback} highlight />
       </div>
-      {hasFinished && isOrganizer && (
-        <p style={{ color: colors.primary[100], marginTop: '5px' }}>
-          Open participants view to confirm attendance
-        </p>
-      )}
     </div>
   );
 };

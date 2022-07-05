@@ -12,14 +12,12 @@ import Link from 'next/link';
 
 export interface IParticipantCardProps {
   user: User;
-  hasFinished: boolean;
-  isOrganizer: boolean;
+  attendanceConfirmable?: boolean;
 }
 
 const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   user,
-  hasFinished,
-  isOrganizer,
+  attendanceConfirmable,
 }) => {
   const { profileImage, givenName, familyName, signup } = user;
   const { colors, shadows } = useTheme();
@@ -31,13 +29,14 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   );
 
   const toggleAttended = async () => {
-    if (hasFinished && isOrganizer) {
+    if (attendanceConfirmable) {
       await toggleAttendance(signup?.id || '');
       setAttendanceToggled((prev) => !prev);
     }
   };
 
-  return (
+  return !attendanceConfirmable ? (
+    // For Participants Modal
     <Link href={`/Profile/${user.id}`}>
       <div
         className={styles.participantCardWrapper}
@@ -58,15 +57,41 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
         </div>
 
         <div className={styles.avatar} onClick={() => toggleAttended()}>
-          <Avatar
-            attended={data?.attended || false}
-            highlightable={true}
-            size={'medium'}
-            image={profileImage || avatar}
-          />
+          <Avatar size={'medium'} image={profileImage || avatar} />
         </div>
       </div>
     </Link>
+  ) : (
+    // For Confirm Attendance Modal
+    <div
+      onClick={() => toggleAttended()}
+      className={styles.participantCardWrapper}
+      style={{
+        backgroundColor: colors.background[80],
+        boxShadow: shadows.medium,
+        border: data?.attended ? `3px solid ${colors.primary[100]}` : 'None',
+      }}
+    >
+      <div className={styles.info}>
+        <p
+          className='highlight-1'
+          style={{ color: colors.text[100] }}
+        >{`${givenName} ${familyName}`}</p>
+        {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
+        <p style={{ color: colors.text[60] }}>
+          {data?.attended ? 'Attendance confirmed' : 'Signed up'}
+        </p>
+      </div>
+
+      <div className={styles.avatar} onClick={() => toggleAttended()}>
+        <Avatar
+          attended={data?.attended || false}
+          highlightable={true}
+          size={'medium'}
+          image={profileImage || avatar}
+        />
+      </div>
+    </div>
   );
 };
 
