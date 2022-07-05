@@ -94,6 +94,8 @@ const Home: NextPage = () => {
       <Head>
         <title>MatchUp</title>
         <meta name="description" content="Find a local sport match that fits your skill level." />
+        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></meta>
       </Head>
       <div style={{ backgroundColor: colors.background[100] }} className={styles.page}>
         {/* ------FILTERING------ */}
