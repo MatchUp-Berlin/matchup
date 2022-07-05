@@ -157,6 +157,8 @@ const MatchUpDetail: NextPage = () => {
   const [showUpdatesModal, setShowUpdatesModal] = useState<boolean>(false);
   const [showRateEventModal, setShowRateEventModal] = useState<boolean>(false);
 
+  console.log('MATCHUP', matchUp);
+
   return (
     <>
       <div
