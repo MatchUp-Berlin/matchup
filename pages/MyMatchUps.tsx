@@ -21,7 +21,7 @@ const YourMatchUpsPage: NextPage = () => {
 
   const organizedQuery = useQuery(
     ['organized', currentUserId],
-    () => getOrganizerMatchUps(currentUserId as string, 3),
+    () => getOrganizerMatchUps(currentUserId as string),
     { enabled: !!currentUserId }
   );
 
@@ -71,20 +71,20 @@ const YourMatchUpsPage: NextPage = () => {
                   <div className={styles.cardsWrapper}>
                     {organizedQuery.data.items.map((signup) => (
                       <MatchUpCard
-                        key={signup?.id}
-                        id={signup.id}
+                        key={signup?.matchUp?.id}
+                        id={signup?.matchUp?.id as string}
                         variant="medium"
-                        timestamp={signup?.date as string}
-                        title={signup?.title as string}
-                        slots={signup?.attendanceMax as number}
-                        participating={/* signu.users.length */ 3} // FIX THIS ONE
-                        location={signup?.location as string}
-                        sport={signup?.sportCategory as TSportCategories}
-                        skill={signup?.skillLevel as TSkillLevels}
-                        imageUrl={signup?.image as string}
-                        paid={(signup?.totalCost > 0) as boolean}
-                        price={signup?.totalCost as number}
-                        rented={signup?.reservedCourt as boolean}
+                        date={signup?.matchUp?.date as string}
+                        indoor={signup.matchUp?.indoor as boolean}
+                        title={signup?.matchUp?.title as string}
+                        attendanceMax={signup?.matchUp?.attendanceMax as number}
+                        participating={signup?.matchUp?.signups?.items?.length || 0}
+                        location={signup?.matchUp?.location as string}
+                        sportCategory={signup?.matchUp?.sportCategory as TSportCategories}
+                        skillLevel={signup?.matchUp?.skillLevel as TSkillLevels}
+                        image={signup?.matchUp?.image as string}
+                        totalCost={signup?.matchUp?.totalCost as number}
+                        reservedCourt={signup?.matchUp?.reservedCourt as boolean}
                       ></MatchUpCard>
                     ))}
                   </div>
@@ -99,26 +99,24 @@ const YourMatchUpsPage: NextPage = () => {
               <Empty text="You haven't participated in a MatchUp yet." />
             ) : (
               <div className={styles.cardsWrapper}>
-                {currentUser &&
-                  currentUser.signups.items.length != 0 &&
-                  currentUser.signups.items.map((signup) => (
-                    <MatchUpCard
-                      key={signup?.matchUp?.id}
-                      id={signup?.matchUp?.id as string}
-                      variant="medium"
-                      timestamp={signup?.matchUp?.date as string}
-                      title={signup?.matchUp?.title as string}
-                      slots={signup?.matchUp?.attendanceMax as number}
-                      participating={signup?.matchUp?.signups?.items?.length || 0} // FIX THIS ONE
-                      location={signup?.matchUp?.location as string}
-                      sport={signup?.matchUp?.sportCategory as TSportCategories}
-                      skill={signup?.matchUp?.skillLevel as TSkillLevels}
-                      imageUrl={signup?.matchUp?.image as string}
-                      paid={(signup?.matchUp?.totalCost > 0) as boolean}
-                      price={signup?.matchUp?.totalCost as number}
-                      rented={signup?.matchUp?.reservedCourt as boolean}
-                    ></MatchUpCard>
-                  ))}
+                {currentUser?.signups.items.map((signup) => (
+                  <MatchUpCard
+                    key={signup?.matchUp?.id}
+                    id={signup?.matchUp?.id as string}
+                    variant="medium"
+                    date={signup?.matchUp?.date as string}
+                    indoor={signup.matchUp?.indoor as boolean}
+                    title={signup?.matchUp?.title as string}
+                    attendanceMax={signup?.matchUp?.attendanceMax as number}
+                    participating={signup?.matchUp?.signups?.items?.length || 0}
+                    location={signup?.matchUp?.location as string}
+                    sportCategory={signup?.matchUp?.sportCategory as TSportCategories}
+                    skillLevel={signup?.matchUp?.skillLevel as TSkillLevels}
+                    image={signup?.matchUp?.image as string}
+                    totalCost={signup?.matchUp?.totalCost as number}
+                    reservedCourt={signup?.matchUp?.reservedCourt as boolean}
+                  ></MatchUpCard>
+                ))}
               </div>
             )}
           </>

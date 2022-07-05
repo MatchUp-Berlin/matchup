@@ -11,7 +11,7 @@ const ThemeButton: React.FunctionComponent<IThemeButtonProps> = (props) => {
       <button
         className={styles.themeButton}
         style={{
-          boxShadow: shadows.large,
+          boxShadow: shadows.small,
           backgroundColor: colors.background['60'],
         }}
         onClick={toggleDarkMode}
