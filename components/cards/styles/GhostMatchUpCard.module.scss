@@ -8,6 +8,7 @@
   border-radius: 10px;
   width: 100%;
   max-width: 500px;
+  border: 1px solid red;
 }
 .imageWrapperLarge {
   height: 330px;
@@ -17,6 +18,18 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   flex: 2;
+  border: 1px solid red;
+}
+
+.infoWrapperLarge {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+}
+.textWrapperLarge {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
 }
 
 //MEDIUM AND SMALL
@@ -25,10 +38,21 @@
   display: flex;
   flex-direction: row;
   height: 100%;
+  border: 1px solid red;
 }
 
 //BOTH CATEGORIES
 
-.imageWrapper .imageWrapperLarge .ghostText .ghostPill {
-  background-color: #fccfd4;
+.imageWrapper,
+.imageWrapperLarge,
+.ghostText,
+.ghostPill {
+  background-color: #fcdbdf;
+  border: 1px solid red;
+}
+
+.pillsWrapper {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
 }

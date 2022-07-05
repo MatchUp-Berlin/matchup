@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles/GhostMatchUpCard.module.scss';
+import { useTheme } from '../../contexts/Theme';
 
 export interface IGhostMatchUpCard {
   size: 'small' | 'medium' | 'large';
@@ -8,30 +9,46 @@ export interface IGhostMatchUpCard {
 const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
   props
 ) => {
+  const { shadows } = useTheme();
   return (
     <section>
       <div
         className={
-          props.size === 'small' ? styles.cardWrapper : styles.cardWrapperLarge
+          props.size === 'large' ? styles.cardWrapperLarge : styles.cardWrapper
         }
+        style={{ boxShadow: shadows.medium }}
       >
         <div
           className={
-            props.size === 'small'
-              ? styles.imageWrapper
-              : styles.imageWrapperLarge
+            props.size === 'large'
+              ? styles.imageWrapperLarge
+              : styles.imageWrapper
           }
-        ></div>
-        <div className={styles.infoWrapper}>
-          <div className={styles.textWrapper}>
-            <div className={styles.ghostText}></div>
-            <div className={styles.ghostText}></div>
+        >
+          image
+        </div>
+        <div
+          className={
+            props.size === 'large'
+              ? styles.infoWrapperLarge
+              : styles.infoWrapper
+          }
+        >
+          <div
+            className={
+              props.size === 'large'
+                ? styles.textWrapperLarge
+                : styles.textWrapper
+            }
+          >
+            <div className={styles.ghostText}>text</div>
+            <div className={styles.ghostText}>text</div>
             {props.size !== 'small' && <div className={styles.ghostInfo}></div>}
           </div>
           {props.size !== 'small' && (
             <div className={styles.pillsWrapper}>
-              <div className={styles.ghostPill}></div>
-              <div className={styles.ghostPill}></div>
+              <div className={styles.ghostPill}>pill</div>
+              <div className={styles.ghostPill}>pill</div>
             </div>
           )}
         </div>
