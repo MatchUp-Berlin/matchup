@@ -9,9 +9,8 @@ import getDefaultImage from '../../utils/getDefaultImage';
 import Link from 'next/link';
 import ImageFallback from '../misc/ImageFallback';
 import { clock, euro, location, watchListOnCard } from '../icons';
-import { createNewWatchList } from '../../utils/Mutation/createWatchList.util';
-import { useMutation, useQueryClient } from 'react-query';
-import { useAuth } from '../../contexts/Auth';
+import { UseMutationResult } from 'react-query';
+import { WatchList } from '../../utils/types/WatchList.Type';
 
 export interface IMatchUpCardProps {
   id: string;
@@ -27,97 +26,113 @@ export interface IMatchUpCardProps {
   date: string;
   indoor: boolean;
   participating: number;
+  addToWatchlist?: UseMutationResult<string | WatchList, unknown, WatchList, unknown>;
+  watchList?: WatchList[];
+  currentUserId?: string;
 }
 
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
-  const { currentUserId, currentUser } = useAuth();
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation(['watchlist', currentUserId], createNewWatchList, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['user', currentUserId]);
-    },
-  });
 
   const isFinished = new Date(props.date) < new Date();
-  const isInWatchlist = currentUser?.watchList.items.some((match) => match.matchUpId === props.id);
+  const isInWatchlist = props.watchList && props.watchList.some((match) => match.matchUpId === props.id);
   const remainingSlots = props.attendanceMax - props.participating;
 
   if (props.variant === 'large')
     return (
-      <Link href={`/MatchUps/${props.id}`}>
+      <div
+        className={styles.largeWrapper}
+        style={{
+          backgroundColor: colors.background[80],
+          boxShadow: shadows.small,
+          opacity: isFinished ? 0.5 : 1,
+        }}
+      >
         <div
-          className={styles.largeWrapper}
-          style={{
-            backgroundColor: colors.background[80],
-            boxShadow: shadows.small,
-            opacity: isFinished ? 0.5 : 1,
-          }}
+          className={styles.watchList}
+          onClick={() =>
+            props.currentUserId && props.addToWatchlist?.mutate({
+              userId: props.currentUserId as string,
+              matchUpId: props.id as string,
+            })
+          }
         >
-          <div
-            className={styles.watchList}
-            onClick={() =>
-              mutation.mutate({
-                userId: currentUserId as string,
-                matchUpId: props.id as string,
-              })
-            }
+          <svg
+            style={{ opacity: isInWatchlist ? 0.8 : 0.5 }}
+            width="14px"
+            height="21px"
+            viewBox={watchListOnCard.viewBox}
           >
-            <svg
-              style={{ opacity: isInWatchlist ? 1 : 0.5 }}
-              width="14px"
-              height="21px"
-              viewBox={watchListOnCard.viewBox}
-            >
-              {isInWatchlist ? watchListOnCard.path.active : watchListOnCard.path.inActive}
-            </svg>
-          </div>
-          <div className={styles.imageWrapper}>
-            <ImageFallback
-              src={props.image as string}
-              fallbackSrc={getDefaultImage(props.sportCategory).src}
-              placeholder="blur"
-              blurDataURL={getDefaultImage(props.sportCategory, true).src}
-              alt={props.title}
-              layout="fill"
-              objectFit="cover"
-            ></ImageFallback>
-          </div>
+            {isInWatchlist ? watchListOnCard.path.active : watchListOnCard.path.inActive}
+          </svg>
+        </div>
 
-          <div className={styles.infoWrapper}>
-            <div className={styles.info}>
-              <div className={styles.title} style={{ color: colors.text[100] }}>
-                <Image
-                  width={'20px'}
-                  height={'20px'}
-                  src={getSportIcon(props.sportCategory)}
-                  alt={props.sportCategory}
-                ></Image>
-                <p className="highlight-2">{props.title}</p>
+        <div className={styles.imageWrapper}>
+          <ImageFallback
+            src={props.image as string}
+            fallbackSrc={getDefaultImage(props.sportCategory).src}
+            placeholder="blur"
+            blurDataURL={getDefaultImage(props.sportCategory, true).src}
+            alt={props.title}
+            layout="fill"
+            objectFit="cover"
+          ></ImageFallback>
+        </div>
+
+        <div className={styles.infoWrapper}>
+          <div className={styles.info}>
+            <div className={styles.title} style={{ color: colors.text[100] }}>
+              <Image
+                width={'20px'}
+                height={'20px'}
+                src={getSportIcon(props.sportCategory)}
+                alt={props.sportCategory}
+              ></Image>
+              <p className="highlight-2">{props.title}</p>
+            </div>
+            <div className={styles.details}>
+              <div className={styles.detail}>
+                <svg width={13} height={13} fill={colors.text[60]} viewBox={clock.viewBox}>
+                  {clock.path}
+                </svg>
+                <p style={{ color: colors.text[60] }}>{moment(props.date).format('dddd MMM Do  hh:mma ')}</p>
               </div>
-              <div className={styles.details}>
-                <div className={styles.detail}>
-                <svg width={10} height={10} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
-                  <p style={{ color: colors.text[60] }}>
-                    {moment(props.date).format('dddd MMM Do  hh:mma ')}
-                  </p>
-                </div>
-                <div className={styles.detail}>
-                <svg width={10} height={10} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
-                  <p style={{ color: colors.text[60] }}>{props.location}</p>
-                </div>
+              <div className={styles.detail}>
+                <svg width={13} height={13} fill={colors.text[60]} viewBox={location.viewBox}>
+                  {location.path}
+                </svg>
+                <p style={{ color: colors.text[60] }}>{props.location}</p>
+              </div>
 
-                <div className={styles.detail}>
-                  <svg width={10} height={10} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
-                  <p style={{ color: colors.text[60] }}>
-                    {props.totalCost > 0 ? props.totalCost + '.00' : 'Free'}
-                  </p>
-                </div>
+              <div className={styles.detail}>
+                <svg width={13} height={13} fill={colors.text[60]} viewBox={euro.viewBox}>
+                  {euro.path}
+                </svg>
+                <p style={{ color: colors.text[60] }}>
+                  {props.totalCost > 0 ? props.totalCost + '.00' : 'Free'}
+                </p>
               </div>
             </div>
+          </div>
 
-            <div className={styles.pills}>
+          <div className={styles.pills}>
+            <div
+              className={styles.pill}
+              style={{
+                backgroundColor: colors.background[100],
+                boxShadow: shadows.small,
+              }}
+            >
+              <p
+                style={{
+                  color: colors.text[100],
+                  fontSize: props.variant === 'large' ? 'x-small' : 'xx-small',
+                }}
+              >
+                {props.skillLevel}
+              </p>
+            </div>
+            {props.reservedCourt && (
               <div
                 className={styles.pill}
                 style={{
@@ -125,43 +140,25 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   boxShadow: shadows.small,
                 }}
               >
-                <p
-                  style={{
-                    color: colors.text[100],
-                    fontSize: props.variant === 'large' ? 'x-small' : 'xx-small',
-                  }}
-                >
-                  {props.skillLevel}
+                <p style={{ color: colors.text[100] }}>Rented</p>
+              </div>
+            )}
+            {remainingSlots && (
+              <div
+                className={styles.pill}
+                style={{
+                  backgroundColor: colors.background[100],
+                  boxShadow: shadows.small,
+                }}
+              >
+                <p style={{ color: colors.primary[100] }}>
+                  {remainingSlots} Spot{remainingSlots > 1 ? 's' : ''} left
                 </p>
               </div>
-              {props.reservedCourt && (
-                <div
-                  className={styles.pill}
-                  style={{
-                    backgroundColor: colors.background[100],
-                    boxShadow: shadows.small,
-                  }}
-                >
-                  <p style={{ color: colors.text[100] }}>Rented</p>
-                </div>
-              )}
-              {remainingSlots && (
-                <div
-                  className={styles.pill}
-                  style={{
-                    backgroundColor: colors.background[100],
-                    boxShadow: shadows.small,
-                  }}
-                >
-                  <p style={{ color: colors.primary[100] }}>
-                    {remainingSlots} Spot{remainingSlots > 1 ? 's' : ''} left
-                  </p>
-                </div>
-              )}
-            </div>
+            )}
           </div>
         </div>
-      </Link>
+      </div>
     );
   return (
     <Link href={`/MatchUps/${props.id}`}>
@@ -202,17 +199,23 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             </div>
             <div className={styles.details}>
               <div className={styles.detail}>
-                <svg width={10} height={10} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
+                <svg width={13} height={13} fill={colors.text[60]} viewBox={clock.viewBox}>
+                  {clock.path}
+                </svg>
                 <p style={{ color: colors.text[60] }}>{moment(props.date).format('dddd MMM Do  hh:mma ')}</p>
               </div>
               <div className={styles.detail}>
-              <svg width={10} height={10} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
+                <svg width={13} height={13} fill={colors.text[60]} viewBox={location.viewBox}>
+                  {location.path}
+                </svg>
                 <p style={{ color: colors.text[60] }}>{props.location}</p>
               </div>
 
               {props.variant == 'medium' && (
                 <div className={styles.detail}>
-                  <svg width={10} height={10} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
+                  <svg width={13} height={13} fill={colors.text[60]} viewBox={euro.viewBox}>
+                    {euro.path}
+                  </svg>
                   <p style={{ color: colors.text[60] }}>
                     {props.totalCost > 0 ? props.totalCost + '.00' : 'Free'}
                   </p>
