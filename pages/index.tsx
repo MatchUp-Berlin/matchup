@@ -1,6 +1,6 @@
 // React and Next
 import type { NextPage } from 'next';
-import Head from 'next/head'
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 // Components
@@ -24,7 +24,12 @@ import { useQuery } from 'react-query';
 import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
 import { cityLatLong, TAddress } from '../utils/types/Address.Type';
 import { initializeMapExplorer } from '../utils/Maps/initializeMapExplorer.util';
-import { MatchUp, TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
+import {
+  MatchUp,
+  TCity,
+  TSkillLevels,
+  TSportCategories,
+} from '../utils/types/MatchUp.Type';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
 import { arrow } from '../components/icons';
 import Empty from '../components/misc/Empty';
@@ -56,7 +61,9 @@ const Home: NextPage = () => {
     isSuccess,
     refetch,
     data: matchUps,
-  } = useQuery(['matchUps', categories], () => getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to));
+  } = useQuery(['matchUps', categories], () =>
+    getMatchUpsByFilter(city, categories, timeFrame.from, timeFrame.to)
+  );
 
   /* --------------- MAP */
   const [showMap, setShowMap] = useState<boolean>(false);
@@ -90,13 +97,13 @@ const Home: NextPage = () => {
 
   return (
     <>
-<<<<<<< HEAD
-=======
-    <Head>
-      <title>MatchUp</title>
-      <meta name="description" content="Find a local sport match that fits your skill level." />
-    </Head>
->>>>>>> main
+      <Head>
+        <title>MatchUp</title>
+        <meta
+          name='description'
+          content='Find a local sport match that fits your skill level.'
+        />
+      </Head>
       <div
         style={{ backgroundColor: colors.background[100] }}
         className={styles.page}
@@ -160,22 +167,8 @@ const Home: NextPage = () => {
               <>
                 <MatchUpCard
                   key={matchup.id}
-<<<<<<< HEAD
-                  variant='large'
-                  timestamp={matchup.date}
-                  title={matchup.title}
-                  slots={matchup.attendanceMax}
-                  participating={matchup.signups.items?.length || 0}
-                  location={matchup.location}
-                  sport={matchup.sportCategory}
-                  skill={matchup.skillLevel}
-                  imageUrl={matchup.image}
-                  paid={matchup.totalCost > 0}
-                  price={matchup.totalCost}
-                  rented={matchup.reservedCourt}
-=======
                   id={matchup.id as string}
-                  variant="large"
+                  variant='large'
                   date={matchup.date as string}
                   indoor={matchup?.indoor as boolean}
                   title={matchup.title as string}
@@ -187,7 +180,6 @@ const Home: NextPage = () => {
                   image={matchup.image as string}
                   totalCost={matchup.totalCost as number}
                   reservedCourt={matchup.reservedCourt as boolean}
->>>>>>> main
                 ></MatchUpCard>
                 <div id='map' className={styles.nodisplaymap}></div>
               </>
