@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Navigation from '../../components/misc/Navigation';
 import { useTheme } from '../../contexts/Theme';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import styles from './styles/id.module.scss';
 import { Avatar, Button, Divider } from '../../components/misc';
 import moment from 'moment';
@@ -18,11 +18,13 @@ import Empty from '../../components/misc/Empty';
 import { getUserById } from '../../utils/Query/getUserById.util';
 import { TSportCategories, TSkillLevels } from '../../utils/types/MatchUp.Type';
 import LoadingSpinner from '../../components/misc/LoadingSpinner';
+import { Storage } from 'aws-amplify';
 
 const ProfileDetailPage: NextPage = () => {
   const { colors } = useTheme();
   const router = useRouter();
   const { id } = router.query;
+  const queryClient = useQueryClient();
 
   // getting current user info
   const { currentUserId, currentUser, logout } = useAuth();
@@ -32,6 +34,20 @@ const ProfileDetailPage: NextPage = () => {
   const userQuery = useQuery(['user', id], () => getUserById(id as string), {
     enabled: !isCurrentUser,
   });
+
+  function uploadProfileImage() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.setAttribute('multiple', false);
+    input.setAttribute('accept', 'image/*');
+    input.onchange = function (event) {
+      currentUserId &&
+        Storage.put(currentUserId, event.target.files[0], { level: 'public', contentType: 'image/*' })
+          .then(() => queryClient.invalidateQueries(['user', currentUserId]))
+          .catch((err) => console.log(err));
+    };
+    input.click();
+  }
 
   // getting organized matchups count
   const { data: organizedCountData, isRefetching: organizedCountIsRefetching } = useQuery(
@@ -72,8 +88,8 @@ const ProfileDetailPage: NextPage = () => {
       <>
         <div className={styles.pageWrapper} style={{ backgroundColor: colors.background['100'] }}>
           <section className={styles.contentWrapper}>
-            <div className={styles.avatarWrapper}>
-              <Avatar size={'large'} image={avatarDefault} />
+            <div className={styles.avatarWrapper} onClick={uploadProfileImage}>
+              <Avatar size={'large'} image={currentUser.profileImage} />
             </div>
             {/*//////// PROFILE MAIN INFO /////////*/}
             <div className={styles.profileMainInfo}>
@@ -242,7 +258,7 @@ const ProfileDetailPage: NextPage = () => {
       ) : userQuery.isSuccess && userQuery.data ? (
         <section className={styles.contentWrapper}>
           <div className={styles.avatarWrapper}>
-            <Avatar size={'large'} image={avatarDefault} />
+            <Avatar size={'large'} image={userQuery.data.profileImage} />
           </div>
           <div className={styles.profileMainInfo}>
             <h1 style={{ color: colors.text['100'] }}>

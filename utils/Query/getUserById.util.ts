@@ -12,6 +12,12 @@ export async function getUserById(id: string): Promise<User> {
     });
     const retrievedUserData = userData.data.getUser;
 
+    // Fill pictures for user
+    if (retrievedUserData) {
+      console.log(retrievedUserData)
+      retrievedUserData.profileImage = await Storage.get(id);
+    }
+
     // Fill pictures for signup items
     if (retrievedUserData && retrievedUserData.signups.items.length > 0) {
       await Promise.all(
