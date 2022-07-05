@@ -10,14 +10,16 @@ function getPin() {
   return pin;
 }
 
-export async function initializeMap(address: TAddress) {
+export async function initializeMap(address: TAddress, addressSelected: boolean) {
   const map = await createMap({
     container: 'map',
     center: address.geometry?.point as [number, number],
     zoom: 12.5,
   });
 
-  if (address.addressNumber !== undefined && address.street !== undefined) {
+  console.log('SELECTED', addressSelected)
+
+  if (addressSelected) {
     const pin = getPin();
     map.on('load', function () {
       drawPoints(

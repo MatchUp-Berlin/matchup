@@ -32,14 +32,14 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
   const [locationResult, setLocationResult] = useState<any[]>([]);
 
   useEffect(() => {
-    initializeMap(props.address);
-  }, [props.address]);
+    initializeMap(props.address, false);
+  }, []);
 
   function selectLocation(loc: TAddress) {
     setLocationResult([]);
     props.setAddress(loc);
     loc.municipality && props.setLocation(loc.municipality.toLowerCase() as TCity);
-    initializeMap(props.address);
+    initializeMap(props.address, true);
   }
 
   async function searchLocation(event: any) {
@@ -94,6 +94,7 @@ const PrimaryInfoForm: React.FunctionComponent<IPrimaryInfoFormProps> = (props) 
           Location
         </label>
         <input
+          // value={locationResult ? locationResult: event.target.value}
           onKeyUp={(e) => searchLocation(e)}
           placeholder="Where do you want to meet?"
           className={styles.input}
