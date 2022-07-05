@@ -120,7 +120,7 @@ const SignInPage: NextPage = () => {
           <HeaderButton
             stayLight
             viewBox="0 0 10 10"
-            callback={() => router.back()}
+            callback={() => router.push('/')}
             icon={
               <path
                 xmlns="http://www.w3.org/2000/svg"

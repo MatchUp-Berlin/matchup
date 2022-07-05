@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { getNextDayOfTheWeek } from '../../utils/getNextDayOfTheWeek';
@@ -100,10 +99,10 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         className={styles.input + ' ' + styles.date}
         onChange={handleTimeFrameChange}
       >
-        <option value='all'>All</option>
         <option value='this-week'>This week</option>
         <option value='this-weekend'>This Weekend</option>
         <option value='next-week'>Next Week</option>
+        <option value='all'>All</option>
       </select>
     </div>
   );
