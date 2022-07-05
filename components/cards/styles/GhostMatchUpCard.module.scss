@@ -55,6 +55,14 @@
   border-bottom-left-radius: 10px;
 }
 
+.infoWrapper {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0.5em 0em;
+}
+
 //BOTH CATEGORIES
 
 .ghostTitle {
