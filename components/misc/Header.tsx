@@ -38,9 +38,12 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
         <ImageFallback
           src={props.imageUrl}
           fallbackSrc={getDefaultImage(props.sportCategory as TSportCategories).src}
+          placeholder="blur"
+          blurDataURL={getDefaultImage(props.sportCategory as TSportCategories, true).src}
           alt={props.title}
           layout="fill"
           objectFit="cover"
+          priority={true}
         ></ImageFallback>
         <div className={styles.buttons}>
           <div className={styles.leftButton}>{props.leftButton}</div>

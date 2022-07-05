@@ -1,18 +1,18 @@
 {
-    "name": "MatchUp",
-    "short_name": "MatchUp",
-    "theme_color": "#252525",
-    "background_color": "#252525",
-    "display": "fullscreen",
-    "orientation": "portrait",
-    "scope": "/",
-    "start_url": "/",
-    "icons": [
-        {
-            "src": "/logopwa.png",
-            "sizes": "500x500",
-            "type": "image/png"
-          }
-    ],
-    "splash_pages": null
-  }
+  "name": "MatchUp",
+  "short_name": "MatchUp",
+  "theme_color": "#252525",
+  "background_color": "#252525",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/logopwa.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": null
+}

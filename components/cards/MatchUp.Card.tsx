@@ -3,36 +3,30 @@ import React from 'react';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/MatchUp.Card.module.scss';
 import moment from 'moment';
-
-import clock from '../../public/clock.svg';
-import pin from '../../public/pin.svg';
-import euro from '../../public/euro.svg';
 import { TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
 import getSportIcon from '../../utils/getSportIcon';
 import getDefaultImage from '../../utils/getDefaultImage';
 import Link from 'next/link';
 import ImageFallback from '../misc/ImageFallback';
-import { watchListOnCard } from '../icons';
+import { clock, euro, location, watchListOnCard } from '../icons';
 import { createNewWatchList } from '../../utils/Mutation/createWatchList.util';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAuth } from '../../contexts/Auth';
 
-//TODO: Adjust to actual types!!
-
 export interface IMatchUpCardProps {
   id: string;
   variant: 'small' | 'medium' | 'large';
-  timestamp: string;
   title: string;
-  slots?: number;
-  participating: number;
   location: string;
-  sport: TSportCategories;
-  skill?: TSkillLevels;
-  imageUrl?: string;
-  paid?: boolean;
-  price: number;
-  rented?: boolean;
+  sportCategory: TSportCategories;
+  skillLevel: TSkillLevels;
+  totalCost: number;
+  reservedCourt: boolean;
+  attendanceMax: number;
+  image: string;
+  date: string;
+  indoor: boolean;
+  participating: number;
 }
 
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
@@ -46,9 +40,9 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
     },
   });
 
-  const isFinished = new Date(props.timestamp) < new Date();
+  const isFinished = new Date(props.date) < new Date();
   const isInWatchlist = currentUser?.watchList.items.some((match) => match.matchUpId === props.id);
-  const remainingSlots = props.slots - props.participating;
+  const remainingSlots = props.attendanceMax - props.participating;
 
   if (props.variant === 'large')
     return (
@@ -64,7 +58,10 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           <div
             className={styles.watchList}
             onClick={() =>
-              mutation.mutate({ userId: currentUserId as string, matchUpId: props.id as string })
+              mutation.mutate({
+                userId: currentUserId as string,
+                matchUpId: props.id as string,
+              })
             }
           >
             <svg
@@ -78,8 +75,10 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           </div>
           <div className={styles.imageWrapper}>
             <ImageFallback
-              src={props.imageUrl as string}
-              fallbackSrc={getDefaultImage(props.sport).src}
+              src={props.image as string}
+              fallbackSrc={getDefaultImage(props.sportCategory).src}
+              placeholder="blur"
+              blurDataURL={getDefaultImage(props.sportCategory, true).src}
               alt={props.title}
               layout="fill"
               objectFit="cover"
@@ -92,26 +91,28 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                 <Image
                   width={'20px'}
                   height={'20px'}
-                  src={getSportIcon(props.sport)}
-                  alt={props.sport}
+                  src={getSportIcon(props.sportCategory)}
+                  alt={props.sportCategory}
                 ></Image>
                 <p className="highlight-2">{props.title}</p>
               </div>
               <div className={styles.details}>
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={clock} alt="taking place on"></Image>
+                <svg width={10} height={10} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
                   <p style={{ color: colors.text[60] }}>
-                    {moment(props.timestamp).format('dddd MMM Do  hh:mma ')}
+                    {moment(props.date).format('dddd MMM Do  hh:mma ')}
                   </p>
                 </div>
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={pin} alt="taking place at"></Image>
+                <svg width={10} height={10} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
                   <p style={{ color: colors.text[60] }}>{props.location}</p>
                 </div>
 
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={euro} alt="costs"></Image>
-                  <p style={{ color: colors.text[60] }}>{props.price > 0 ? props.price + '.00' : 'Free'}</p>
+                  <svg width={10} height={10} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
+                  <p style={{ color: colors.text[60] }}>
+                    {props.totalCost > 0 ? props.totalCost + '.00' : 'Free'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -130,10 +131,10 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                     fontSize: props.variant === 'large' ? 'x-small' : 'xx-small',
                   }}
                 >
-                  {props.skill}
+                  {props.skillLevel}
                 </p>
               </div>
-              {props.rented && (
+              {props.reservedCourt && (
                 <div
                   className={styles.pill}
                   style={{
@@ -144,7 +145,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   <p style={{ color: colors.text[100] }}>Rented</p>
                 </div>
               )}
-              {props.slots && remainingSlots && (
+              {remainingSlots && (
                 <div
                   className={styles.pill}
                   style={{
@@ -175,8 +176,10 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
       >
         <div className={styles.imageWrapper}>
           <ImageFallback
-            src={props.imageUrl as string}
-            fallbackSrc={getDefaultImage(props.sport).src}
+            src={props.image as string}
+            fallbackSrc={getDefaultImage(props.sportCategory).src}
+            placeholder="blur"
+            blurDataURL={getDefaultImage(props.sportCategory, true).src}
             alt={props.title}
             layout="fill"
             objectFit="cover"
@@ -189,25 +192,30 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             style={props.variant == 'small' ? { justifyContent: 'space-around', height: '100%' } : {}}
           >
             <div className={styles.title} style={{ color: colors.text[100] }}>
-              <Image width={'20px'} height={'20px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
+              <Image
+                width={'20px'}
+                height={'20px'}
+                src={getSportIcon(props.sportCategory)}
+                alt={props.sportCategory}
+              ></Image>
               <p className="highlight-2">{props.title}</p>
             </div>
             <div className={styles.details}>
               <div className={styles.detail}>
-                <Image width={'10px'} height={'10px'} src={clock} alt="taking place on"></Image>
-                <p style={{ color: colors.text[60] }}>
-                  {moment(props.timestamp).format('dddd MMM Do  hh:mma ')}
-                </p>
+                <svg width={10} height={10} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
+                <p style={{ color: colors.text[60] }}>{moment(props.date).format('dddd MMM Do  hh:mma ')}</p>
               </div>
               <div className={styles.detail}>
-                <Image width={'10px'} height={'10px'} src={pin} alt="taking place at"></Image>
+              <svg width={10} height={10} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
                 <p style={{ color: colors.text[60] }}>{props.location}</p>
               </div>
 
               {props.variant == 'medium' && (
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={euro} alt="costs"></Image>
-                  <p style={{ color: colors.text[60] }}>{props.price > 0 ? props.price + '.00' : 'Free'}</p>
+                  <svg width={10} height={10} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
+                  <p style={{ color: colors.text[60] }}>
+                    {props.totalCost > 0 ? props.totalCost + '.00' : 'Free'}
+                  </p>
                 </div>
               )}
             </div>
@@ -222,9 +230,9 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   boxShadow: shadows.small,
                 }}
               >
-                <p style={{ color: colors.text[100] }}>{props.skill}</p>
+                <p style={{ color: colors.text[100] }}>{props.skillLevel}</p>
               </div>
-              {props.rented && (
+              {props.reservedCourt && (
                 <div
                   className={styles.pill}
                   style={{
@@ -235,7 +243,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   <p style={{ color: colors.text[100] }}>Rented</p>
                 </div>
               )}
-              {props.variant == 'medium' && props.slots && props.slots - props.participating && (
+              {props.variant == 'medium' && remainingSlots && (
                 <div
                   className={styles.pill}
                   style={{
@@ -243,7 +251,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                     boxShadow: shadows.small,
                   }}
                 >
-                  <p style={{ color: colors.primary[100] }}>{props.slots - props.participating} Spots left</p>
+                  <p style={{ color: colors.primary[100] }}>{remainingSlots} Spots left</p>
                 </div>
               )}
             </div>

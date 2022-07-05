@@ -67,7 +67,7 @@ const OrganizePage: NextPage = () => {
   /* ------------SUBMISSION */
   const mutation = useMutation(createNewMatchUp, {
     onSuccess: (data) => {
-      Storage.put(data.id, image, { level: 'public' });
+      Storage.put(data.id, image, { level: 'public', contentType: "image/*"});
       router.push('/');
     },
     onError: () => {
@@ -86,7 +86,7 @@ const OrganizePage: NextPage = () => {
               <HeaderButton callback={() => Router.back()} viewBox={close.viewBox} icon={close.path} />
             }
           ></Header>
-          
+
           <div className={styles.sportCategoriesList}>
             <SportCard
               title="Football (Soccer)"

@@ -13,8 +13,6 @@ export async function getUserMatchUpsSignedUp(
       variables: { filter: { userId: { eq: userId } } },
     });
 
-    console.log(signUps);
-
     const userMatchUps = await Promise.all(
       signUps.data.listSignUps.items.map(async (signUp: SignUp) => {
         try {

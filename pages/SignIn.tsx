@@ -48,7 +48,6 @@ const SignInPage: NextPage = () => {
     setLoginLoading(true);
     try {
       const user = await authUtils?.login(loginEmail, loginPassword);
-      console.log('handleLogin', user);
       setLoginLoading(false);
       user && router.push('/');
     } catch (err) {
@@ -215,13 +214,13 @@ const SignInPage: NextPage = () => {
         {/* BACKGROUND STYLING */}
         <div className={styles.background}>
           <div className={styles.bgBubbleOne}>
-            <Image layout="fixed" width="500px" height="500px" src={bubble} alt="background"></Image>
+            <Image priority layout="fixed" width="500px" height="500px" src={bubble} alt="background"></Image>
           </div>
           <div className={styles.bgBubbleTwo}>
-            <Image layout="fixed" width="500px" height="500px" src={bubble} alt="background"></Image>
+            <Image priority layout="fixed" width="500px" height="500px" src={bubble} alt="background"></Image>
           </div>
           <div className={styles.bgBubbleThree}>
-            <Image layout="fixed" width="500px" height="500px" src={bubble} alt="background"></Image>
+            <Image priority layout="fixed" width="500px" height="500px" src={bubble} alt="background"></Image>
           </div>
         </div>
       </div>

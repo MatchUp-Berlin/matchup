@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTheme } from '../../contexts/Theme';
 import ImageFallback from './ImageFallback';
-import getDefaultImage from '../../utils/getDefaultImage';
 import defaultAvatar from '../../public/default-avatar.png';
 
 export interface IAvatarProps {
@@ -20,7 +19,7 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({ size, image }) => {
     avatarSize = '75px';
   }
   if (size === 'large') {
-    avatarSize = '150px';
+    avatarSize = '200px';
   }
 
   return (
@@ -40,6 +39,7 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({ size, image }) => {
         objectFit='cover'
         width={avatarSize}
         height={avatarSize}
+        priority={true}
         alt='personally I would have replaced missing images with some Max-s mothers picture, but you now...pc people and stuff'
       />
     </div>

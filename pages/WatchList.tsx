@@ -34,17 +34,17 @@ const WatchListPage: NextPage = () => {
                   key={watchlist?.matchUp?.id}
                   id={watchlist?.matchUp?.id as string}
                   variant="medium"
-                  timestamp={watchlist?.matchUp?.date as string}
+                  date={watchlist?.matchUp?.date as string}
+                  indoor={watchlist.matchUp?.indoor as boolean}
                   title={watchlist?.matchUp?.title as string}
-                  slots={watchlist?.matchUp?.attendanceMax as number}
-                  participating={watchlist?.matchUp?.signups?.items?.length || 0} // FIX THIS ONE
+                  attendanceMax={watchlist?.matchUp?.attendanceMax as number}
+                  participating={watchlist?.matchUp?.signups?.items?.length || 0}
                   location={watchlist?.matchUp?.location as string}
-                  sport={watchlist?.matchUp?.sportCategory as TSportCategories}
-                  skill={watchlist?.matchUp?.skillLevel as TSkillLevels}
-                  imageUrl={watchlist?.matchUp?.image as string}
-                  paid={(watchlist?.matchUp?.totalCost > 0) as boolean}
-                  price={watchlist?.matchUp?.totalCost as number}
-                  rented={watchlist?.matchUp?.reservedCourt as boolean}
+                  sportCategory={watchlist?.matchUp?.sportCategory as TSportCategories}
+                  skillLevel={watchlist?.matchUp?.skillLevel as TSkillLevels}
+                  image={watchlist?.matchUp?.image as string}
+                  totalCost={watchlist?.matchUp?.totalCost as number}
+                  reservedCourt={watchlist?.matchUp?.reservedCourt as boolean}
                 ></MatchUpCard>
               ))}
           </div>

@@ -4,11 +4,9 @@ import React from 'react';
 import { useTheme } from '../../contexts/Theme';
 import getSportIcon from '../../utils/getSportIcon';
 import styles from './styles/MainInfo.module.scss';
-import clock from '../../public/clock.svg';
-import pin from '../../public/pin.svg';
-import euro from '../../public/euro.svg';
 import { TCity, TSportCategories } from '../../utils/types/MatchUp.Type';
 import { TAddress } from '../../utils/types/Address.Type';
+import { clock, euro, location } from '../icons';
 
 export interface IMainInfoProps {
   title: string;
@@ -33,11 +31,11 @@ const MainInfo: React.FunctionComponent<IMainInfoProps> = (props) => {
       {/* DETAILS */}
       <div className={styles.details}>
         <div className={styles.detail}>
-          <Image width={'18em'} height="18em" src={clock} alt="taking place on"></Image>
+        <svg width={18} height={18} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
           <p style={{ color: colors.text[60] }}>{moment(props.timestamp).format('H:mm dddd')}</p>
         </div>
         <div className={styles.detail}>
-          <Image width={'18em'} height="18em" src={pin} alt="taking place at"></Image>
+        <svg width={18} height={18} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
           <p style={{ color: colors.text[60] }}>
             {props.address?.street && props.address?.street + ', '}
             {props.city}
@@ -46,7 +44,7 @@ const MainInfo: React.FunctionComponent<IMainInfoProps> = (props) => {
         </div>
 
         <div className={styles.detail}>
-          <Image width={'18em'} height="18em" src={euro} alt="costs"></Image>
+        <svg width={18} height={18} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
           <p style={{ color: colors.text[60] }}>{props.costs > 0 ? props.costs + '.00' : 'Free'}</p>
         </div>
       </div>
