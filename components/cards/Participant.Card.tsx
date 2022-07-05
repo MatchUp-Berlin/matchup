@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { User } from '../../utils/types/User.Type';
 import { Avatar } from '../misc';
 import { useTheme } from '../../contexts/Theme';
@@ -6,7 +6,7 @@ import styles from './styles/Participant.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
 import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
 import { getSignUpByUserIdMatchUpId } from '../../utils/Query/getSignUpByUserIdMatchUpId.util';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import Link from 'next/link';
 
 export interface IParticipantCardProps {
@@ -21,27 +21,16 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
   const { profileImage, givenName, familyName, signup, id } = user;
   const { colors, shadows } = useTheme();
 
-  const [attendanceToggled, setAttendanceToggled] = useState<boolean>(false);
-
-  // const { data } = useQuery(['signup', attendanceToggled], () =>
-  //   getSignUpByUserIdMatchUpId(id, signup?.matchUpId)
-  // );
-
   const queryClient = useQueryClient();
 
   const toggleAttended = async () => {
     const signupData = await getSignUpByUserIdMatchUpId(id, signup?.matchUpId);
-    console.log('signupData', signupData);
     if (attendanceConfirmable) {
-      await toggleAttendance(signupData?.id).then((res) =>
+      await toggleAttendance(signupData?.id || '').then((res) =>
         queryClient.invalidateQueries(['matchup', signupData.matchUpId])
       );
     }
-    const signupData2 = await getSignUpByUserIdMatchUpId(id, signup?.matchUpId);
-    console.log('signupData2', signupData2);
   };
-
-  console.log('signup', signup);
 
   return !attendanceConfirmable ? (
     // For Participants Modal
@@ -85,7 +74,6 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
           className='highlight-1'
           style={{ color: colors.text[100] }}
         >{`${givenName} ${familyName}`}</p>
-        {/* <p style={{ color: colors.text[80] }}>{`Participated in ${signups.length} MatchUps`}</p> */}
         <p style={{ color: colors.text[60] }}>
           {signup?.attended ? 'Attendance confirmed' : 'Signed up'}
         </p>

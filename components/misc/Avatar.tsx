@@ -7,8 +7,6 @@ import defaultAvatar from '../../public/default-avatar.png';
 export interface IAvatarProps {
   size: string;
   image: any;
-  attended?: boolean;
-  highlightable?: boolean;
 }
 
 const Avatar: React.FunctionComponent<IAvatarProps> = ({ size, image }) => {

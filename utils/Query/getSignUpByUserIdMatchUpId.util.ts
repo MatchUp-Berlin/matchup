@@ -18,8 +18,6 @@ export async function getSignUpByUserIdMatchUpId(
     });
 
     return signUpData.data.listSignUps.items[0];
-
-    // return signUpData.data.listSignUps.items[0];
   } catch (error) {
     throw error;
   }
