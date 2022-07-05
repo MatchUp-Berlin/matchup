@@ -26,7 +26,12 @@ export interface IMatchUpCardProps {
   date: string;
   indoor: boolean;
   participating: number;
-  addToWatchlist?: UseMutationResult<string | WatchList, unknown, WatchList, unknown>;
+  addToWatchlist?: UseMutationResult<
+    string | WatchList,
+    unknown,
+    WatchList,
+    unknown
+  >;
   watchList?: WatchList[];
   currentUserId?: string;
 }
@@ -35,7 +40,9 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
 
   const isFinished = new Date(props.date) < new Date();
-  const isInWatchlist = props.watchList && props.watchList.some((match) => match.matchUpId === props.id);
+  const isInWatchlist =
+    props.watchList &&
+    props.watchList.some((match) => match.matchUpId === props.id);
   const remainingSlots = props.attendanceMax - props.participating;
 
   if (props.variant === 'large')
@@ -61,11 +68,13 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           >
             <svg
               style={{ opacity: isInWatchlist ? 0.8 : 0.5 }}
-              width="14px"
-              height="21px"
+              width='14px'
+              height='21px'
               viewBox={watchListOnCard.viewBox}
             >
-              {isInWatchlist ? watchListOnCard.path.active : watchListOnCard.path.inActive}
+              {isInWatchlist
+                ? watchListOnCard.path.active
+                : watchListOnCard.path.inActive}
             </svg>
           </div>
 
@@ -73,11 +82,11 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             <ImageFallback
               src={props.image as string}
               fallbackSrc={getDefaultImage(props.sportCategory).src}
-              placeholder="blur"
+              placeholder='blur'
               blurDataURL={getDefaultImage(props.sportCategory, true).src}
               alt={props.title}
-              layout="fill"
-              objectFit="cover"
+              layout='fill'
+              objectFit='cover'
             ></ImageFallback>
           </div>
 
@@ -90,11 +99,16 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   src={getSportIcon(props.sportCategory)}
                   alt={props.sportCategory}
                 ></Image>
-                <p className="highlight-2">{props.title}</p>
+                <p className='highlight-2'>{props.title}</p>
               </div>
               <div className={styles.details}>
                 <div className={styles.detail}>
-                  <svg width={13} height={13} fill={colors.text[60]} viewBox={clock.viewBox}>
+                  <svg
+                    width={13}
+                    height={13}
+                    fill={colors.text[60]}
+                    viewBox={clock.viewBox}
+                  >
                     {clock.path}
                   </svg>
                   <p style={{ color: colors.text[60] }}>
@@ -102,14 +116,24 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   </p>
                 </div>
                 <div className={styles.detail}>
-                  <svg width={13} height={13} fill={colors.text[60]} viewBox={location.viewBox}>
+                  <svg
+                    width={13}
+                    height={13}
+                    fill={colors.text[60]}
+                    viewBox={location.viewBox}
+                  >
                     {location.path}
                   </svg>
                   <p style={{ color: colors.text[60] }}>{props.location}</p>
                 </div>
 
                 <div className={styles.detail}>
-                  <svg width={13} height={13} fill={colors.text[60]} viewBox={euro.viewBox}>
+                  <svg
+                    width={13}
+                    height={13}
+                    fill={colors.text[60]}
+                    viewBox={euro.viewBox}
+                  >
                     {euro.path}
                   </svg>
                   <p style={{ color: colors.text[60] }}>
@@ -130,7 +154,8 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                 <p
                   style={{
                     color: colors.text[100],
-                    fontSize: props.variant === 'large' ? 'x-small' : 'xx-small',
+                    fontSize:
+                      props.variant === 'large' ? 'x-small' : 'xx-small',
                   }}
                 >
                   {props.skillLevel}
@@ -180,7 +205,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
           <ImageFallback
             src={props.image as string}
             fallbackSrc={getDefaultImage(props.sportCategory).src}
-            placeholder="blur"
+            placeholder='blur'
             blurDataURL={getDefaultImage(props.sportCategory, true).src}
             alt={props.title}
             layout='fill'
@@ -208,13 +233,25 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             </div>
             <div className={styles.details}>
               <div className={styles.detail}>
-                <svg width={13} height={13} fill={colors.text[60]} viewBox={clock.viewBox}>
+                <svg
+                  width={13}
+                  height={13}
+                  fill={colors.text[60]}
+                  viewBox={clock.viewBox}
+                >
                   {clock.path}
                 </svg>
-                <p style={{ color: colors.text[60] }}>{moment(props.date).format('dddd MMM Do  hh:mma ')}</p>
+                <p style={{ color: colors.text[60] }}>
+                  {moment(props.date).format('dddd MMM Do  hh:mma ')}
+                </p>
               </div>
               <div className={styles.detail}>
-                <svg width={13} height={13} fill={colors.text[60]} viewBox={location.viewBox}>
+                <svg
+                  width={13}
+                  height={13}
+                  fill={colors.text[60]}
+                  viewBox={location.viewBox}
+                >
                   {location.path}
                 </svg>
                 <p style={{ color: colors.text[60] }}>{props.location}</p>
@@ -222,7 +259,12 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
 
               {props.variant == 'medium' && (
                 <div className={styles.detail}>
-                  <svg width={13} height={13} fill={colors.text[60]} viewBox={euro.viewBox}>
+                  <svg
+                    width={13}
+                    height={13}
+                    fill={colors.text[60]}
+                    viewBox={euro.viewBox}
+                  >
                     {euro.path}
                   </svg>
                   <p style={{ color: colors.text[60] }}>
@@ -264,7 +306,11 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   }}
                 >
                   <p style={{ color: colors.primary[100] }}>
-                    {remainingSlots} Spots left
+                    {isFinished
+                      ? 'Past Event'
+                      : remainingSlots !== 0
+                      ? `${remainingSlots} Spots left`
+                      : 'Fully Booked'}
                   </p>
                 </div>
               )}
