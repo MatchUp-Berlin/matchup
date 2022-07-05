@@ -49,6 +49,7 @@ export const onCreateMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -138,6 +139,7 @@ export const onUpdateMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -227,6 +229,7 @@ export const onDeleteMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -490,6 +493,7 @@ export const onCreateSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -567,6 +571,7 @@ export const onUpdateSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -644,6 +649,7 @@ export const onDeleteSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -721,6 +727,7 @@ export const onCreateUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -798,6 +805,7 @@ export const onUpdateUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -875,6 +883,7 @@ export const onDeleteUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -952,6 +961,7 @@ export const onCreateWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -1028,6 +1038,7 @@ export const onUpdateWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -1104,6 +1115,7 @@ export const onDeleteWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -1180,6 +1192,7 @@ export const onCreateOrganized = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -1256,6 +1269,7 @@ export const onUpdateOrganized = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -1332,6 +1346,7 @@ export const onDeleteOrganized = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image

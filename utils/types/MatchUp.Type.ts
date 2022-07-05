@@ -41,6 +41,7 @@ export interface MatchUp {
   attendanceMin: number;
   attendanceMax: number;
   cancelled: boolean;
+  completed: boolean;
   description: string;
   image: string;
   date: string;
@@ -57,6 +58,7 @@ export interface CreateMatchUpInput {
   organizerId: string;
   date: string;
   address?: Object;
+  completed?: boolean;
   skillLevel?: TSkillLevels;
   totalCost?: number;
   reservedCourt?: boolean;

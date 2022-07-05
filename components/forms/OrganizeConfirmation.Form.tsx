@@ -24,7 +24,7 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
   const { colors, darkMode } = useTheme();
 
   useEffect(() => {
-    initializeMap(props.address)
+    initializeMap(props.address, true)
   })
 
   return (

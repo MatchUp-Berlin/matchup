@@ -49,6 +49,7 @@ export const getMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -123,6 +124,7 @@ export const listMatchUps = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -287,6 +289,7 @@ export const getSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -344,6 +347,7 @@ export const listSignUps = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image
@@ -414,6 +418,7 @@ export const getUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -471,6 +476,7 @@ export const listUpdates = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
           indoor
           description
           image
@@ -541,6 +547,7 @@ export const getWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -597,6 +604,250 @@ export const listWatchLists = /* GraphQL */ `
           attendanceMin
           attendanceMax
           cancelled
+          completed
+          indoor
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getOrganized = /* GraphQL */ `
+  query GetOrganized($id: ID!) {
+    getOrganized(id: $id) {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+        }
+        location
+        address
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        completed
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listOrganizeds = /* GraphQL */ `
+  query ListOrganizeds(
+    $filter: ModelOrganizedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOrganizeds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          address
+          organizerId
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          completed
+          indoor
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const byUserOrganized = /* GraphQL */ `
+  query ByUserOrganized(
+    $userId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrganizedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byUserOrganized(
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          address
+          organizerId
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          completed
+          indoor
+          description
+          image
+          date
+          currency
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const byMatchUpOrganized = /* GraphQL */ `
+  query ByMatchUpOrganized(
+    $matchUpId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrganizedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byMatchUpOrganized(
+      matchUpId: $matchUpId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        matchUpId
+        user {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        matchUp {
+          id
+          title
+          location
+          address
+          organizerId
+          sportCategory
+          skillLevel
+          totalCost
+          reservedCourt
+          attendanceMin
+          attendanceMax
+          cancelled
+          completed
           indoor
           description
           image

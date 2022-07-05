@@ -16,6 +16,8 @@ export interface User {
   updates: Update[];
   watchList: WatchListsReturn;
   organized: Organized[];
+  attended?: boolean;
+  signup?: SignUp;
 }
 
 export interface UsersReturn {
