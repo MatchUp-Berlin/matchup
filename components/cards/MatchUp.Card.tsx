@@ -3,19 +3,15 @@ import React from 'react';
 import { useTheme } from '../../contexts/Theme';
 import styles from './styles/MatchUp.Card.module.scss';
 import moment from 'moment';
-import clock from '../../public/clock.svg';
-import pin from '../../public/pin.svg';
-import euro from '../../public/euro.svg';
 import { TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
 import getSportIcon from '../../utils/getSportIcon';
 import getDefaultImage from '../../utils/getDefaultImage';
 import Link from 'next/link';
 import ImageFallback from '../misc/ImageFallback';
-import { watchListOnCard } from '../icons';
+import { clock, euro, location, watchListOnCard } from '../icons';
 import { createNewWatchList } from '../../utils/Mutation/createWatchList.util';
 import { useMutation, useQueryClient } from 'react-query';
 import { useAuth } from '../../contexts/Auth';
-
 
 export interface IMatchUpCardProps {
   id: string;
@@ -102,18 +98,18 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
               </div>
               <div className={styles.details}>
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={clock} alt="taking place on"></Image>
+                <svg width={10} height={10} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
                   <p style={{ color: colors.text[60] }}>
                     {moment(props.date).format('dddd MMM Do  hh:mma ')}
                   </p>
                 </div>
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={pin} alt="taking place at"></Image>
+                <svg width={10} height={10} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
                   <p style={{ color: colors.text[60] }}>{props.location}</p>
                 </div>
 
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={euro} alt="costs"></Image>
+                  <svg width={10} height={10} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
                   <p style={{ color: colors.text[60] }}>
                     {props.totalCost > 0 ? props.totalCost + '.00' : 'Free'}
                   </p>
@@ -183,7 +179,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             src={props.image as string}
             fallbackSrc={getDefaultImage(props.sportCategory).src}
             placeholder="blur"
-              blurDataURL={getDefaultImage(props.sportCategory, true).src}
+            blurDataURL={getDefaultImage(props.sportCategory, true).src}
             alt={props.title}
             layout="fill"
             objectFit="cover"
@@ -206,17 +202,17 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             </div>
             <div className={styles.details}>
               <div className={styles.detail}>
-                <Image width={'10px'} height={'10px'} src={clock} alt="taking place on"></Image>
+                <svg width={10} height={10} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
                 <p style={{ color: colors.text[60] }}>{moment(props.date).format('dddd MMM Do  hh:mma ')}</p>
               </div>
               <div className={styles.detail}>
-                <Image width={'10px'} height={'10px'} src={pin} alt="taking place at"></Image>
+              <svg width={10} height={10} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
                 <p style={{ color: colors.text[60] }}>{props.location}</p>
               </div>
 
               {props.variant == 'medium' && (
                 <div className={styles.detail}>
-                  <Image width={'10px'} height={'10px'} src={euro} alt="costs"></Image>
+                  <svg width={10} height={10} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
                   <p style={{ color: colors.text[60] }}>
                     {props.totalCost > 0 ? props.totalCost + '.00' : 'Free'}
                   </p>
