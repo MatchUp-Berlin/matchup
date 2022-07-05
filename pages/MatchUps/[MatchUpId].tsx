@@ -160,7 +160,7 @@ const MatchUpDetail: NextPage = () => {
   const [showConfirmAttendanceModal, setShowConfirmAttendanceModal] =
     useState<boolean>(false);
 
-  console.log('MATCHUP', matchUp);
+  console.log(matchUp);
 
   return (
     <>
@@ -430,7 +430,7 @@ const MatchUpDetail: NextPage = () => {
             ) : (
               <Button
                 variant='primary'
-                text={'Confirm Attendance'}
+                text={'Review'}
                 disabled={matchUp?.completed}
                 callback={() => setShowConfirmAttendanceModal(true)}
               ></Button>

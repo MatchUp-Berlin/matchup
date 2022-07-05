@@ -6,8 +6,7 @@ import styles from './styles/Participant.Card.module.scss';
 import avatar from '../../public/default-avatar.png';
 import { toggleAttendance } from '../../utils/Mutation/toggleAttendance.util';
 import { getSignUpById } from '../../utils/Query/getSignUpById.util';
-import { useQuery, useQueryClient } from 'react-query';
-import { SignUp } from '../../utils/types/SignUp.Type';
+import { useQuery } from 'react-query';
 import Link from 'next/link';
 
 export interface IParticipantCardProps {
@@ -24,9 +23,13 @@ const ParticipantCard: React.FunctionComponent<IParticipantCardProps> = ({
 
   const [attendanceToggled, setAttendanceToggled] = useState<boolean>(false);
 
-  const { isLoading, data } = useQuery(['signup', attendanceToggled], () =>
+  const { data } = useQuery(['signup', attendanceToggled], () =>
     getSignUpById(signup?.id || '')
   );
+
+  // getSignUpByUserId
+
+  console.log('data', data);
 
   const toggleAttended = async () => {
     if (attendanceConfirmable) {
