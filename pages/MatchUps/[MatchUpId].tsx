@@ -347,8 +347,7 @@ const MatchUpDetail: NextPage = () => {
                 {matchUp?.signups.items.length} / {matchUp?.attendanceMax} players joined
               </p>
               <p className="small" style={{ color: colors.text[100] }}>
-                {matchUp?.totalCost > 0 ? matchUp?.totalCost + '.00 ' + matchUp?.currency : 'Free'} + 5€
-                deposit{' '}
+                {matchUp?.totalCost > 0 ? matchUp?.totalCost + '.00€' : 'Free'} + 5€ deposit{' '}
                 {
                   <span>
                     <svg
@@ -366,7 +365,14 @@ const MatchUpDetail: NextPage = () => {
             </div>
           }
           rightButton={
-            !hasFinished ? (
+            matchUp && matchUp?.attendanceMax - matchUp?.signups.items.length == 0 && !hasFinished ? (
+              <Button
+                variant="secondary"
+                text={'FULL'}
+                disabled={matchUp?.completed}
+                callback={() => setShowConfirmAttendanceModal(true)}
+              ></Button>
+            ) : !hasFinished ? (
               <Button
                 variant="primary"
                 text={isSignedUp ? 'Cancel' : 'Join'}

@@ -1,7 +1,7 @@
 /* REACT, NEXT */
 import type { NextPage } from 'next';
 import Router, { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /* COMPONENTS */
 import Header from '../components/misc/Header';
@@ -67,13 +67,18 @@ const OrganizePage: NextPage = () => {
   /* ------------SUBMISSION */
   const mutation = useMutation(createNewMatchUp, {
     onSuccess: (data) => {
-      Storage.put(data.id, image, { level: 'public', contentType: "image/*"});
+      Storage.put(data.id, image, { level: 'public', contentType: 'image/*' });
       router.push('/');
     },
     onError: () => {
       console.log('failed to submit');
     },
   });
+
+  /* ------------REDIRECTING */
+  useEffect(() => {
+    if (!currentUserId) router.push('/SignIn');
+  }, [currentUserId]);
 
   return (
     <div className={styles.wrapper} style={{ backgroundColor: colors.background[100] }}>
