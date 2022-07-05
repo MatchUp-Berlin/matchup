@@ -1,8 +1,6 @@
 import { API, Storage } from 'aws-amplify';
 import { byUserOrganized } from '../../src/graphql/queries';
-import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
 import { OrganizedReturn, Organized } from '../types/Organized.Type';
-import { SignUp } from '../types/SignUp.Type';
 
 export async function getOrganizerMatchUps(id: string, token?: string): Promise<OrganizedReturn> {
   try {
@@ -16,8 +14,6 @@ export async function getOrganizerMatchUps(id: string, token?: string): Promise<
     });
 
     const retrievedData = await matchUpsData.data.byUserOrganized;
-
-    console.log('retrieved data      ', matchUpsData);
 
     await Promise.all(
       retrievedData.items.map(async (data: Organized) => {

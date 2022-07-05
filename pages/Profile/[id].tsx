@@ -43,12 +43,12 @@ const ProfileDetailPage: NextPage = () => {
   // getting organized events
   const [organizedEventsToken, setOrganizedEventsToken] = useState<string | null>();
   const organizedQuery = useQuery(
-    ['organized', currentUserId],
-    () =>
-      getOrganizerMatchUps(currentUserId as string, organizedEventsToken ? organizedEventsToken : undefined),
+    ['organized', id],
+    () => getOrganizerMatchUps(id as string, organizedEventsToken ? organizedEventsToken : undefined),
     {
-      enabled: !!currentUserId,
+      enabled: !!id,
       onSuccess: (data) => setOrganizedEventsToken(data.nextToken),
+      keepPreviousData: true
     }
   );
 
@@ -107,9 +107,7 @@ const ProfileDetailPage: NextPage = () => {
                   >
                     <path d="M20 7.66999C19.9368 7.48708 19.822 7.32642 19.6693 7.20749C19.5167 7.08857 19.3328 7.01649 19.14 6.99999L13.45 6.16999L10.9 0.999993C10.8181 0.830922 10.6903 0.688335 10.5311 0.588566C10.3719 0.488798 10.1878 0.435883 9.99999 0.435883C9.81214 0.435883 9.62808 0.488798 9.4689 0.588566C9.30973 0.688335 9.18188 0.830922 9.09999 0.999993L6.54999 6.15999L0.859993 6.99999C0.674915 7.0263 0.500917 7.10396 0.357743 7.22415C0.214569 7.34435 0.107953 7.50227 0.0499927 7.67999C-0.00306233 7.85367 -0.00782339 8.03851 0.0362204 8.21469C0.0802643 8.39086 0.17145 8.55172 0.299993 8.67999L4.42999 12.68L3.42999 18.36C3.38962 18.5484 3.40455 18.7445 3.47298 18.9246C3.54141 19.1048 3.66043 19.2613 3.81572 19.3754C3.97101 19.4895 4.15596 19.5563 4.34832 19.5677C4.54068 19.5792 4.73225 19.5348 4.89999 19.44L9.99999 16.77L15.1 19.44C15.2403 19.5192 15.3989 19.5605 15.56 19.56C15.7718 19.5607 15.9784 19.4942 16.15 19.37C16.3051 19.2589 16.4252 19.1056 16.4961 18.9284C16.567 18.7512 16.5857 18.5575 16.55 18.37L15.55 12.69L19.68 8.68999C19.8244 8.56767 19.9311 8.4069 19.9877 8.22634C20.0444 8.04579 20.0486 7.85287 20 7.66999ZM13.85 11.67C13.7342 11.7824 13.6474 11.9211 13.5969 12.0744C13.5464 12.2276 13.5338 12.3908 13.56 12.55L14.28 16.75L10.52 14.75C10.3739 14.6777 10.213 14.6401 10.05 14.6401C9.88696 14.6401 9.72612 14.6777 9.57999 14.75L5.81999 16.75L6.53999 12.55C6.56623 12.3908 6.55356 12.2276 6.50306 12.0744C6.45256 11.9211 6.36574 11.7824 6.24999 11.67L3.24999 8.66999L7.45999 8.05999C7.62199 8.03746 7.77599 7.97553 7.90849 7.87964C8.04099 7.78376 8.14795 7.65683 8.21999 7.50999L9.99999 3.69999L11.88 7.51999C11.952 7.66683 12.059 7.79376 12.1915 7.88964C12.324 7.98553 12.478 8.04746 12.64 8.06999L16.85 8.67999L13.85 11.67Z" />
                   </svg>
-                  <p style={{ color: colors.text['60'] }}>
-                    Organized {organizedCountData ? organizedCountData : 0} MatchUps
-                  </p>
+                  <p style={{ color: colors.text['60'] }}>Organized {organizedCountData || 0} MatchUps</p>
                 </div>
                 <div className={styles.detail}>
                   <svg
@@ -178,7 +176,7 @@ const ProfileDetailPage: NextPage = () => {
                 <Divider />
                 <div className={styles.matchupsWrapper}>
                   <p className="highlight-2" style={{ color: colors.text['100'] }}>
-                    Organized {currentUser?.signups.items.length || 0} MatchUps
+                    Organized {organizedCountData || 0} MatchUps
                   </p>
                   <div className={styles.cardsWrapper}>
                     <div className={styles.cardsWrapper}>
@@ -192,7 +190,7 @@ const ProfileDetailPage: NextPage = () => {
                           <MatchUpCard
                             key={organized.matchUp.id}
                             id={organized.matchUp.id as string}
-                            variant="large"
+                            variant="small"
                             date={organized.matchUp.date as string}
                             indoor={organized.matchUp.indoor as boolean}
                             title={organized.matchUp.title as string}
@@ -269,9 +267,7 @@ const ProfileDetailPage: NextPage = () => {
                 >
                   <path d="M20 7.66999C19.9368 7.48708 19.822 7.32642 19.6693 7.20749C19.5167 7.08857 19.3328 7.01649 19.14 6.99999L13.45 6.16999L10.9 0.999993C10.8181 0.830922 10.6903 0.688335 10.5311 0.588566C10.3719 0.488798 10.1878 0.435883 9.99999 0.435883C9.81214 0.435883 9.62808 0.488798 9.4689 0.588566C9.30973 0.688335 9.18188 0.830922 9.09999 0.999993L6.54999 6.15999L0.859993 6.99999C0.674915 7.0263 0.500917 7.10396 0.357743 7.22415C0.214569 7.34435 0.107953 7.50227 0.0499927 7.67999C-0.00306233 7.85367 -0.00782339 8.03851 0.0362204 8.21469C0.0802643 8.39086 0.17145 8.55172 0.299993 8.67999L4.42999 12.68L3.42999 18.36C3.38962 18.5484 3.40455 18.7445 3.47298 18.9246C3.54141 19.1048 3.66043 19.2613 3.81572 19.3754C3.97101 19.4895 4.15596 19.5563 4.34832 19.5677C4.54068 19.5792 4.73225 19.5348 4.89999 19.44L9.99999 16.77L15.1 19.44C15.2403 19.5192 15.3989 19.5605 15.56 19.56C15.7718 19.5607 15.9784 19.4942 16.15 19.37C16.3051 19.2589 16.4252 19.1056 16.4961 18.9284C16.567 18.7512 16.5857 18.5575 16.55 18.37L15.55 12.69L19.68 8.68999C19.8244 8.56767 19.9311 8.4069 19.9877 8.22634C20.0444 8.04579 20.0486 7.85287 20 7.66999ZM13.85 11.67C13.7342 11.7824 13.6474 11.9211 13.5969 12.0744C13.5464 12.2276 13.5338 12.3908 13.56 12.55L14.28 16.75L10.52 14.75C10.3739 14.6777 10.213 14.6401 10.05 14.6401C9.88696 14.6401 9.72612 14.6777 9.57999 14.75L5.81999 16.75L6.53999 12.55C6.56623 12.3908 6.55356 12.2276 6.50306 12.0744C6.45256 11.9211 6.36574 11.7824 6.24999 11.67L3.24999 8.66999L7.45999 8.05999C7.62199 8.03746 7.77599 7.97553 7.90849 7.87964C8.04099 7.78376 8.14795 7.65683 8.21999 7.50999L9.99999 3.69999L11.88 7.51999C11.952 7.66683 12.059 7.79376 12.1915 7.88964C12.324 7.98553 12.478 8.04746 12.64 8.06999L16.85 8.67999L13.85 11.67Z" />
                 </svg>
-                <p style={{ color: colors.text['60'] }}>
-                  Organized {organizedCountData ? organizedCountData : 0} MatchUps
-                </p>
+                <p style={{ color: colors.text['60'] }}>Organized {organizedCountData || 0} MatchUps</p>
               </div>
               <div className={styles.detail}>
                 <svg
@@ -342,43 +338,41 @@ const ProfileDetailPage: NextPage = () => {
               <Divider />
               <div className={styles.matchupsWrapper}>
                 <p className="highlight-2" style={{ color: colors.text['100'] }}>
-                  Organized {userQuery.data?.signups.items.length || 0} MatchUps
+                  Organized {organizedCountData || 0} MatchUps
                 </p>
                 <div className={styles.cardsWrapper}>
-                  <div className={styles.cardsWrapper}>
-                    {organizedCountIsRefetching && (
-                      <div className={styles.refetchWrapper}>
-                        <LoadingSpinner />
-                      </div>
-                    )}
-                    {organizedQuery.data?.items.map((organized) => (
-                      <>
-                        <MatchUpCard
-                          key={organized.matchUp.id}
-                          id={organized.matchUp.id as string}
-                          variant="large"
-                          date={organized.matchUp.date as string}
-                          indoor={organized.matchUp.indoor as boolean}
-                          title={organized.matchUp.title as string}
-                          attendanceMax={organized.matchUp.attendanceMax as number}
-                          participating={organized.matchUp.signups?.items?.length || 0}
-                          location={organized.matchUp.location as string}
-                          sportCategory={organized.matchUp.sportCategory as TSportCategories}
-                          skillLevel={organized.matchUp.skillLevel as TSkillLevels}
-                          image={organized.matchUp.image as string}
-                          totalCost={organized.matchUp.totalCost as number}
-                          reservedCourt={organized.matchUp.reservedCourt as boolean}
-                        ></MatchUpCard>
-                        <div id="map" className={styles.nodisplaymap}></div>
-                      </>
-                    ))}
-                    <Button
-                      variant="secondary"
-                      callback={() => organizedQuery.refetch()}
-                      text={'Show more'}
-                    ></Button>
-                  </div>
+                  {organizedCountIsRefetching && (
+                    <div className={styles.refetchWrapper}>
+                      <LoadingSpinner />
+                    </div>
+                  )}
+                  {organizedQuery.data?.items.map((organized) => (
+                    <>
+                      <MatchUpCard
+                        key={organized.matchUp.id}
+                        id={organized.matchUp.id as string}
+                        variant="small"
+                        date={organized.matchUp.date as string}
+                        indoor={organized.matchUp.indoor as boolean}
+                        title={organized.matchUp.title as string}
+                        attendanceMax={organized.matchUp.attendanceMax as number}
+                        participating={organized.matchUp.signups?.items?.length || 0}
+                        location={organized.matchUp.location as string}
+                        sportCategory={organized.matchUp.sportCategory as TSportCategories}
+                        skillLevel={organized.matchUp.skillLevel as TSkillLevels}
+                        image={organized.matchUp.image as string}
+                        totalCost={organized.matchUp.totalCost as number}
+                        reservedCourt={organized.matchUp.reservedCourt as boolean}
+                      ></MatchUpCard>
+                    </>
+                  ))}
                 </div>
+                <Button
+                  variant="secondary"
+                  disabled={organizedQuery.isRefetching}
+                  callback={() => organizedQuery.refetch()}
+                  text={'Show more'}
+                ></Button>
               </div>
             </>
           )}
