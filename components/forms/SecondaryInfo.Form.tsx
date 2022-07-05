@@ -26,6 +26,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
   const { colors, shadows, darkMode } = useTheme();
   const [doesCost, setDoesCost] = useState<boolean>(false);
   const [hasCustomPic, setHasCustomPic] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<string>('')
 
   function decreaseMinAttendance(): void {
     if (props.attendanceMin > 2) {
@@ -46,6 +47,16 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
     if (props.attendanceMin < 30) {
       props.setAttendanceMax((prevAttendanceMax) => prevAttendanceMax + 1);
     }
+  }
+
+  function addImage(image: File) {
+    setImageError('');
+    //3MB
+    if (image.size > 3000000) {
+      setImageError('image too large')
+      return;
+    }
+    props.setImage(image);
   }
 
   return (
@@ -188,6 +199,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
           className={styles.uploadImageWrapper}
           style={{ borderColor: darkMode ? colors.background[60] : '#DDDDDD' }}
         >
+          {(imageError.length > 0) ? <div className={styles.imageError}>{imageError}</div>: ''}
           <div
             className={styles.inputImageBtn}
             style={
@@ -220,7 +232,7 @@ const SecondaryInfoForm: React.FunctionComponent<ISecondaryInfoFormProps> = (pro
               multiple={false}
               accept={'image/*'}
               onChange={(e) => {
-                e.target.files && props.setImage(e.target.files[0]);
+                e.target.files && addImage(e.target.files[0]);
               }}
             />
           </div>
