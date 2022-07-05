@@ -90,7 +90,9 @@ const SignInPage: NextPage = () => {
     try {
       await authUtils?.verifyEmail(loginEmail, verificationCode);
       setVerificationLoading(false);
-      router.push('/');
+      const user = await authUtils?.login(loginEmail, loginPassword);
+      setLoginLoading(false);
+      user && router.push('/');
     } catch (err) {
       console.log(err);
       setVerificationLoading(false);
@@ -200,6 +202,7 @@ const SignInPage: NextPage = () => {
               setLoginPassword={setLoginPassword}
               handleLogin={handleLogin}
               error={loginError}
+              setError={setLoginError}
               isLoading={loginLoading}
             />
             <p className={styles.bottomText + ' small'}>

@@ -6,6 +6,11 @@
   align-items: center;
 }
 
+.pageWrapper {
+  min-width: 100vw;
+  min-height: 100%;
+}
+
 .contentWrapper {
   padding: 1em;
   padding-bottom: 5em;
