@@ -1,3 +1,4 @@
+import { stat } from 'fs';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { getNextDayOfTheWeek } from '../../utils/getNextDayOfTheWeek';
@@ -15,6 +16,18 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
 
   function handleTimeFrameChange(e: any) {
     switch (e.target.value) {
+      case 'all': {
+        const start = new Date();
+        start.setUTCHours(0, 0, 0, 0);
+
+        const end = new Date('2999-12-31');
+        end.setHours(23, 59, 59, 999);
+        props.setTimeFrame({
+          from: start.toISOString(),
+          to: end.toISOString(),
+        });
+        break;
+      }
       case 'this-week': {
         const start = new Date();
         start.setUTCHours(0, 0, 0, 0);
@@ -63,19 +76,19 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
         }}
         value={props.city}
         onChange={(e) => props.setCity(e.target.value as TCity)}
-        placeholder="Search for a city"
+        placeholder='Search for a city'
         className={styles.input + ' ' + styles.location}
       >
-        <option value="berlin">berlin</option>
-        <option value="hamburg">hamburg</option>
-        <option value="münchen">münchen</option>
-        <option value="köln">köln</option>
-        <option value="frankfurtamMain">frankfurt am Main</option>
-        <option value="stuttgart">stuttgart</option>
-        <option value="dortmund">dortmund</option>
-        <option value="düsseldorf">düsseldorf</option>
-        <option value="bremen">bremen</option>
-        <option value="hannover">hannover</option>
+        <option value='berlin'>berlin</option>
+        <option value='hamburg'>hamburg</option>
+        <option value='münchen'>münchen</option>
+        <option value='köln'>köln</option>
+        <option value='frankfurtamMain'>frankfurt am Main</option>
+        <option value='stuttgart'>stuttgart</option>
+        <option value='dortmund'>dortmund</option>
+        <option value='düsseldorf'>düsseldorf</option>
+        <option value='bremen'>bremen</option>
+        <option value='hannover'>hannover</option>
       </select>
       <select
         style={{
@@ -83,13 +96,14 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
           color: '#757575',
           outlineColor: colors.primary[80],
         }}
-        placeholder="Select time"
+        placeholder='Select time'
         className={styles.input + ' ' + styles.date}
         onChange={handleTimeFrameChange}
       >
-        <option value="this-week">This week</option>
-        <option value="this-weekend">This Weekend</option>
-        <option value="next-week">Next Week</option>
+        <option value='all'>All</option>
+        <option value='this-week'>This week</option>
+        <option value='this-weekend'>This Weekend</option>
+        <option value='next-week'>Next Week</option>
       </select>
     </div>
   );

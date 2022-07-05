@@ -6,21 +6,11 @@ import defaultAvatar from '../../public/default-avatar.png';
 export interface IAvatarProps {
   size: string;
   image: any;
-  attended?: boolean;
-  highlightable?: boolean;
 }
 
-const Avatar: React.FunctionComponent<IAvatarProps> = ({
-  size,
-  image,
-  attended,
-  highlightable,
-}) => {
+const Avatar: React.FunctionComponent<IAvatarProps> = ({ size, image }) => {
   const { colors, shadows } = useTheme();
   let avatarSize: string = '';
-
-  const border =
-    highlightable && attended ? `3px solid ${colors.primary[100]}` : 'None';
 
   if (size === 'small') {
     avatarSize = '50px';
@@ -40,7 +30,6 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({
         width: avatarSize,
         height: avatarSize,
         overflow: 'hidden',
-        border: border,
       }}
     >
       <ImageFallback
