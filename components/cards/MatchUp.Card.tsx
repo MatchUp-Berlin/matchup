@@ -45,6 +45,8 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
     props.watchList.some((match) => match.matchUpId === props.id);
   const remainingSlots = props.attendanceMax - props.participating;
 
+  console.log(remainingSlots);
+
   if (props.variant === 'large')
     return (
       <Link href={`/MatchUps/${props.id}`}>
@@ -172,19 +174,20 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   <p style={{ color: colors.text[100] }}>Rented</p>
                 </div>
               )}
-              {remainingSlots && (
-                <div
-                  className={styles.pill}
-                  style={{
-                    backgroundColor: colors.background[100],
-                    boxShadow: shadows.small,
-                  }}
-                >
-                  <p style={{ color: colors.primary[100] }}>
-                    {remainingSlots} Spot{remainingSlots > 1 ? 's' : ''} left
-                  </p>
-                </div>
-              )}
+              <div
+                className={styles.pill}
+                style={{
+                  backgroundColor: colors.background[100],
+                  boxShadow: shadows.small,
+                }}
+              >
+                <p style={{ color: colors.primary[100] }}>
+                  {isFinished && 'Past Event'}
+                  {!isFinished && remainingSlots === 0
+                    ? 'Fully Booked'
+                    : `${remainingSlots} Spots left`}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -297,7 +300,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   <p style={{ color: colors.text[100] }}>Rented</p>
                 </div>
               )}
-              {props.variant == 'medium' && remainingSlots && (
+              {props.variant == 'medium' && (
                 <div
                   className={styles.pill}
                   style={{
@@ -306,11 +309,10 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   }}
                 >
                   <p style={{ color: colors.primary[100] }}>
-                    {isFinished
-                      ? 'Past Event'
-                      : remainingSlots !== 0
-                      ? `${remainingSlots} Spots left`
-                      : 'Fully Booked'}
+                    {isFinished && 'Past Event'}
+                    {!isFinished && remainingSlots === 0
+                      ? 'Fully Booked'
+                      : `${remainingSlots} Spots left`}
                   </p>
                 </div>
               )}
