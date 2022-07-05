@@ -73,12 +73,3 @@ type Organized @model @auth(rules: [{ allow: public }]) {
   user: User @belongsTo(fields: ["userId"])
   matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
 }
-
-type Organized @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  userId: ID @index(name: "byUserOrganized", queryField: "byUserOrganized")
-  matchUpId: ID
-    @index(name: "byMatchUpOrganized", queryField: "byMatchUpOrganized")
-  user: User @belongsTo(fields: ["userId"])
-  matchUp: MatchUp @belongsTo(fields: ["matchUpId"])
-}
