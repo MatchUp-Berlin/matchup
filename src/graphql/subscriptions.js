@@ -28,6 +28,9 @@ export const onCreateMatchUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -46,6 +49,7 @@ export const onCreateMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -63,6 +67,16 @@ export const onCreateMatchUp = /* GraphQL */ `
         nextToken
       }
       watchList {
+        items {
+          id
+          userId
+          matchUpId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      organized {
         items {
           id
           userId
@@ -104,6 +118,9 @@ export const onUpdateMatchUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -122,6 +139,7 @@ export const onUpdateMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -139,6 +157,16 @@ export const onUpdateMatchUp = /* GraphQL */ `
         nextToken
       }
       watchList {
+        items {
+          id
+          userId
+          matchUpId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      organized {
         items {
           id
           userId
@@ -180,6 +208,9 @@ export const onDeleteMatchUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -198,6 +229,7 @@ export const onDeleteMatchUp = /* GraphQL */ `
       attendanceMin
       attendanceMax
       cancelled
+      completed
       indoor
       description
       image
@@ -215,6 +247,16 @@ export const onDeleteMatchUp = /* GraphQL */ `
         nextToken
       }
       watchList {
+        items {
+          id
+          userId
+          matchUpId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      organized {
         items {
           id
           userId
@@ -242,6 +284,16 @@ export const onCreateUser = /* GraphQL */ `
           userId
           matchUpId
           attended
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      organized {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
         }
@@ -293,6 +345,16 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
+      organized {
+        items {
+          id
+          userId
+          matchUpId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       profileImage
       about
       updates {
@@ -334,6 +396,16 @@ export const onDeleteUser = /* GraphQL */ `
           userId
           matchUpId
           attended
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      organized {
+        items {
+          id
+          userId
+          matchUpId
           createdAt
           updatedAt
         }
@@ -381,6 +453,9 @@ export const onCreateSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -418,6 +493,7 @@ export const onCreateSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -427,6 +503,9 @@ export const onCreateSignUp = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -452,6 +531,9 @@ export const onUpdateSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -489,6 +571,7 @@ export const onUpdateSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -498,6 +581,9 @@ export const onUpdateSignUp = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -523,6 +609,9 @@ export const onDeleteSignUp = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -560,6 +649,7 @@ export const onDeleteSignUp = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -569,6 +659,9 @@ export const onDeleteSignUp = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -594,6 +687,9 @@ export const onCreateUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -631,6 +727,7 @@ export const onCreateUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -640,6 +737,9 @@ export const onCreateUpdate = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -665,6 +765,9 @@ export const onUpdateUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -702,6 +805,7 @@ export const onUpdateUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -711,6 +815,9 @@ export const onUpdateUpdate = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -736,6 +843,9 @@ export const onDeleteUpdate = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -773,6 +883,7 @@ export const onDeleteUpdate = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -782,6 +893,9 @@ export const onDeleteUpdate = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -807,6 +921,9 @@ export const onCreateWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -844,6 +961,7 @@ export const onCreateWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -853,6 +971,9 @@ export const onCreateWatchList = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -877,6 +998,9 @@ export const onUpdateWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -914,6 +1038,7 @@ export const onUpdateWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -923,6 +1048,9 @@ export const onUpdateWatchList = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt
@@ -947,6 +1075,9 @@ export const onDeleteWatchList = /* GraphQL */ `
         signups {
           nextToken
         }
+        organized {
+          nextToken
+        }
         profileImage
         about
         updates {
@@ -984,6 +1115,7 @@ export const onDeleteWatchList = /* GraphQL */ `
         attendanceMin
         attendanceMax
         cancelled
+        completed
         indoor
         description
         image
@@ -993,6 +1125,240 @@ export const onDeleteWatchList = /* GraphQL */ `
           nextToken
         }
         watchList {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOrganized = /* GraphQL */ `
+  subscription OnCreateOrganized {
+    onCreateOrganized {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+        }
+        location
+        address
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        completed
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOrganized = /* GraphQL */ `
+  subscription OnUpdateOrganized {
+    onUpdateOrganized {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+        }
+        location
+        address
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        completed
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOrganized = /* GraphQL */ `
+  subscription OnDeleteOrganized {
+    onDeleteOrganized {
+      id
+      userId
+      matchUpId
+      user {
+        id
+        givenName
+        familyName
+        email
+        signups {
+          nextToken
+        }
+        organized {
+          nextToken
+        }
+        profileImage
+        about
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      matchUp {
+        id
+        title
+        signups {
+          nextToken
+        }
+        location
+        address
+        organizerId
+        organizer {
+          id
+          givenName
+          familyName
+          email
+          profileImage
+          about
+          createdAt
+          updatedAt
+        }
+        sportCategory
+        skillLevel
+        totalCost
+        reservedCourt
+        attendanceMin
+        attendanceMax
+        cancelled
+        completed
+        indoor
+        description
+        image
+        date
+        currency
+        updates {
+          nextToken
+        }
+        watchList {
+          nextToken
+        }
+        organized {
           nextToken
         }
         createdAt

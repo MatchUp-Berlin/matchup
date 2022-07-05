@@ -13,7 +13,6 @@ export interface IUpdatesMessageCardProps {
 const UpdatesMessageCard: React.FunctionComponent<IUpdatesMessageCardProps> = (props) => {
   const { content, createdAt, userId } = props.update;
   const { colors, shadows, darkMode } = useTheme();
-  console.log('message card: ', props.organizer);
   const { id } = props.organizer;
 
   return (

@@ -1,6 +1,7 @@
 import { SignUp } from './SignUp.Type';
 import { Update } from './Update.Type';
-import { WatchList } from './WatchList.Type';
+import { WatchList, WatchListsReturn } from './WatchList.Type';
+import { Organized } from './Organized.Type';
 import { SignUpsReturn } from './SignUp.Type';
 
 export interface User {
@@ -13,7 +14,12 @@ export interface User {
   about: string;
   createdAt: string;
   updates: Update[];
+<<<<<<< HEAD
   watchList: { items: WatchList[] };
+=======
+  watchList: WatchListsReturn;
+  organized: Organized[];
+>>>>>>> main
   attended?: boolean;
   signup?: SignUp;
 }

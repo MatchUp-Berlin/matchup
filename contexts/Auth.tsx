@@ -81,7 +81,6 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
     /* On auth events */
     Hub.listen('auth', ({ payload }) => {
-      console.log(payload);
       Auth.currentAuthenticatedUser()
         .then((user) => user && setCurrentUserId(user.username))
         .catch((err) => setCurrentUserId(null));
