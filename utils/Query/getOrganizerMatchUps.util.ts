@@ -4,10 +4,7 @@ import { getMatchUpsReturn, MatchUp } from '../types/MatchUp.Type';
 import { OrganizedReturn, Organized } from '../types/Organized.Type';
 import { SignUp } from '../types/SignUp.Type';
 
-export async function getOrganizerMatchUps(
-  id: string,
-  token: string
-): Promise<OrganizedReturn> {
+export async function getOrganizerMatchUps(id: string, token: string): Promise<OrganizedReturn> {
   try {
     const matchUpsData = await API.graphql({
       query: byUserOrganized,
@@ -22,7 +19,7 @@ export async function getOrganizerMatchUps(
 
     console.log('retrieved data      ', matchUpsData);
 
-    const imageData = await Promise.all(
+    await Promise.all(
       retrievedData.items.map(async (data: Organized) => {
         const headerImage = await Storage.get(data.matchUp.id);
         data.matchUp.image = headerImage;

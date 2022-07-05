@@ -11,7 +11,6 @@ export interface IUpdatesMessageCardProps {
 }
 
 const UpdatesMessageCard: React.FunctionComponent<IUpdatesMessageCardProps> = (props) => {
-  const { givenName, familyName } = props.update.user;
   const { content, createdAt, userId } = props.update;
   const { colors, shadows, darkMode } = useTheme();
   console.log('message card: ', props.organizer);
@@ -27,7 +26,7 @@ const UpdatesMessageCard: React.FunctionComponent<IUpdatesMessageCardProps> = (p
         }}
       >
         <p className={'fat'} style={{ color: userId === id ? colors.primary[100] : colors.text[80] }}>
-          {givenName} {familyName}
+          {props.update.user?.givenName + ' ' + props.update.user?.familyName} {id === userId && ' (Organizer)'}
         </p>
         <p style={{ color: colors.text[80] }}>{content}</p>
         <p className={styles.time + ' small'} style={{ color: colors.text[60] }}>

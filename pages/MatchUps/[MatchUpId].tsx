@@ -39,7 +39,7 @@ const MatchUpDetail: NextPage = () => {
     isError,
     data: matchUp,
   } = useQuery(['matchup', MatchUpId], () => getMatchUpById(MatchUpId as string), { enabled: !!MatchUpId });
-  
+
   /* -----USER ROLE----- */
   const { currentUserId } = useAuth();
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
@@ -89,23 +89,16 @@ const MatchUpDetail: NextPage = () => {
             key={1}
             viewBox={share.viewBox}
             callback={() =>
-              mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })
-            }
-            icon={share.path}
-          />,
-          <HeaderButton
-            stayLight
-            key={2}
-            viewBox={edit.viewBox}
-            callback={() =>
+              navigator.share &&
               navigator.share({
                 url: window.location.href,
                 title: matchUp.title,
                 text: matchUp.description,
               })
             }
-            icon={edit.path}
+            icon={share.path}
           />,
+          <HeaderButton stayLight key={2} viewBox={edit.viewBox} callback={() => {}} icon={edit.path} />,
         ]);
       else
         setHeaderButtons([
@@ -113,7 +106,7 @@ const MatchUpDetail: NextPage = () => {
             stayLight
             key={1}
             viewBox={watchList.viewBox}
-            callback={() => {}}
+            callback={() => mutation.mutate({ userId: currentUserId as string, matchUpId: matchUp.id as string })}
             icon={watchList.path}
           />,
           <HeaderButton stayLight key={2} viewBox={share.viewBox} callback={() => {}} icon={share.path} />,
@@ -159,7 +152,9 @@ const MatchUpDetail: NextPage = () => {
             <UpdatesModal
               close={() => setShowUpdatesModal(false)}
               updates={matchUp.updates}
+              matchUpId={matchUp.id}
               organizer={matchUp.organizer as User}
+              isSignedUp={isSignedUp}
             />
           </>
         )}
@@ -254,9 +249,7 @@ const MatchUpDetail: NextPage = () => {
                 </p>
                 <p style={{ color: colors.text[60] }}>
                   {matchUp.description}
-                  {matchUp.description.length > 100 && (
-                    <span style={{ color: colors.primary[100] }}> Read more</span>
-                  )}
+                  {matchUp.description.length > 100 && <span style={{ color: colors.primary[100] }}> Read more</span>}
                 </p>
               </div>
 
@@ -267,18 +260,22 @@ const MatchUpDetail: NextPage = () => {
                 }}
               ></div>
 
-              <UpdatesPreviewCard
-                updates={matchUp.updates}
-                organizer={matchUp.organizer as User}
-                callback={() => setShowUpdatesModal(true)}
-              ></UpdatesPreviewCard>
+              {isSignedUp && (
+                <UpdatesPreviewCard
+                  updates={matchUp.updates}
+                  organizer={matchUp.organizer as User}
+                  callback={() => setShowUpdatesModal(true)}
+                ></UpdatesPreviewCard>
+              )}
+              {isSignedUp && (
+                <div
+                  className={styles.divider}
+                  style={{
+                    borderColor: darkMode ? colors.background[60] : '#DDDDDD',
+                  }}
+                ></div>
+              )}
 
-              <div
-                className={styles.divider}
-                style={{
-                  borderColor: darkMode ? colors.background[60] : '#DDDDDD',
-                }}
-              ></div>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${matchUp.address.geometry?.point[1]}%2C${matchUp.address.geometry?.point[0]}`}
               >
@@ -295,8 +292,7 @@ const MatchUpDetail: NextPage = () => {
                 {matchUp?.signups.items.length} / {matchUp?.attendanceMax} players joined
               </p>
               <p className="small" style={{ color: colors.text[100] }}>
-                {matchUp?.totalCost > 0 ? matchUp?.totalCost + '.00 ' + matchUp?.currency : 'Free'} + 5€
-                deposit{' '}
+                {matchUp?.totalCost > 0 ? matchUp?.totalCost + '.00 ' + matchUp?.currency : 'Free'} + 5€ deposit{' '}
                 {
                   <span>
                     <svg
