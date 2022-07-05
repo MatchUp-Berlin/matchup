@@ -13,7 +13,9 @@ export interface User {
   about: string;
   createdAt: string;
   updates: Update[];
-  watchList: {items: WatchList[]};
+  watchList: { items: WatchList[] };
+  attended?: boolean;
+  signup?: SignUp;
 }
 
 export interface UsersReturn {
