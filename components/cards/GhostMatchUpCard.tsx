@@ -17,10 +17,18 @@ const GhostMatchUpCard: React.FunctionComponent<IGhostMatchUpCard> = (
         className={
           props.size === 'large' ? styles.cardWrapperLarge : styles.cardWrapper
         }
-        style={{
-          boxShadow: shadows.medium,
-          backgroundColor: colors.background['80'],
-        }}
+        style={
+          props.size === 'small'
+            ? {
+                boxShadow: shadows.medium,
+                backgroundColor: colors.background['80'],
+                height: '100px',
+              }
+            : {
+                boxShadow: shadows.medium,
+                backgroundColor: colors.background['80'],
+              }
+        }
       >
         {/* IMAGE WRAPPER */}
         <div
