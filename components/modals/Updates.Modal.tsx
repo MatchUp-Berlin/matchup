@@ -13,7 +13,7 @@ import { useTheme } from '../../contexts/Theme';
 
 /* UTILS */
 
-import { Update, UpdatesReturn } from '../../utils/types/Update.Type';
+import { UpdatesReturn } from '../../utils/types/Update.Type';
 import { User } from '../../utils/types/User.Type';
 import { arrow } from '../icons';
 import { createNewUpdate } from '../../utils/Mutation/createUpdate.util';
