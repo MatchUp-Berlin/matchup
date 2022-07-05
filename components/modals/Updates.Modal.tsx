@@ -13,7 +13,7 @@ import { useTheme } from '../../contexts/Theme';
 
 /* UTILS */
 
-import { Update, UpdatesReturn } from '../../utils/types/Update.Type';
+import { UpdatesReturn } from '../../utils/types/Update.Type';
 import { User } from '../../utils/types/User.Type';
 import { arrow } from '../icons';
 import { createNewUpdate } from '../../utils/Mutation/createUpdate.util';
@@ -88,12 +88,6 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
         </div>
         {props.updates.items.length === 0 && <Empty text="No updates yet."></Empty>}
         <div className={styles.scrollable}>
-<<<<<<< HEAD
-          {props.updates.items.map((update, index) => {
-            return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;
-          })}
-          <div ref={divRef}></div>
-=======
           <div ref={divRef}></div>
           {props.updates.items
             .sort((a, b): number => {
@@ -104,7 +98,6 @@ const UpdatesModal: React.FunctionComponent<IUpdatesModalProps> = (props) => {
             .map((update, index) => {
               return <UpdatesMessageCard key={index} update={update} organizer={props.organizer} />;
             })}
->>>>>>> main
         </div>
         <div className={styles.sendGroup}>
           <input
