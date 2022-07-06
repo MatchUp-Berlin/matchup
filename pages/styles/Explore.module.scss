@@ -32,6 +32,16 @@
     }
   }
 
+  .matchUpCard {
+    position: relative;
+    .watchList {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      z-index: 1;
+    }
+  }
+
   .nodisplaymap {
     display: none;
   }
