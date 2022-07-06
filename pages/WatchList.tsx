@@ -18,8 +18,6 @@ const WatchListPage: NextPage = () => {
     if (!currentUserId) router.push('/SignIn');
   }, [currentUserId]);
 
-  console.log(currentUser);
-
   return (
     <>
       <div
