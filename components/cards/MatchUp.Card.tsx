@@ -183,7 +183,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                   {isFinished && 'Past Event'}
                   {!isFinished && remainingSlots === 0
                     ? 'Fully Booked'
-                    : `${remainingSlots} Spots left`}
+                    : !isFinished && `${remainingSlots} Spots left`}
                 </p>
               </div>
             </div>
@@ -310,7 +310,7 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
                     {isFinished && 'Past Event'}
                     {!isFinished && remainingSlots === 0
                       ? 'Fully Booked'
-                      : `${remainingSlots} Spots left`}
+                      : !isFinished && `${remainingSlots} Spots left`}
                   </p>
                 </div>
               )}
