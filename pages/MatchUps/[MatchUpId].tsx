@@ -9,7 +9,8 @@ import { initializeMap } from '../../utils/Maps/initializeMap.util';
 
 import styles from './styles/MatchUpId.module.scss';
 import { User } from '../../utils/types/User.Type';
-import { ParticipantsPreviewCard, SkillsCard, SlotsCard } from '../../components/cards';
+import BigPill from '../../components/cards/BigPill.Card';
+import { ParticipantsPreviewCard } from '../../components/cards';
 import OrganizerCard from '../../components/cards/Organizer.Card';
 import UpdatesPreviewCard from '../../components/cards/UpdatesPreview.Card';
 import { Button, Footer } from '../../components/misc';
@@ -249,8 +250,12 @@ const MatchUpDetail: NextPage = () => {
 
               {/*  ------------BIG PILLS------------  */}
               <div className={styles.bigPills}>
-                <SkillsCard skillLevel={matchUp.skillLevel}></SkillsCard>
-                <SlotsCard slots={matchUp.attendanceMax} attending={matchUp.signups.items.length}></SlotsCard>
+                <BigPill filled title="Skill" text={matchUp.skillLevel}></BigPill>
+                <BigPill
+                  filled={matchUp.attendanceMax - matchUp.signups.items.length == 0}
+                  text={`${matchUp.signups.items.length} / ${matchUp.attendanceMax}`}
+                  title="Coming"
+                ></BigPill>
               </div>
 
               <div
