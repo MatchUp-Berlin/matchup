@@ -3,7 +3,6 @@ import { ConfigurationServicePlaceholders } from "aws-sdk/lib/config_service_pla
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  console.log(req.headers)
   if (req.method === 'POST') {
     try {
       // Create Checkout Sessions from body params.
@@ -15,8 +14,8 @@ export default async function handler(req, res) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.referer}`,
-        cancel_url: `${req.headers.referer}`,
+        success_url: `${req.headers.origin}/MyMatchUps`,
+        cancel_url: `${req.headers.origin}`,
       });
       res.redirect(303, session.url);
     } catch (err) {
