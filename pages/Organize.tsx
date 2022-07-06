@@ -25,7 +25,11 @@ import volleyball from '../public/volleyball.jpg';
 import frisbee from '../public/frisbee.jpg';
 
 /* UTILS */
-import { TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
+import {
+  TCity,
+  TSkillLevels,
+  TSportCategories,
+} from '../utils/types/MatchUp.Type';
 import { TAddress } from '../utils/types/Address.Type';
 import { cityLatLong } from '../utils/types/Address.Type';
 import { Storage } from 'aws-amplify';
@@ -81,21 +85,28 @@ const OrganizePage: NextPage = () => {
   }, [currentUserId]);
 
   return (
-    <div className={styles.wrapper} style={{ backgroundColor: colors.background[100] }}>
+    <div
+      className={styles.wrapper}
+      style={{ backgroundColor: colors.background[100] }}
+    >
       {step == 0 ? (
         /////-----------> STEP 0: CHOOSE SPORT
         <>
           <Header
-            title="Choose a sport you want to play"
+            title='Choose a sport you want to play'
             leftButton={
-              <HeaderButton callback={() => Router.back()} viewBox={close.viewBox} icon={close.path} />
+              <HeaderButton
+                callback={() => Router.back()}
+                viewBox={close.viewBox}
+                icon={close.path}
+              />
             }
           ></Header>
 
           <div className={styles.sportCategoriesList}>
             <SportCard
-              title="Football (Soccer)"
-              subTitle="Start a football match with locals"
+              title='Football (Soccer)'
+              subTitle='Start a football match with locals'
               image={football}
               callback={() => {
                 setSportCategory('football');
@@ -104,8 +115,8 @@ const OrganizePage: NextPage = () => {
             ></SportCard>
 
             <SportCard
-              title="Basketball"
-              subTitle="Organize a basketball game"
+              title='Basketball'
+              subTitle='Organize a basketball game'
               image={basketball}
               callback={() => {
                 setSportCategory('basketball');
@@ -114,8 +125,8 @@ const OrganizePage: NextPage = () => {
             ></SportCard>
 
             <SportCard
-              title="Beach Volleyball"
-              subTitle="Step on the warm sand for a round of volleyball"
+              title='Beach Volleyball'
+              subTitle='Step on the warm sand for a round of volleyball'
               image={beachvolleyball}
               callback={() => {
                 setSportCategory('beach-volleyball');
@@ -124,8 +135,8 @@ const OrganizePage: NextPage = () => {
             ></SportCard>
 
             <SportCard
-              title="Tennis"
-              subTitle="Challange yourself with new tennis opponents"
+              title='Tennis'
+              subTitle='Challenge yourself with new tennis opponents'
               image={tennis}
               callback={() => {
                 setSportCategory('tennis');
@@ -134,8 +145,8 @@ const OrganizePage: NextPage = () => {
             ></SportCard>
 
             <SportCard
-              title="Volleyball"
-              subTitle="Level up your volley skills?"
+              title='Volleyball'
+              subTitle='Level up your volley skills?'
               image={volleyball}
               callback={() => {
                 setSportCategory('volleyball');
@@ -144,8 +155,8 @@ const OrganizePage: NextPage = () => {
             ></SportCard>
 
             <SportCard
-              title="Ultimate Frisbee"
-              subTitle="I have no ideas for cool prompts?"
+              title='Ultimate Frisbee'
+              subTitle='I have no ideas for cool prompts?'
               image={frisbee}
               callback={() => {
                 setSportCategory('ultimate-frisbee');
@@ -160,10 +171,10 @@ const OrganizePage: NextPage = () => {
             leftSide={<p onClick={() => Router.back()}>Back</p>}
             rightButton={
               <Button
-                variant="primary"
+                variant='primary'
                 disabled={disableNextStepZero}
                 callback={goToNext}
-                text="Next"
+                text='Next'
               ></Button>
             }
           ></Footer>
@@ -172,9 +183,13 @@ const OrganizePage: NextPage = () => {
         /////-----------> STEP 1: GENERAL INFO
         <>
           <Header
-            title="Give us some general information"
+            title='Give us some general information'
             leftButton={
-              <HeaderButton callback={() => Router.back()} viewBox={close.viewBox} icon={close.path} />
+              <HeaderButton
+                callback={() => Router.back()}
+                viewBox={close.viewBox}
+                icon={close.path}
+              />
             }
           ></Header>
 
@@ -196,10 +211,10 @@ const OrganizePage: NextPage = () => {
             leftSide={<p onClick={() => goBack()}>Back</p>}
             rightButton={
               <Button
-                variant="primary"
+                variant='primary'
                 disabled={disableNextStepOne}
                 callback={goToNext}
-                text="Next"
+                text='Next'
               ></Button>
             }
           ></Footer>
@@ -210,7 +225,11 @@ const OrganizePage: NextPage = () => {
           <Header
             title="Let's figure out some more information"
             leftButton={
-              <HeaderButton callback={() => Router.back()} viewBox={close.viewBox} icon={close.path} />
+              <HeaderButton
+                callback={() => Router.back()}
+                viewBox={close.viewBox}
+                icon={close.path}
+              />
             }
           ></Header>
 
@@ -236,10 +255,10 @@ const OrganizePage: NextPage = () => {
             leftSide={<p onClick={() => goBack()}>Back</p>}
             rightButton={
               <Button
-                variant="primary"
+                variant='primary'
                 disabled={disableNextStepTwo}
                 callback={goToNext}
-                text="Next"
+                text='Next'
               ></Button>
             }
           ></Footer>
@@ -252,7 +271,11 @@ const OrganizePage: NextPage = () => {
             sportCategory={sportCategory}
             title={'Is everything correct?'}
             leftButton={
-              <HeaderButton callback={() => Router.back()} viewBox={close.viewBox} icon={close.path} />
+              <HeaderButton
+                callback={() => Router.back()}
+                viewBox={close.viewBox}
+                icon={close.path}
+              />
             }
           ></Header>
           <OrganizeConfirmationForm
@@ -272,7 +295,7 @@ const OrganizePage: NextPage = () => {
             leftSide={<p onClick={() => goBack()}>Back</p>}
             rightButton={
               <Button
-                variant="primary"
+                variant='primary'
                 callback={() =>
                   mutation.mutate({
                     sportCategory: sportCategory as TSportCategories,
@@ -291,7 +314,7 @@ const OrganizePage: NextPage = () => {
                     organizerId: currentUserId as string,
                   })
                 }
-                text="Save"
+                text='Save'
               ></Button>
             }
           ></Footer>
