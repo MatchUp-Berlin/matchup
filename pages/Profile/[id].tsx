@@ -20,7 +20,6 @@ import LoadingSpinner from '../../components/misc/LoadingSpinner';
 import { Storage } from 'aws-amplify';
 import SmallButton from '../../components/misc/SmallButton';
 import { blitz, close, cup, star } from '../../components/icons';
-import EditBioModal from '../../components/modals/EditAbout.Modal';
 import EditAboutModal from '../../components/modals/EditAbout.Modal';
 import { updateUser } from '../../utils/Mutation/updateUser.util';
 
@@ -77,7 +76,7 @@ const ProfileDetailPage: NextPage = () => {
   function uploadAvatar(event: any) {
     currentUserId &&
       Storage.put(currentUserId, event.target.files[0], { level: 'public', contentType: 'image/*' })
-        .then(() => queryClient.invalidateQueries(['user', currentUserId]))
+        .then(() => queryClient.refetchQueries(['user', currentUserId]))
         .catch((err) => console.log(err));
   }
 
