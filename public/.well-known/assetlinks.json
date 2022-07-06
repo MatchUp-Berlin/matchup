@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "app.vercel.matchup.twa",
+                     "sha256_cert_fingerprints": ["8E:A4:40:22:39:95:10:C9:E7:41:ED:CE:F8:FE:24:91:3C:09:2F:C3:EB:E8:97:38:52:28:9C:D8:14:D8:C8:E9"] }
+      }
+]
