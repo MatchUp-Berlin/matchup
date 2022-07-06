@@ -25,17 +25,38 @@ const MainInfo: React.FunctionComponent<IMainInfoProps> = (props) => {
       <h1 style={{ color: colors.text[100] }}>
         {props.title}
         <span>
-          <Image width={'32px'} height={'32px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
+          <Image
+            width={'32px'}
+            height={'32px'}
+            src={getSportIcon(props.sport)}
+            alt={props.sport}
+          ></Image>
         </span>
       </h1>
       {/* DETAILS */}
       <div className={styles.details}>
         <div className={styles.detail}>
-        <svg width={18} height={18} fill={colors.text[60]} viewBox={clock.viewBox}>{clock.path}</svg>
-          <p style={{ color: colors.text[60] }}>{moment(props.timestamp).format('H:mm dddd')}</p>
+          <svg
+            width={18}
+            height={18}
+            fill={colors.text[60]}
+            viewBox={clock.viewBox}
+          >
+            {clock.path}
+          </svg>
+          <p style={{ color: colors.text[60] }}>
+            {moment(props.timestamp).format('dddd MMM Do  hh:mma')}
+          </p>
         </div>
         <div className={styles.detail}>
-        <svg width={18} height={18} fill={colors.text[60]} viewBox={location.viewBox}>{location.path}</svg>
+          <svg
+            width={18}
+            height={18}
+            fill={colors.text[60]}
+            viewBox={location.viewBox}
+          >
+            {location.path}
+          </svg>
           <p style={{ color: colors.text[60] }}>
             {props.address?.street && props.address?.street + ', '}
             {props.city}
@@ -44,8 +65,17 @@ const MainInfo: React.FunctionComponent<IMainInfoProps> = (props) => {
         </div>
 
         <div className={styles.detail}>
-        <svg width={18} height={18} fill={colors.text[60]} viewBox={euro.viewBox}>{euro.path}</svg>
-          <p style={{ color: colors.text[60] }}>{props.costs > 0 ? props.costs + '.00' : 'Free'}</p>
+          <svg
+            width={18}
+            height={18}
+            fill={colors.text[60]}
+            viewBox={euro.viewBox}
+          >
+            {euro.path}
+          </svg>
+          <p style={{ color: colors.text[60] }}>
+            {props.costs > 0 ? props.costs + '.00' : 'Free'}
+          </p>
         </div>
       </div>
     </div>
