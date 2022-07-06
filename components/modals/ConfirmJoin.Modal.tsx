@@ -9,6 +9,8 @@ import { removeUserFromMatchUp } from '../../utils/Mutation/removeUserFromMatchU
 import { useQueryClient } from 'react-query';
 import SmallButton from '../misc/SmallButton';
 import { useAuth } from '../../contexts/Auth';
+import { getStripe } from '../../utils/get-stripe'
+const Stripe = getStripe();
 
 export interface IConfirmJoinModalProps {
   matchUp: MatchUp;
@@ -33,6 +35,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         queryClient.invalidateQueries(['matchup', props.matchUp.id]);
         props.setShowModal(false);
       })
+      .then((res) => handlePayment())
       .catch((err: any) => console.log(err));
   };
 
@@ -43,6 +46,26 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         props.setShowModal(false);
       })
       .catch((err: any) => console.log(err));
+  };
+
+  const handlePayment = async () => {
+    // Create a Checkout Session.
+    const checkoutSession: Stripe.Checkout.Session = await fetch('/api/checkout_sessions',
+    {
+      method: 'POST'
+    }
+    );
+    if ((checkoutSession as any).statusCode === 500) {
+      console.error((checkoutSession as any).message);
+      return;
+    }
+
+    // Redirect to Checkout.
+    const stripe = await getStripe();
+    const { error } = await stripe!.redirectToCheckout({
+      sessionId: checkoutSession.id,
+    });
+    console.warn(error.message);
   };
 
   return (
@@ -138,7 +161,7 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         <a
           style={{ backgroundColor: colors.primary[100]}}
           className={styles.modelConfirm}
-          href={props.isSignedUp ? '': "https://buy.stripe.com/test_cN29BV4Dv7R03T2cMM"}
+          // href={props.isSignedUp ? '': "https://buy.stripe.com/test_cN29BV4Dv7R03T2cMM"}
           onClick={
             props.isSignedUp ? () => handleCancel() : () => handleCommit()
           }
