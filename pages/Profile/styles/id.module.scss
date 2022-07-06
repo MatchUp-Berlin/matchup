@@ -6,12 +6,6 @@
   align-items: center;
 }
 
-.logoutButton {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-}
-
 
 .contentWrapper {
   padding: 1em;
@@ -24,6 +18,12 @@
     align-items: center;
     margin: 2em 0;
   }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1em;
+  left: 1em;
 }
 
 .details {
