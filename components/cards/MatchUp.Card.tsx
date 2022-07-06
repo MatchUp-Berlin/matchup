@@ -8,9 +8,7 @@ import getSportIcon from '../../utils/getSportIcon';
 import getDefaultImage from '../../utils/getDefaultImage';
 import Link from 'next/link';
 import ImageFallback from '../misc/ImageFallback';
-import { clock, euro, location, watchListOnCard } from '../icons';
-import { UseMutationResult } from 'react-query';
-import { WatchList } from '../../utils/types/WatchList.Type';
+import { clock, euro, location } from '../icons';
 
 export interface IMatchUpCardProps {
   id: string;
@@ -26,28 +24,17 @@ export interface IMatchUpCardProps {
   date: string;
   indoor: boolean;
   participating: number;
-  addToWatchlist?: UseMutationResult<
-    string | WatchList,
-    unknown,
-    WatchList,
-    unknown
-  >;
-  watchList?: WatchList[];
-  currentUserId?: string;
 }
 
 const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
   const { colors, shadows } = useTheme();
 
   const isFinished = new Date(props.date) < new Date();
-  const isInWatchlist =
-    props.watchList &&
-    props.watchList.some((match) => match.matchUpId === props.id);
   const remainingSlots = props.attendanceMax - props.participating;
 
   if (props.variant === 'large')
     return (
-      <Link href={`/MatchUps/${props.id}`}>
+      <Link href={`/MatchUps/${props.id}`} passHref>
         <div
           className={styles.largeWrapper}
           style={{
@@ -56,28 +43,6 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
             opacity: isFinished ? 0.5 : 1,
           }}
         >
-          <div
-            className={styles.watchList}
-            onClick={() =>
-              props.currentUserId &&
-              props.addToWatchlist?.mutate({
-                userId: props.currentUserId as string,
-                matchUpId: props.id as string,
-              })
-            }
-          >
-            <svg
-              style={{ opacity: isInWatchlist ? 0.8 : 0.5 }}
-              width='14px'
-              height='21px'
-              viewBox={watchListOnCard.viewBox}
-            >
-              {isInWatchlist
-                ? watchListOnCard.path.active
-                : watchListOnCard.path.inActive}
-            </svg>
-          </div>
-
           <div className={styles.imageWrapper}>
             <ImageFallback
               src={props.image as string}

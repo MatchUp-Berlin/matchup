@@ -25,16 +25,17 @@ import { getMatchUpsByFilter } from '../utils/Query/getMatchUpsByFilter.util';
 import { initializeMapExplorer } from '../utils/Maps/initializeMapExplorer.util';
 import { MatchUp, TCity, TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
 import { getNextDayOfTheWeek } from '../utils/getNextDayOfTheWeek';
-import { arrow } from '../components/icons';
+import { arrow, watchListOnCard } from '../components/icons';
 import Empty from '../components/misc/Empty';
 import { createNewWatchList } from '../utils/Mutation/createWatchList.util';
 import { useAuth } from '../contexts/Auth';
-import { WatchList } from '../utils/types/WatchList.Type';
 import GhostMatchUpCard from '../components/cards/GhostMatchUpCard';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
   const { colors } = useTheme();
   const { currentUserId, currentUser } = useAuth();
+  const router = useRouter();
 
   /* --------------- FILTER STATE */
   const [categories, setCategories] = useState<TSportCategories[]>([]);
@@ -166,30 +167,52 @@ const Home: NextPage = () => {
                 <LoadingSpinner />
               </div>
             )}
-            {matchUps?.items.map((matchup: MatchUp) => (
-              <>
-                <MatchUpCard
-                  key={matchup.id}
-                  id={matchup.id as string}
-                  variant="large"
-                  date={matchup.date as string}
-                  indoor={matchup?.indoor as boolean}
-                  title={matchup.title as string}
-                  attendanceMax={matchup.attendanceMax as number}
-                  participating={matchup.signups?.items?.length || 0}
-                  location={matchup.location as string}
-                  sportCategory={matchup.sportCategory as TSportCategories}
-                  skillLevel={matchup.skillLevel as TSkillLevels}
-                  image={matchup.image as string}
-                  totalCost={matchup.totalCost as number}
-                  reservedCourt={matchup.reservedCourt as boolean}
-                  addToWatchlist={mutation}
-                  currentUserId={currentUserId as string}
-                  watchList={currentUser?.watchList.items as WatchList[]}
-                ></MatchUpCard>
-                <div id="map" className={styles.nodisplaymap}></div>
-              </>
-            ))}
+            {matchUps?.items.map((matchup: MatchUp) => {
+              const isInWatchlist =
+                currentUser?.watchList.items &&
+                currentUser?.watchList.items.some((match) => match.matchUpId === matchup.id);
+              return (
+                <div key={matchup.id} className={styles.matchUpCard}>
+                  {/* SAVING TO WATCHLIST */}
+                  <div
+                    className={styles.watchList}
+                    onClick={() =>
+                      currentUserId
+                        ? mutation.mutate({
+                            userId: currentUserId as string,
+                            matchUpId: matchup.id as string,
+                          })
+                        : router.push('/SignIn')
+                    }
+                  >
+                    <svg
+                      style={{ opacity: isInWatchlist ? 0.8 : 0.5 }}
+                      width="14px"
+                      height="21px"
+                      viewBox={watchListOnCard.viewBox}
+                    >
+                      {isInWatchlist ? watchListOnCard.path.active : watchListOnCard.path.inActive}
+                    </svg>
+                  </div>
+                  {/* MATCHUPCARD */}
+                  <MatchUpCard
+                    id={matchup.id as string}
+                    variant="large"
+                    date={matchup.date as string}
+                    indoor={matchup?.indoor as boolean}
+                    title={matchup.title as string}
+                    attendanceMax={matchup.attendanceMax as number}
+                    participating={matchup.signups?.items?.length || 0}
+                    location={matchup.location as string}
+                    sportCategory={matchup.sportCategory as TSportCategories}
+                    skillLevel={matchup.skillLevel as TSkillLevels}
+                    image={matchup.image as string}
+                    totalCost={matchup.totalCost as number}
+                    reservedCourt={matchup.reservedCourt as boolean}
+                  ></MatchUpCard>
+                </div>
+              );
+            })}
           </div>
         )}
 
