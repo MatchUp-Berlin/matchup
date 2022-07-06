@@ -67,6 +67,11 @@ export const getUser = /* GraphQL */ `
             image
             date
             currency
+            signups {
+              items {
+                id
+              }
+            }
           }
         }
         nextToken
