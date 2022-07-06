@@ -70,39 +70,41 @@ const Filter: React.FunctionComponent<IFilterProps> = (props) => {
       <select
         style={{
           borderColor: darkMode ? colors.background[80] : '#DDDDDD',
-          color: '#757575',
+          color: colors.text[60],
           outlineColor: colors.primary[80],
+          backgroundColor: colors.background[100],
         }}
         value={props.city}
         onChange={(e) => props.setCity(e.target.value as TCity)}
-        placeholder='Search for a city'
+        placeholder="Search for a city"
         className={styles.input + ' ' + styles.location}
       >
-        <option value='berlin'>berlin</option>
-        <option value='hamburg'>hamburg</option>
-        <option value='münchen'>münchen</option>
-        <option value='köln'>köln</option>
-        <option value='frankfurtamMain'>frankfurt am Main</option>
-        <option value='stuttgart'>stuttgart</option>
-        <option value='dortmund'>dortmund</option>
-        <option value='düsseldorf'>düsseldorf</option>
-        <option value='bremen'>bremen</option>
-        <option value='hannover'>hannover</option>
+        <option value="berlin">berlin</option>
+        <option value="hamburg">hamburg</option>
+        <option value="münchen">münchen</option>
+        <option value="köln">köln</option>
+        <option value="frankfurtamMain">frankfurt am Main</option>
+        <option value="stuttgart">stuttgart</option>
+        <option value="dortmund">dortmund</option>
+        <option value="düsseldorf">düsseldorf</option>
+        <option value="bremen">bremen</option>
+        <option value="hannover">hannover</option>
       </select>
       <select
         style={{
           borderColor: darkMode ? colors.background[80] : '#DDDDDD',
-          color: '#757575',
+          color: colors.text[60],
           outlineColor: colors.primary[80],
+          backgroundColor: colors.background[100],
         }}
-        placeholder='Select time'
+        placeholder="Select time"
         className={styles.input + ' ' + styles.date}
         onChange={handleTimeFrameChange}
       >
-        <option value='this-week'>This week</option>
-        <option value='this-weekend'>This Weekend</option>
-        <option value='next-week'>Next Week</option>
-        <option value='all'>All</option>
+        <option value="this-week">This week</option>
+        <option value="this-weekend">This Weekend</option>
+        <option value="next-week">Next Week</option>
+        <option value="all">All</option>
       </select>
     </div>
   );
