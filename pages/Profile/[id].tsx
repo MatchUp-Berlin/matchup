@@ -193,39 +193,36 @@ const ProfileDetailPage: NextPage = () => {
                     Organized {organizedCountData || 0} MatchUps
                   </p>
                   <div className={styles.cardsWrapper}>
-                    <div className={styles.cardsWrapper}>
-                      {organizedCountIsRefetching && (
-                        <div className={styles.refetchWrapper}>
-                          <LoadingSpinner />
-                        </div>
-                      )}
-                      {organizedQuery.data?.items.map((organized) => (
-                        <>
-                          <MatchUpCard
-                            key={organized.matchUp.id}
-                            id={organized.matchUp.id as string}
-                            variant="small"
-                            date={organized.matchUp.date as string}
-                            indoor={organized.matchUp.indoor as boolean}
-                            title={organized.matchUp.title as string}
-                            attendanceMax={organized.matchUp.attendanceMax as number}
-                            participating={organized.matchUp.signups?.items?.length || 0}
-                            location={organized.matchUp.location as string}
-                            sportCategory={organized.matchUp.sportCategory as TSportCategories}
-                            skillLevel={organized.matchUp.skillLevel as TSkillLevels}
-                            image={organized.matchUp.image as string}
-                            totalCost={organized.matchUp.totalCost as number}
-                            reservedCourt={organized.matchUp.reservedCourt as boolean}
-                          ></MatchUpCard>
-                          <div id="map" className={styles.nodisplaymap}></div>
-                        </>
-                      ))}
-                      <Button
-                        variant="secondary"
-                        callback={() => organizedQuery.refetch()}
-                        text={'Show more'}
-                      ></Button>
-                    </div>
+                    {organizedCountIsRefetching && (
+                      <div className={styles.refetchWrapper}>
+                        <LoadingSpinner />
+                      </div>
+                    )}
+                    {organizedQuery.data?.items.map((organized) => (
+                      <>
+                        <MatchUpCard
+                          key={organized.matchUp.id}
+                          id={organized.matchUp.id as string}
+                          variant="small"
+                          date={organized.matchUp.date as string}
+                          indoor={organized.matchUp.indoor as boolean}
+                          title={organized.matchUp.title as string}
+                          attendanceMax={organized.matchUp.attendanceMax as number}
+                          participating={organized.matchUp.signups?.items?.length || 0}
+                          location={organized.matchUp.location as string}
+                          sportCategory={organized.matchUp.sportCategory as TSportCategories}
+                          skillLevel={organized.matchUp.skillLevel as TSkillLevels}
+                          image={organized.matchUp.image as string}
+                          totalCost={organized.matchUp.totalCost as number}
+                          reservedCourt={organized.matchUp.reservedCourt as boolean}
+                        ></MatchUpCard>
+                      </>
+                    ))}
+                    <Button
+                      variant="secondary"
+                      callback={() => organizedQuery.refetch()}
+                      text={'Show more'}
+                    ></Button>
                   </div>
                 </div>
               </>
