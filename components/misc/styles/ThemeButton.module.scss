@@ -1,10 +1,9 @@
 .themeButton {
   position: fixed;
   right: 1em;
-  bottom: 6.5em;
-  height: 3em;
-  width: 3em;
-
+  bottom: calc(75px + 1em);
+  height: 3.5em;
+  width: 3.5em;
   z-index: 10;
   border-radius: 50%;
 
