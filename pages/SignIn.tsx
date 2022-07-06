@@ -52,6 +52,7 @@ const SignInPage: NextPage = () => {
       user && router.push('/');
     } catch (err) {
       console.log(err);
+      setLoginLoading(false);
       if (err == 'UserNotConfirmedException: User is not confirmed.') setCurrentForm('verification');
       setLoginError('Please check your credentials.');
     }
@@ -80,6 +81,7 @@ const SignInPage: NextPage = () => {
         setRegistrationError('There has been an error. Please try again.');
       }
     } else {
+      setLoginLoading(false);
       setRegistrationLoading(false);
       setRegistrationError('Passwords do not match. Please try again.');
     }
@@ -95,6 +97,7 @@ const SignInPage: NextPage = () => {
       user && router.push('/');
     } catch (err) {
       console.log(err);
+      setLoginLoading(false);
       setVerificationLoading(false);
       setVerificationError('Error. Please try again.');
     }
