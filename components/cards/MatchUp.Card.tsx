@@ -45,8 +45,6 @@ const MatchUpCard: React.FunctionComponent<IMatchUpCardProps> = (props) => {
     props.watchList.some((match) => match.matchUpId === props.id);
   const remainingSlots = props.attendanceMax - props.participating;
 
-  console.log(remainingSlots);
-
   if (props.variant === 'large')
     return (
       <Link href={`/MatchUps/${props.id}`}>
