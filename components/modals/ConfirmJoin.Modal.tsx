@@ -38,11 +38,11 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         queryClient.invalidateQueries(['matchup', props.matchUp.id]);
         props.setShowModal(false);
       })
-      .then((res) => fetch('/api/checkout_sessions', {method: 'POST'}))
       .catch((err: any) => console.log(err));
   };
 
   const handleCancel = () => {
+    console.log('banana')
     removeUserFromMatchUp(currentUserId || '', props.matchUp.id || '')
       .then((res: any) => {
         queryClient.invalidateQueries(['matchup', props.matchUp.id]);
@@ -140,21 +140,32 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         >
           Read more about our local charities and commitment policy
         </a>
-
-        <a
-          style={{ backgroundColor: colors.primary[100]}}
-          className={styles.modelConfirm}
-          // href={props.isSignedUp ? '': "https://buy.stripe.com/test_cN29BV4Dv7R03T2cMM"}
-          onClick={
-            props.isSignedUp ? () => handleCancel() : () => handleCommit()
+        {!props.isSignedUp &&<form
+        action={"/api/checkout_sessions"}
+        method={"POST"}>
+        <Button
+          variant='primary'
+          callback={
+            () => handleCommit()
           }
-        >{
-          !props.isSignedUp
-            ? 'Commit'
-            : props.isWithin24Hours
-            ? 'Donate 5€'
-            : 'Cancel'
-        }</a>
+          text={'Commit'
+          }
+          disabled={false}
+        ></Button>
+        </form>}
+        {props.isSignedUp &&
+        <Button
+          variant='primary'
+          callback={() =>
+            handleCancel()
+          }
+          text={
+              props.isWithin24Hours
+              ? 'Donate 5€'
+              : 'Cancel'
+          }
+          disabled={false}
+        ></Button>}
       </div>
     </div>
   );
