@@ -2,7 +2,7 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 7em;
+  bottom: calc(75px + 1em);
   z-index: 10;
 
   padding: 0.8em 1.3em;
