@@ -38,7 +38,7 @@ const ProfileDetailPage: NextPage = () => {
   function uploadProfileImage() {
     let input = document.createElement('input');
     input.type = 'file';
-    input.setAttribute('multiple', false);
+    input.setAttribute('multiple', "false");
     input.setAttribute('accept', 'image/*');
     input.onchange = function (event) {
       currentUserId &&
