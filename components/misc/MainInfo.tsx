@@ -25,7 +25,7 @@ const MainInfo: React.FunctionComponent<IMainInfoProps> = (props) => {
       <h1 style={{ color: colors.text[100] }}>
         {props.title}
         <span>
-          <Image width={'30px'} height={'30px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
+          <Image width={'32px'} height={'32px'} src={getSportIcon(props.sport)} alt={props.sport}></Image>
         </span>
       </h1>
       {/* DETAILS */}

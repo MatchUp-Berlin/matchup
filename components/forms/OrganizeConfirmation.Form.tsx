@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { useTheme } from '../../contexts/Theme';
 import { TCity, TSkillLevels, TSportCategories } from '../../utils/types/MatchUp.Type';
-import { SkillsCard, SlotsCard } from '../cards';
 import { initializeMap } from '../../utils/Maps/initializeMap.util';
 import MainInfo from '../misc/MainInfo';
 import styles from './styles/OrganizeConfirmation.Form.module.scss';
 import { TAddress } from '../../utils/types/Address.Type';
+import BigPill from '../cards/BigPill.Card';
 
 export interface IOrganizeConfirmationFormProps {
   title: string;
-  address: TAddress
+  address: TAddress;
   sportCategory: TSportCategories | undefined;
   timestamp: string;
   location: TCity;
@@ -24,8 +24,8 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
   const { colors, darkMode } = useTheme();
 
   useEffect(() => {
-    initializeMap(props.address, true)
-  })
+    initializeMap(props.address, true);
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -41,8 +41,8 @@ const OrganizeConfirmationForm: React.FunctionComponent<IOrganizeConfirmationFor
 
       {/*  ------BIG PILLS------  */}
       <div className={styles.bigPills}>
-        <SkillsCard skillLevel={props.skillLevel}></SkillsCard>
-        <SlotsCard slots={props.attendanceMax} attending={0}></SlotsCard>
+        <BigPill filled title="Skill" text={props.skillLevel}></BigPill>
+        <BigPill filled={false} text={`0 / ${props.attendanceMax}`} title="Coming"></BigPill>
       </div>
 
       <div
