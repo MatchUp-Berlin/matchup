@@ -74,11 +74,11 @@
 
 .map {
   pointer-events: none;
-  overflow: hidden;
   border-radius: 10px;
   height: 30vh;
   width: 100%;
-  z-index: 0;
+  position: relative;
+  color: white;
 }
 
 .nodisplaymap {
