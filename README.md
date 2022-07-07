@@ -16,7 +16,7 @@ yarn dev
 
 ## Backend
 
-This app runs on AWS Amplfy
+This app runs on AWS Ampilfy
 
 To set it up follow the instructions at [AWS Amplify](https://docs.amplify.aws/cli/start/install/)
 
@@ -29,7 +29,7 @@ aws_appsync_apiKey="api-key-example" <br>
 aws_user_files_s3_bucket="s3-bucket-name-example" <br>
 
 The environment variables and duplicated aws-exports file is for [Vercel deployment](https://vercel.com/). <br>
-Their need is located at src/exportdata.js and next.config.js
+These process.env variables are used in the following files: src/exportdata.js and next.config.js
 
 ### context for aws-exports.js and exportdata.js
 If we were to deploy on AWS Amplify, AWS would generate the aws-exports file for its deployment but vercel does not do this.
