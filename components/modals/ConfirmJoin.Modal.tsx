@@ -25,9 +25,9 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
   const queryClient = useQueryClient();
   const { currentUserId } = useAuth();
 
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-  );
+  // const stripePromise = loadStripe(
+  //   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  // );
 
   const handleCommit = () => {
     addUserToMatchUp({
@@ -42,7 +42,6 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
   };
 
   const handleCancel = () => {
-    console.log('banana')
     removeUserFromMatchUp(currentUserId || '', props.matchUp.id || '')
       .then((res: any) => {
         queryClient.invalidateQueries(['matchup', props.matchUp.id]);
@@ -140,32 +139,28 @@ const ConfirmJoinModal: React.FunctionComponent<IConfirmJoinModalProps> = (
         >
           Read more about our local charities and commitment policy
         </a>
-        {!props.isSignedUp &&<form
-        action={"/api/checkout_sessions"}
-        method={"POST"}>
-        <Button
-          variant='primary'
-          callback={
-            () => handleCommit()
-          }
-          text={'Commit'
-          }
-          disabled={false}
-        ></Button>
-        </form>}
-        {props.isSignedUp &&
-        <Button
-          variant='primary'
-          callback={() =>
-            handleCancel()
-          }
-          text={
-              props.isWithin24Hours
-              ? 'Donate 5€'
-              : 'Cancel'
-          }
-          disabled={false}
-        ></Button>}
+        {
+          !props.isSignedUp && (
+            // <form
+            // action={"/api/checkout_sessions"}
+            // method={"POST"}>
+            <Button
+              variant='primary'
+              callback={() => handleCommit()}
+              text={'Commit'}
+              disabled={false}
+            ></Button>
+          )
+          // </form>
+        }
+        {props.isSignedUp && (
+          <Button
+            variant='primary'
+            callback={() => handleCancel()}
+            text={props.isWithin24Hours ? 'Donate 5€' : 'Cancel'}
+            disabled={false}
+          ></Button>
+        )}
       </div>
     </div>
   );
