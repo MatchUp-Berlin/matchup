@@ -14,25 +14,41 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Backend
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+This app runs on AWS Ampilfy
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+To set it up follow the instructions at [AWS Amplify](https://docs.amplify.aws/cli/start/install/)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Environment Variables
 
-## Learn More
+Take these specific variables from the js file generated at src/aws-exports.js and create the env data listed below at /.env.local
 
-To learn more about Next.js, take a look at the following resources:
+aws_appsync_graphqlEndpoint="https://example-endpoint/graphql" <br>
+aws_appsync_apiKey="api-key-example" <br>
+aws_user_files_s3_bucket="s3-bucket-name-example" <br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The environment variables and duplicated aws-exports file is for [Vercel deployment](https://vercel.com/). <br>
+These process.env variables are used in the following files: src/exportdata.js and next.config.js
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### context for aws-exports.js and exportdata.js
+If we were to deploy on AWS Amplify, AWS would generate the aws-exports file for its deployment but vercel does not do this.
+aws-exports contains some sensitive data so we need to duplicate it and provide the process.env data.
+aws-exports will be regenerated in your repo on every amplify push/pull so better to just duplicate it.
 
-## Deploy on Vercel
+If you deploy on vercel make sure to add these environment variables on that vercel project as well.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Stripe Integration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+for stripe integration located at pages/api/checkout_sessions
+
+add the environment variables
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="exmaple-public-key" <br>
+STRIPE_SECRET_KEY="example-secret-key"
+
+## PWA 
+
+This app is deployed as a PWA on Apple App Store and Google Play
+
+To do the same generate the needed packages at [PWA Builder](https://www.pwabuilder.com/) and follow their instructions for publishing.
