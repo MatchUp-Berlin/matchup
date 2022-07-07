@@ -7,6 +7,7 @@ import Navigation from '../components/misc/Navigation';
 import { useAuth } from '../contexts/Auth';
 import { useTheme } from '../contexts/Theme';
 import { TSkillLevels, TSportCategories } from '../utils/types/MatchUp.Type';
+import { WatchList } from '../utils/types/WatchList.Type';
 import styles from './styles/WatchList.module.scss';
 
 const WatchListPage: NextPage = () => {
@@ -17,6 +18,35 @@ const WatchListPage: NextPage = () => {
   useEffect(() => {
     if (!currentUserId) router.push('/SignIn');
   }, [currentUserId]);
+
+  const sortWatchlistItems = (watchlistItems: WatchList[]) => {
+    const pastMatchUps = watchlistItems
+      .filter(
+        (watchlist: any) =>
+          Date.parse(watchlist.matchUp.date) <
+          Date.parse(new Date().toISOString() || '')
+      )
+
+      .sort(
+        (a: WatchList, b: WatchList) =>
+          Date.parse(a?.matchUp?.date || '') -
+          Date.parse(b?.matchUp?.date || '')
+      );
+
+    const futureMatchUps = watchlistItems
+      .filter(
+        (watchlist: any) =>
+          Date.parse(watchlist.matchUp.date) >
+          Date.parse(new Date().toISOString() || '')
+      )
+      .sort(
+        (a: WatchList, b: WatchList) =>
+          Date.parse(a?.matchUp?.date || '') -
+          Date.parse(b?.matchUp?.date || '')
+      );
+
+    return [...futureMatchUps, ...pastMatchUps];
+  };
 
   return (
     <>
@@ -32,28 +62,30 @@ const WatchListPage: NextPage = () => {
           <div className={styles.cardsWrapper}>
             {currentUser &&
               currentUser.watchList.items.length != 0 &&
-              currentUser.watchList.items.map((watchlist) => (
-                <MatchUpCard
-                  key={watchlist?.matchUp?.id}
-                  id={watchlist?.matchUp?.id as string}
-                  variant='medium'
-                  date={watchlist?.matchUp?.date as string}
-                  indoor={watchlist.matchUp?.indoor as boolean}
-                  title={watchlist?.matchUp?.title as string}
-                  attendanceMax={watchlist?.matchUp?.attendanceMax as number}
-                  participating={
-                    watchlist?.matchUp?.signups?.items?.length || 0
-                  }
-                  location={watchlist?.matchUp?.location as string}
-                  sportCategory={
-                    watchlist?.matchUp?.sportCategory as TSportCategories
-                  }
-                  skillLevel={watchlist?.matchUp?.skillLevel as TSkillLevels}
-                  image={watchlist?.matchUp?.image as string}
-                  totalCost={watchlist?.matchUp?.totalCost as number}
-                  reservedCourt={watchlist?.matchUp?.reservedCourt as boolean}
-                ></MatchUpCard>
-              ))}
+              sortWatchlistItems(currentUser.watchList.items).map(
+                (watchlist) => (
+                  <MatchUpCard
+                    key={watchlist?.matchUp?.id}
+                    id={watchlist?.matchUp?.id as string}
+                    variant='medium'
+                    date={watchlist?.matchUp?.date as string}
+                    indoor={watchlist.matchUp?.indoor as boolean}
+                    title={watchlist?.matchUp?.title as string}
+                    attendanceMax={watchlist?.matchUp?.attendanceMax as number}
+                    participating={
+                      watchlist?.matchUp?.signups?.items?.length || 0
+                    }
+                    location={watchlist?.matchUp?.location as string}
+                    sportCategory={
+                      watchlist?.matchUp?.sportCategory as TSportCategories
+                    }
+                    skillLevel={watchlist?.matchUp?.skillLevel as TSkillLevels}
+                    image={watchlist?.matchUp?.image as string}
+                    totalCost={watchlist?.matchUp?.totalCost as number}
+                    reservedCourt={watchlist?.matchUp?.reservedCourt as boolean}
+                  ></MatchUpCard>
+                )
+              )}
           </div>
         )}
         <Navigation />
