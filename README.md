@@ -47,7 +47,7 @@ add the environment variables
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="exmaple-public-key" <br>
 STRIPE_SECRET_KEY="example-secret-key"
 
-# PWA 
+## PWA 
 
 This app is deployed as a PWA on Apple App Store and Google Play
 
