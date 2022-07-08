@@ -2,6 +2,31 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/mitcheman/matchup/badge)](https://www.codefactor.io/repository/github/mitcheman/matchup)
 
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="http://matchup.vercel.app/">
+    <img src="public/logopwa.png" alt="Logo" width="60" height="60">
+  </a>
+
+  <h4 align="center">MatchUp</h4>
+
+  <p align="center">
+    Find local sport matches
+    <br/>
+    <a href="https://youtu.be/vILG4DxNP4w">Beta walkthrough</a>
+  </p>
+</div>
+
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](http://matchup.vercel.app/)
+
+Looking for a fun and easy way to meet up and play sports with locals in your city? MatchUp makes it simple and quick to connect with other sports enthusiasts in your area so you can hit the court, field, or course in no time!
+By requiring a small commitment deposit of 5€, we make sure that people that signed up to a MatchUp actually appear. If they do,
+the deposit gets refunded - but if not, it will be automatically donated to a local charity organization.
+
 ## Getting Started
 
 ```bash
@@ -18,8 +43,8 @@ To set it up follow the instructions at [AWS Amplify](https://docs.amplify.aws/c
 
 ## Environment Variables
 
-Take these specific variables from the js file generated at src/aws-exports.js and create the env data listed below at /.env.local
-http://127.0.0.1:8000/
+Take these specific variables from the js file generated at src/aws-exports.js and create the env data listed below at <code>/.env.local</code>
+
 ```bash
 aws_appsync_graphqlEndpoint="https://example-endpoint/graphql"
 aws_appsync_apiKey="api-key-example"
@@ -52,3 +77,6 @@ STRIPE_SECRET_KEY="example-secret-key"
 This app is deployed as a PWA on Apple App Store and Google Play
 
 To do the same generate the needed packages at [PWA Builder](https://www.pwabuilder.com/) and follow their instructions for publishing.
+
+
+[product-screenshot]: ./product-screenshot.png
