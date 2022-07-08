@@ -9,7 +9,6 @@ export async function createNewUpdate(updateData: CreateUpdateInput): Promise<Up
       variables: { input: updateData },
       // authMode: 'AMAZON_COGNITO_USER_POOLS'
     });
-    console.log(newUpdate);
     const newUpdateData = newUpdate.data.createUpdate;
     return newUpdateData;
   } catch (error) {

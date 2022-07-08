@@ -185,7 +185,7 @@ const SignInPage: NextPage = () => {
               isLoading={registrationLoading}
             />
             <p className={styles.bottomText + ' small'}>
-              Already have an account?{' '}
+              Don&#8217;t have an account?{' '}
               <span onClick={() => setCurrentForm('login')} style={{ color: colors.primary[100] }}>
                 Sign in
               </span>
@@ -209,7 +209,7 @@ const SignInPage: NextPage = () => {
               isLoading={loginLoading}
             />
             <p className={styles.bottomText + ' small'}>
-              Already have an account?{' '}
+            Don&#8217;t have an account?{' '}
               <span onClick={() => setCurrentForm('registration')} style={{ color: colors.primary[100] }}>
                 Sign up
               </span>
