@@ -1,10 +1,21 @@
-.mapButton {
+.wrapper {
+  width: 100%;
+  height: calc(75px + 50px + 1em);
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: calc(75px + 1em);
-  z-index: 10;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 
+  .buttonWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.mapButton {
   padding: 0.8em 1.3em;
   border-radius: 50px;
 
@@ -24,6 +35,6 @@
   transition: 0.3s;
   &:hover {
     cursor: pointer;
-    transform: translateX(-50%) scale(1.1);
+    transform: scale(1.1);
   }
 }
