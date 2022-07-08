@@ -2,11 +2,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/mitcheman/matchup/badge)](https://www.codefactor.io/repository/github/mitcheman/matchup)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
-
-First, run the development server:
 
 ```bash
 npm run dev
@@ -23,10 +19,12 @@ To set it up follow the instructions at [AWS Amplify](https://docs.amplify.aws/c
 ## Environment Variables
 
 Take these specific variables from the js file generated at src/aws-exports.js and create the env data listed below at /.env.local
-
-aws_appsync_graphqlEndpoint="https://example-endpoint/graphql" <br>
-aws_appsync_apiKey="api-key-example" <br>
-aws_user_files_s3_bucket="s3-bucket-name-example" <br>
+http://127.0.0.1:8000/
+```bash
+aws_appsync_graphqlEndpoint="https://example-endpoint/graphql"
+aws_appsync_apiKey="api-key-example"
+aws_user_files_s3_bucket="s3-bucket-name-example"
+```
 
 The environment variables and duplicated aws-exports file is for [Vercel deployment](https://vercel.com/). <br>
 These process.env variables are used in the following files: src/exportdata.js and next.config.js
@@ -44,8 +42,10 @@ for stripe integration located at pages/api/checkout_sessions
 
 add the environment variables
 
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="exmaple-public-key" <br>
+```bash
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="exmaple-public-key"
 STRIPE_SECRET_KEY="example-secret-key"
+```
 
 ## PWA 
 
