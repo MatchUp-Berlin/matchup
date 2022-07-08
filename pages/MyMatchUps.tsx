@@ -33,37 +33,22 @@ const YourMatchUpsPage: NextPage = () => {
   const sortSignUps = (signups: SignUp[]): SignUp[] => {
     const pastSignUps = signups
       .filter(
-        (signup) =>
-          Date.parse(signup?.matchUp?.date || '') <
-          Date.parse(new Date().toISOString() || '')
+        (signup) => Date.parse(signup?.matchUp?.date || '') < Date.parse(new Date().toISOString() || '')
       )
-      .sort(
-        (a, b) =>
-          Date.parse(a?.matchUp?.date || '') -
-          Date.parse(b?.matchUp?.date || '')
-      );
+      .sort((a, b) => Date.parse(a?.matchUp?.date || '') - Date.parse(b?.matchUp?.date || ''));
 
     const futureSignUps = signups
       .filter(
-        (signup) =>
-          Date.parse(signup?.matchUp?.date || '') >=
-          Date.parse(new Date().toISOString() || '')
+        (signup) => Date.parse(signup?.matchUp?.date || '') >= Date.parse(new Date().toISOString() || '')
       )
-      .sort(
-        (a, b) =>
-          Date.parse(a?.matchUp?.date || '') -
-          Date.parse(b?.matchUp?.date || '')
-      );
+      .sort((a, b) => Date.parse(a?.matchUp?.date || '') - Date.parse(b?.matchUp?.date || ''));
 
     return [...futureSignUps, ...pastSignUps];
   };
 
   return (
     <>
-      <div
-        className={styles.wrapper}
-        style={{ backgroundColor: colors.background[100] }}
-      >
+      <div className={styles.wrapper} style={{ backgroundColor: colors.background[100] }}>
         {/* -----TABS----- */}
         <div className={styles.tabs}>
           <p
@@ -94,9 +79,8 @@ const YourMatchUpsPage: NextPage = () => {
             {organizedQuery.isLoading ? (
               <LoadingSpinner />
             ) : organizedQuery.isError ? (
-              <Empty text='Something went wrong.' />
-            ) : organizedQuery.isSuccess &&
-              organizedQuery.data.items.length == 0 ? (
+              <Empty text="Something went wrong." />
+            ) : organizedQuery.isSuccess && organizedQuery.data.items.length == 0 ? (
               <Empty text="You haven't participated in a MatchUp yet." />
             ) : (
               organizedQuery.data && (
@@ -107,28 +91,18 @@ const YourMatchUpsPage: NextPage = () => {
                         <MatchUpCard
                           key={signup?.matchUp?.id}
                           id={signup?.matchUp?.id as string}
-                          variant='medium'
+                          variant="medium"
                           date={signup?.matchUp?.date as string}
                           indoor={signup.matchUp?.indoor as boolean}
                           title={signup?.matchUp?.title as string}
-                          attendanceMax={
-                            signup?.matchUp?.attendanceMax as number
-                          }
-                          participating={
-                            signup?.matchUp?.signups?.items?.length || 0
-                          }
+                          attendanceMax={signup?.matchUp?.attendanceMax as number}
+                          participating={signup?.matchUp?.signups?.items?.length || 0}
                           location={signup?.matchUp?.location as string}
-                          sportCategory={
-                            signup?.matchUp?.sportCategory as TSportCategories
-                          }
-                          skillLevel={
-                            signup?.matchUp?.skillLevel as TSkillLevels
-                          }
+                          sportCategory={signup?.matchUp?.sportCategory as TSportCategories}
+                          skillLevel={signup?.matchUp?.skillLevel as TSkillLevels}
                           image={signup?.matchUp?.image as string}
                           totalCost={signup?.matchUp?.totalCost as number}
-                          reservedCourt={
-                            signup?.matchUp?.reservedCourt as boolean
-                          }
+                          reservedCourt={signup?.matchUp?.reservedCourt as boolean}
                         ></MatchUpCard>
                       ))}
                   </div>
@@ -148,18 +122,14 @@ const YourMatchUpsPage: NextPage = () => {
                     <MatchUpCard
                       key={signup?.matchUp?.id}
                       id={signup?.matchUp?.id as string}
-                      variant='medium'
+                      variant="medium"
                       date={signup?.matchUp?.date as string}
                       indoor={signup.matchUp?.indoor as boolean}
                       title={signup?.matchUp?.title as string}
                       attendanceMax={signup?.matchUp?.attendanceMax as number}
-                      participating={
-                        signup?.matchUp?.signups?.items?.length || 0
-                      }
+                      participating={signup?.matchUp?.signups?.items?.length || 0}
                       location={signup?.matchUp?.location as string}
-                      sportCategory={
-                        signup?.matchUp?.sportCategory as TSportCategories
-                      }
+                      sportCategory={signup?.matchUp?.sportCategory as TSportCategories}
                       skillLevel={signup?.matchUp?.skillLevel as TSkillLevels}
                       image={signup?.matchUp?.image as string}
                       totalCost={signup?.matchUp?.totalCost as number}
@@ -170,8 +140,8 @@ const YourMatchUpsPage: NextPage = () => {
             )}
           </>
         )}
+        <Navigation/>
       </div>
-      <Navigation></Navigation>
     </>
   );
 };

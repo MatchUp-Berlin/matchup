@@ -1,21 +1,22 @@
 .wrapper {
-  width: 100vw;
+  width: 100%;
   position: fixed;
   bottom: 0;
-  left: 0;
-  padding: 1em;
+  margin-left: -1em;
+  padding: 1em 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: row;
   border-top-width: 1px;
   border-top-style: solid;
-  z-index: 1;
+  z-index: 2;
 
   p {
     font-weight:500;
   }
 
   .link {
+    width: 4em;
     display: flex;
     flex-direction: column;
     gap: 5px;

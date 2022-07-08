@@ -266,9 +266,9 @@ const ProfileDetailPage: NextPage = () => {
             >
               Sign out
             </p>
+            <ThemeButton />
+            <Navigation />
           </section>
-          <ThemeButton />
-          <Navigation />
         </div>
       </>
     );
@@ -279,6 +279,7 @@ const ProfileDetailPage: NextPage = () => {
       <div className={styles.closeButton}>
         <SmallButton viewBox={close.viewBox} icon={close.path} />
       </div>
+
       {userQuery.isLoading ? (
         <div className={styles.loadingWrapper}>
           <LoadingSpinner />
@@ -428,13 +429,12 @@ const ProfileDetailPage: NextPage = () => {
               </div>
             </>
           )}
+          <ThemeButton />
+          <Navigation />
         </section>
       ) : (
         <></>
       )}
-
-      <ThemeButton />
-      <Navigation />
     </div>
   );
 };
