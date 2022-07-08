@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://heazy.studio/">
+  <a href="http://matchup.vercel.app/">
     <img src="public/favicon.ico" alt="Logo" width="60" height="60">
   </a>
 
@@ -18,6 +18,14 @@
     <a href="https://youtu.be/vILG4DxNP4w">Beta walkthrough</a>
   </p>
 </div>
+
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](http://matchup.vercel.app/)
+
+Looking for a fun and easy way to meet up and play sports with locals in your city? MatchUp makes it simple and quick to connect with other sports enthusiasts in your area so you can hit the court, field, or course in no time!
+By requiring a small commitment deposit of 5€, we make sure that people that signed up to a MatchUp actually appear. If they do,
+the deposit gets refunded - but if not, it will be automatically donated to a local charity organization.
 
 ## Getting Started
 
@@ -69,3 +77,6 @@ STRIPE_SECRET_KEY="example-secret-key"
 This app is deployed as a PWA on Apple App Store and Google Play
 
 To do the same generate the needed packages at [PWA Builder](https://www.pwabuilder.com/) and follow their instructions for publishing.
+
+
+[product-screenshot]: ./product-screenshot.png
