@@ -2,6 +2,23 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/mitcheman/matchup/badge)](https://www.codefactor.io/repository/github/mitcheman/matchup)
 
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://heazy.studio/">
+    <img src="public/favicon.ico" alt="Logo" width="60" height="60">
+  </a>
+
+  <h4 align="center">MatchUp</h4>
+
+  <p align="center">
+    Find local sport matches
+    <br/>
+    <a href="https://youtu.be/vILG4DxNP4w">Beta walkthrough</a>
+  </p>
+</div>
+
 ## Getting Started
 
 ```bash
@@ -18,7 +35,7 @@ To set it up follow the instructions at [AWS Amplify](https://docs.amplify.aws/c
 
 ## Environment Variables
 
-Take these specific variables from the js file generated at src/aws-exports.js and create the env data listed below at /.env.local
+Take these specific variables from the js file generated at src/aws-exports.js and create the env data listed below at <code>/.env.local</code>
 
 ```bash
 aws_appsync_graphqlEndpoint="https://example-endpoint/graphql"
