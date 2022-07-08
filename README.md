@@ -19,7 +19,7 @@ To set it up follow the instructions at [AWS Amplify](https://docs.amplify.aws/c
 ## Environment Variables
 
 Take these specific variables from the js file generated at src/aws-exports.js and create the env data listed below at /.env.local
-http://127.0.0.1:8000/
+
 ```bash
 aws_appsync_graphqlEndpoint="https://example-endpoint/graphql"
 aws_appsync_apiKey="api-key-example"
