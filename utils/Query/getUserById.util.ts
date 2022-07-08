@@ -14,7 +14,6 @@ export async function getUserById(id: string): Promise<User> {
 
     // Fill pictures for user
     if (retrievedUserData) {
-      console.log(retrievedUserData)
       retrievedUserData.profileImage = await Storage.get(id);
     }
 
