@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="http://matchup.vercel.app/">
-    <img src="public/favicon.ico" alt="Logo" width="60" height="60">
+    <img src="public/logopwa.png" alt="Logo" width="60" height="60">
   </a>
 
   <h4 align="center">MatchUp</h4>
