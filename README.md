@@ -43,7 +43,7 @@ for stripe integration located at pages/api/checkout_sessions
 add the environment variables
 
 ```bash
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="exmaple-public-key" <br>
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="exmaple-public-key"
 STRIPE_SECRET_KEY="example-secret-key"
 ```
 
