@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="http://matchup.vercel.app/">
+  <a href="matchup-landing.vercel.app">
     <img src="public/logopwa.png" alt="Logo" width="60" height="60">
   </a>
 
@@ -23,7 +23,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](http://matchup.vercel.app/)
 
-Looking for a fun and easy way to meet up and play sports with locals in your city? MatchUp makes it simple and quick to connect with other sports enthusiasts in your area so you can hit the court, field, or course in no time!
+Looking for a fun and easy way to meet up and play sports with locals in your city? <a href="matchup-landing.vercel.app">MatchUp</a> makes it simple and quick to connect with other sports enthusiasts in your area so you can hit the court, field, or course in no time!
 By requiring a small commitment deposit of 5€, we make sure that people that signed up to a MatchUp actually appear. If they do,
 the deposit gets refunded - but if not, it will be automatically donated to a local charity organization.
 
