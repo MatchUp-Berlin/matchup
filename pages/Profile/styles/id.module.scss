@@ -90,3 +90,15 @@
     padding-bottom: 1em;
   }
 }
+
+.logoutWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .logout {
+    border: none;
+    background-color: transparent;
+    align-self: center;
+  }
+}

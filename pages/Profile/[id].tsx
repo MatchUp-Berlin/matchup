@@ -257,15 +257,17 @@ const ProfileDetailPage: NextPage = () => {
                 </div>
               </>
             )}
-            <p
-              onClick={() => {
-                logout().then(() => router.push('/'));
-              }}
-              className="small"
-              style={{ color: colors.primary[100], textAlign: 'center' }}
-            >
-              Sign out
-            </p>
+            <div className={styles.logoutWrapper}>
+              <button
+                onClick={() => {
+                  logout().then(() => router.push('/'));
+                }}
+                className={styles.logout}
+                style={{ color: colors.primary[100], textAlign: 'center' }}
+              >
+                Sign out
+              </button>
+            </div>
             <ThemeButton />
             <Navigation />
           </section>
