@@ -1,26 +1,10 @@
-.wrapper {
-  width: 100%;
-  height: calc(75px + 56px + 1em);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-
-  .buttonWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 1em;
-  }
-}
-
-
 .themeButton {
   height: 3.5em;
   width: 3.5em;
   border-radius: 50%;
+  position: fixed;
+  bottom: calc(75px + 1em);
+  right: 1em;
 
   border: none;
 
