@@ -9,8 +9,9 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2023-08-08T18:41:30.812Z",
+              "description": "vercel"
             }
           },
           "additionalAuthenticationProviders": [
