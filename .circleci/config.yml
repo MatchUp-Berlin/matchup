@@ -20,17 +20,15 @@ jobs:
                   region: 'eu-central-1'
 
 workflows:
-    scan:
+    build:
         jobs:
             - ggshield/scan:
                   name: ggshield-scan
                   base_revision: << pipeline.git.base_revision >>
                   revision: <<pipeline.git.revision>>
-    build:
-        jobs:
             - build:
                   requires:
-                      - scan
+                      - ggshield-scan
                   filters:
                       branches:
                           only: main
