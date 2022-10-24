@@ -11,8 +11,8 @@ jobs:
             - image: cimg/node:18.8.0
         steps:
             - checkout
-            - node/install-packages:
-                  cache-path: ~/project/node_modules
+            - run:
+                  command: npm ci
             - snyk/scan
     build:
         docker:
