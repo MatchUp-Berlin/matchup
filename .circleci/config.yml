@@ -14,6 +14,8 @@ jobs:
                   repo-scan-on-push: true
                   tag: 'latest'
                   role-arn: 'arn:aws:iam::$ACCOUNT_ID:role/ecr-manager'
+                  registry-id: $ACCOUNT_ID
+                  region: 'eu-central-1'
 
 workflows:
     build:
