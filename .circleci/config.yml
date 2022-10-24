@@ -12,7 +12,8 @@ jobs:
             - checkout
             - run:
                   command: npm ci
-            - snyk/scan
+            - snyk/scan:
+                  severity-threshold: high
     build:
         docker:
             - image: cimg/base:2022.10
@@ -24,7 +25,7 @@ jobs:
                   create-repo: false
                   repo: matchup
                   repo-scan-on-push: true
-                  tag: 'latest, $CIRCLE_BUILD_NUM'
+                  tag: 'latest, $CIRCLE_BUILD_NUM, $CIRCLE_SHA1'
                   role-arn: 'arn:aws:iam::$ACCOUNT_ID:role/ecr-manager'
                   region: 'eu-central-1'
 
