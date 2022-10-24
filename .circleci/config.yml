@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
     aws-ecr: circleci/aws-ecr@8.1.3
+    ggshield: gitguardian/ggshield@1.1.4
 
 jobs:
     build:
@@ -19,6 +20,12 @@ jobs:
                   region: 'eu-central-1'
 
 workflows:
+    scan:
+        jobs:
+            - ggshield/scan:
+                  name: ggshield-scan
+                  base_revision: << pipeline.git.base_revision >>
+                  revision: <<pipeline.git.revision>>
     build:
         jobs:
             - build
