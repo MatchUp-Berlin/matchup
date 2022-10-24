@@ -15,7 +15,7 @@ jobs:
                   create-repo: false
                   repo: matchup
                   repo-scan-on-push: true
-                  tag: 'latest'
+                  tag: 'latest, $CIRCLE_BUILD_NUM'
                   role-arn: 'arn:aws:iam::$ACCOUNT_ID:role/ecr-manager'
                   region: 'eu-central-1'
 
@@ -28,4 +28,9 @@ workflows:
                   revision: <<pipeline.git.revision>>
     build:
         jobs:
-            - build
+            - build:
+                  requires:
+                      - scan
+                  filters:
+                      branches:
+                          only: main
