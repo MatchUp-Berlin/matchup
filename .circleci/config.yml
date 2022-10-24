@@ -8,7 +8,12 @@ jobs:
             - image: cimg/node:18.8.0
         steps:
             - checkout
-            - aws-ecr/build-and-push-image
+            - aws-ecr/build-and-push-image:
+                  create-repo: false
+                  repo: matchup
+                  repo-scan-on-push: true
+                  tag: 'latest'
+                  role-arn: 'arn:aws:iam::$ACCOUNT_ID:role/ecr-manager'
 
 workflows:
     build:
