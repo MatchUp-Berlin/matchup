@@ -10,11 +10,11 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"@aws-amplify/ui-react": "^3.0.2",
+		"@aws-amplify/ui-react": "^3.5.9",
 		"@stripe/stripe-js": "^1.32.0",
 		"@types/googlemaps": "^3.43.3",
 		"@types/react-query": "^1.2.9",
-		"aws-amplify": "^4.3.26",
+		"aws-amplify": "^4.3.39",
 		"aws-sdk": "^2.1162.0",
 		"dotenv": "^16.0.1",
 		"maplibre-gl": "^1.15.3",
