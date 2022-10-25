@@ -31,7 +31,6 @@ jobs:
                   tag: 'latest'
                   role-arn: 'arn:aws:iam::$ACCOUNT_ID:role/ecr-manager'
                   region: 'eu-central-1'
-                  extra-build-args: '--build-arg aws_appsync_graphqlEndpoint=$aws_appsync_graphqlEndpoint --build-arg aws_appsync_apiKey=$aws_appsync_apiKey --build-arg aws_user_files_s3_bucket=$aws_user_files_s3_bucket'
 
 workflows:
     build:
