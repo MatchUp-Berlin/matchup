@@ -19,6 +19,9 @@ jobs:
             - image: cimg/base:2022.10
         steps:
             - checkout
+            - run:
+                  name: create env file
+                  command: cd .circleci; chmod +x env.sh; sh env.sh
             - setup_remote_docker:
                   version: 20.10.14
             - aws-ecr/build-and-push-image:
@@ -41,6 +44,3 @@ workflows:
                   requires:
                       - ggshield-scan
                       - snyk-scan
-                  filters:
-                      branches:
-                          only: main
