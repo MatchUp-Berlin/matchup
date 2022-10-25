@@ -42,6 +42,4 @@ workflows:
                   requires:
                       - ggshield-scan
                       - snyk-scan
-                  filters:
-                      branches:
-                          only: main
+
