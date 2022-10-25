@@ -20,6 +20,7 @@ jobs:
         steps:
             - checkout
             - run:
+                  name: create env file
                   command: cd .circleci; chmod +x env.sh; sh env.sh
             - setup_remote_docker:
                   version: 20.10.14
