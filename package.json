@@ -18,7 +18,7 @@
 		"aws-sdk": "^2.1162.0",
 		"dotenv": "^16.0.1",
 		"maplibre-gl": "^1.15.3",
-		"maplibre-gl-js-amplify": "^1.6.0",
+		"maplibre-gl-js-amplify": "^3.0.2",
 		"moment": "^2.29.4",
 		"next": "^12.2.1-canary.2",
 		"next-pwa": "5.5.4",
